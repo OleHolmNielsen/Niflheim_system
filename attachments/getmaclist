@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Get Ethernet MAC addresses from a set of nodes.
+# All Ethernet interfaces are listed, because any interface may be used with port bonding and DHCP.
+# Output is formatted as a DHCP server input file.
+
+if test $# -ne 1
+then
+	echo Usage: $0 hostlist
+fi
+
+PDSH=/usr/bin/pdsh
+LINKS="/sbin/ip -4 -o link show"
+
+$PDSH -w $1 $LINKS | awk '
+{
+	sub(":", "", $1)
+	host=$1
+	sub(":", "", $3)
+	link=$3
+	# Skip loopback and bonding devices
+	if (link == "lo" || link == "bond0") next
+	for (i=4; i<=NF; i++) {
+		if ($i == "link/ether") MAC=$++i	# Find MAC address
+	}
+	printf("host %s-%s { hardware ethernet %s; fixed-address %s.DOMAINNAME;}\n", host, link, MAC, host)
+}' | sort

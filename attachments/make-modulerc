@@ -1,0 +1,92 @@
+#!/bin/sh
+
+# Create ~/.modulerc file with module hide-version information
+# The hidden modules will not be shown by "module avail".
+# List system-wide modulerc file by:
+# $ module --config 2>&1 | grep MODULERCFILE
+# MODULERCFILE /usr/share/lmod/etc/rc
+MODULERC=~/.modulerc
+
+# List available modules
+TEMP=/tmp/modulerc.$$
+rm -f $TEMP
+# module --terse --show-hidden avail > $TEMP 2>&1
+module --show-hidden avail > $TEMP 2>&1
+
+# Generate a hide list
+
+cat <<EOF > $MODULERC
+#%Module
+# Documentation of hide-version:
+# https://lmod.readthedocs.io/en/latest/040_FAQ.html?highlight=hide-version
+# and https://github.com/TACC/Lmod/blob/master/Transition_to_Lmod7.txt
+global env
+if { [info exists env(LMOD_VERSION_MAJOR)]} {
+EOF
+
+# Define patterns for which modules to hide
+
+cat <<EOF | grep -f - $TEMP | awk '{print "\thide-version " $1}' | sort | uniq >> $MODULERC
+GCCcore-5.4.0
+GCCcore-6.1.0
+GCCcore/5.4.0
+GCCcore/6.1.0
+GCC-5.4.0-2.26
+GCC-6.3.0-2.27
+foss/2016a
+foss-2016a
+foss/2016b
+foss-2016b
+Autoconf
+Automake
+Autotools
+Bison
+CMake
+LibTIFF
+LibUUID
+M4
+Szip
+Tcl/
+Tk/
+Tkinter
+XML-Parser
+XZ
+bzip2
+binutils
+cURL
+expat
+flex
+fontconfig
+freetype
+gettext
+gompi-2016b
+gompi/2016b
+gperf
+help2man
+hwloc
+intltool
+libevent
+libffi
+libjpeg-turbo
+libpciaccess
+libpng
+libreadline
+LibTIFF
+libtool
+LibUUID
+libxml2
+ncurses
+numactl
+pkg-config
+tmux
+util-linux
+xorg-macros
+zlib
+EOF
+
+# Terminating bracket
+echo "}" >> $MODULERC
+
+echo File $MODULERC has been created
+
+rm -f $TEMP
