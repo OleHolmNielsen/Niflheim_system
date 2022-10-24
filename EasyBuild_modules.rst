@@ -343,7 +343,7 @@ On CentOS systems the shell initialization scripts are in ``/etc/profile.d/``.
 The Lmod_ RPM has installed several scripts here.
 See also the Lmod_User_Guide_.
 
-To set up the EasyBuild_ environment create in ``/etc/profile.d/`` the file :download:`z01_EasyBuild.sh <z01_EasyBuild.sh>`::
+To set up the EasyBuild_ environment create in ``/etc/profile.d/`` the file :download:`z01_EasyBuild.sh <attachments/z01_EasyBuild.sh>`::
 
   if [ -z "$__Init_Default_Modules" ]; then
    export __Init_Default_Modules=1
@@ -354,7 +354,7 @@ To set up the EasyBuild_ environment create in ``/etc/profile.d/`` the file :dow
    module refresh
   fi
 
-and for *tcsh* :download:`z01_EasyBuild.csh <z01_EasyBuild.csh>`::
+and for *tcsh* :download:`z01_EasyBuild.csh <attachments/z01_EasyBuild.csh>`::
 
   if ( ! $?__Init_Default_Modules )  then
     setenv __Init_Default_Modules 1
@@ -553,7 +553,7 @@ For example, create a user ``~/.modulerc`` or a system file ``/usr/share/lmod/et
   #%Module
   hide-version zlib/1.2.8
 
-We have written a convenient script :download:`make-modulerc <make-modulerc>` for generating the modulerc file from a simple list of modules that we want to be hidden.
+We have written a convenient script :download:`make-modulerc <attachments/make-modulerc>` for generating the modulerc file from a simple list of modules that we want to be hidden.
 
 Lmod isVisibleHook
 ..................

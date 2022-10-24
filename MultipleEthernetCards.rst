@@ -179,5 +179,5 @@ To learn the interface MAC-addresses you may use this command::
 
 We offer a script getmaclist__ using pdsh_ for gathering this information.
 
-__ attachment:getmaclist
+__ attachment:attachments/getmaclist
 .. _pdsh: https://linux.die.net/man/1/pdsh

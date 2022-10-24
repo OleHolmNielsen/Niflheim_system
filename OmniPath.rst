@@ -1036,7 +1036,7 @@ To verify the basic functionality of the OmniPath network, copy the *Intel® PSM
 *Intel® Performance Scaled Messaging 2 (PSM2) Programmer’s Guide* in Intel's *End User Publications* web page.
 We attach the file psm2-demo.c__ for convenience.
 
-__ attachment:psm2-demo.c
+__ attachment:attachments/psm2-demo.c
 
 Make sure the PSM2_ packages have been installed::
 

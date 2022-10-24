@@ -140,7 +140,7 @@ Place the resulting ``ssh_known_hosts`` file in all the nodes' ``/etc/ssh`` dire
 which is easily accomplished on the Golden Client first, 
 before cloning the other nodes (alternatively, the file can be distributed later).
 
-__ attachment:clusterlabel.c
+__ attachment:attachments/clusterlabel.c
 
 The *root superuser* is a special case, since ``/etc/hosts.equiv`` is ignored for this user.
 The best method for password-less root logins is to create public keys on the
