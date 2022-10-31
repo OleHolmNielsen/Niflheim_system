@@ -1,5 +1,5 @@
 System technical documentation for Niflheim
-===========================================
+#################################################
 
 This page contains system technical documentation for Niflheim
 describing the installation of Slurm batch queue system, software modules, and networking topics.
