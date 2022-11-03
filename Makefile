@@ -10,7 +10,7 @@ BUILDDIR      = _build
 WEBTOPDIR     = /var/www/wiki
 
 ifneq ($(VIRTUAL_ENV),)
-dirhtml:
+dirhtml: gitpull
 else
 $(error VIRTUAL_ENV not set! Please use a Python virtual environment: . venv/bin/activate)
 endif
@@ -18,6 +18,9 @@ endif
 rsync: dirhtml
 	@echo Rsyncing HTML pages to ${WEBTOPDIR}/`basename $$PWD`/
 	@rsync -av --delete ./_build/dirhtml/ ${WEBTOPDIR}/`basename $$PWD`/
+
+gitpull:
+	git pull
 
 # Put it first so that "make" without argument is like "make help".
 help:
