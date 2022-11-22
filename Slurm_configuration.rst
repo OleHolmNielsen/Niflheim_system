@@ -1241,14 +1241,14 @@ Sharing nodes
 =============
 
 By default nodes are allocated exclusively to jobs, but it is possible to permit multiple jobs and/or multiple users per node.
-This is configured using **Consumable Resource Allocation Plugin** or cons_res_ in slurm.conf_.
-A newer version of this plugin is cons_tres_ which has improved support for GPU nodes.
-The cons_tres_ is described in the *Presentations from Slurm User Group Meeting, September 2019*,
+This is configured using **Consumable Resource Allocation Plugin** or cons_tres_ in slurm.conf_.
+The cons_tres_ plugin has improved support for GPU nodes as compared to the older cons_res_,
+and is described in the *Presentations from Slurm User Group Meeting, September 2019*,
 see Slurm_publications_.
 
-The slurm.conf_ configuration is::
+The required slurm.conf_ configuration is::
 
-  SelectType=select/cons_res   - or -   SelectType=select/cons_tres  (more modern)
+  SelectType=select/cons_tres 
   SelectTypeParameters=CR_CPU_MEMORY
 
 In this configuration CPU and Memory are consumable resources.
@@ -1263,6 +1263,22 @@ See also the cons_res_share_ page.
 .. _cons_res: https://slurm.schedmd.com/cons_res.html
 .. _cons_res_share: https://slurm.schedmd.com/cons_res_share.html
 .. _cons_tres: https://slurm.schedmd.com/slurm.conf.html
+
+Upgrade cons_res to cons_tres
+---------------------------------
+
+The newer cons_tres_ plugin should be used in stead of cons_res_,
+and it is simple to make the upgrade, see bug_15470_.
+In slurm.conf_ simply change into ``SelectType=select/cons_tres`` and restart the controller::
+
+  systemctl restart slurmctld
+
+The slurm.conf_ file must of course be distributed to all nodes (automatic with Configless_) and then do::
+
+  scontrol reconfigure
+
+.. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
+
 
 Configure multiple nodes and their features
 ===========================================
