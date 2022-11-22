@@ -1237,8 +1237,8 @@ If some partition (like big memory nodes) should have a higher priority, this is
   PartitionName ... PriorityJobFactor=10
   PriorityWeightPartition=1000
 
-Sharing nodes
-=============
+Sharing nodes and cons_tres
+=================================
 
 By default nodes are allocated exclusively to jobs, but it is possible to permit multiple jobs and/or multiple users per node.
 This is configured using **Consumable Resource Allocation Plugin** or cons_tres_ in slurm.conf_.
@@ -1267,9 +1267,10 @@ See also the cons_res_share_ page.
 Upgrade cons_res to cons_tres
 ---------------------------------
 
-The newer cons_tres_ plugin should be used in stead of cons_res_,
-and it is simple to make the upgrade, see bug_15470_.
-In slurm.conf_ simply change into ``SelectType=select/cons_tres`` and restart the controller::
+The newer cons_tres_ plugin should be used in stead of cons_res_.
+There may be some issues in performing the upgrade, however, see bug_15470_.
+
+In slurm.conf_ change into ``SelectType=select/cons_tres`` and restart the controller::
 
   systemctl restart slurmctld
 
