@@ -1268,18 +1268,21 @@ Upgrade cons_res to cons_tres
 ---------------------------------
 
 The newer cons_tres_ plugin should be used in stead of cons_res_.
-There may be some issues in performing the upgrade, however, see bug_15470_.
+Upgrading from cons_res_ to cons_tres_ on a running system must be done very carefully, however, as discussed in bug_15470_.
+The procedure is:
 
-In slurm.conf_ change into ``SelectType=select/cons_tres`` and restart the controller::
+In slurm.conf_ change into ``SelectType=select/cons_tres``.
+The slurm.conf_ file must be distributed to all nodes (not needed with Configless_).
+
+Then restart the slurmctld_ **as well as** all slurmd_ immediately::
 
   systemctl restart slurmctld
+  clush -ba systemctl restart slurmd
 
-The slurm.conf_ file must of course be distributed to all nodes (automatic with Configless_) and then do::
-
-  scontrol reconfigure
+Here we have used clush_ to run the command on all nodes.
 
 .. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
-
+.. _clush: :ref:`Slurm_operations/#clustershell`
 
 Configure multiple nodes and their features
 ===========================================
