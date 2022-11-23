@@ -79,11 +79,13 @@ Without this flag, cloud nodes will not appear in the output of commands like si
 Resume and Suspend scripts
 --------------------------
 
-Each site must develop their own *ResumeProgram/SuspendProgram* scripts.
+Each site must develop their own ResumeProgram_ and SuspendProgram_ scripts.
 Remember that Slurm_ executes these scripts as the *slurm* user, which must therefore be able to power up/down cloud nodes!
 
 In addition, a ResumeFailProgram_ script will be useful for handling nodes that do not resume (power up) correctly.
 
+.. _SuspendProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_SuspendProgram
+.. _ResumeProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_ResumeProgram
 .. _ResumeFailProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_ResumeFailProgram
 
 Logging from the *ResumeProgram/SuspendProgram* scripts must be programmed in the scripts.
