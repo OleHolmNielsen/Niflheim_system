@@ -800,7 +800,7 @@ To use ``eb --new-pr`` you need to link EasyBuild with your github account.  You
 
 3. On github_ go to your account *Settings* and then *Developer settings*:
 
-   * Select `Personal access tokens`_.
+   * Select `Personal access tokens`_ (classic).
    * Press the ``Generate new token`` button.
    * Give the token a name (e.g. EasyBuild).
    * Select access to ``repo`` and ``gist``.
