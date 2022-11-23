@@ -1279,11 +1279,10 @@ The procedure is:
      systemctl restart slurmctld
      clush -ba systemctl restart slurmd
 
-Here we have used clush_ to run the command on all nodes.
+Here we have used :ref:`Slurm_operations/#clustershell` to run the command on all nodes.
 One **must not** make a ``scontrol reconfig`` during this process!
 
 .. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
-.. _clush: `Slurm_operations/#clustershell`_
 
 Configure multiple nodes and their features
 ===========================================
