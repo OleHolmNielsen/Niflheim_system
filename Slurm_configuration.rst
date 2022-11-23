@@ -1283,7 +1283,7 @@ Here we have used clush_ to run the command on all nodes.
 One **must not** make a ``scontrol reconfig`` during this process!
 
 .. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
-.. _clush: :ref:`Slurm_operations/#clustershell`
+.. _clush: Slurm_operations/#clustershell_
 
 Configure multiple nodes and their features
 ===========================================
