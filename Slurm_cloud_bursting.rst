@@ -60,7 +60,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   SuspendExcParts=xeon8
   SlurmctldParameters=idle_on_node_suspend,cloud_dns   # Maybe add also this parameter: cloud_reg_addrs
   ResumeTimeout=600
-  SuspendTime=300 
+  SuspendTime=300   # Global value, the default is INFINITE
   SuspendTimeout=120
   ResumeProgram=/usr/local/bin/cloudresume
   SuspendProgram=/usr/local/bin/cloudsuspend
