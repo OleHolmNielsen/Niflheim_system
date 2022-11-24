@@ -71,16 +71,16 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
 * If you set ``SuspendTime`` to anything but INFINITE (or -1), power saving shutdown of nodes will commence!
 * It may be preferable to omit the global parameter and leave it with the default value ``SuspendTime=INFINITE``.
-  in stead define it only on any relevant partitions, for example::
+  In stead define it only on any relevant partitions, for example::
 
     PartitionName=my_partition SuspendTime=300
 
-You should set this in slurm.conf_, see `bug 14270 <https://bugs.schedmd.com/show_bug.cgi?id=14270>`_::
+* You must set this in slurm.conf_, see `bug 14270 <https://bugs.schedmd.com/show_bug.cgi?id=14270>`_::
 
-  PrivateData=cloud
+    PrivateData=cloud
 
-This is documented from Slurm_ 22.05.2.
-Without this flag, cloud nodes will not appear in the output of commands like sinfo_ unless they are powered on, even for the *slurm* and *root* users.
+  This is documented from Slurm_ 22.05.2.
+  Without this flag, cloud nodes will not appear in the output of commands like sinfo_ unless they are powered on, even for the *slurm* and *root* users.
 
 Resume and Suspend scripts
 --------------------------
