@@ -60,14 +60,20 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   SuspendExcParts=xeon8
   SlurmctldParameters=idle_on_node_suspend,cloud_dns   # Maybe add also this parameter: cloud_reg_addrs
   ResumeTimeout=600
-  SuspendTime=300     # Global value, can also be defined for each partition. Setting SuspendTime to anything but INFINITE (or -1) will enable power save mode. INFINITE is the default. 
+  SuspendTime=300 
   SuspendTimeout=120
   ResumeProgram=/usr/local/bin/cloudresume
   SuspendProgram=/usr/local/bin/cloudsuspend
   DebugFlags=Power
   TreeWidth=1000     # Or 65535, the default is 50.  Large values disable tree fanout of slurmd communications
 
-**Beware:** If you set *SuspendTime* to anything but INFINITE (or -1), power saving shutdown of nodes will commence!
+**Beware**:
+
+* If you set ``SuspendTime`` to anything but INFINITE (or -1), power saving shutdown of nodes will commence!
+* It may be preferable to **not** define a global ``SuspendTime`` parameter at all,
+  but in stead define it only on the relevant partitions, for example::
+
+    PartitionName=my_partition SuspendTime=300
 
 You should set this in slurm.conf_, see `bug 14270 <https://bugs.schedmd.com/show_bug.cgi?id=14270>`_::
 
