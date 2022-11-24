@@ -70,8 +70,8 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 **Beware**:
 
 * If you set ``SuspendTime`` to anything but INFINITE (or -1), power saving shutdown of nodes will commence!
-* It may be preferable to **not** define a global ``SuspendTime`` parameter at all,
-  but in stead define it only on the relevant partitions, for example::
+* It may be preferable to leave the global parameter as ``SuspendTime=INFINITE``,
+  and in stead define it only on the relevant partitions, for example::
 
     PartitionName=my_partition SuspendTime=300
 
