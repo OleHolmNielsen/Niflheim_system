@@ -33,6 +33,8 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _Rclone: https://rclone.org/
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 
+.. _Slurm_configuration_for_cloud_nodes:
+
 Slurm configuration for cloud nodes
 ===================================
 
