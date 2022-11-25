@@ -269,6 +269,18 @@ There exist a few Open Source tools for graphical monitoring of Slurm:
 Working with Compute nodes
 ==========================
 
+Slurm power saving scripts
+--------------------------
+
+Slurm provides an integrated power saving mechanism for powering down idle nodes, 
+and starting them again when jobs need to be scheduled, 
+see the [Slurm Power Saving Guide](https://slurm.schedmd.com/power_save.html).
+
+We provide some Slurm power saving scripts in the page https://github.com/OleHolmNielsen/Slurm_tools/tree/master/power_save
+which may be useful for power management using IPMI_ or with cloud services.
+
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
+
 Expanding and collapsing host lists
 -----------------------------------
 
