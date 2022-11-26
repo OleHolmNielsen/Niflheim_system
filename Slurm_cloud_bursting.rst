@@ -38,8 +38,13 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 Slurm configuration for cloud nodes
 ===================================
 
-**Prerequisites:**  Enable JSON_ in the slurmctld_ in order to use *ResumeProgram* as specified in the Power_Saving_Guide_.  
-You must make sure to install these prerequisites before building Slurm_ RPM packages::
+Prerequisites
+-------------
+
+Prior to Slurm_ 22.05.6 it is required to enable JSON_ in the slurmctld_ in order to use *ResumeProgram* as specified in the Power_Saving_Guide_,  
+see bug_14925_.
+If you run an older Slurm_ version, 
+you must make sure to install these prerequisites before building Slurm_ RPM packages::
 
   yum install http-parser-devel json-c-devel
 
@@ -52,6 +57,7 @@ Check that slurmctld_ has JSON_ support::
 
 .. _JSON: https://www.json.org/json-en.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
+.. _bug_14925: https://bugs.schedmd.com/show_bug.cgi?id=14925
 
 Configuring slurm.conf
 ----------------------
