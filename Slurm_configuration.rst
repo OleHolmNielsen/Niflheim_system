@@ -329,7 +329,7 @@ See also the cgroup.conf_ configuration file for the Cgroups_ support.
 
 If you use *jobacct_gather*, change the default *ProctrackType* in slurm.conf_::
 
-  ProctrackType=proctrack/linuxproc
+  ProctrackType=proctrack/linux
 
 otherwise you'll get this warning in the slurmctld_ log::
 
