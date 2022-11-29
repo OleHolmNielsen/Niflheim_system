@@ -264,6 +264,8 @@ The command line prompt supports the following keystrokes (see :ref:`syslinux.do
   <Esc>           interrupt boot in progress
 
 
+.. _Automated_network_installation_with_pxeconfig:
+
 Automated network installation with pxeconfig
 =============================================
 

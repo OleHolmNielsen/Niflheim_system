@@ -97,17 +97,16 @@ Having to watch the installation process and finally change the client nodes' BI
 when you have more than a dozen or two client nodes. 
 
 After having tested the network installation process manually as described above, 
-you can automate the process completely using the `pxeconfig toolkit <https://oss.trac.surfsara.nl/pxeconfig>`_
-written by Bas van der Vlies. 
+you can automate the process completely using the pxeconfig_ toolkit written by Bas van der Vlies. 
 Now a client node installation is as simple as configuring on the central server whether a node should perform a network installation or simply boot from hard disk: 
 When the node is turned on, it all happens automatically with no operator intervention at all ! 
 The BIOS boot order must still have PXE/network before the hard disk.
-The SystemImager toolkit actually contains a similar utility called ``si_netbootmond``,
-but IMHO the `pxeconfig toolkit <https://oss.trac.surfsara.nl/pxeconfig>`_ is a better solution.
 
 Please see the following page for information about the pxeconfig toolkit:
 
-   * `Automated network installation with pxeconfig <PXE-booting#automated-network-installation-with-pxeconfig>`_
+* :ref:`Automated_network_installation_with_pxeconfig`.
+
+.. _pxeconfig: https://gitlab.com/surfsara/pxeconfig
 
 Networking considerations
 =========================
