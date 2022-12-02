@@ -3,7 +3,11 @@ System technical documentation for Niflheim
 
 This page contains system technical documentation for Niflheim
 describing the installation of Slurm batch queue system, software modules, and networking topics.
-(Note: This information is probably not useful for end users of Niflheim.)
+(Note: This information is probably not useful for end users of Niflheim,
+please refer to the page_for_users_ in stead).
+
+.. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
+
 
 .. toctree::
    :maxdepth: 1
