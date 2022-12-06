@@ -66,7 +66,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
   # Exceptions to the node suspend/resume logic (partitions):
   SuspendExcParts=xeon8
-  SlurmctldParameters=idle_on_node_suspend,cloud_dns   # Maybe add also this parameter: cloud_reg_addrs
+  SlurmctldParameters=cloud_dns   # Maybe add also these parameters: cloud_reg_addrs, idle_on_node_suspend
   ResumeTimeout=600
   SuspendTime=300   # Global value, the default is INFINITE
   SuspendTimeout=120
@@ -89,6 +89,10 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
   This is documented from Slurm_ 22.05.2.
   Without this flag, cloud nodes will not appear in the output of commands like sinfo_ unless they are powered on, even for the *slurm* and *root* users.
+
+* The ```SlurmctldParameters=idle_on_node_suspend``` causes nodes drained for maintenance purposes to become idle and available
+  for running jobs.
+  This is most likely **not** desirable.
 
 Resume and Suspend scripts
 --------------------------
