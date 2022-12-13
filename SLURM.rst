@@ -24,7 +24,7 @@ The information has been subdivided into sub-pages for separate Slurm topics:
 
   * **Note:** Content previously on the current page has been moved to this new sub-page.
 
-* :ref:`Slurm_installation` plus **details about upgrading**.
+* :ref:`Slurm_installation`.
 * :ref:`Slurm_configuration` setting up the services.
 * :ref:`Slurm_database` for storing user and job data.
 * :ref:`Slurm_accounting` defining user accounts.
