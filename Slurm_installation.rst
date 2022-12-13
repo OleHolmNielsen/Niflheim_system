@@ -181,6 +181,7 @@ On RHEL/CentOS systems the procedure is:
      systemctl daemon-reload 
      systemctl restart munge
 
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 .. _munged: https://www.systutorials.com/docs/linux/man/8-munged/
 
 Build Slurm RPMs
