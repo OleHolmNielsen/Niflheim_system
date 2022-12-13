@@ -294,9 +294,9 @@ Build Slurm packages
 Get the Slurm_ source code from the Slurm_download_ page.
 At this point you must decide whether to build in Slurm plugins, for example, *mysql* for accounting (see above).
 
-Set the version (for example, 21.08.1) and build Slurm_ RPM packages by::
+Set the version (for example, 22.05.6) and build Slurm_ RPM packages by::
 
-  export VER=21.08.1
+  export VER=22.05.6
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql      # Includes accounting support with the slurm-slurmdbd package
   rpmbuild -ta slurm-$VER.tar.bz2 --without mysql   # No slurm-slurmdbd accounting support
 
@@ -326,7 +326,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Head/Master** Node (where the slurmctld_ daemon runs), **Compute**, and **Login** nodes::
 
-    export VER=21.08.1-1
+    export VER=22.05.6-1
     yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
 
   On the **master node** explicitly enable the *slurmctld* service::
@@ -338,7 +338,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
   Only if the **database service** will run on the Head/Master node:
   Install the database service RPM::
 
-    export VER=21.08.1-1
+    export VER=22.05.6-1
     yum install slurm-slurmdbd-$VER*rpm
 
   Explicitly enable the service::
@@ -359,7 +359,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Database-only** (slurmdbd_ service) node::
 
-    export VER=21.08.1-1
+    export VER=22.05.6-1
     yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
   Explicitly enable the service::
@@ -581,7 +581,6 @@ Here is a suggested procedure:
      yum install slurm-slurmdbd-$VER*rpm 
 
    Information about building RPMs is in the :ref:`Slurm_installation` page.
-   Note: From Slurm_ 17.11 the slurm-sql RPM no longer exists.
 
 5. Make sure that the ``/etc/slurm`` directory exists (it is not needed in configless_ Slurm_ clusters)::
 
@@ -627,9 +626,9 @@ Here is a suggested procedure:
 7. At this point you have a Slurm database server running an exact copy of your main Slurm database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 21.08.5-1) built as shown above::
+   Update all Slurm_ RPMs to the new version (say, 22.05.6-1) built as shown above::
 
-     export VER=21.08.5-1
+     export VER=22.05.6-1
      yum update slurm*$VER*.rpm
 
    If you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the upgrade::
@@ -696,9 +695,9 @@ The upgrading steps for the slurmdbd_ host are:
    If also upgrading to MariaDB_ 10.2.1 (and above) from an older version, there are some important changes to Slurm database tables,
    please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
 
-3. From Slurm_ 17.11 the RPM packages have been restructured and you need to update all RPMs::
+3. Update all RPMs::
 
-     export VER=21.08.1-1
+     export VER=22.05.6-1
      yum update slurm*$VER*.rpm
 
 4. Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
@@ -753,12 +752,8 @@ The upgrading steps for the slurmctld_ host are:
 
 4. Upgrade the RPMs, for example::
 
-     export VER=21.08.6-1
+     export VER=22.05.6-1
      yum update slurm*$VER-*.rpm
-
-  From Slurm 17.11 there is a new RPM for *slurmctld*::
-
-    yum install slurm-slurmctld-$VER-*.rpm
 
 5. Enable and restart the slurmctld_ service::
 
@@ -829,17 +824,15 @@ For the compute nodes running slurmd_ the procedure could be:
 
      clush -bw <nodelist> systemctl stop slurmd
 
-3. Update the RPMs (here: version 21.08.1-1) on nodes::
+3. Update the RPMs (here: version 22.05.6-1) on nodes::
 
-     clush -bw <nodelist> 'yum -y update /some/path/slurm*21.08.1-1-*.rpm'
+     clush -bw <nodelist> 'yum -y update /some/path/slurm*22.05.6-1-*.rpm'
 
    and make sure to install also the new *slurmd* and *contribs* packages::
 
-     clush -bw <nodelist> 'yum -y install /some/path/slurm-slurmd*21.08.1-1-*.rpm /some/path/slurm-contribs*21.08.1-1-*.rpm'
+     clush -bw <nodelist> 'yum -y install /some/path/slurm-slurmd*22.05.6-1-*.rpm /some/path/slurm-contribs*22.05.6-1-*.rpm'
 
-   From 17.02 and later ``slurm-contribs`` replaces the obsolete packages ``slurm-seff, slurm-sjobexit, slurm-sjstat``.
-
-   **Important:** From Slurm 17.11 you must explicitly enable the service::
+   Enable the slurmd_ service::
 
      clush -bw <nodelist> systemctl enable slurmd
 
@@ -855,8 +848,6 @@ For the compute nodes running slurmd_ the procedure could be:
    b. Reboot the nodes automatically as they become idle using the **RebootProgram** as configured in slurm.conf_, see the scontrol_ **reboot** option and explanation in the man-page::
 
         scontrol reboot [ASAP] [NodeList]
-
-      The ASAP flag is available from Slurm_ 17.02 (see ``man scontrol`` for older versions).
 
 5. Return upgraded nodes to the IDLE state::
 
@@ -876,25 +867,6 @@ Again, consult the Upgrades_ page before you start!
 
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 
-Removing /etc/init.d/slurm
-==========================
-
-**Obsolete:** This section only applies to Slurm 16.05 and older.
-
-On Systemd_ systems such as RHEL7/CentOS7 the old-style init-script ``/etc/init.d/slurm`` should be disabled, see the :ref:`Slurm_configuration` page.
-This should be done at the initial installation as well as after **upgrading**.
-With Slurm_ 17.02 and newer this bug_3371_ has been resolved.
-
-The relevant commands are summarized as::
-
-  chkconfig --del slurm
-  rm -f /etc/init.d/slurm
-
-Then enable and start services using ``systemctl``.
-
-.. _bug_3371: https://bugs.schedmd.com/show_bug.cgi?id=3371
-.. _Systemd: https://en.wikipedia.org/wiki/Systemd
-
 Log file rotation
 =================
 
@@ -905,7 +877,7 @@ Therefore you probably want to configure logrotate_ to administer your log files
 On RHEL and CentOS the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
 
 Manual configuration is required because the SchedMD_ RPM files do not contain the logrotate setup, see bug_3904_ and bug_2215_ and bug_4393_.
-See also the section *LOGGING* at the end of the slurm.conf_ page with an example logrotate script (please note that the SIGUSR2 signal applies to 17.11 and newer).
+See also the section *LOGGING* at the end of the slurm.conf_ page with an example logrotate script.
 
 First install the relevant RPM::
 
