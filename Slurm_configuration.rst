@@ -146,6 +146,7 @@ In stead you need to configure the Systemd_ service as follows::
   systemctl restart slurmd
 
 Another way is to use ``systemctl edit slurmd`` to create an override file, see the systemctl manual page.
+The override files will be placed in the ``/etc/systemd/system/slurmd.service.d/`` folder.
 
 The slurmd_ option *-M* locks ``slurmd`` in memory.
 See configless_ and the slurmd_ manual page.
