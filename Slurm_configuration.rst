@@ -138,12 +138,10 @@ The simplest way to achieve this is described in bug_9832_:
 Configuring a custom slurmctld server
 -------------------------------------
 
-The usual configuration file ``/etc/sysconfig/slurm`` does not seem to be used by Systemd_ om CentOS 7.
-In stead you need to configure the Systemd_ service as follows::
+The ``SLURMD_OPTIONS`` can be defined in the file ``/etc/sysconfig/slurmd`` which is read by
+the Systemd_ service file ``/usr/lib/systemd/system/slurmd.service``::
 
-  systemctl set-environment SLURMD_OPTIONS="-M --conf-server <name of slurmctld server>"
-  systemctl show-environment    # Shows PATH and LANG
-  systemctl restart slurmd
+  SLURMD_OPTIONS=-M --conf-server <name of slurmctld server>
 
 Another way is to use ``systemctl edit slurmd`` to create an override file, see the systemctl manual page.
 The override files will be placed in the ``/etc/systemd/system/slurmd.service.d/`` folder.
