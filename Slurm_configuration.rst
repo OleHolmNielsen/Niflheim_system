@@ -148,7 +148,12 @@ In stead you need to configure the Systemd_ service as follows::
 Another way is to use ``systemctl edit slurmd`` to create an override file, see the systemctl manual page.
 The override files will be placed in the ``/etc/systemd/system/slurmd.service.d/`` folder.
 
-The slurmd_ option *-M* locks ``slurmd`` in memory.
+An example file ``/etc/systemd/system/slurmd.service.d/override.conf`` file could be::
+
+  [Service]
+  Environment="SLURMD_OPTIONS=-M --conf-server <name of slurmctld server>"
+
+In this example the slurmd_ option ``-M`` locks ``slurmd`` in memory, and the slurmctld server name is given.
 See configless_ and the slurmd_ manual page.
 
 Configurator for slurm.conf
