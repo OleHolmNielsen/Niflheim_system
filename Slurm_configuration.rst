@@ -138,10 +138,11 @@ The simplest way to achieve this is described in bug_9832_:
 Configuring a custom slurmd service
 -----------------------------------
 
-The ``SLURMD_OPTIONS`` can be defined in the file ``/etc/sysconfig/slurmd`` which is read by
-the Systemd_ service file ``/usr/lib/systemd/system/slurmd.service``::
+The ``SLURMD_OPTIONS`` can be defined in the file ``/etc/sysconfig/slurmd``::
 
   SLURMD_OPTIONS=-M --conf-server <name of slurmctld server>
+
+which is read by the Systemd_ service file ``/usr/lib/systemd/system/slurmd.service``.
 
 Another way is to use ``systemctl edit slurmd`` to create an override file, see the systemctl manual page.
 The override files will be placed in the ``/etc/systemd/system/slurmd.service.d/`` folder.
