@@ -135,8 +135,8 @@ The simplest way to achieve this is described in bug_9832_:
 
 .. _bug_9832: https://bugs.schedmd.com/show_bug.cgi?id=9832
 
-Configuring a custom slurmd server
-----------------------------------
+Configuring a custom slurmd service
+-----------------------------------
 
 The ``SLURMD_OPTIONS`` can be defined in the file ``/etc/sysconfig/slurmd`` which is read by
 the Systemd_ service file ``/usr/lib/systemd/system/slurmd.service``::
