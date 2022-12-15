@@ -744,12 +744,12 @@ The upgrading steps for the slurmctld_ host are:
 
      systemctl stop slurmctld
 
-3. Make a backup copy of the ``StateSaveLocation`` (check your configuration first) ``/var/spool/slurmctld`` directory::
+3. Make a backup copy of the ``StateSaveLocation``
+   (check your configuration first) ``/var/spool/slurmctld`` directory::
 
      tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld/*
 
-   **Remember** the trailing ``/`` in case the directory is a soft-link!
-   The ``tar`` command will strip the leading ``/`` from the filenames.
+   Make sure the contents of the tar-ball file looks correct!
 
 4. Upgrade the RPMs, for example::
 
@@ -761,7 +761,8 @@ The upgrading steps for the slurmctld_ host are:
      systemctl enable slurmctld
      systemctl restart slurmctld
 
-6. Check the cluster nodes' health using ``sinfo`` and check for any "Nodes ... not responding" errors in ``slurmctld.log``.
+6. Check the cluster nodes' health using ``sinfo`` and check for any
+   ``Nodes ... not responding`` errors in ``slurmctld.log``.
    It may be necessary to restart all the ``slurmd`` on all nodes::
 
      clush -ba systemctl restart slurmd
