@@ -734,7 +734,7 @@ The upgrading steps for the slurmctld_ host are:
      SlurmdTimeout=3600 
 
    and copy ``/etc/slurm/slurm.conf`` to all nodes (not needed in configless_ Slurm_ clusters).
-   Then reconfigure the running daemons and test the timeout and StateSaveLocation values::
+   Then reconfigure the running daemons and test the timeout and ``StateSaveLocation`` values::
 
      scontrol reconfigure
      scontrol show config | grep Timeout
@@ -744,9 +744,9 @@ The upgrading steps for the slurmctld_ host are:
 
      systemctl stop slurmctld
 
-3. Make a backup copy of the *StateSaveLocation* (check your configuration first) ``/var/spool/slurmctld`` directory::
+3. Make a backup copy of the ``StateSaveLocation`` (check your configuration first) ``/var/spool/slurmctld`` directory::
 
-     tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld/
+     tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld/*
 
    **Remember** the trailing ``/`` in case the directory is a soft-link!
    The ``tar`` command will strip the leading ``/`` from the filenames.
@@ -761,7 +761,14 @@ The upgrading steps for the slurmctld_ host are:
      systemctl enable slurmctld
      systemctl restart slurmctld
 
-6. Restore the previous timeout values in slurm.conf_ (item 1.).
+6. Check the cluster nodes' health using ``sinfo`` and check for any "Nodes ... not responding" errors in ``slurmctld.log``.
+   It may be necessary to restart all the ``slurmd`` on all nodes::
+
+     clush -ba systemctl restart slurmd
+
+7. Restore the previous timeout values in slurm.conf_ (item 1.).
+
+Note: The compute nodes should be upgraded at your earliest convenience.
 
 Install slurm-libpmi
 ....................
