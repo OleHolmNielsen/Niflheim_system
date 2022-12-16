@@ -221,6 +221,10 @@ Install the following sets of packages:
     EL7: yum install ibacm infinipath-psm libibumad libibverbs libnl3 librdmacm opensm-libs perftest qperf rdma-core rdma-core-devel
     EL8: dnf install ibacm libibumad libibverbs libnl3 librdmacm opensm-libs perftest qperf rdma-core rdma-core-devel
 
+  For OpenMPI you may also require this package on EL7 systems::
+
+    EL7: yum install infinipath-psm-devel
+
 * System Centric::
 
     EL7: yum install atlas bc coreutils expat expect gcc-gfortran glibc json-c libgfortran libgomp libquadmath libstdc++ libstdc++-devel
