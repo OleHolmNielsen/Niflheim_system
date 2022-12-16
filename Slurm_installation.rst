@@ -818,7 +818,13 @@ First determine which Slurm_ version the nodes are running::
 
 See the :ref:`SLURM` page about ClusterShell_ or PDSH_.
 
-For the compute nodes running slurmd_ the procedure could be:
+The **quick and usually OK procedure** would be to simply update the RPMs (here: version 22.05.6-1) on all nodes::
+
+     clush -bw <nodelist> 'yum -y update /some/path/slurm*22.05.6-1-*.rpm'
+
+This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
+
+For the compute nodes running slurmd_ the **safe** procedure could be:
 
 1. Drain all desired compute nodes in a <nodelist>::
 
@@ -837,9 +843,7 @@ For the compute nodes running slurmd_ the procedure could be:
 
      clush -bw <nodelist> 'yum -y update /some/path/slurm*22.05.6-1-*.rpm'
 
-   and make sure to install also the new *slurmd* and *contribs* packages::
-
-     clush -bw <nodelist> 'yum -y install /some/path/slurm-slurmd*22.05.6-1-*.rpm /some/path/slurm-contribs*22.05.6-1-*.rpm'
+   and make sure to install also the new ``slurmd`` and ``contribs`` packages::
 
    Enable the slurmd_ service::
 
