@@ -221,7 +221,7 @@ Install the following sets of packages:
     EL7: yum install ibacm infinipath-psm libibumad libibverbs libnl3 librdmacm opensm-libs perftest qperf rdma-core rdma-core-devel
     EL8: dnf install ibacm libibumad libibverbs libnl3 librdmacm opensm-libs perftest qperf rdma-core rdma-core-devel
 
-  For OpenMPI you may also require this package on EL7 systems::
+  For OpenMPI_ you may also require this package on EL7 systems::
 
     EL7: yum install infinipath-psm-devel
 
@@ -247,6 +247,8 @@ Install the following sets of packages:
 
 It is therefore strongly recommended **NOT** to update the kernel and kernel-devel RPMs until after the OPA software installation.
 The **kernel-devel** RPM must be installed during OS installation and must correspond to the running kernel during installation.
+
+.. _OpenMPI: https://www.open-mpi.org/
 
 Installation with OPA Yum repository
 ------------------------------------
@@ -1073,18 +1075,24 @@ On CentOS 7 you must have these prerequisite packages, which are installed as ab
 
   rpm -q libpsm2 libpsm2-devel
 
-If you get OpenMPI runtime errors like::
+If you get OpenMPI_ runtime errors like::
 
   mca: base: components_open: component pml / cm open function failed
 
-then you may need to install also these packages before building OpenMPI::
+then you may need to install also these packages before building OpenMPI_::
 
   yum install infinipath-psm infinipath-psm-devel
 
 see `[OMPI users] Issue about cm PML <https://www.open-mpi.org/community/lists/users/2016/03/28734.php>`_
 and `rocks 6.2 infiniband <https://lists.sdsc.edu/pipermail/npaci-rocks-discussion/2016-March/068806.html>`_.
 
-Build OpenMPI on RHEL/CentOS 7.2 or later with the configuration flags::
+With OpenMPI_ 4.1.4 there is an issue (reference needed) that it attempts to open 2 connections per CPU core for one-sided communication,
+causing OPA applications to crash.
+The workaround is to set this environment variable::
+
+  export OMPI_MCA_btl=^openib,ofi
+
+Build OpenMPI_ on RHEL/CentOS 7.2 (or later) with the configuration flags::
 
    --with-psm2=/usr # Build support for the PSM 2 library (starting with the v1.10 series).
 
@@ -1103,26 +1111,26 @@ The older PSM library is not available on CentOS 7::
 Intel OpenMPI
 -------------
 
-The *IntelOPA-Basic.RHEL73-x86_64.10.3.0.0.81* package contains Intel's builds of OpenMPI using the GCC compiler.
+The *IntelOPA-Basic.RHEL73-x86_64.10.3.0.0.81* package contains Intel's builds of OpenMPI_ using the GCC compiler.
 Install the **hfi** versions of RPMs to use OmniPath, for example::
 
   cd IntelOPA-OFED_DELTA.RHEL73-x86_64.10.3.0.0.82/RPMS/redhat-ES73
   install openmpi_gcc_hfi-1.10.4-9.x86_64.rpm mpi-selector-1.0.3-1.x86_64.rpm mpitests_openmpi_gcc_hfi-3.2-930.x86_64.rpm
 
-To use the Intel OpenMPI see the Intel *Omni-Path Fabric Performance Tuning User Guide* chapter 5 *MPI Performance*:
+To use the Intel OpenMPI_ see the Intel *Omni-Path Fabric Performance Tuning User Guide* chapter 5 *MPI Performance*:
 
 * Load the environment variables::
 
     source /usr/mpi/gcc/openmpi-1.10.4-hfi/bin/mpivars.sh
 
-* Use the options in your mpirun command to specify the use of PSM2 with OpenMPI::
+* Use the options in your mpirun command to specify the use of PSM2 with OpenMPI_::
 
     mpirun -mca pml cm -mca mtl psm2 ... 
 
 Using OpenMPI with OmniPath
 ---------------------------
 
-First make the correct version of OpenMPI available to your applications.
+First make the correct version of OpenMPI_ available to your applications.
 If you use *software modules* (see the :ref:`EasyBuild_modules` page) load the appropriate module, for example::
 
   # module load foss
@@ -1141,7 +1149,7 @@ If you use *software modules* (see the :ref:`EasyBuild_modules` page) load the a
  11) ScaLAPACK/2.0.2-gompi-2016b-OpenBLAS-0.2.18-LAPACK-3.6.1
  12) foss/2016b
 
-Now verify that the *psm2* component has been built into OpenMPI::
+Now verify that the *psm2* component has been built into OpenMPI_::
 
   # ompi_info | grep psm2
     MCA mtl: psm2 (MCA v2.0.0, API v2.0.0, Component v1.10.3)
@@ -1151,7 +1159,7 @@ MPI performance tuning
 
 The Intel *Omni-Path Fabric Performance Tuning User Guide* discusses in chapter 5 *MPI Performance*.
 
-* Use the options in your mpirun command to specify the use of PSM2 with OpenMPI::
+* Use the options in your mpirun command to specify the use of PSM2 with OpenMPI_::
 
     mpirun -mca pml cm -mca mtl psm2 ... 
 
