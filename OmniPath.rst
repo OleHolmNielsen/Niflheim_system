@@ -1086,8 +1086,15 @@ then you may need to install also these packages before building OpenMPI_::
 see `[OMPI users] Issue about cm PML <https://www.open-mpi.org/community/lists/users/2016/03/28734.php>`_
 and `rocks 6.2 infiniband <https://lists.sdsc.edu/pipermail/npaci-rocks-discussion/2016-March/068806.html>`_.
 
-With OpenMPI_ 4.1.4 there is an issue (reference needed) that it attempts to open 2 connections per CPU core for one-sided communication,
-causing OPA applications to crash.
+
+Omni-Path and OpenMPI_ version 4.1.4 (and possibly later versions) need special care:
+
+* The driver package must be installed on all CentOS machines with the OmniPath driver.
+* OpenMPI_ must be built on a compute node with Omni-Path installed.
+* An environment variable must be set to prevent OpenMPI_ from opening more communications channels than the driver supports.
+  This is because OpenMPI_ from version 4.1 opens extra communication channels for the rarely used one-sides communications, and that causes the kernel driver to run out of ressources.
+  See https://github.com/open-mpi/ompi/issues/9575 and https://github.com/ComputeCanada/software-stack-config/pull/34
+
 The workaround is to set this environment variable::
 
   export OMPI_MCA_btl=^openib,ofi
