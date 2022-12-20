@@ -586,6 +586,7 @@ In MariaDB_ 10.2.1 and above there are some important changes which have been di
 Several Slurm database tables must be altered while the ``slurmdbd`` is stopped.
 Please note that EL7 contains MariaDB_ version 5.5, and EL8 contains MariaDB_ version 10.3,
 so this is important, for example, when upgrading from EL7 to EL8.
+This has been resolved in Slurm 22.05.7.
 
 We have discussed the procedure in details in bug_15168_.
 A future version of Slurm may perform these changes automatically.

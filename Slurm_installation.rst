@@ -532,6 +532,7 @@ Slurm database modifications required for MariaDB 10.2.1 and above
 
 In MariaDB_ 10.2.1 and above there are some important changes to Slurm database tables,
 please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
+This has been resolved in Slurm 22.05.7.
 
 .. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
 
@@ -695,6 +696,7 @@ The upgrading steps for the slurmdbd_ host are:
 
    If also upgrading to MariaDB_ 10.2.1 (and above) from an older version, there are some important changes to Slurm database tables,
    please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
+   This has been resolved in Slurm 22.05.7.
 
 3. Update all RPMs::
 
@@ -824,7 +826,7 @@ The **quick and usually OK procedure** would be to simply update the RPMs (here:
 
 This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
 
-For the compute nodes running slurmd_ the **safe** procedure could be:
+For the compute nodes running slurmd_ the **safe procedure** could be:
 
 1. Drain all desired compute nodes in a <nodelist>::
 
