@@ -221,6 +221,9 @@ Here we list some useful third-party utilities that Slurm administrators or user
 
   - pestat_ prints a node status list (1 host per line) with information about jobids, users and CPU loads.
 
+* `SlurmCommander <https://github.com/CLIP-HPC/SlurmCommander>`_ is a simple, lightweight, no-dependencies text-based user interface (TUI) to your cluster.
+  It ties together multiple slurm commands to provide you with a simple and efficient interaction point with slurm.
+
 * `STUBL - SLURM Tools and UBiLities <https://github.com/ubccr/stubl>`_.
 
 * `birc-aeh/slurm-utils <https://github.com/birc-aeh/slurm-utils>`_:
