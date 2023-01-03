@@ -8,7 +8,7 @@ please refer to the page_for_users_ in stead).
 
 .. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
 .. _Ansible_configuration: https://wiki.fysik.dtu.dk/ITwiki/Ansible_configuration/
-
+.. _Hardware_documentation: https://wiki.fysik.dtu.dk/ITwiki/Hardware/
 
 .. toctree::
    :maxdepth: 1
@@ -28,8 +28,12 @@ please refer to the page_for_users_ in stead).
    :caption: Software documentation
 
    EasyBuild_modules
-
 * Ansible_configuration_ of Linux servers and desktops.
+
+Hardware documentation
+=========================
+
+Server Hardware_documentation_.
 
 .. toctree::
    :maxdepth: 1
