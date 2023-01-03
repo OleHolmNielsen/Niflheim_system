@@ -28,7 +28,6 @@ please refer to the page_for_users_ in stead).
    :caption: Software documentation
 
    EasyBuild_modules
-   Ansible_
 
 .. toctree::
    :maxdepth: 1
@@ -42,3 +41,8 @@ please refer to the page_for_users_ in stead).
    pxelinux.doc
    syslinux.doc
    MultipleEthernetCards
+
+External pages
+===============
+
+* Ansible_ configuration of Linux servers and desktops.
