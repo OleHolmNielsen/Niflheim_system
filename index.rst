@@ -43,8 +43,3 @@ please refer to the page_for_users_ in stead).
    pxelinux.doc
    syslinux.doc
    MultipleEthernetCards
-
-External pages
-===============
-
-* Ansible_configuration_ of Linux servers and desktops.
