@@ -7,6 +7,7 @@ describing the installation of Slurm batch queue system, software modules, and n
 please refer to the page_for_users_ in stead).
 
 .. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
+.. _Ansible: https://wiki.fysik.dtu.dk/ITwiki/Ansible_configuration/
 
 
 .. toctree::
@@ -27,6 +28,7 @@ please refer to the page_for_users_ in stead).
    :caption: Software documentation
 
    EasyBuild_modules
+   Ansible_
 
 .. toctree::
    :maxdepth: 1
