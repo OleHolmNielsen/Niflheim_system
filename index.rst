@@ -28,12 +28,13 @@ please refer to the page_for_users_ in stead).
    :caption: Software documentation
 
    EasyBuild_modules
-* Ansible_configuration_ of Linux servers and desktops.
+
+* Ansible_configuration_ of Linux servers and desktops
 
 Hardware documentation
 =========================
 
-Server Hardware_documentation_.
+Hardware_documentation_ of servers and other devices
 
 .. toctree::
    :maxdepth: 1
