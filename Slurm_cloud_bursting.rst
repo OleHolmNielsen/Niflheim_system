@@ -407,11 +407,13 @@ Now you can create a new machine in the Virtual_machines_ page by clicking *+Add
 
     az vm image list --all -o table --publisher almalinux
 
-  For Rockylinux there are only for-pay images::
+  Display lists of available Rockylinux images::
 
+    az vm image list --all -o table --publisher  erockyenterprisesoftwarefoundationinc1653071250513
     az vm image list -f rocky --all -o table
 
-  See also the list of `Rockylinux cloud images <https://rockylinux.org/cloud-images/>`_.
+  There is a free `Rocky Linux 8 - Official <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/erockyenterprisesoftwarefoundationinc1653071250513.rockylinux>`_ image,
+  see also the list of `Rockylinux cloud images <https://rockylinux.org/cloud-images/>`_.
 
 * Azure_ spot instance: No
 * Size of the machine: Select from the list of available Azure_ machine_sizes_ in the *Change size* menu.
