@@ -1137,6 +1137,7 @@ There are several possible solutions:
   **WARNING:** 
   NFS automount and ``job_container/tmpfs`` do not play well together:
   If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
+  The issue should be resolved in Slurm_ 23.02 according to bug_12567_.
 
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir 
