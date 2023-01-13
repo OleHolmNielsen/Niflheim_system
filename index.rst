@@ -34,7 +34,7 @@ please refer to the page_for_users_ in stead).
 Hardware documentation
 =========================
 
-Hardware_documentation_ of servers and other devices
+* Hardware_documentation_ of servers and other devices
 
 .. toctree::
    :maxdepth: 1
