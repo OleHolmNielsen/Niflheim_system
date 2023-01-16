@@ -13,6 +13,9 @@ and the section Automated_network_installation_with_pxeconfig_ below.
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 
+SYSLINUX and PXELINUX
+==========================
+
 `PXE network booting <http://en.wikipedia.org/wiki/Preboot_Execution_Environment>`_
 from Linux servers uses the `SYSLINUX <http://syslinux.zytor.com/>`_ and 
 `PXELINUX <http://syslinux.zytor.com/pxe.php>`_ utilities
