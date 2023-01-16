@@ -1,13 +1,13 @@
 .. _PXE-booting:
 
-===================
 PXE network booting
 ===================
 
 .. Contents::
 
 This page described BIOS_ PXE_ booting.
-See also the page on PXE_and_UEFI_ network booting.
+See also the page on PXE_and_UEFI_ network booting,
+and the section Automated_network_installation_with_pxeconfig_ below.
 
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
@@ -150,7 +150,7 @@ One must first install SYSLINUX files to ``/tftpboot`` on the DHCP/TFTP server a
 
 Secondly, for each client machine that should use the SYSLINUX menu systems a hexadecimally encoded IP-address file
 must be created in ``/tftpboot/pxelinux.cfg/``, pointing to the menu configuration file.
-This can conveniently be done with the *pxeconfig* command discussed below.
+This can conveniently be done with the ``pxeconfig`` command discussed below.
 
 A simple ``default.menu`` SYSLINUX menu file in ``/tftpboot/pxelinux.cfg/`` is::
 
