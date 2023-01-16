@@ -6,24 +6,23 @@ PXE network booting
 
 .. Contents::
 
-This pages described BIOS_ PXE_ booting:
+This page described BIOS_ PXE_ booting.
+See also the page on PXE_and_UEFI_ network booting.
+
+.. _BIOS: https://en.wikipedia.org/wiki/BIOS
+.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
+
+SYSLINUX tools
+==============
 
 .. toctree::
    :maxdepth: 1
-   :caption: PXE booting documentation
+   :caption: SYSLINUX documentation
 
    README.menu
    pxelinux.doc
    syslinux.doc
-
-* PXE_and_UEFI_ network booting.
-
-.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
-.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
-.. _BIOS: https://en.wikipedia.org/wiki/BIOS
-
-SYSLINUX tools
-==============
 
 `PXE network booting <http://en.wikipedia.org/wiki/Preboot_Execution_Environment>`_
 from Linux servers uses the `SYSLINUX <http://syslinux.zytor.com/>`_ and 
