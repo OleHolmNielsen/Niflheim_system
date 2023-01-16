@@ -1,5 +1,6 @@
 .. _PXE-booting:
 
+===================
 PXE network booting
 ===================
 
