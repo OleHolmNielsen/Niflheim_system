@@ -6,7 +6,7 @@ PXE network booting
 
 .. Contents::
 
-This page described the installation of a Linux OS on a computer by means of BIOS_ PXE_ booting.
+This page described the installation of a Linux OS on a computer by means of PXE_ (*Preboot Execution Environment*) booting.
 
 See also pages on:
 
