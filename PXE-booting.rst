@@ -6,9 +6,12 @@ PXE network booting
 
 .. Contents::
 
-This page described BIOS_ PXE_ booting.
-See also the page on PXE_and_UEFI_ network booting,
-and the section Automated_network_installation_with_pxeconfig_ below.
+This page described the installation of a Linux OS on a computer by means of BIOS_ PXE_ booting.
+
+See also pages on:
+
+* PXE_and_UEFI_ network booting.
+* The section Automated_network_installation_with_pxeconfig_ below.
 
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
