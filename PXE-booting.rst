@@ -13,14 +13,6 @@ See also the page on PXE_and_UEFI_ network booting.
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 
-.. toctree::
-   :maxdepth: 1
-   :caption: SYSLINUX documentation
-
-   README.menu
-   pxelinux.doc
-   syslinux.doc
-
 `PXE network booting <http://en.wikipedia.org/wiki/Preboot_Execution_Environment>`_
 from Linux servers uses the `SYSLINUX <http://syslinux.zytor.com/>`_ and 
 `PXELINUX <http://syslinux.zytor.com/pxe.php>`_ utilities
@@ -31,6 +23,14 @@ additional very useful documentation which we have copied here: :ref:`syslinux.d
 
 There is a `SYSLINUX mailing list <http://www.zytor.com/mailman/listinfo/syslinux>`_
 as well as a `SYSLINUX Wiki <http://syslinux.zytor.com/wiki/index.php/Main_Page>`_.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: SYSLINUX documentation
+
+   README.menu
+   pxelinux.doc
+   syslinux.doc
 
 Boot process summary
 --------------------
