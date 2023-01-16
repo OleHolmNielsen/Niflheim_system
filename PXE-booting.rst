@@ -13,9 +13,6 @@ See also the page on PXE_and_UEFI_ network booting.
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
 .. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 
-SYSLINUX tools
-==============
-
 .. toctree::
    :maxdepth: 1
    :caption: SYSLINUX documentation
