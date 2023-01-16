@@ -9,7 +9,7 @@ PXE network booting
 This pages described BIOS_ PXE_ booting:
 
 .. toctree::
-      :maxdepth: 1
+   :maxdepth: 1
    :caption: PXE booting documentation
 
    README.menu
