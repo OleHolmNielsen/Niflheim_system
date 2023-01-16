@@ -6,10 +6,20 @@ PXE network booting
 
 .. Contents::
 
-This pages described BIOS_ PXE_ booting.
-We currently have a separate page on PXE_and_UEFI_ network booting.
+This pages described BIOS_ PXE_ booting:
 
-.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/it/PXE_and_UEFI
+.. toctree::
+      :maxdepth: 1
+   :caption: PXE booting documentation
+
+   README.menu
+   pxelinux.doc
+   syslinux.doc
+
+* PXE_and_UEFI_ network booting.
+
+.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
+.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 .. _BIOS: https://en.wikipedia.org/wiki/BIOS
 
 SYSLINUX tools
@@ -34,7 +44,6 @@ and further information including a TFTP-server address (DHCP ``next-server`` op
 and a boot image file name ``pxelinux.0`` (DHCP ``filename`` option).
 The client retrieves the file ``pxelinux.0`` from the TFTP server and executes it.
 
-.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
 
 The ``pxelinux.0`` PXELINUX boot image then attempts to download configurations files from the TFTP server
 in the boot process `explained here <pxelinux.doc#how-to-configure-pxelinux>`_.
