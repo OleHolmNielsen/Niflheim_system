@@ -44,7 +44,4 @@ Hardware documentation
    OmniPath_switches
    System_administration
    PXE-booting
-   README.menu
-   pxelinux.doc
-   syslinux.doc
    MultipleEthernetCards
