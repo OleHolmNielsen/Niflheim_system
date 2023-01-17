@@ -281,7 +281,7 @@ see the Slurm_Power_Saving_Guide_.
 
 We provide some Slurm_power_saving_scripts_ which may be useful for power management using IPMI_ or with cloud services.
 
-.. _Slurm_Power_Saving_Guide: https://slurm.schedmd.com/power_save.html).
+.. _Slurm_Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 .. _Slurm_power_saving_scripts: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/power_save
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 
