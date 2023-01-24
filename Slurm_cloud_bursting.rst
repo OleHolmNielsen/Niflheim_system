@@ -59,6 +59,8 @@ Check that slurmctld_ has JSON_ support::
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 .. _bug_14925: https://bugs.schedmd.com/show_bug.cgi?id=14925
 
+.. _configuring-slurm-conf-for-power-saving:
+
 Configuring slurm.conf for power saving
 ------------------------------------------
 
