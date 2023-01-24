@@ -733,7 +733,7 @@ The nodes will be restored to normal operation once work is assigned to them.
 
 We describe the power_save_ configuration in the Slurm_cloud_bursting_ page section on :ref:`configuring-slurm-conf-for-power-saving`.
 
-.. _power_saving: https://slurm.schedmd.com/power_save.html
+.. _power_save: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
 
 High throughput configuration or large clusters
