@@ -731,7 +731,7 @@ Slurm_ provides an integrated power_save_ mechanism for powering down idle nodes
 Nodes that remain idle for a configurable period of time can be placed in a power saving mode, which can reduce power consumption or fully power down the node.
 The nodes will be restored to normal operation once work is assigned to them. 
 
-We describe the power_save_ configuration in the Slurm_cloud_bursting_ page section on :ref:`configuring-slurm-conf-for-power-saving``.
+We describe the power_save_ configuration in the Slurm_cloud_bursting_ page section on :ref:`configuring-slurm-conf-for-power-saving`.
 
 .. _power_saving: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
