@@ -59,13 +59,14 @@ Check that slurmctld_ has JSON_ support::
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 .. _bug_14925: https://bugs.schedmd.com/show_bug.cgi?id=14925
 
-Configuring slurm.conf
-----------------------
+Configuring slurm.conf for power saving
+------------------------------------------
 
 According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.conf_ must be carefully configured, for example::
 
   # Exceptions to the node suspend/resume logic (partitions):
   SuspendExcParts=xeon8
+  SuspendExcNodes=node00[1-9]
   SlurmctldParameters=cloud_dns   # Maybe add also these parameters: cloud_reg_addrs, idle_on_node_suspend
   ResumeTimeout=600
   SuspendTime=300   # Global value, the default is INFINITE
@@ -75,7 +76,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   DebugFlags=Power
   TreeWidth=1000     # Or 65535, the default is 50.  Large values disable tree fanout of slurmd communications
 
-**Beware**:
+**Some important points about power saving parameters**:
 
 * If you set ``SuspendTime`` to anything but INFINITE (or -1), power saving shutdown of nodes will commence!
 * It may be preferable to omit the global parameter and leave it with the default value ``SuspendTime=INFINITE``.
@@ -83,7 +84,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
     PartitionName=my_partition SuspendTime=300
 
-* You must set this in slurm.conf_, see `bug 14270 <https://bugs.schedmd.com/show_bug.cgi?id=14270>`_::
+* You must set this in slurm.conf_, see bug_14270_::
 
     PrivateData=cloud
 
@@ -93,6 +94,20 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 * The ```SlurmctldParameters=idle_on_node_suspend``` causes nodes drained for maintenance purposes to become idle and available
   for running jobs.
   This is most likely **not** desirable.
+
+An important side effect of power saving suspension of nodes pertains to on-premise nodes.
+Compute nodes that are, for example, drained for maintenance purposes will be suspended and later resumed when needed by jobs.
+This is highly undesirable!
+
+This issue has been resolved in Slurm_ 23.02 by bug_15184_ which introduces a new slurm.conf_ parameter ``SuspendExcStates``.
+This permits to configure node states which you want to be excluded from power saving suspension.
+Valid states for ``SuspendExcStates`` include::
+
+  CLOUD, DOWN, DRAIN, DYNAMIC_FUTURE, DYNAMIC_NORM, FAIL, INVALID_REG, MAINTENANCE, NOT_RESPONDING, PERFCTRS, PLANNED, RESERVED
+
+
+.. _bug_14270: https://bugs.schedmd.com/show_bug.cgi?id=14270
+.. _bug_15184: https://bugs.schedmd.com/show_bug.cgi?id=15184
 
 Resume and Suspend scripts
 --------------------------
@@ -112,7 +127,7 @@ This example may be used::
   action="start"
   echo "`date` User $USER invoked $action $0 $*" >>/var/log/slurm/power_save.log
 
-See also examples in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/cloud
+See also some suspend/resume scripts in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/power_save
 
 
 Site-to-Site VPN connection
@@ -409,7 +424,7 @@ Now you can create a new machine in the Virtual_machines_ page by clicking *+Add
 
   Display lists of available Rockylinux images::
 
-    az vm image list --all -o table --publisher  erockyenterprisesoftwarefoundationinc1653071250513
+    az vm image list --all -o table --publisher erockyenterprisesoftwarefoundationinc1653071250513
     az vm image list -f rocky --all -o table
 
   There is a free `Rocky Linux 8 - Official <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/erockyenterprisesoftwarefoundationinc1653071250513.rockylinux>`_ image,
