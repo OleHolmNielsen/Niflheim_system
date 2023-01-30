@@ -18,7 +18,7 @@ Documentation:
 * EasyBuild_ homepage.
 * Documentation_ page.
 * Release_notes_.
-* `Demos <http://easybuild.readthedocs.io/en/latest/demos/>`_.
+* `Demos <https://docs.easybuild.io/demos/>`_ of EasyBuild_.
 * Paper: `Modern Scientific Software Management Using EasyBuild and Lmod <http://dl.acm.org/citation.cfm?id=2691141>`_.
 * `EasyBuild mailinglist <https://lists.ugent.be/wws/info/easybuild>`_.
 * Github_information_ and Integration_with_GitHub_.
@@ -27,17 +27,18 @@ Documentation:
 * Slack: Contact the EasyBuild community via Slack: https://easybuild.slack.com, self-request an invite via https://easybuild-slack.herokuapp.com.
 * IRC: An IRC channel #easybuild has been set up on the FreeNode network.
   Just connect your IRC client to the chat.freenode.net server, and join the #easybuild channel.
-* `Generating container recipes & images <http://easybuild.readthedocs.io/en/develop/Containers.html>`_.
+* `Generating container recipes & images <https://docs.easybuild.io/api/easybuild/tools/containers/>`_.
 
 Software provided by EasyBuild_:
 
-* `List of supported software <http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html>`_.
+* List_of_supported_software_
 
+.. _List_of_supported_software: https://docs.easybuild.io/version-specific/supported-software/
 .. _EasyBuild: https://github.com/hpcugent/easybuild
-.. _Documentation: https://easybuild.readthedocs.io/en/latest/
-.. _Release_notes: http://easybuild.readthedocs.io/en/latest/Release_notes.html
+.. _Documentation: https://docs.easybuild.io/
+.. _Release_notes: https://docs.easybuild.io/release-notes/
 .. _Github_information: https://easybuilders.github.io/easybuild/
-.. _Integration_with_GitHub: https://easybuild.readthedocs.io/en/latest/Integration_with_GitHub.html
+.. _Integration_with_GitHub: https://docs.easybuild.io/integration-with-github/
 .. _Twitter: https://twitter.com/easy_build
 .. _Youtube: https://www.youtube.com/easybuilders
 
@@ -49,7 +50,7 @@ Some talks about EasyBuild_:
 Lmod
 ====
 
-EasyBuild_ works with older Tcl/C based module tools, but Lmod_ is `recommended <https://easybuild.readthedocs.io/en/latest/Installation.html#dependencies>`_.
+EasyBuild_ works with older Tcl/C based module tools, but Lmod_ is `recommended <https://docs.easybuild.io/installation/#dependencies>`_.
 From the Lmod_ homepage:
 
 * Lmod_ is a Lua_ based module system that easily handles the MODULEPATH Hierarchical problem.
@@ -77,7 +78,8 @@ Install Lmod
 You must install Lmod_ on every node in your cluster.
 It is most convenient to install an Lmod_ RPM package on all nodes.
 
-If you don't have **root** permissions on the system, you can install Lmod_ as described in `Installing Lmod without root permissions <http://easybuild.readthedocs.io/en/latest/Installing-Lmod-without-root-permissions.html>`_.
+If you don't have **root** permissions on the system, you can install Lmod_ as described in
+`Installing Lmod without root permissions <https://docs.easybuild.io/installing-lmod-without-root-permissions/>`_.
 
 There are no official Lmod_ RPM packages available from the authors, so for CentOS/RHEL Linux you need to install Lmod_ from the EPEL_ repository.
 First you install the newest version of *epel-release* RPM for EL7, for example::
@@ -158,7 +160,7 @@ EasyBuild prerequisites
 
 Prerequisite modules are listed in Dependencies_.
 
-.. _Dependencies: https://easybuild.readthedocs.io/en/latest/Installation.html#dependencies
+.. _Dependencies: https://docs.easybuild.io/installation/#dependencies
 
 For RHEL/CentOS 7 these packages seem to suffice::
 
@@ -170,14 +172,14 @@ Modules such as UCX require some OS dependencies::
 
 Old versions of EasyBuild might also require the *python-mock* RPM, see https://github.com/easybuilders/easybuild-framework/issues/2712
 
-Some optional packages from EPEL_ may perhaps be needed, see `Dependencies <https://easybuild.readthedocs.io/en/latest/Installation.html#dependencies>`_::
+Some optional packages from EPEL_ may perhaps be needed, see Dependencies_::
 
   yum install GitPython pysvn graphviz 
 
 Bootstrapping
 -------------
 
-.. _Configuration: http://easybuild.readthedocs.io/en/latest/Configuration.html
+.. _Configuration: https://docs.easybuild.io/configuration/
 
 Now you should login or do::
 
@@ -192,7 +194,7 @@ The steps required for a normal (**non-root**) user are:
   You may want to use `Installing EasyBuild with EasyBuild <https://docs.easybuild.io/en/latest/Installation.html#installing-easybuild-with-easybuild>`_ to build an EasyBuild_ module.
   This is assumed in the sections below.
 
-.. _Installation: https://easybuild.readthedocs.io/en/latest/Installation.html
+.. _Installation: https://docs.easybuild.io/installation/
 
 * If multiple module tools are available on the system, it may be necessary to configure the use of Lmod_ (see the Configuration_ page)::
 
@@ -251,7 +253,7 @@ The simplest way may be the `new command <https://github.com/hpcugent/easybuild-
 The standard upgrading method is to download the bootstrap script and execute it as in the normal installation explained above.
 Then reload the *EasyBuild* module as shown above.
 
-.. _Updating: https://easybuild.readthedocs.io/en/latest/Installation.html#updating-an-existing-easybuild-installation
+.. _Updating: https://docs.easybuild.io/installation/#updating
 
 Using EasyBuild for module building
 ===================================
@@ -284,8 +286,6 @@ Of particular interest is:
 
      eb --list-toolchains
 
-  See also http://easybuild.readthedocs.io/en/latest/eb_list_toolchains.html
-
 * The easyblocks_: The implementation of a particular software build and install procedure is done in a Python module, which is aptly referred to as an **easyblock**.
   A list of easyblocks_ can be obtained with::
 
@@ -295,12 +295,12 @@ Of particular interest is:
 
     eb -S ^GCC-4.6
 
-.. _command_line: https://easybuild.readthedocs.io/en/latest/Using_the_EasyBuild_command_line.html
-.. _toolchains: https://easybuild.readthedocs.io/en/latest/Using_the_EasyBuild_command_line.html#list-of-known-toolchains-list-toolchains
-.. _easyblocks: https://easybuild.readthedocs.io/en/latest/Using_the_EasyBuild_command_line.html#list-of-available-easyblocks-list-easyblocks
-.. _Concepts_and_Terminology: https://easybuild.readthedocs.io/en/latest/Concepts_and_Terminology.html
-.. _Searching_for_easyconfigs: https://easybuild.readthedocs.io/en/latest/Using_the_EasyBuild_command_line.html#searching-for-easyconfigs-search-s
-.. _easyconfig: https://easybuild.readthedocs.io/en/latest/Concepts_and_Terminology.html#easyconfig-files
+.. _command_line: https://docs.easybuild.io/using-easybuild/
+.. _toolchains: https://docs.easybuild.io/version-specific/toolchains/
+.. _easyblocks: https://docs.easybuild.io/using-easybuild/#list_easyblocks
+.. _Concepts_and_Terminology: https://docs.easybuild.io/terminology/
+.. _Searching_for_easyconfigs: https://docs.easybuild.io/using-easybuild/#searching_for_easyconfigs
+.. _easyconfig: https://docs.easybuild.io/terminology/#easyconfig_files
 
 Building in a RAM disk
 ----------------------
@@ -373,7 +373,7 @@ Setting the CPU hardware architecture
 By default, EasyBuild optimizes builds for the CPU architecture of the build host, by instructing the compiler to generate instructions for the highest instruction set supported by the process architecture of the build host processor.
 This is done by including specific compiler flags in $CFLAGS, $CXXFLAGS, $FFLAGS, $F90FLAGS, etc.
 
-See `Controlling compiler optimization flags <https://easybuild.readthedocs.io/en/latest/Controlling_compiler_optimization_flags.html>`_.
+See `Controlling compiler optimization flags <https://docs.easybuild.io/controlling-compiler-optimization-flags/>`_.
 
 
 Some compilers will generate code for the CPU hardware on which it is executed, and this code may not run on older CPUs.
@@ -463,7 +463,7 @@ Now the ``/etc/auto.home`` file is independent of CPU architecture, since this i
 Install common packages
 =======================
 
-See the `List of supported software <http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html>`_.
+See the List_of_supported_software_.
 
 Some examples:
 
@@ -524,7 +524,7 @@ During the module building process one may use::
 
   eb xxx.eb --hide-deps=zlib,Szip
 
-see https://easybuild.readthedocs.io/en/latest/Manipulating_dependencies.html#installing-dependencies-as-hidden-modules-using-hide-deps
+see https://docs.easybuild.io/manipulating-dependencies/#hide_deps
 
 Hidden modules may also be defined in this (undocumented?) environment variable::
 
@@ -666,7 +666,7 @@ The *OpenMPI 2.1.3* build of iomkl_ has some prerequisite CentOS packages::
 
   yum install libpciaccess-devel libxml2-devel
 
-.. _iomkl: http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html#list-software-iomkl-540
+.. _iomkl: https://docs.easybuild.io/version-specific/supported-software/#iomkl
 
 We have built an old 2016 version of the iomkl_ toolchain using modified EB files with these steps::
 
@@ -781,7 +781,7 @@ If you develop easyconfig_ files you can contribute them back to the community, 
 Submitting pull requests (--new-pr)
 -----------------------------------
 
-See http://easybuild.readthedocs.io/en/latest/Integration_with_GitHub.html#github-new-pr
+See https://docs.easybuild.io/integration-with-github/#github_synergy_new_update_pr_dry_run
 
 In its simplest form, you just provide the location of the file(s) that you want to include in the pull request::
 
