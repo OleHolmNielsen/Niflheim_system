@@ -135,7 +135,7 @@ Now follow the accounting_ page instructions (using -p to enter the database pas
   create database slurm_acct_db;
   quit;
 
-**WARNING:** Use the *slurm* database user's password **in stead of some_pass**.
+**WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
 
 Optional: If you would like to grant read-only (SELECT) access to the database, set up a *readonly* user with access from '%' (meaning any host)::
 
@@ -310,7 +310,7 @@ Configure some of the ``/etc/slurm/slurmdbd.conf`` variables::
   DbdPort=6819    # The default value
   SlurmUser=slurm
   StorageHost=localhost
-  StoragePass=some_pass    # The above defined database password
+  StoragePass=some_pass    # The above defined database password, change it for your site!
   StorageLoc=slurm_acct_db
 
 Setting database purge parameters
