@@ -78,7 +78,7 @@ Install slurmdbd package
 
 Install the slurm database RPM on the database-only (slurmdbd service) node::
 
-  export VER=20.02.6-1  # Use the latest version
+  export VER=22.05.8-1  # Use the latest version
   yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm
 
 Explicitly enable the service::
