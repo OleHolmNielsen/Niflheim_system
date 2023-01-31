@@ -59,7 +59,7 @@ by mounting the MariaDB_ (MySQL_) database directory on a dedicated high-speed f
 
 Whether this is required depends on the number and frequency of jobs expected.
 A high-speed file system could be placed on a separate SSD SAS/SATA disk drive,
-or even better on a PCIe_ SSD disk drive.
+or even better on a PCIe_ NVMe_ disk drive.
 
 Such disks must be qualified for high-volume random small read/write operations relevant for databases,
 and should be built with the *Non-Volatile Memory Express* (NVMe_) storage interface standard for reliability and performance.
