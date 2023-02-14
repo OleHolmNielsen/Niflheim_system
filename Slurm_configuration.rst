@@ -1640,11 +1640,11 @@ Please note that job_submit.lua.example_ has an issue with use of ``log.user()``
 
 .. _bug_14539: https://bugs.schedmd.com/show_bug.cgi?id=14539
 
-On the slurmctld_ server you could start with this example::
+On the slurmctld_ server you may start with this example::
 
-  cp ~/rpmbuild/BUILD/slurm-21.08.8-2/etc/job_submit.lua.example /etc/slurm/job_submit.lua
+  cp ~/rpmbuild/BUILD/slurm-22.05.8/etc/job_submit.lua.example /etc/slurm/job_submit.lua
 
-and read in the Lua_manual_ about Lua_ programming.
+(replace the 22.05 version number) and read in the Lua_manual_ about Lua_ programming.
 Install also the Lua_ package::
 
   yum install lua
