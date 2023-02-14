@@ -1630,13 +1630,13 @@ Sample Lua_ scripts can be copied from the Slurm_ source distribution in the dir
 * job_submit.lua_
 * job_submit.license.lua_
 
-We also provide a plugin in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/plugins
+We also provide a job submit plugin in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/plugins
 
 .. _job_submit.lua.example: https://github.com/SchedMD/slurm/blob/master/etc/job_submit.lua.example
 .. _job_submit.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.lua
 .. _job_submit.license.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.license.lua
 
-Please note that job_submit.lua.example_ seems to have an issue with use of log.user() in job_modify, see bug_14539_.
+Please note that job_submit.lua.example_ seems to have an issue with use of ``log.user()`` in job_modify, see bug_14539_.
 
 .. _bug_14539: https://bugs.schedmd.com/show_bug.cgi?id=14539
 
