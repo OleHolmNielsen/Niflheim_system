@@ -1738,7 +1738,7 @@ Then configure slurm.conf_ with this parameter (undocumented prior to 22.05.3)::
   JobSubmitPlugins=lua
 
 which will make Slurm_ use the ``/etc/slurm/job_submit.lua`` script.
-Make sure to distribute slurm.conf_ to all nodes.
+Make sure to distribute slurm.conf_ to all nodes (or use a configless_ setup).
 
 Then reconfigure ``slurmctld``::
 
@@ -1746,4 +1746,6 @@ Then reconfigure ``slurmctld``::
 
 If ``slurmctld`` gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
 (see `comment 15 <https://bugs.schedmd.com/show_bug.cgi?id=14472#c15>`_ in bug_14472_).
-If ``slurmctld`` does not have a cached script (because it was just restarted) it may crash!
+
+**WARNING:**
+If ``slurmctld`` does not have a cached script (because it was just restarted, for example) it may crash!
