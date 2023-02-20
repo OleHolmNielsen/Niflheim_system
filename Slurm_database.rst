@@ -291,9 +291,12 @@ This must be available on your MySQL_ installation or rollback will not work.
 slurmdbd_ requires its own configuration file called slurmdbd.conf_. 
 Start by copying the example file from the *slurmdbd.conf* man-page.
 
-The file ``slurmdbd.conf`` should be only on the computer where slurmdbd_ executes and should only be readable by the user which executes slurmdbd_ (e.g. "slurm"). 
+The file ``/etc/slurm/slurmdbd.conf`` should be only on the computer where slurmdbd_ executes and should only be readable by the user which executes slurmdbd_ (e.g. "slurm"). 
 It must be protected from unauthorized access since it contains a database login name and password::
 See the slurmdbd.conf_ man-page for a more complete description of the configuration parameters. 
+
+**NOTICE:** The ``/etc/slurm/slurm.conf`` file is **not needed or used** in the slurmdbd_ server.
+The only file required is ``/etc/slurm/slurmdbd.conf``.
 
 Set up files and permissions::
 
@@ -384,11 +387,11 @@ The default value may be *localhost*, meaning that **no other hosts** can inquir
 
 We recommend to explicitly set the slurmdbd_ hostname (for example, ``slurmdbd.my.domain``) in these files:
 
-* **DbdHost** in slurmdbd.conf_ as documented above::
+* On the slurmdbd_ server configure ``DbdHost`` in slurmdbd.conf_ as documented above::
 
     DbdHost=slurmdbd.my.domain
 
-* **AccountingStorageHost** in slurm.conf_::
+* On the slurmctld_ server configure ``AccountingStorageHost`` in slurm.conf_ so that slurmctld_ knows the slurmdbd_ server's hostname::
 
     AccountingStorageHost=slurmdbd.my.domain
 
@@ -398,7 +401,7 @@ After restarting the slurmctld_ and slurmdbd_ services, verify the setup by::
 
 If other nodes than the slurmdbd_ node must be able to connect to the slurmdbd_ service, you must open the firewall to specific hosts
 as described in :ref:`firewall-between-slurmctld-and-slurmdbd`.
-
+ 
 Setting MaxQueryTimeRange
 -------------------------
 
