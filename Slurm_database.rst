@@ -686,7 +686,7 @@ Testing the database restore
 Take a database dump file and restore it into the MariaDB_/MySQL_ database (see above :ref:`backup-and-restore-of-database`).
 Use the ``time`` command to get an estimate of the time this will take.
 
-Configure the server's hostname ( for example **db2**) in slurmdbd.conf_:
+Configure the server's hostname ( for example ``db2``) in slurmdbd.conf_:
 
   DbdHost=<hostname>
 
@@ -705,26 +705,15 @@ Database migration procedure
 
 Let us denote the slurmdbd_ servers as:
 
-* **db1** is the current slurmdbd_ and MariaDB_ database server.
+* ``db1`` is the current slurmdbd_ and MariaDB_ database server.
   This could be the same as the slurmctld_ server, or it could be a dedicated server.
 
-* **db2** is the designated new slurmdbd_ and MariaDB_ database server.
-
-On the slurmctld_ server, increase the timeout values in slurm.conf_ sufficiently, for example::
-
-     SlurmctldTimeout=3600
-     SlurmdTimeout=3600 
-
-and copy slurm.conf_ to all nodes.
-Then reconfigure the running daemons and test the timeout values::
-
-     scontrol reconfigure
-     scontrol show config | grep Timeout
+* ``db2`` is the designated new slurmdbd_ and MariaDB_ database server.
 
 db1: stop slurmdbd
 ..................
 
-On the db1 server:
+On the ``db1`` server:
 
 1. Stop and disable slurmdbd_ and make sure the status is down::
 
@@ -734,7 +723,7 @@ On the db1 server:
 
 2. Run the MySQL_ database dump described  above :ref:`backup-and-restore-of-database`.
 
-   Copy the database dump to the db2 server.
+   Copy the database dump to the ``db2`` server.
    Make a long-term copy of the database dump.
 
 3. Stop any crontab jobs that run MySQL_ database dumps.
@@ -742,11 +731,11 @@ On the db1 server:
 db2: restore database and start slurmdbd
 ........................................
 
-On the db2 server:
+On the ``db2`` server:
 
 1. Make sure the slurmdbd_ service is stopped and that no crontab jobs will run database dumps.
 
-2. Load the database dump from db1 into MariaDB_ as shown above :ref:`backup-and-restore-of-database`.
+2. Load the database dump from ``db1`` into MariaDB_ as shown above :ref:`backup-and-restore-of-database`.
 
 3. Start the slurmdbd_ service manually to see if any errors occur::
 
@@ -764,20 +753,20 @@ On the db2 server:
      systemctl start slurmdbd
      systemctl status slurmdbd
 
-Now the new slurmdbd_ service should be up and running on the **db2** server in a stable state.
+Now the new slurmdbd_ service should be up and running on the ``db2`` server in a stable state.
 
 slurmctld server: reconfigure AccountingStorageHost
 ...................................................
 
 On the slurmctld_ server:
 
-Now it's time to reconfigure slurmctld_ for the new **db2** slurmdbd_ server.
+Now it's time to reconfigure slurmctld_ for the new ``db2`` slurmdbd_ server.
 
 1. Stop the slurmctld_::
 
      systemctl stop slurmctld
 
-2. Edit slurm.conf_ to configure the new slurmdbd_ server (db2)::
+2. Edit slurm.conf_ to configure the new slurmdbd_ server (``db2``)::
 
      AccountingStorageHost=db2
 
@@ -798,35 +787,11 @@ Now it's time to reconfigure slurmctld_ for the new **db2** slurmdbd_ server.
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
 
-Update all nodes
-................
-
-On the slurmctld_ server:
-
-Change the timeout values in slurm.conf_ back to the original values, for example::
-
-     SlurmctldTimeout=300
-     SlurmdTimeout=300 
-
-and copy slurm.conf_ to all nodes.
-Then reconfigure the running daemons and test the timeout values::
-
-     scontrol reconfigure
-     scontrol show config | grep Timeout
-
-Restart the daemons::
-
-   systemctl restart slurmctld
-
-and on all nodes (using :ref:`clustershell`)::
-
-  clush -ba systemctl restart slurmd
-
 db2: Enable database backups
 ............................
 
-On the db2 server:
+On the ``db2`` server:
 
 1. Make a crontab job for doing database dumps as in :ref:`backup-and-restore-of-database`.
 
-2. Make sure the db2 server and the database dumps are backed up daily/regularly to your site's backup service.
+2. Make sure the ``db2`` server and the database dumps are backed up daily/regularly to your site's backup service.
