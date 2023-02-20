@@ -297,6 +297,8 @@ See the slurmdbd.conf_ man-page for a more complete description of the configura
 
 **NOTICE:** The ``/etc/slurm/slurm.conf`` file is **not needed or used** in the slurmdbd_ server.
 The only file required is ``/etc/slurm/slurmdbd.conf``.
+However, user commands such as ``sinfo`` and ``sacctmgr`` will need access to ``slurm.conf``,
+and if ``/etc/slurm/slurm.conf`` does not exist, then they will use the configless_ mode (if configured).
 
 Set up files and permissions::
 
@@ -315,6 +317,8 @@ Configure some of the ``/etc/slurm/slurmdbd.conf`` variables::
   StorageHost=localhost
   StoragePass=some_pass    # The above defined database password, change it for your site!
   StorageLoc=slurm_acct_db
+
+.. _configless: https://slurm.schedmd.com/configless_slurm.html
 
 Setting database purge parameters
 ---------------------------------
