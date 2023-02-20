@@ -736,13 +736,14 @@ On the ``db2`` server:
 1. Make sure the slurmdbd_ service is stopped and that no crontab jobs will run database dumps.
 
 2. Load the database dump from ``db1`` into MariaDB_ as shown above :ref:`backup-and-restore-of-database`.
+   If the MariaDB_ version on ``db2`` than on ``db1`` then **you must remember** to perform the MariaDB_ update actions shown above.
 
 3. Start the slurmdbd_ service manually to see if any errors occur::
 
      slurmdbd -D -vvvv 
 
    and wait for the output::
-
+ 
      slurmdbd: debug2: Everything rolled up
 
    and do a *Control-C*.
