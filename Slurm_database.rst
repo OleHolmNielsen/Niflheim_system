@@ -770,7 +770,8 @@ Now it's time to reconfigure slurmctld_ for the new ``db2`` slurmdbd_ server.
 
      AccountingStorageHost=db2
 
-3. Make a backup copy of the *StateSaveLocation* ``/var/spool/slurmctld`` directory::
+3. Just for safety, but not required:
+   Make a backup copy of the *StateSaveLocation* ``/var/spool/slurmctld`` directory::
 
      tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld
 
