@@ -582,13 +582,13 @@ since there are some incompatible changes between 5.5 and 10.
 Slurm database modifications required for MariaDB 10.2.1 and above
 ..................................................................
 
-In MariaDB_ 10.2.1 and above there are some important changes which have been discussed in bug_13562_.
+In MariaDB_ 10.2.1 and above there are some **important changes** which have been discussed in bug_13562_.
 Several Slurm database tables must be altered while the ``slurmdbd`` is stopped.
 Please note that EL7 contains MariaDB_ version 5.5, and EL8 contains MariaDB_ version 10.3,
-so this is important, for example, when upgrading from EL7 to EL8.
-This has been resolved in Slurm 22.05.7.
+so this point is **important**, for example, when upgrading from EL7 to EL8!
+This has been resolved from Slurm 22.05.7.
 
-We have discussed the procedure in details in bug_15168_.
+We have discussed the procedure for MariaDB_ 10.2.1 and above in details in bug_15168_.
 A future version of Slurm may perform these changes automatically.
 
 The procedure for Slurm database modifications must be followed
