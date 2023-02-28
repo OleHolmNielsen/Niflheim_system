@@ -670,8 +670,8 @@ since slurmctld_ just caches all state information in the *StateSaveLocation* di
   $ scontrol show config | grep StateSaveLocation
   StateSaveLocation       = /var/spool/slurmctld
 
-Therefore we can take down slurmdbd_ for a number of minutes or hours without problems.
-The outstanding messages in the *StateSaveLocation* are currently capped at *3xNodes + MaxJobCount*.
+Therefore we can take down the slurmdbd_ service and server for a number of minutes or hours without any problems.
+The outstanding messages in the ``StateSaveLocation`` are currently capped at ``3xNodes + MaxJobCount``.
 
 Configure a slurmdbd server
 ---------------------------
