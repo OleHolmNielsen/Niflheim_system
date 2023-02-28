@@ -635,7 +635,9 @@ The following steps should be made:
 
      DebugLevel=verbose
 
-   and restart slurmdbd_.
+   and restart slurmdbd_::
+
+     systemctl start slurmdbd
 
 .. _bug_13562: https://bugs.schedmd.com/show_bug.cgi?id=13562#c21
 .. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
