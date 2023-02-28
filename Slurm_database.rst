@@ -799,6 +799,10 @@ Now it's time to reconfigure slurmctld_ for the new ``db2`` slurmdbd_ server.
 
      systemctl start slurmctld
 
+   and make a ``reconfig`` to notify all the ``slurmd`` processes::
+
+     scontrol reconfig
+
 5. Check the slurmctld_ log file, for example::
 
      grep slurmdbd: /var/log/slurm/slurmctld.log
