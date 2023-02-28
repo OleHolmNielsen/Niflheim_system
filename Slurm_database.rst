@@ -297,7 +297,7 @@ See the slurmdbd.conf_ man-page for a more complete description of the configura
 
 **NOTICE:** The ``/etc/slurm/slurm.conf`` file is **not needed or used** in the slurmdbd_ server.
 The only file required is ``/etc/slurm/slurmdbd.conf``.
-However, user commands such as ``sinfo`` and ``sacctmgr`` will need access to ``slurm.conf``,
+However, user commands such as sinfo_ and sacctmgr_ will need access to slurm.conf_,
 and if ``/etc/slurm/slurm.conf`` does not exist, then they will use the configless_ mode (if configured).
 
 Set up files and permissions::
@@ -308,7 +308,7 @@ Set up files and permissions::
   touch /var/log/slurm/slurmdbd.log
   chown slurm: /var/log/slurm/slurmdbd.log
 
-Configure some of the ``/etc/slurm/slurmdbd.conf`` variables::
+Configure some of the slurmdbd.conf_ variables::
 
   LogFile=/var/log/slurm/slurmdbd.log
   DbdHost=XXXX    # Replace by the slurmdbd server hostname (for example, slurmdbd.my.domain)
@@ -647,7 +647,7 @@ Configure database accounting in slurm.conf
 
 Finally, when you have made sure that the slurmdbd_ service is working correctly, you must configure slurm.conf_ to use slurmdbd_.
 
-In ``slurm.conf`` (see slurm.conf_) you must configure accounting so that the database will be used through the slurmdbd_ database daemon::
+In slurm.conf_ you must configure accounting so that the database will be used through the slurmdbd_ database daemon::
 
   AccountingStorageType=accounting_storage/slurmdbd
 
@@ -694,7 +694,7 @@ Testing the database restore
 ............................
 
 Take a database dump file and restore it into the MariaDB_/MySQL_ database (see above :ref:`backup-and-restore-of-database`).
-Use the ``time`` command to get an estimate of the time this will take.
+Use the time_command_ to get an estimate of the time this will take.
 
 Configure the server's hostname ( for example ``db2``) in slurmdbd.conf_:
 
@@ -709,6 +709,8 @@ and wait for the output::
      slurmdbd: debug2: Everything rolled up
 
 and do a *Control-C*.
+
+.. _time_command: https://man7.org/linux/man-pages/man1/time.1.html
 
 Database migration procedure
 ----------------------------
