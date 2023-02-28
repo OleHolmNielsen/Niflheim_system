@@ -546,6 +546,10 @@ The database contents must be loaded from the backup.
 To restore a MySQL_ database see for example
 `How do I restore a MySQL .dump file? <https://stackoverflow.com/questions/105776/how-do-i-restore-a-mysql-dump-file>`_.
 
+Make sure slurmdbd_ is stopped::
+
+  systemctl stop slurmdbd
+
 As user *root* read in the above created backup file::
 
   mysql -u root -p < /root/mysql_dump
@@ -787,7 +791,9 @@ Now it's time to reconfigure slurmctld_ for the new ``db2`` slurmdbd_ server.
 3. Just for safety, but not required:
    Make a backup copy of the ``StateSaveLocation`` directory ``/var/spool/slurmctld``::
 
-     tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld
+     tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld/*
+
+   Make sure the contents of the tar-ball file looks correct!
 
 4. Start the slurmctld_::
 
