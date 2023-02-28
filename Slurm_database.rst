@@ -26,6 +26,8 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
+.. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
+.. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
 .. _MySQL: https://www.mysql.com/
 
 Database documentation
