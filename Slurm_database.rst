@@ -340,7 +340,7 @@ The values of these parameters depend on the number of jobs in the database, whi
 There does not seem to be any heuristics for determining good values, so some testing will be required.
 
 From the high_throughput_ page:
-You might also consider setting the *Purge* options in your slurmdbd.conf to clear out old Data. 
+You might also consider setting the *Purge* options in your slurmdbd.conf_ to clear out old Data. 
 A typical configuration might look like this::
 
   PurgeEventAfter=12months
@@ -604,7 +604,7 @@ or when a Slurm database has been restored from a dump from an older MariaDB_ ve
 
 The following steps should be made:
 
-1. Make sure ``slurmdbd`` is stopped::
+1. Make sure slurmdbd_ is stopped::
 
      systemctl stop slurmdbd
 
@@ -621,7 +621,7 @@ The following steps should be made:
      show tables;
      quit;
 
-5. Set a high debug level in ``slurmdbd.conf``::
+5. Set a high debug level in slurmdbd.conf_::
 
      DebugLevel=debug4
 
@@ -631,7 +631,7 @@ The following steps should be made:
 
    You can also repeat the ``show tables;`` command from above to verify that ``table_defs_table`` exists once again.
 
-7. At the end, set a normal debug level in ``slurmdbd.conf``::
+7. At the end, set a normal debug level in slurmdbd.conf_::
 
      DebugLevel=verbose
 
