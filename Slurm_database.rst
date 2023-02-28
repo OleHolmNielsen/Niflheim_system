@@ -590,7 +590,7 @@ Slurm database modifications required for MariaDB 10.2.1 and above
 ..................................................................
 
 In MariaDB_ 10.2.1 and above there are some **important changes** which have been discussed in bug_13562_.
-Several Slurm database tables must be altered while the ``slurmdbd`` is stopped.
+Several Slurm database tables must be altered while the slurmdbd_ is stopped.
 Please note that EL7 contains MariaDB_ version 5.5, and EL8 contains MariaDB_ version 10.3,
 so this point is **important**, for example, when upgrading from EL7 to EL8!
 This has been resolved from Slurm 22.05.7.
@@ -625,7 +625,7 @@ The following steps should be made:
 
      DebugLevel=debug4
 
-6. Start the ``slurmdbd`` service and look for a number of table creation lines in ``/var/log/slurm/slurmdbd.log`` such as::
+6. Start the slurmdbd_ service and look for a number of table creation lines in ``/var/log/slurm/slurmdbd.log`` such as::
 
      debug4: Table "niflheim_assoc_table" doesn't exist, adding
 
@@ -635,7 +635,7 @@ The following steps should be made:
 
      DebugLevel=verbose
 
-   and restart ``slurmdbd``.
+   and restart slurmdbd_.
 
 .. _bug_13562: https://bugs.schedmd.com/show_bug.cgi?id=13562#c21
 .. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
