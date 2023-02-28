@@ -604,8 +604,12 @@ or when a Slurm database has been restored from a dump from an older MariaDB_ ve
 
 The following steps should be made:
 
-1. Make sure slurmdbd is stopped.
+1. Make sure ``slurmdbd`` is stopped::
+
+     systemctl stop slurmdbd
+
 2. Configure MariaDB 10.3 for Slurm in the usual way (see above in the present page).
+
 3. Login to the *slurm_acct_db* database::
 
      # mysql -p -u slurm slurm_acct_db
