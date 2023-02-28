@@ -665,7 +665,7 @@ However, many sites run both services successfully on the same server.
 If you decide to migrate the slurmdbd_ service to another server, here is a tested procedure which works on a running production cluster.
 
 It is important to understand that the slurmctld_ service can run without problems even when the slurmdbd_ database is not responding,
-since slurmctld_ just caches all state information in the *StateSaveLocation* directory::
+since slurmctld_ just caches all state information in the ``StateSaveLocation`` directory::
 
   $ scontrol show config | grep StateSaveLocation
   StateSaveLocation       = /var/spool/slurmctld
@@ -785,7 +785,7 @@ Now it's time to reconfigure slurmctld_ for the new ``db2`` slurmdbd_ server.
      AccountingStorageHost=db2
 
 3. Just for safety, but not required:
-   Make a backup copy of the *StateSaveLocation* ``/var/spool/slurmctld`` directory::
+   Make a backup copy of the ``StateSaveLocation`` directory ``/var/spool/slurmctld``::
 
      tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld
 
