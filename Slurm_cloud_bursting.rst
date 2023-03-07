@@ -97,15 +97,15 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   for running jobs.
   This is most likely **not** desirable.
 
-An important side effect of power saving suspension of nodes pertains to on-premise nodes.
-Compute nodes that are, for example, drained for maintenance purposes will be suspended and later resumed when needed by jobs.
-This is highly undesirable!
+* An important side effect of power saving suspension of nodes pertains to on-premise nodes.
+  Compute nodes that are, for example, drained for maintenance purposes will be suspended and later resumed when needed by jobs.
+  This is highly undesirable!
 
-This issue has been resolved in Slurm_ 23.02 by bug_15184_ which introduces a new slurm.conf_ parameter ``SuspendExcStates``.
-This permits to configure node states which you want to be excluded from power saving suspension.
-Valid states for ``SuspendExcStates`` include::
+  This issue has been resolved in Slurm_ 23.02 by bug_15184_ which introduces a new slurm.conf_ parameter ``SuspendExcStates``.
+  This permits to configure node states which you want to be excluded from power saving suspension.
+  Valid states for ``SuspendExcStates`` include::
 
-  CLOUD, DOWN, DRAIN, DYNAMIC_FUTURE, DYNAMIC_NORM, FAIL, INVALID_REG, MAINTENANCE, NOT_RESPONDING, PERFCTRS, PLANNED, RESERVED
+    CLOUD, DOWN, DRAIN, DYNAMIC_FUTURE, DYNAMIC_NORM, FAIL, INVALID_REG, MAINTENANCE, NOT_RESPONDING, PERFCTRS, PLANNED, RESERVED
 
 
 .. _bug_14270: https://bugs.schedmd.com/show_bug.cgi?id=14270
