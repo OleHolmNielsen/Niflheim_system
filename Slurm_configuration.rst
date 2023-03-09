@@ -1069,7 +1069,7 @@ There are several possible solutions:
 * The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
 
   A great advantage of this plugin that it actually works correctly with NFS home directories automounted by autofs_,
-  in contrast to Slurm's job_container.conf_ plugin priot to 23.02 (see more below).
+  in contrast to Slurm's job_container.conf_ plugin prior to 23.02 (see more below).
 
   You can build a customized RPM package for this plugin:
 
@@ -1147,7 +1147,7 @@ There are several possible solutions:
   The job_container.conf_ plugin uses Linux_namespaces_.
 
   **WARNING:** 
-  NFS automount and ``job_container/tmpfs`` do not play well together priot to 23.02:
+  NFS automount and ``job_container/tmpfs`` do not play well together prior to 23.02:
   If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
   The issue has been resolved in Slurm_ 23.02 according to bug_12567_.
 
@@ -1155,7 +1155,7 @@ There are several possible solutions:
 
     Shared=true
 
-  See the job_container.conf manual page.
+  See the ``job_container.conf`` manual page.
 
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir 
