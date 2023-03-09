@@ -1066,9 +1066,9 @@ Jobs may be storing temporary files in ``/tmp``, ``/scratch``, and ``/dev/shm/``
 These directories may be filled up, and no clean-up is done after the job exits.
 There are several possible solutions:
 
-* The job_container.conf_ plugin which was introduced in Slurm_ 20.11.5.
+* The job_container_tmpfs_ plugin which was introduced in Slurm_ 20.11.5.
   You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as bug_11183_ and bug_11135_ for further details.
-  The job_container.conf_ plugin uses Linux_namespaces_.
+  The job_container_tmpfs_ plugin uses Linux_namespaces_.
 
   **WARNING:** 
   NFS automount and ``job_container/tmpfs`` do not play well together prior to 23.02:
@@ -1159,7 +1159,7 @@ There are several possible solutions:
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir 
 .. _autofs: https://wiki.archlinux.org/title/autofs
-.. _job_container.conf: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
+.. _job_container_tmpfs: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
 .. _bug_11183: https://bugs.schedmd.com/show_bug.cgi?id=11183
 .. _bug_11135: https://bugs.schedmd.com/show_bug.cgi?id=11135
 .. _bug_14344: https://bugs.schedmd.com/show_bug.cgi?id=14344
