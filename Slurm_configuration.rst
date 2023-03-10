@@ -1080,6 +1080,10 @@ There are several possible solutions:
     Shared=true
 
   See the job_container.conf_ manual page.
+  An example job_container.conf_ file might contain::
+
+    AutoBasePath=true
+    BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
 
 * The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
 
