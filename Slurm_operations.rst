@@ -832,6 +832,10 @@ For example, to **reserve a set of nodes** for a testing purpose with a duration
 
   scontrol create reservation starttime=now duration=720:00:00 ReservationName=Test1 Flags=MAGNETIC nodes=x[049-096] user=user1,user2
 
+Ignore currently running jobs when creating the reservation::
+
+  flags=ignore_jobs
+
 **Magnetic reservations** were introduced in Slurm 20.02, see the scontrol_ man-page::
 
   Flags=MAGNETIC  # This flag allows jobs to be considered for this reservation even if they didn't request it.
