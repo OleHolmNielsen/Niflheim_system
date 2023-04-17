@@ -832,7 +832,7 @@ For example, to **reserve a set of nodes** for a testing purpose with a duration
 
   scontrol create reservation starttime=now duration=720:00:00 ReservationName=Test1 Flags=MAGNETIC nodes=x[049-096] user=user1,user2
 
-Ignore currently running jobs when creating the reservation::
+Ignore currently running jobs when creating the reservation by adding this flag::
 
   flags=ignore_jobs
 
