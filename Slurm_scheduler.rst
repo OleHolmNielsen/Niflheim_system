@@ -186,6 +186,10 @@ Use one of these commands to print the fairshare number of user xxx::
   sacctmgr -nP list associations user=xxx format=fairshare
   sshare -lU -u xxx
 
+or get a complete fairshare listing with::
+
+  sacctmgr -sor show associations format=user,account,fairshare
+
 Quality of Service (QOS)
 ------------------------
 
