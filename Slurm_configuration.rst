@@ -1609,6 +1609,8 @@ Slurm plugins
 A Slurm_ plugin_ is a dynamically linked code object which is loaded explicitly at run time by the Slurm libraries. 
 A plugin_ provides a customized implementation of a well-defined API connected to tasks such as authentication, interconnect fabric, and task scheduling. 
 
+For plugin_ documentation see items in the section ``Slurm Developers`` in the Slurm_documentation_ page.
+
 Plugins include:
 
 * Job_Submit_Plugin_.
@@ -1622,6 +1624,7 @@ Plugins include:
 * The site_factor_ plugin_ is designed to provide the site a way to build a custom multifactor priority factor, and will only be loaded and operation alongside *PriorityType=priority/multifactor*.
 
 .. _plugin: https://slurm.schedmd.com/plugins.html
+.. _Slurm_documentation: https://slurm.schedmd.com/documentation.html
 .. _Job_Submit_Plugin: https://slurm.schedmd.com/job_submit_plugins.html
 .. _site_factor: https://slurm.schedmd.com/site_factor.html
 .. _schedplugins: https://slurm.schedmd.com/schedplugins.html
