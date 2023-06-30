@@ -1619,7 +1619,7 @@ Plugins include:
 
 * SPANK_ - *Slurm Plug-in Architecture for Node and job (K)control*.
 
-* cli_filter_ Plugin API.
+* cli_filter_ Plugin API provides programmatic hooks during the execution of the salloc_, sbatch_, and srun_ command line interface (CLI) programs.
 
 * The site_factor_ plugin_ is designed to provide the site a way to build a custom multifactor priority factor, and will only be loaded and operation alongside *PriorityType=priority/multifactor*.
 
