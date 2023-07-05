@@ -7,7 +7,8 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
-WEBTOPDIR     = /var/www/wiki
+# Configure the project's top-level folder in the web server:
+WEBTOPDIR     = /var/www/wiki/Niflheim_system
 
 ifneq ($(VIRTUAL_ENV),)
 dirhtml: gitpull
@@ -16,8 +17,8 @@ $(error VIRTUAL_ENV not set! Please use a Python virtual environment: . venv/bin
 endif
 
 rsync: dirhtml
-	@echo Rsyncing HTML pages to ${WEBTOPDIR}/`basename $$PWD`/
-	@rsync -av --delete ./_build/dirhtml/ ${WEBTOPDIR}/`basename $$PWD`/
+	@echo Rsyncing HTML pages to ${WEBTOPDIR}/
+	@rsync -av --delete ./_build/dirhtml/ ${WEBTOPDIR}/
 
 gitpull:
 	git pull
