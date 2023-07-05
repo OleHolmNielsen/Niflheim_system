@@ -1630,6 +1630,8 @@ Plugins include:
 .. _schedplugins: https://slurm.schedmd.com/schedplugins.html
 .. _SPANK: https://slurm.schedmd.com/spank.html
 .. _cli_filter: https://slurm.schedmd.com/cli_filter_plugins.html
+.. _salloc: https://slurm.schedmd.com/salloc.html
+.. _sbatch: https://slurm.schedmd.com/sbatch.html
 
 Job submit plugins
 ------------------
