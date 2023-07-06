@@ -981,6 +981,8 @@ See the overview of Slurm_man_pages_ as well as the individual command man-pages
     - Update user's maximum number of submitted jobs to NN.  NN=0 blocks submissions, NN=-1 removes the limit.
   * - sacctmgr_ -nP list associations user=xxx format=fairshare
     - Print the fairshare number of user xxx.
+  * - sacctmgr_ show event
+    - Display information about events like downed or draining nodes on clusters.
   * - sshare_ -lU -u xxx
     - Print the various fairshare values of user xxx.
 
