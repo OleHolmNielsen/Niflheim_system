@@ -21,6 +21,17 @@ Slurm configuration
 
 Jump to our top-level Slurm page: :ref:`SLURM` 
 
+
+Network configuration for Slurm
+=====================================
+
+There are a lot of components in a Slurm_ cluster that need to be able to communicate with each other.
+Some sites have security requirements that prevent them from opening all communications between the machines and will need to be able to selectively open just the ports that are necessary. 
+
+Read more in the Slurm_ Network_Configuration_Guide_.
+
+.. _Network_Configuration_Guide: https://slurm.schedmd.com/network.html
+
 Slurm configuration and slurm.conf
 ==================================
 
