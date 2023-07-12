@@ -571,6 +571,18 @@ Here is a suggested procedure:
 
    Verify the database contents on the compute node by making a new database dump and compare it to the original dump.
 
+4. Select a suitable *slurm* user's **database password**.
+   Now follow the accounting_ page instructions (using -p to enter the database password)::
+
+     # mysql -p
+     grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'some_pass' with grant option;  ### WARNING: change the some_pass
+     SHOW GRANTS;
+     SHOW VARIABLES LIKE 'have_innodb';
+     create database slurm_acct_db;
+     quit;
+
+   **WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
+
 4. The following actions must be performed on the drained compute node.
 
    First stop the regular slurmd_ daemons on the compute node::
@@ -600,6 +612,7 @@ Here is a suggested procedure:
 
      DbdHost=localhost
      StorageHost=localhost
+     StoragePass=<slurm database user password>  # See above
 
    Configure this in ``slurm.conf``::
 
