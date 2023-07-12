@@ -583,7 +583,7 @@ Here is a suggested procedure:
 
    **WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
 
-4. The following actions must be performed on the drained compute node.
+5. The following actions must be performed on the drained compute node.
 
    First stop the regular slurmd_ daemons on the compute node::
 
@@ -596,7 +596,7 @@ Here is a suggested procedure:
 
    Information about building RPMs is in the :ref:`Slurm_installation` page.
 
-5. Make sure that the ``/etc/slurm`` directory exists (it is not needed in configless_ Slurm_ clusters)::
+6. Make sure that the ``/etc/slurm`` directory exists (it is not needed in configless_ Slurm_ clusters)::
 
      $ ls -lad /etc/slurm
      drwxr-xr-x. 5 root root 4096 Feb 22 10:12 /etc/slurm
@@ -625,7 +625,7 @@ Here is a suggested procedure:
      touch /var/log/slurm/slurmdbd.log
      chown slurm: /var/log/slurm/slurmdbd.log
 
-6. Make sure that slurmdbd_ is running, and start it if necessary::
+7. Make sure that slurmdbd_ is running, and start it if necessary::
 
      systemctl status slurmdbd
      systemctl start slurmdbd
@@ -638,7 +638,7 @@ Here is a suggested procedure:
 
      systemctl stop slurmdbd
 
-7. At this point you have a Slurm database server running an exact copy of your main Slurm database!
+8. At this point you have a Slurm database server running an exact copy of your main Slurm database!
 
    Now it is time to do some testing.
    Update all Slurm_ RPMs to the new version (say, 22.05.8-1) built as shown above::
@@ -654,7 +654,7 @@ Here is a suggested procedure:
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir
 
-8. Perform and time the actual database upgrade::
+9. Perform and time the actual database upgrade::
 
      time slurmdbd -D -vvv
 
@@ -672,13 +672,13 @@ Here is a suggested procedure:
 
      systemctl start slurmdbd
 
-9. Make some query to test slurmdbd_::
+10. Make some query to test slurmdbd_::
 
      sacctmgr show user -s
 
    and make some other tests to verify that slurmdbd_ is responding correctly.
 
-10. When all tests have been completed successfully, reinstall the compute node to its default installation.
+11. When all tests have been completed successfully, reinstall the compute node to its default installation.
 
 Upgrading on CentOS 7
 ---------------------
