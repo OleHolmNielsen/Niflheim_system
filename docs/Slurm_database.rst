@@ -133,6 +133,7 @@ Now follow the accounting_ page instructions (using -p to enter the database pas
 
   # mysql -p
   grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'some_pass' with grant option;  ### WARNING: change the some_pass
+  SHOW GRANTS;
   SHOW VARIABLES LIKE 'have_innodb';
   create database slurm_acct_db;
   quit;
