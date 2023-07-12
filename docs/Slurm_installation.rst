@@ -572,7 +572,7 @@ Here is a suggested procedure:
    Verify the database contents on the compute node by making a new database dump and compare it to the original dump.
 
 4. Select a suitable *slurm* user's **database password**.
-   Now follow the accounting_ page instructions (using -p to enter the database password)::
+   Now follow the Slurm_accounting_ page instructions (using -p to enter the database password)::
 
      # mysql -p
      grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'some_pass' with grant option;  ### WARNING: change the some_pass
