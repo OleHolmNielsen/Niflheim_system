@@ -120,7 +120,7 @@ See a general description from the Fedora page:
 
 There is documentation of the Kickstart_file_ syntax.
 
-A Kickstart_ installation can be made using PXE network booting, see PXE-booting_ and PXE_and_UEFI_ network booting.
+A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ network booting.
 
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
