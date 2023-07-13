@@ -158,31 +158,22 @@ Secondly, for each client machine that should use the SYSLINUX menu systems a he
 must be created in ``/tftpboot/pxelinux.cfg/``, pointing to the menu configuration file.
 This can conveniently be done with the ``pxeconfig`` command discussed below.
 
-A simple ``default.menu`` SYSLINUX menu file in ``/tftpboot/pxelinux.cfg/`` is::
+An example ``default.menu`` SYSLINUX menu file in ``/tftpboot/pxelinux.cfg/`` is::
 
   DEFAULT menu.c32
   PROMPT 0
   
   MENU TITLE Menu from TFTP server
 
+  label AlmaLinux8.8 minimal-x86_64
+        menu label Clean AlmaLinux-8.8-x86_64, minimal install
+        kernel AlmaLinux-8.8-x86_64/vmlinuz
+        append load_ramdisk=1 initrd=AlmaLinux-8.8-x86_64/initrd.img network inst.ks=nfs:<some-IP-address>:/u/kickstart/ks-almalinux-8.8-minimal-x86_64.cfg vga=792
+
   label harddisk
         menu label Boot from local harddisk
         kernel chain.c32
         append hd0
-
-  label memtest86
-        menu label Memtest86 memory tester
-        kernel memtest86
-
-  label BIOS
-        menu label BIOS upgrade ibm_fw_bios_c0e132a
-        kernel memdisk
-        append initrd=ibm_fw_bios_c0e132a_anyos_i386.img
-
-  label CentOS-4.4-i386
-        menu label Installation of CentOS-4.4-i386, no kickstart
-        kernel CentOS-4.4/vmlinuz
-        append load_ramdisk=1 initrd=CentOS-4.4/initrd.img network
 
 This configuration will display a menu with 4 items, each performing a different task
 as described in the ``menu label`` lines.
