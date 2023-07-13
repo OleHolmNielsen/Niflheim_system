@@ -118,11 +118,13 @@ See a general description from the Fedora page:
   To answer this need, Red Hat created the Kickstart_ installation method.
   Using Kickstart_, a system administrator can create a single file containing the answers to all the questions that would normally be asked during a typical installation.
 
-  Kickstart_ files can be kept on a server system and read by individual computers during the installation.
+* Kickstart_ files can be kept on a server system and read by individual computers during the installation.
   This installation method can support the use of a single Kickstart_file_ to install Fedora_ or Red Hat Enterprise Linux on multiple machines,
   making it ideal for network and system administrators.
 
 There is documentation of the Kickstart_file_ syntax.
+
+A Kickstart_ installation can be made using PXE network booting, see :ref:`PXE network booting <PXE-booting>`.
 
 .. _Kickstart: https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-1-introduction
 .. _Kickstart_file: https://anaconda-installer.readthedocs.io/en/latest/kickstart.html
