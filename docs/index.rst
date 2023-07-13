@@ -43,5 +43,4 @@ Hardware documentation
    OmniPath
    OmniPath_switches
    System_administration
-   PXE-booting
    MultipleEthernetCards
