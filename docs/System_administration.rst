@@ -27,9 +27,7 @@ The first 2 items enable you to perform node diagnostics and configuration.
 The Network (PXE) option will be the normal boot mode.
 The final hard disk option is only used if all the preceding ones fail (for troubleshooting, only).
 
-Please consult this page for detailed information about PXE network booting:
-
-    * :ref:`PXE network booting <PXE-booting>`
+Please consult the PXE-booting_ page for detailed information about PXE network booting.
 
 DHCP setup
 ----------
@@ -102,9 +100,7 @@ Now a client node installation is as simple as configuring on the central server
 When the node is turned on, it all happens automatically with no operator intervention at all ! 
 The BIOS boot order must still have PXE/network before the hard disk.
 
-Please see the following page for information about the pxeconfig toolkit:
-
-* :ref:`Automated_network_installation_with_pxeconfig`.
+Please see the PXE-booting_ page section *Automated network installation with pxeconfig* for information about the pxeconfig_ toolkit.
 
 .. _pxeconfig: https://gitlab.com/surfsara/pxeconfig
 
