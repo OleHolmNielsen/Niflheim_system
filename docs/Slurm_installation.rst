@@ -765,7 +765,9 @@ The upgrading steps for the slurmctld_ host are:
 
      tar czf $HOME/var.spool.slurmctld.tar.gz /var/spool/slurmctld/*
 
-   Make sure the contents of the tar-ball file looks correct!
+   Make sure the contents of the tar-ball file look correct::
+
+     tar tzvf $HOME/var.spool.slurmctld.tar.gz | less
 
 4. Upgrade the RPMs, for example::
 
