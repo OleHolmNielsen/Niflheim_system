@@ -705,7 +705,7 @@ The upgrading steps for the slurmdbd_ host are:
 
      systemctl stop slurmdbd
 
-2. Make a *mysqldump* of the MySQL_/Mariadb_ database (see above).
+2. Make a dump of the MySQL_/Mariadb_ database (see :ref:`Slurm_database`).
 
    If also **upgrading** MariaDB_ to version 10.2.1 and above from an **older version**,
    there are some important changes to Slurm database tables,
