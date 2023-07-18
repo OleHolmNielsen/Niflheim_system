@@ -71,7 +71,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   SuspendExcNodes=node00[1-9]
   SlurmctldParameters=cloud_dns   # Maybe add also these parameters: cloud_reg_addrs, idle_on_node_suspend
   ResumeTimeout=600
-  SuspendTime=300   # Global value, the default is INFINITE
+  # SuspendTime=3600   # Global value: the default is INFINITE.  DO NOT change the default!
   SuspendTimeout=120
   ResumeProgram=/usr/local/bin/cloudresume
   SuspendProgram=/usr/local/bin/cloudsuspend
@@ -84,7 +84,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 * It may be preferable to omit the global parameter and leave it with the default value ``SuspendTime=INFINITE``.
   In stead define it only on any relevant partitions, for example::
 
-    PartitionName=my_partition SuspendTime=300
+    PartitionName=my_partition SuspendTime=3600
 
 * For Slurm_ prior to 23.02 you must set this in slurm.conf_, see bug_14270_::
 
