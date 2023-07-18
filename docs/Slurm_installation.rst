@@ -295,9 +295,9 @@ Build Slurm packages
 Get the Slurm_ source code from the Slurm_download_ page.
 At this point you must decide whether to build in Slurm plugins, for example, *mysql* for accounting (see above).
 
-Set the version (for example, 22.05.8) and build Slurm_ RPM packages by::
+Set the version (for example, 23.02.3) and build Slurm_ RPM packages by::
 
-  export VER=22.05.8
+  export VER=23.02.3
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql      # Includes accounting support with the slurm-slurmdbd package
   rpmbuild -ta slurm-$VER.tar.bz2 --without mysql   # No slurm-slurmdbd accounting support
 
@@ -327,7 +327,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Head/Master** Node (where the slurmctld_ daemon runs), **Compute**, and **Login** nodes::
 
-    export VER=22.05.8-1
+    export VER=23.02.3
     yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
 
   On the **master node** explicitly enable the *slurmctld* service::
@@ -339,7 +339,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
   Only if the **database service** will run on the Head/Master node:
   Install the database service RPM::
 
-    export VER=22.05.8-1
+    export VER=23.02.3
     yum install slurm-slurmdbd-$VER*rpm
 
   Explicitly enable the service::
@@ -360,7 +360,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Database-only** (slurmdbd_ service) node::
 
-    export VER=22.05.8-1
+    export VER=23.02.3
     yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
   Explicitly enable the service::
@@ -641,9 +641,9 @@ Here is a suggested procedure:
 8. At this point you have a Slurm database server running an exact copy of your main Slurm database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 22.05.8-1) built as shown above::
+   Update all Slurm_ RPMs to the new version (say, 23.02.3) built as shown above::
 
-     export VER=22.05.8-1
+     export VER=23.02.3
      yum update slurm*$VER*.rpm
 
    If you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the upgrade::
@@ -707,13 +707,14 @@ The upgrading steps for the slurmdbd_ host are:
 
 2. Make a *mysqldump* of the MySQL_/Mariadb_ database (see above).
 
-   If also upgrading to MariaDB_ 10.2.1 (and above) from an older version, there are some important changes to Slurm database tables,
+   If also **upgrading** to MariaDB_ 10.2.1 (and above) from an **older version**,
+   there are some important changes to Slurm database tables,
    please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
    This has been resolved in Slurm 22.05.7.
 
 3. Update all RPMs::
 
-     export VER=22.05.8-1
+     export VER=23.02.3
      yum update slurm*$VER*.rpm
 
 4. Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
@@ -768,7 +769,7 @@ The upgrading steps for the slurmctld_ host are:
 
 4. Upgrade the RPMs, for example::
 
-     export VER=22.05.8-1
+     export VER=23.02.3
      yum update slurm*$VER-*.rpm
 
 5. Enable and restart the slurmctld_ service::
@@ -833,9 +834,9 @@ First determine which Slurm_ version the nodes are running::
 
 See the :ref:`SLURM` page about ClusterShell_ or PDSH_.
 
-The **quick and usually OK procedure** would be to simply update the RPMs (here: version 22.05.8-1) on all nodes::
+The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.02.3) on all nodes::
 
-     clush -bw <nodelist> 'yum -y update /some/path/slurm*22.05.8-1-*.rpm'
+     clush -bw <nodelist> 'yum -y update /some/path/slurm*23.02.3-*.rpm'
 
 This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
 
@@ -854,9 +855,9 @@ For the compute nodes running slurmd_ the **safe procedure** could be:
 
      clush -bw <nodelist> systemctl stop slurmd
 
-3. Update the RPMs (here: version 22.05.8-1) on nodes::
+3. Update the RPMs (here: version 23.02.3) on nodes::
 
-     clush -bw <nodelist> 'yum -y update /some/path/slurm*22.05.8-1-*.rpm'
+     clush -bw <nodelist> 'yum -y update /some/path/slurm*23.02.3-*.rpm'
 
    and make sure to install also the new ``slurm-slurmd`` and ``slurm-contribs`` packages.
 
