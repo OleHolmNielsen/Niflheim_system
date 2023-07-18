@@ -13,6 +13,15 @@ in some detail how we install and manage a cluster of some 800 nodes.
 System and network setup
 ========================
 
+PXE Network Booting
+-------------------------
+
+An OS installation using Kickstart_ can be made with PXE-booting_ or PXE_and_UEFI_ network booting.
+
+.. _PXE-booting: https://wiki.fysik.dtu.dk/ITwiki/PXE-booting
+.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
+.. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
+
 Node's BIOS boot order
 ----------------------
 
@@ -20,14 +29,12 @@ We recommend to configure the client node BIOS to a *boot order* similar to the 
 
   1. USB devices
   2. CD-ROM
-  3. Network (PXE)
+  3. Network (PXE_)
   4. Hard disk
 
 The first 2 items enable you to perform node diagnostics and configuration.
-The Network (PXE) option will be the normal boot mode.
+The Network (PXE_) option will be the normal boot mode.
 The final hard disk option is only used if all the preceding ones fail (for troubleshooting, only).
-
-Please consult the PXE-booting_ page for detailed information about PXE network booting.
 
 DHCP setup
 ----------
@@ -98,7 +105,7 @@ After having tested the network installation process manually as described above
 you can automate the process completely using the pxeconfig_ toolkit written by Bas van der Vlies. 
 Now a client node installation is as simple as configuring on the central server whether a node should perform a network installation or simply boot from hard disk: 
 When the node is turned on, it all happens automatically with no operator intervention at all ! 
-The BIOS boot order must still have PXE/network before the hard disk.
+The BIOS boot order must still have PXE_/network before the hard disk.
 
 Please see the PXE-booting_ page section *Automated network installation with pxeconfig* for information about the pxeconfig_ toolkit.
 
@@ -128,8 +135,6 @@ A Kickstart_ installation can be made using PXE-booting_ or PXE_and_UEFI_ networ
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://www.rockylinux.org
 .. _Fedora: https://fedoraproject.org/
-.. _PXE-booting: https://wiki.fysik.dtu.dk/ITwiki/PXE-booting
-.. _PXE_and_UEFI: https://wiki.fysik.dtu.dk/ITwiki/PXE_and_UEFI
 
 Networking considerations
 =========================
