@@ -707,7 +707,7 @@ The upgrading steps for the slurmdbd_ host are:
 
 2. Make a *mysqldump* of the MySQL_/Mariadb_ database (see above).
 
-   If also **upgrading** to MariaDB_ 10.2.1 (and above) from an **older version**,
+   If also **upgrading** MariaDB_ to version 10.2.1 and above from an **older version**,
    there are some important changes to Slurm database tables,
    please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
    This has been resolved in Slurm 22.05.7.
