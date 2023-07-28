@@ -181,4 +181,4 @@ We offer a script getmaclist__ using ClusterShell_ for gathering this informatio
 
 __ attachment:attachments/getmaclist
 .. _pdsh: https://linux.die.net/man/1/pdsh
-.. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
+.. _ClusterShell: https://clustershell.readthedocs.io/en/latest/intro.html
