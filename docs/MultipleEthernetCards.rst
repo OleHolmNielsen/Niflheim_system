@@ -177,7 +177,8 @@ To learn the interface MAC-addresses you may use this command::
 
   /sbin/ip -4 -o link show
 
-We offer a script getmaclist__ using pdsh_ for gathering this information.
+We offer a script getmaclist__ using ClusterShell_ for gathering this information.
 
 __ attachment:attachments/getmaclist
 .. _pdsh: https://linux.die.net/man/1/pdsh
+.. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html

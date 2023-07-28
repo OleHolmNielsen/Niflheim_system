@@ -48,9 +48,9 @@ For a PCIe Gen3 x16 adapter the PCIe bus speed should be 8 GT/s, whereas Gen2 sp
 In older versions of this manual there was an incorrect requirement of Gen2 speed setting.
 
 Please verify your adapter's speed and PCIe width.
-This can be done from the Linux OS by pdsh_::
+This can be done from the Linux OS by ClusterShell_::
 
-  pdsh -w <node-list> 'lspci -vvv -s 04:00.0 | grep LnkSta:' | dshbak -c
+  clush -w <node-list> 'lspci -vvv -s 04:00.0 | grep LnkSta:' | dshbak -c
 
 The output may look like::
 
@@ -59,6 +59,8 @@ The output may look like::
 Here the PCIe device ID is 04:00.0, you determine it by::
 
   lspci | grep Omni-Path
+
+.. _ClusterShell: https://clustershell.readthedocs.io/en/latest/intro.html
 
 Software installation
 =====================
@@ -877,11 +879,9 @@ On each host you can verify the OPA HFI adapter revision by::
 
 (installed by the *opa-basic-tools* RPM package).
 
-Check the OPA link quality on a list of nodes using pdsh_::
+Check the OPA link quality on a list of nodes using ClusterShell_::
 
-  pdsh -w <node-list>  'opainfo  | grep Link' | dshbak -c
-
-.. _pdsh: https://linux.die.net/man/1/pdsh
+  clush -w <node-list>  'opainfo  | grep Link' | dshbak -c
 
 The *opa-fastfabric* RPM package (part of the IFS software package) contains a useful host checking script::
 
@@ -1423,7 +1423,7 @@ and see the device status::
 
 To display the OPA device *ib0* IP address information on a list of nodes::
 
-  pdsh -w <node-list> '/sbin/ip -4 -o addr show label ib0' | sort 
+  clush -w <node-list> '/sbin/ip -4 -o addr show label ib0' | sort 
 
 Performance tuning
 ==================

@@ -800,11 +800,7 @@ Copy slurm.conf to all nodes
 
 Finally copy ``/etc/slurm/slurm.conf`` to all compute nodes::
 
-  scp -p /etc/slurm/slurm.conf nodeXXX:/etc/slurm/slurm.conf
-
-It's convenient to use the ``pdsh`` command, see PDSH_.
-
-.. _PDSH: https://wiki.fysik.dtu.dk/niflheim/SLURM#pdsh-parallel-distributed-shell
+  clush -bw <node-list> --copy /etc/slurm/slurm.conf --dest /etc/slurm/slurm.conf
 
 It is important to keep this file **identical** on both the *Head/Master* server and all Compute nodes.
 Remember to include all of the *NodeName=* lines for all compute nodes.

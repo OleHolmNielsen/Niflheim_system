@@ -694,7 +694,7 @@ You must first do::
 
   yum remove pdsh-mod-slurm
 
-and then later rebuild and install pdsh-mod-slurm, see the :ref:`SLURM` page.
+and then later rebuild and reinstall pdsh-mod-slurm, see the :ref:`SLURM` page.
 
 Upgrade slurmdbd
 ................

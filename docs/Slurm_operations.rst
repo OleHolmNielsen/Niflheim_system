@@ -582,7 +582,7 @@ PDSH - Parallel Distributed Shell
 ---------------------------------
 
 A crucial tool for the sysadmin is to execute commands in parallel on the compute nodes.
-The widely used pdsh_ tool may be used for this (see also ClusterShell_tool_ below).
+The widely used pdsh_ tool may be used for this (see also ClusterShell_tool_ above).
 
 .. _pdsh: https://github.com/grondo/pdsh
 
