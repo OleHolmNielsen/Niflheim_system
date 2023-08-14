@@ -739,10 +739,10 @@ The upgrading steps for the slurmdbd_ host are:
 
      sacctmgr show user -s
 
-**WARNING:** Newer versions of user commands like sinfo_, squeue_ etc. are **not interoperable** with an older 
+**WARNING:** Newer versions of user commands like ``sinfo``, ``squeue`` etc. are **not interoperable** with an older 
 slurmctld_ version, as explained in bug_17418_, due to RPC changes!
 
-.. _bug_17418 https://bugs.schedmd.com/show_bug.cgi?id=17418
+.. _bug_17418: https://bugs.schedmd.com/show_bug.cgi?id=17418
 
 Upgrade slurmctld
 .................
