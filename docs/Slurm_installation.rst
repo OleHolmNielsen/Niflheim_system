@@ -765,9 +765,8 @@ The upgrading steps for the slurmctld_ host are:
 
      systemctl stop slurmctld
 
-3. Make a backup copy of the ``StateSaveLocation``
-   (check your configuration first) ``/var/spool/slurmctld`` directory.
-   First check the size of the ``StateSaveLocation`` and the backup destination to ensure there is sufficient disk space::
+3. Make a backup copy of the ``StateSaveLocation`` (check your configuration first) ``/var/spool/slurmctld`` directory.
+   Check the size of the ``StateSaveLocation`` and the backup destination to ensure there is sufficient disk space::
 
      du -sm /var/spool/slurmctld/
      df -h $HOME
