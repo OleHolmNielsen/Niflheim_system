@@ -767,16 +767,16 @@ The upgrading steps for the slurmctld_ host are:
 
 3. Make a backup copy of the ``StateSaveLocation`` (check your configuration first) ``/var/spool/slurmctld`` directory:
 
-   3a. Check the size of the ``StateSaveLocation`` and the backup destination to ensure there is sufficient disk space::
+   * Check the size of the ``StateSaveLocation`` and the backup destination to ensure there is sufficient disk space::
 
      du -sm /var/spool/slurmctld/
      df -h $HOME
 
-   3b. Then make a tar-ball backup file::
+   * Then make a tar-ball backup file::
 
      tar cf $HOME/var.spool.slurmctld.tar /var/spool/slurmctld/*
 
-   3c. Make sure the contents of the tar-ball file look correct::
+   * Make sure the contents of the tar-ball file look correct::
 
      less $HOME/var.spool.slurmctld.tar
 
