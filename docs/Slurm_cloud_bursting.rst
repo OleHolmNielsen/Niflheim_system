@@ -107,6 +107,8 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
     CLOUD, DOWN, DRAIN, DYNAMIC_FUTURE, DYNAMIC_NORM, FAIL, INVALID_REG, MAINTENANCE, NOT_RESPONDING, PERFCTRS, PLANNED, RESERVED
 
+  **Beware:** If any nodes in the cluster are running Slurm_ versions lower than 23.02, they will fail if the ``SuspendExcStates`` parameter is specified!
+
 
 .. _bug_14270: https://bugs.schedmd.com/show_bug.cgi?id=14270
 .. _bug_15184: https://bugs.schedmd.com/show_bug.cgi?id=15184
