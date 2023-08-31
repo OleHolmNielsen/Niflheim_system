@@ -69,7 +69,6 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   # Exceptions to the node suspend/resume logic (partitions):
   SuspendExcParts=xeon8
   SuspendExcNodes=node00[1-9]
-  SlurmctldParameters=cloud_dns   # Maybe add also these parameters: cloud_reg_addrs, idle_on_node_suspend
   ResumeTimeout=600
   # SuspendTime=3600   # Global value: the default is INFINITE.  DO NOT change the default!
   SuspendTimeout=120
@@ -107,7 +106,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
     CLOUD, DOWN, DRAIN, DYNAMIC_FUTURE, DYNAMIC_NORM, FAIL, INVALID_REG, MAINTENANCE, NOT_RESPONDING, PERFCTRS, PLANNED, RESERVED
 
-  **Beware:** If any nodes in the cluster are running Slurm_ versions lower than 23.02, the slurmd_ will fail if the ``SuspendExcStates`` parameter is specified!
+  **Beware:** If any nodes in the cluster are running Slurm_ versions lower than 23.02, the slurmd_ will fail if the new ``SuspendExcStates`` parameter is specified!
 
 .. _bug_14270: https://bugs.schedmd.com/show_bug.cgi?id=14270
 .. _bug_15184: https://bugs.schedmd.com/show_bug.cgi?id=15184
