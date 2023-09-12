@@ -92,7 +92,7 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   This is documented from Slurm_ 22.05.2, and the issue has been fixed in 23.02.
   Without this flag, cloud nodes will not appear in the output of commands like sinfo_ unless they are powered on, even for the *slurm* and *root* users.
 
-* The ```SlurmctldParameters=idle_on_node_suspend``` causes nodes drained for maintenance purposes to become idle and available
+* The ``SlurmctldParameters=idle_on_node_suspend`` causes nodes drained for maintenance purposes to become idle and available
   for running jobs.
   This is most likely **not** desirable.
 
