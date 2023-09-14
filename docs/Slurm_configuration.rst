@@ -700,7 +700,11 @@ See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct
 
 Then do a ``scontrol reconfig``.
 
-It is required that the ``freeipmi`` package with the ``libfreeipmi`` library is installed before Slurm_ is built::
+The Slurm quickstart guide states:
+
+* IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
+
+Therefore it is required that the ``freeipmi`` package with the ``libfreeipmi`` library is installed before Slurm_ is built::
 
   dnf install freeipmi
 
