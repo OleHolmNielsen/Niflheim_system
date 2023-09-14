@@ -698,6 +698,8 @@ Slurm_ can be built with IPMI power monitoring in slurm.conf_::
 
 See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
 
+Then do a ``scontrol reconfig``.
+
 It is required that the ``freeipmi`` package with the ``libfreeipmi`` library is installed before Slurm_ is built::
 
   dnf install freeipmi
