@@ -663,9 +663,8 @@ is described in acct_gather.conf_.
 
 .. _acct_gather.conf: https://slurm.schedmd.com/acct_gather.conf.html
 
-**Notice:** Please beware that the power monitoring may or may not cover entire compute node cabinets and other infrastructure!
-For example, the RAPL_ method described below monitors CPUs and RAM only, 
-and does not cover other power usage within the node such as GPUs, motherboard, fans, power supplies, PCIe network and storage adapters.
+RAPL CPU+DIMM power monitoring
+....................................
 
 On most types of processors one may activate *Running Average Power Limit* (RAPL_) sensors for CPUs and RAM memory,
 see these papers:
@@ -676,6 +675,10 @@ see these papers:
 * `RAPL (Running Average Power Limit) driver <https://lwn.net/Articles/545745/>`_.
 * `Running Average Power Limit – RAPL <https://01.org/blogs/2014/running-average-power-limit-%E2%80%93-rapl>`_.
 
+**Notice:** Please beware that the power monitoring may or may not cover entire compute node cabinets and other infrastructure!
+For example, the RAPL_ method described below monitors CPUs and RAM only, 
+and does not cover other power usage within the node such as GPUs, motherboard, fans, power supplies, PCIe network and storage adapters.
+
 With Slurm_ several *AcctGatherEnergyType* types are defined in the slurm.conf_ manual page.
 RAPL_ data gathering can be enabled in Slurm_ by::
 
@@ -684,7 +687,27 @@ RAPL_ data gathering can be enabled in Slurm_ by::
   AcctGatherNodeFreq=30
 
 and do a ``scontrol reconfig``.
-After a minute the power values become available::
+
+IPMI power monitoring
+..........................
+
+Slurm_ can be built with IPMI power monitoring in slurm.conf_::
+
+  AcctGatherEnergyType=acct_gather_energy/ipmi
+  EnergyIPMIfrequency=60
+
+See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
+
+It is required that the ``freeipmi`` package with the ``libfreeipmi`` library is installed before Slurm_ is built::
+
+  dnf install freeipmi
+
+NOTE: Some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI DCMI extensions, so your milage may vary!
+
+Monitoring power with Slurm
+...............................
+
+After reconfiguring the power values become available::
 
   $ scontrol show node n123
   ...
