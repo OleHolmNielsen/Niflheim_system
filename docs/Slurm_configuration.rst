@@ -708,6 +708,12 @@ Note that some BMCs (Huawei, Xfusion) do not support reading power usage values 
   $ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
+The Slurm quickstart admin guide https://slurm.schedmd.com/quickstart_admin.html states:
+
+* IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
+
+It is therefore required that the freeipmi_ package with the ``libfreeipmi`` library is installed **before** Slurm_ is built.
+
 Slurm_ can be built with IPMI power monitoring in slurm.conf_::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
@@ -715,12 +721,6 @@ Slurm_ can be built with IPMI power monitoring in slurm.conf_::
 
 See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
 Then do a ``scontrol reconfig``.
-
-The Slurm quickstart admin guide https://slurm.schedmd.com/quickstart_admin.html states:
-
-* IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
-
-It is therefore required that the freeipmi_ package with the ``libfreeipmi`` library is installed **before** Slurm_ is built.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _freeipmi: https://www.gnu.org/software/freeipmi/
