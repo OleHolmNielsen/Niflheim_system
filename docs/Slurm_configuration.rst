@@ -692,11 +692,13 @@ IPMI power monitoring
 ..........................
 
 Many types of BMC permit the reading of power consumption values using the IPMI DCMI_ extensions.
-Install the freeipmi_ package::
+Install the freeipmi_ package on the build server, the slurmctld_ server, and nodes with slurmd_::
 
   dnf install freeipmi
 
-On each type of compute node to be monitored, test whether the power values can be read by::
+If several freeipmi_ subcomponent packages exist, make sure to install also the ``freeipmi-devel`` package.
+
+On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
