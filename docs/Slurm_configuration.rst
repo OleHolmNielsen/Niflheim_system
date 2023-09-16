@@ -691,24 +691,37 @@ and do a ``scontrol reconfig``.
 IPMI power monitoring
 ..........................
 
+Many types of BMC permit the reading of power consumption values using the IPMI DCMI_ extensions.
+Install the freeipmi_ package::
+
+  dnf install freeipmi
+
+On each type of compute node to be monitored, test whether the power values can be read by::
+
+  ipmi-dcmi --get-system-power-statistics
+  ipmi-dcmi --get-enhanced-system-power-statistics
+
+Note that some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI DCMI_ extensions and give this response::
+
+  $ ipmi-dcmi --get-system-power-statistics
+  ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
+
 Slurm_ can be built with IPMI power monitoring in slurm.conf_::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
   EnergyIPMIfrequency=60
 
 See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
-
 Then do a ``scontrol reconfig``.
 
-The Slurm quickstart guide states:
+The Slurm quickstart admin guide https://slurm.schedmd.com/quickstart_admin.html states:
 
-* IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
+* IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
 
-Therefore it is required that the ``freeipmi`` package with the ``libfreeipmi`` library is installed before Slurm_ is built::
+It is therefore required that the freeipmi_ package with the ``libfreeipmi`` library is installed **before** Slurm_ is built.
 
-  dnf install freeipmi
-
-NOTE: Some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI DCMI extensions, so your milage may vary!
+.. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
+.. _freeipmi: https://www.gnu.org/software/freeipmi/
 
 Monitoring power with Slurm
 ...............................
