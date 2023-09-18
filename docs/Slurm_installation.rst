@@ -211,7 +211,7 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 
 Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
-  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi
+  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi freeipmi-devel
 
 Enable the EPEL_ repository::
 
