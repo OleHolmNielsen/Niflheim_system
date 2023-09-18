@@ -206,19 +206,17 @@ You must decide which Slurm_ plugins to activate in the RPM packages which you b
 Install prerequisites
 ---------------------
 
-Install Slurm_ prerequisites as well as several optional packages that enable Slurm plugins as described in the Slurm_Quick_Start_ guide::
+Slurm_ can be built with a number of **optional plugins**, each of which has some prerequisite library.
+The Slurm_Quick_Start_ guide lists these in the section `Building and Installing Slurm <https://slurm.schedmd.com/quickstart_admin.html#build_install>`_.
+
+Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
   yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi
 
-Enable the EPEL_ repository:
+Enable the EPEL_ repository::
 
-* CentOS 8::
-
-    dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-
-* CentOS 7::
-
-    dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm  # EL8
+  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  # EL7
 
 and install the following packages from EPEL_::
 
