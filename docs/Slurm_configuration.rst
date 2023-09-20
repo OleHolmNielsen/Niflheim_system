@@ -692,11 +692,11 @@ IPMI power monitoring
 ..........................
 
 Many types of BMC permit the reading of power consumption values using the IPMI DCMI_ extensions.
-Install the freeipmi_ package on the build server, the slurmctld_ server, and nodes with slurmd_::
+Install the freeipmi_ packages on the Slurm_ RPM build server before building packages::
 
-  dnf install freeipmi
+  dnf install freeipmi freeipmi-devel
 
-If several freeipmi_ subcomponent packages exist, make sure to install also the ``freeipmi-devel`` package.
+Later when installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
@@ -712,9 +712,9 @@ The Slurm quickstart admin guide https://slurm.schedmd.com/quickstart_admin.html
 
 * IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
 
-It is therefore required that the freeipmi_ package with the ``libfreeipmi`` library is installed **before** Slurm_ is built.
+It is therefore required that the above freeipmi_ packages are installed **before** Slurm_ is built.
 
-Slurm_ can be built with IPMI power monitoring in slurm.conf_::
+Slurm_ can be configured for IPMI power monitoring in slurm.conf_::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
   EnergyIPMIfrequency=60
