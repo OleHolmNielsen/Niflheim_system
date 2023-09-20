@@ -211,7 +211,7 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 
 Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
-  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi freeipmi-devel libyaml libyaml-devel
+  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi-devel libyaml-devel libjwt-devel
 
 Enable the EPEL_ repository::
 
@@ -232,9 +232,9 @@ in slurm.conf_ or slurmdbd.conf_, then you must also install::
 
 If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer),
 or if you want to use the slurm.conf_ ``ResumeProgram`` and ``SuspendProgram`` from the Power_Saving_Guide_,
-then you make sure to install these prerequisites before building RPMs::
+then you make sure to install these prerequisites **before** building Slurm_ RPMs::
 
-  yum install http-parser-devel json-c-devel
+  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel
 
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
