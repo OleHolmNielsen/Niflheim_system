@@ -211,30 +211,26 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 
 Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
-  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth http-parser-devel json-c-devel freeipmi-devel libyaml-devel libjwt-devel
+  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth 
 
-Enable the EPEL_ repository::
-
-  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm  # EL8
-  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  # EL7
-
-and install the following packages from EPEL_::
-
-  yum install libssh2-devel man2html
-
-If you use the recommended::
-
-  AuthType=auth/munge
-
-in slurm.conf_ or slurmdbd.conf_, then you must also install::
+If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install::
 
   yum install munge munge-libs munge-devel
 
 If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer),
 or if you want to use the slurm.conf_ ``ResumeProgram`` and ``SuspendProgram`` from the Power_Saving_Guide_,
-then you make sure to install these prerequisites **before** building Slurm_ RPMs::
+then you must install these prerequisites also::
 
-  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel
+  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel freeipmi-devel
+
+Furthermore, enable the EPEL_ repository::
+
+  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm  # EL8
+  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  # EL7
+
+and install the following EPEL_ packages::
+
+  yum install libssh2-devel man2html
 
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
