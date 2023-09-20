@@ -747,9 +747,9 @@ As stated in the scontrol_ page under the *reconfigure* option):
 
 * The slurmctld_ daemon must be restarted if nodes are added to or removed from the cluster. 
 
-Furthermore, the slurmd_ service on all compute nodes must also be reloaded in order to pick up the changes in slurm.conf_, for example::
+Furthermore, the slurmd_ service on all compute nodes must also be restarted in order to pick up the changes in slurm.conf_, for example::
 
-  clush -ba systemctl reload slurmd
+  clush -ba systemctl restart slurmd
 
 See advice from the Slurm_publications_ talk *Technical: Field Notes Mark 2: Random Musings From Under A New Hat, Tim Wickberg, SchedMD* (2018) on the *Safe procedure*:
 
