@@ -217,12 +217,6 @@ If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.c
 
   yum install munge munge-libs munge-devel
 
-If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer),
-or if you want to use the slurm.conf_ ``ResumeProgram`` and ``SuspendProgram`` from the Power_Saving_Guide_,
-then you must install these prerequisites also::
-
-  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel freeipmi-devel
-
 Furthermore, enable the EPEL_ repository::
 
   dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm  # EL8
@@ -231,6 +225,12 @@ Furthermore, enable the EPEL_ repository::
 and install the following EPEL_ packages::
 
   yum install libssh2-devel man2html
+
+If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
+or if you want to use the slurm.conf_ ``ResumeProgram`` and ``SuspendProgram`` from the Power_Saving_Guide_,
+then you must install these prerequisites also::
+
+  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel freeipmi-devel
 
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
