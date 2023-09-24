@@ -226,16 +226,27 @@ and install the following EPEL_ packages::
 
   yum install libssh2-devel man2html
 
-If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
-or if you want to use the slurm.conf_ ``ResumeProgram`` and ``SuspendProgram`` from the Power_Saving_Guide_,
-then you must install these prerequisites also::
+Optional prerequisites
+........................
 
-  yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel freeipmi-devel
+Certain Slurm tools and plugins require additional prerequisites **before** building Slurm:
 
-You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
+1. If you want to implement power saving as described in the Power_Saving_Guide_ then you must install this prerequisite::
 
-  dnf install jq
+     yum install freeipmi-devel
 
+   See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page.
+
+2. If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
+   then you must install these prerequisites also::
+
+     yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel 
+
+   See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
+   You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
+   
+     dnf install jq
+   
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 
