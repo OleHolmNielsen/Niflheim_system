@@ -232,6 +232,10 @@ then you must install these prerequisites also::
 
   yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel freeipmi-devel
 
+You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
+
+  dnf install jq
+
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 
