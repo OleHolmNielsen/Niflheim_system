@@ -701,6 +701,8 @@ Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstar
 
 * IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
 
+See also the discussion in bug bug_17704_.
+
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
   ipmi-dcmi --get-system-power-statistics
@@ -724,6 +726,7 @@ Finally do a ``scontrol reconfig``.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
 Monitoring power with Slurm
 ...............................
