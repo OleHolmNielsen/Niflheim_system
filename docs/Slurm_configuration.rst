@@ -718,7 +718,9 @@ Slurm_ can be configured for IPMI power monitoring in slurm.conf_::
 
 **Beware:** You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
 All slurmd's may crash if one is configured without the other!
-Then do a ``scontrol reconfig``.
+If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
+
+Finally do a ``scontrol reconfig``.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
