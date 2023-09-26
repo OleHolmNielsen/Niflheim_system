@@ -722,7 +722,6 @@ Then do a ``scontrol reconfig``.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
-.. _acct_gather.conf: https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
 
 Monitoring power with Slurm
 ...............................
