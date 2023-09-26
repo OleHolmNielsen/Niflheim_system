@@ -716,11 +716,13 @@ Slurm_ can be configured for IPMI power monitoring in slurm.conf_::
   AcctGatherEnergyType=acct_gather_energy/ipmi
   EnergyIPMIfrequency=60
 
-See the manual page https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
+**Beware:** You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
+All slurmd's may crash if one is configured without the other!
 Then do a ``scontrol reconfig``.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _acct_gather.conf: https://slurm.schedmd.com/acct_gather.conf.html#SECTION_acct_gather_energy/IPMI
 
 Monitoring power with Slurm
 ...............................
