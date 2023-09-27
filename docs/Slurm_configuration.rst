@@ -703,6 +703,13 @@ Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstar
 
 See also the discussion in bug bug_17704_.
 
+**WARNING:**
+As discussed in bug_17639_ there is a **serious bug** in FreeIPMI_ because it uses the *select()* system call in 
+``driver/ipmi-openipmi-driver.c`` and presumably the number of file descriptors used exceeds the hard limit of 1024.
+Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring!
+
+.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639#c30
+
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
   ipmi-dcmi --get-system-power-statistics
