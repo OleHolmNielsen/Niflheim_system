@@ -706,7 +706,7 @@ See also the discussion in bug bug_17704_.
 **WARNING:**
 As discussed in bug_17639_ there is a **serious bug** in FreeIPMI_ because it uses the *select()* system call in 
 ``driver/ipmi-openipmi-driver.c`` and presumably the number of file descriptors used exceeds the hard limit of 1024.
-Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring!
+Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring with the DCMI options in ``acct_gather.conf``!
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639#c30
 
