@@ -696,7 +696,7 @@ Install the FreeIPMI_ packages on the Slurm_ RPM build server before building pa
 
   dnf install freeipmi freeipmi-devel
 
-Later when installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
+When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states:
 
 * IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
@@ -709,6 +709,17 @@ As discussed in bug_17639_ there is a **serious bug** in FreeIPMI_ because it us
 Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring with the DCMI options in ``acct_gather.conf``!
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639#c30
+
+Since the official RPM repos may contain old versions,
+it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as *master*).
+First download a source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
+Unpack the tar-ball and do::
+
+  ./autogen.sh
+  ./configure
+  make
+  make dist
+  rpmbuild -ta --with systemd *.tar.gz 
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
