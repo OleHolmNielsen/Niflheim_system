@@ -713,6 +713,10 @@ Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power 
 Since the official RPM repos may contain old versions,
 it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as *master*).
 First download a source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
+Install prerequisites for the build::
+
+  dnf install libtool libgcrypt-devel texinfo
+
 Unpack the tar-ball and do::
 
   ./autogen.sh
