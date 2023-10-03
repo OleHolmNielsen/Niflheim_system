@@ -194,6 +194,9 @@ The steps required for a normal (**non-root**) user are:
   You may want to use `Installing EasyBuild with EasyBuild <https://docs.easybuild.io/installation/#eb_as_module>`_
   to build an EasyBuild_ module.
   This is assumed in the sections below.
+  At our site we install modules into the ``/home/modules`` using this bootstrap command::
+
+    eb --install-latest-eb-release --prefix /home/modules
 
 .. _Installation: https://docs.easybuild.io/installation/
 
