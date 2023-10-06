@@ -211,7 +211,7 @@ To verify the availability of GPU_ accelerators in a node run the command::
 which is installed with the *xorg-x11-drv-nvidia* RPM package.
 
 RPC rate limiting
----------------------
+=====================
 
 It is common to experience users who bombard the slurmctld_ server by executing commands such as 
 squeue_, sinfo_, sbatch_ or the like with many requests per second.
@@ -221,7 +221,7 @@ The ability to do ``RPC rate limiting`` on a per-user basis is a new feature wit
 It acts as a virtual bucket of tokens that users consume with *Remote Procedure Calls* (RPC_).
 Enable this feature in slurm.conf_ by adding ``rl_enable`` and other parameters such as ``rl_refill_period``, for example::
 
-  SlurmctldParameters = rl_enable,rl_refill_period=5
+  SlurmctldParameters=rl_enable,rl_refill_period=5
 
 This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
 You can define:
@@ -239,6 +239,7 @@ We have written a small script sratelimit_ for summarizing such log entries.
 
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 .. _sratelimit: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/sratelimit
+.. _bug_17835: https://bugs.schedmd.com/show_bug.cgi?id=17835
 
 Utilities for Slurm
 ===================
