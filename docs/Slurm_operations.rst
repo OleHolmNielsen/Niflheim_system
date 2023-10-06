@@ -209,6 +209,36 @@ To verify the availability of GPU_ accelerators in a node run the command::
 
 which is installed with the *xorg-x11-drv-nvidia* RPM package.
 
+RPC rate limiting
+---------------------
+
+It is common to experience users who bombard the slurmctld_ server by executing commands such as 
+squeue_, sinfo_, sbatch_ or the like with many requests per second.
+This can potentially make the slurmctld_ unresponsive and therefore affect the entire cluster.
+
+The ability to do ``RPC rate limiting`` on a per-user basis is a new feature with Slurm_ 23.02.
+It acts as a virtual bucket of tokens that users consume with *Remote Procedure Calls* (RPC_).
+Enable this feature in slurm.conf_ by adding ``rl_enable`` and other parameters such as ``rl_refill_period``, for example::
+
+  SlurmctldParameters = rl_enable,rl_refill_period=5
+
+This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
+You can define:
+
+* The maximum number of tokens with ``rl_bucket_size``,
+* the rate at which new tokens are added with ``rl_refill_rate``,
+* the frequency with which tokens are refilled with ``rl_refill_period``
+* and the number of entities to track with ``rl_table_size``.
+
+When this is enabled you may find lines in ``slurmctld.log`` such as::
+
+  2023-10-06T10:22:32.893] RPC rate limit exceeded by uid 2851 with REQUEST_SUBMIT_BATCH_JOB, telling to back off
+
+We have written a small script sratelimit_ for summarizing such log entries.
+
+.. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
+.. _sratelimit: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/sratelimit
+
 Utilities for Slurm
 ===================
 
