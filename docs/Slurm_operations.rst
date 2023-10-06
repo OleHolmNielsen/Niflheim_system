@@ -8,6 +8,7 @@ Slurm operations
 
 Jump to our top-level Slurm page: :ref:`SLURM`
 
+.. _Slurm: https://www.schedmd.com/
 .. _Slurm_homepage: https://www.schedmd.com/
 .. _Slurm_docs: https://slurm.schedmd.com/
 .. _Slurm_Quick_Start: https://slurm.schedmd.com/quickstart_admin.html
