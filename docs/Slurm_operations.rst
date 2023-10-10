@@ -230,6 +230,7 @@ You can define:
 * the rate at which new tokens are added with ``rl_refill_rate``,
 * the frequency with which tokens are refilled with ``rl_refill_period``
 * and the number of entities to track with ``rl_table_size``.
+* New in 23.02.6: ``rl_log_freq`` option to limit the number of *RPC limit exceeded...* messages that are logged. 
 
 When this is enabled you may find lines in ``slurmctld.log`` such as::
 
