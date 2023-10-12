@@ -237,6 +237,9 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 
    See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page.
 
+   Since the official RPM repos may contain old versions, it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as master),
+   see the section on :ref:`ipmi-power-monitoring`.
+
 2. If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
    then you must install these prerequisites also::
 
