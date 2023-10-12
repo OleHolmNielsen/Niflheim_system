@@ -688,7 +688,7 @@ RAPL_ data gathering can be enabled in Slurm_ by::
 
 and do a ``scontrol reconfig``.
 
-.. _ipmi_power_monitoring:
+.. _ipmi-power-monitoring:
 
 IPMI power monitoring
 ..........................
