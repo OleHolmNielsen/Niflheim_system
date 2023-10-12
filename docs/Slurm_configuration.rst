@@ -705,27 +705,53 @@ Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstar
 
 See also the discussion in bug bug_17704_.
 
+You can check if Slurm_ has been built with the **acct_gather_energy/ipmi** accounting plugin,
+and verify if the ``libfreeipmi.so.*`` library is also available on the system::
+
+  $ ldd /usr/lib64/slurm/acct_gather_energy_ipmi.so
+        linux-vdso.so.1 (0x00007ffcc35f6000)
+        libipmimonitoring.so.6 => /usr/lib64/libipmimonitoring.so.6 (0x00007f5817f88000)
+        libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00007f58177a8000)
+        libpthread.so.0 => /usr/lib64/libpthread.so.0 (0x00007f5817588000)
+        libdl.so.2 => /usr/lib64/libdl.so.2 (0x00007f5817384000)
+        librt.so.1 => /usr/lib64/librt.so.1 (0x00007f581717c000)
+        libm.so.6 => /usr/lib64/libm.so.6 (0x00007f5816dfa000)
+        libresolv.so.2 => /usr/lib64/libresolv.so.2 (0x00007f5816be2000)
+        libc.so.6 => /usr/lib64/libc.so.6 (0x00007f581681d000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f58183b1000)
+        libgcrypt.so.20 => /usr/lib64/libgcrypt.so.20 (0x00007f58164ff000)
+        libgpg-error.so.0 => /usr/lib64/libgpg-error.so.0 (0x00007f58162de000)
+
+FreeIPMI issues
+................
+
 **WARNING:**
-As discussed in bug_17639_ there is a **serious bug** in FreeIPMI_ because it uses the *select()* system call in 
-``driver/ipmi-openipmi-driver.c`` and presumably the number of file descriptors used exceeds the hard limit of 1024.
+As discussed in bug_17639_ there is an issue in FreeIPMI_ because it uses the ``select()`` system call in 
+``driver/ipmi-openipmi-driver.c`` and presumably the number of file descriptors used may exceed the system hard limit of 1024.
 Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring with the DCMI options in ``acct_gather.conf``!
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639#c30
 
+It is probably a good idea to install the latest FreeIPMI_ development version 1.7.0 or later.
 Since the official RPM repos may contain old versions,
-it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as *master*).
-First download a source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
-Install prerequisites for the build::
+you can build newer ``freeipmi`` RPMs from a development version (such as *master*):
 
-  dnf install libtool libgcrypt-devel texinfo
+* Install prerequisites for the build::
 
-Unpack the tar-ball and do::
+    dnf install libtool libgcrypt-devel texinfo
 
-  ./autogen.sh
-  ./configure
-  make
-  make dist
-  rpmbuild -ta --with systemd *.tar.gz 
+* Download a source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
+
+* Unpack the ``freeipmi`` tar-ball and configure and build RPMS::
+
+    ./autogen.sh
+    ./configure
+    make
+    make dist
+    rpmbuild -ta --with systemd *.tar.gz 
+
+Using IPMI power monitoring
+............................
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
