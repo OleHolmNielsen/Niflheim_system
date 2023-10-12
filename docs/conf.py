@@ -20,8 +20,8 @@ release = '2.0'
 # extensions = []
 extensions = [
     'sphinx_rtd_theme',
-    'sphinx.ext.autosectionlabel',
 ]
+    # 'sphinx.ext.autosectionlabel',
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
