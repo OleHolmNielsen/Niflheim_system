@@ -699,9 +699,9 @@ Install the FreeIPMI_ packages on the Slurm_ RPM build server before building pa
   dnf install freeipmi freeipmi-devel
 
 When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
-Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states:
+Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
-* IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
+  IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
 
 See also the discussion in bug bug_17704_.
 
@@ -721,6 +721,8 @@ and verify if the ``libfreeipmi.so.*`` library is also available on the system::
         /lib64/ld-linux-x86-64.so.2 (0x00007f58183b1000)
         libgcrypt.so.20 => /usr/lib64/libgcrypt.so.20 (0x00007f58164ff000)
         libgpg-error.so.0 => /usr/lib64/libgpg-error.so.0 (0x00007f58162de000)
+
+.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
 FreeIPMI issues
 ................
@@ -776,7 +778,6 @@ Finally do a ``scontrol reconfig``.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
-.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
 Monitoring power with Slurm
 ...............................
