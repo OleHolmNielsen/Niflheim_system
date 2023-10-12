@@ -701,7 +701,7 @@ Install the FreeIPMI_ packages on the Slurm_ RPM build server before building pa
 When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
-  IPMI Energy Consumption: The **acct_gather_energy/ipmi** accounting plugin will be built if the freeipmi_ development library is present.
+  IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi_ development library is present.
 
 See also the discussion in bug bug_17704_.
 
