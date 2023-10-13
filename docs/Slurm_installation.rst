@@ -317,11 +317,6 @@ The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmd
 but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
 and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
 
-If you want to build Slurm with the optional power saving as described in the Power_Saving_Guide_ then build Slurm_ with ``freeipmi`` 
-(make sure that the ``freeipmi-devel`` prerequisite was installed as shown above)::
-
-  rpmbuild -ta slurm-$VER.tar.bz2 --with mysql --with freeipmi
-
 If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer)::
 
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql --with slurmrestd
