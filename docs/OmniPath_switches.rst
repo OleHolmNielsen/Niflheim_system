@@ -6,7 +6,7 @@ Omni-Path switches
 
 .. Contents::
 
-mniPath software and documentation
+OmniPath software and documentation
 ===================================
 
 From early 2021 the Intel Omni-Path product has been taken over by a spin-out company CornelisNetworks_.
