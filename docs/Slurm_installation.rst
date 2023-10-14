@@ -231,7 +231,7 @@ Optional prerequisites
 
 Certain Slurm tools and plugins require additional prerequisites **before** building Slurm:
 
-1. If you want to implement power saving as described in the Power_Saving_Guide_ then you must install this prerequisite::
+1. If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
      yum install freeipmi-devel
 
@@ -252,6 +252,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
    
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 
 Install MariaDB database
 ------------------------
@@ -311,26 +312,35 @@ Set the version (for example, 23.02.6) and build Slurm_ RPM packages by::
 
   export VER=23.02.6
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql      # Includes accounting support with the slurm-slurmdbd package
-  rpmbuild -ta slurm-$VER.tar.bz2 --without mysql   # No slurm-slurmdbd accounting support
 
 The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmdbd`` package will be built by default, 
 but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
 and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
 
-If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer)::
-
-  rpmbuild -ta slurm-$VER.tar.bz2 --with mysql --with slurmrestd
-
 Note: On RHEL 9 (and derivatives) you must (currently) disable LTO_ in the SPEC file, see bug_14565_.
+
+The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
 .. _LTO: https://johanengelen.github.io/ldc/2016/11/10/Link-Time-Optimization-LDC.html
 .. _bug_14565: https://bugs.schedmd.com/show_bug.cgi?id=14565
-
-The RPM packages will typically be in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
-
 .. _MariaDB: https://mariadb.org/
 .. _MySQL: https://www.mysql.com/
 .. _bug_8882: https://bugs.schedmd.com/show_bug.cgi?id=8882
+
+Build Slurm with optional features
+.......................................
+
+* If you want to implement power saving as described in the Power_Saving_Guide_ then you can ensure that FreeIPMI_ gets built in by adding::
+
+    rpmbuild <...> --with freeipmi
+
+  This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see bug_17900_.
+
+* If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer) you must add::
+
+    rpmbuild <...> --with slurmrestd
+
+.. _bug_17900: https://bugs.schedmd.com/show_bug.cgi?id=17900
 
 Installing RPMs
 ===============
