@@ -53,7 +53,7 @@ Documentation from SchedMD_ about Slurm_:
 * Slurm configuration file slurm.conf_
 * Slurm NEWS_ (changes in recent versions of Slurm) and RELEASE_NOTES_ (change to the relevant **Tag** in stead of the **master** branch) on changes in recent versions of Slurm.
 * Slurm_download_ with links to external tools under *Download Related Software*.
-* Slurm_git_repo_.
+* Slurm_git_repo_ and Slurm_git_commits_.
 * Subscribe to Slurm_mailing_lists_.
 * The slurm_devel_archive_.
 * Slurm_publications_ and presentations.
@@ -98,5 +98,6 @@ Documentation from other sources:
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 .. _Slurm_git_repo: https://github.com/SchedMD/slurm
+.. _Slurm_git_commits: https://github.com/SchedMD/slurm/commits/
 .. _RELEASE_NOTES: https://github.com/SchedMD/slurm/blob/master/RELEASE_NOTES
 
