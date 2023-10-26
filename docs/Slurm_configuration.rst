@@ -772,6 +772,7 @@ in compute nodes by this slurm.conf_ configuration (activate it by ``scontrol re
   EnergyIPMIfrequency=60
 
 **IMPORTANT**:
+
 * You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
