@@ -140,7 +140,7 @@ Now follow the accounting_ page instructions (using -p to enter the database pas
 
 **WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
 
-Optional: If you would like to grant read-only (SELECT) access to the database, set up a ``readonly`` user with access from '%' (meaning any host)::
+Optional: If you would like to grant read-only (SELECT) access to the database, set up a ``readonly`` user with access from ``%`` (meaning any host)::
 
   # mysql -p
   grant select on slurm_acct_db.* TO 'readonly'@'%' identified by 'some_pass';
