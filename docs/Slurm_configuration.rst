@@ -760,7 +760,8 @@ which you can verify by this command::
   $ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
-Slurm_ can be configured for IPMI_ power monitoring by slurmd_ in compute nodes by this slurm.conf_ configuration
+Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.11!)
+in compute nodes by this slurm.conf_ configuration
 (activate it by ``scontrol reconfig``)::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
