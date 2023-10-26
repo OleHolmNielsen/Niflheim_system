@@ -693,11 +693,12 @@ and do a ``scontrol reconfig``.
 Building in IPMI power monitoring
 ........................................
 
-Many types of BMC permit the reading of power consumption values using the IPMI DCMI_ extensions.
+Many types of BMC permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
 Install the FreeIPMI_ packages on the Slurm_ RPM build server **before** building packages::
 
   dnf install freeipmi freeipmi-devel
 
+When building Slurm_ RPM packages make sure to use ``rpmbuild ... --with freeipmi``.
 When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
