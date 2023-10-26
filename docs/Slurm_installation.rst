@@ -311,7 +311,7 @@ At this point you must decide whether to build in Slurm plugins, for example, *m
 Set the version (for example, 23.02.6) and build Slurm_ RPM packages by::
 
   export VER=23.02.6
-  rpmbuild -ta slurm-$VER.tar.bz2 --with mysql      # Includes accounting support with the slurm-slurmdbd package
+  rpmbuild -ta slurm-$VER.tar.bz2 --with mysql
 
 Notes about the ``--with mysql`` option:
 
@@ -321,7 +321,9 @@ Notes about the ``--with mysql`` option:
 * From Slurm 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
 
-Note: On RHEL 9 (and derivatives) you must (currently) disable LTO_ in the SPEC file, see bug_14565_.
+Note about RHEL 9 (and derivatives):
+
+* You must (currently) disable LTO_ in the SPEC file, see bug_14565_.
 
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
