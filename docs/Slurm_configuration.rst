@@ -746,11 +746,16 @@ you can build newer ``freeipmi`` RPMs from a development version (such as *maste
     make dist
     rpmbuild -ta --with systemd *.tar.gz 
 
-Using IPMI power monitoring
-............................
+Using IPMI power monitoring (from Slurm 23.11)
+................................................
+
+* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.11!
+  The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
+  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.11.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
+  ipmi-dcmi --get-dcmi-capability-info
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
@@ -761,21 +766,15 @@ which you can verify by this command::
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
 Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.11!)
-in compute nodes by this slurm.conf_ configuration
-(activate it by ``scontrol reconfig``)::
+in compute nodes by this slurm.conf_ configuration (activate it by ``scontrol reconfig``)::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
   EnergyIPMIfrequency=60
 
 **IMPORTANT**:
-
 * You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
-
-* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.11!
-  The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
-  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.11.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
