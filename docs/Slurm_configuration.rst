@@ -690,20 +690,20 @@ and do a ``scontrol reconfig``.
 
 .. _ipmi_power_monitoring:
 
-IPMI power monitoring
-..........................
+Building in IPMI power monitoring
+........................................
 
 Many types of BMC permit the reading of power consumption values using the IPMI DCMI_ extensions.
-Install the FreeIPMI_ packages on the Slurm_ RPM build server before building packages::
+Install the FreeIPMI_ packages on the Slurm_ RPM build server **before** building packages::
 
   dnf install freeipmi freeipmi-devel
 
 When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
-  IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi_ development library is present.
+  IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
 
-See also the discussion in bug bug_17704_.
+See also the discussion about IPMI_ *Data Center Manageability Interface* (DCMI_) in bug bug_17704_.
 
 You can check if Slurm_ has been built with the **acct_gather_energy/ipmi** accounting plugin,
 and verify if the ``libfreeipmi.so.*`` library file is also available on the system::
@@ -720,11 +720,11 @@ FreeIPMI issues
 ................
 
 **WARNING:**
-As discussed in bug_17639_ there is an issue in FreeIPMI_ because it uses the ``select()`` system call in 
-``driver/ipmi-openipmi-driver.c`` and presumably the number of file descriptors used may exceed the system hard limit of 1024.
-Until this bug has been fixed, it is **recommended NOT to use** FreeIPMI_ power monitoring with the DCMI options in ``acct_gather.conf``!
+As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.7
+because it uses the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
+Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
 
-.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639#c30
+.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 
 It is probably a good idea to install the latest FreeIPMI_ development version 1.7.0 or later.
 Since the official RPM repos may contain old versions,
@@ -752,21 +752,27 @@ On each type of compute node to be monitored, test whether the power values can 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
-Note that some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI DCMI_ extensions and give this response::
+Note that some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI_ DCMI_ extensions,
+which you can verify by this command::
 
   $ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
-Slurm_ can be configured for IPMI power monitoring in slurm.conf_::
+Slurm_ can be configured for IPMI_ power monitoring by slurmd_ in compute nodes by this slurm.conf_ configuration
+(activate it by ``scontrol reconfig``)::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
   EnergyIPMIfrequency=60
 
-**Beware:** You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
-All slurmd's may crash if one is configured without the other!
-If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
+**IMPORTANT**:
 
-Finally do a ``scontrol reconfig``.
+* You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
+  All slurmd's may crash if one is configured without the other!
+  If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
+
+* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.11!
+  The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
+  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.11.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
@@ -780,8 +786,10 @@ After reconfiguring the power values become available::
   ...
     CurrentWatts=641 AveWatts=480
 
-Please beware that the Slurm `bug 9956 <https://bugs.schedmd.com/show_bug.cgi?id=9956>`_ states:
+Please beware that the Slurm bug_9956_ states:
 *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
+
+.. _bug_9956: https://bugs.schedmd.com/show_bug.cgi?id=9956
 
 A convenient script showpower_ is available for printing node power values as well as the total/average for sets of nodes with 1 line per node::
 
