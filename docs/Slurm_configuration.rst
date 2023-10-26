@@ -714,6 +714,7 @@ and verify if the ``libfreeipmi.so.*`` library file is also available on the sys
         libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00007f58177a8000)
         ...
 
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
 FreeIPMI issues
