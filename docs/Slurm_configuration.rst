@@ -746,12 +746,12 @@ you can build newer ``freeipmi`` RPMs from a development version (such as *maste
     make dist
     rpmbuild -ta --with systemd *.tar.gz 
 
-Using IPMI power monitoring (from Slurm 23.11)
+Using IPMI power monitoring (from Slurm 23.02.7)
 ................................................
 
-* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.11!
+* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.02.7!
   The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
-  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.11.
+  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.02.7.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
@@ -765,7 +765,7 @@ which you can verify by this command::
   $ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
-Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.11!)
+Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.02.7!)
 in compute nodes by this slurm.conf_ configuration (activate it by ``scontrol reconfig``)::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
