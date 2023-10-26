@@ -313,9 +313,13 @@ Set the version (for example, 23.02.6) and build Slurm_ RPM packages by::
   export VER=23.02.6
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql      # Includes accounting support with the slurm-slurmdbd package
 
-The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmdbd`` package will be built by default, 
-but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
-and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
+Notes about the ``--with mysql`` option:
+
+* The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmdbd`` package will be built by default, 
+  but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
+  and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
+* From Slurm 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
+  The default behavior now is to always require one of the sql development libraries.
 
 Note: On RHEL 9 (and derivatives) you must (currently) disable LTO_ in the SPEC file, see bug_14565_.
 
