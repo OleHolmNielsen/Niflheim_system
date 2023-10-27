@@ -693,7 +693,7 @@ and do a ``scontrol reconfig``.
 Building in IPMI power monitoring
 ........................................
 
-Many types of *Baseboard Management Controllers* (BMC) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
+Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
 Install the FreeIPMI_ packages on the Slurm_ RPM build server **before** building packages::
 
   dnf install freeipmi freeipmi-devel
@@ -715,6 +715,7 @@ and verify if the ``libfreeipmi.so.*`` library file is also available on the sys
         libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00007f58177a8000)
         ...
 
+.. _BMC: https://www.techopedia.com/definition/15941/baseboard-management-controller-bmc
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
@@ -759,7 +760,7 @@ On each type of compute node to be monitored, test whether the power values can 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
-Note that some BMCs (Huawei, Xfusion) do not support reading power usage values with the IPMI_ DCMI_ extensions,
+Note that some BMC_ (Huawei, Xfusion) do not support reading power usage values with the IPMI_ DCMI_ extensions,
 which you can verify by this command::
 
   $ ipmi-dcmi --get-system-power-statistics
