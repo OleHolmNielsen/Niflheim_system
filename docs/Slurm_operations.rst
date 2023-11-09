@@ -459,9 +459,10 @@ Here are the steps for configuring Host-based_Authentication_ on CentOS 7 system
 
    The *GSSAPI* (Generic Security Service Application Program Interface (GSS-API) Authentication and Key Exchange for the Secure Shell (SSH) Protocol) is defined in rfc4462_.
 
-3. Add this line to the SSH server ``/etc/ssh/sshd_config`` file on all nodes::
+3. Add these lines to the SSH server ``/etc/ssh/sshd_config`` file on all nodes::
 
      HostbasedAuthentication yes
+     UseDNS yes
 
    and restart the SSH service::
 
