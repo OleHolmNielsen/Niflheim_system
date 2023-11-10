@@ -1000,11 +1000,11 @@ On Compute nodes you may additionally install the ``slurm-pam_slurm`` RPM packag
 A more important functions is the *containment* of SSH tasks, for example, by some MPI libraries **not** using Slurm_ for spawning tasks.
 The pam_slurm_adopt_ module makes sure that child SSH tasks are controlled by Slurm on the job's master node.
 
-SELinux may conflict with pam_slurm_adopt_, so it might need to be disabled by this command::
+SELinux_ may conflict with pam_slurm_adopt_, so it might need to be disabled by this command::
 
   setenforce 0
 
-Disable SELinux permanently in ``/etc/selinux/config``::
+Disable SELinux_ permanently in ``/etc/selinux/config``::
 
   SELINUX=disabled
 
@@ -1028,6 +1028,7 @@ The PAM usage of, for example, ``/etc/pam.d/system-auth`` on CentOS/RHEL is conf
 
 .. _pam_slurm: https://slurm.schedmd.com/faq.html#pam
 .. _authconfig: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System-Level_Authentication_Guide/authconfig-addl-auth.html
+.. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 
 Configure PrologFlags
 .....................
@@ -1110,6 +1111,11 @@ Normal user logins should be rejected with the message::
 
   Access denied by pam_slurm_adopt: you have no active jobs on this node
   Connection closed by <IP address>
+
+Logins may also fail if SELinux_ got enabled by accident, check that it is disabled with::
+
+  $ getenforce 
+  Disabled
 
 slurmd systemd limits
 ---------------------
