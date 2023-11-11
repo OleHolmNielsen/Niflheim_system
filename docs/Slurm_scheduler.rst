@@ -256,6 +256,7 @@ With Slurm_ it appears that the only way to achieve user job throttling is the f
 
     sacctmgr modify association where name=XXX set GrpTRESRunMin=cpu=1000000   # For an account/user asociation
     sacctmgr modify qos where name=some_QOS set GrpTRESRunMin=cpu=1000000      # For a QOS
+    sacctmgr modify qos where name=some_QOS set MaxTRESPU=cpu=1000             # QOS Max TRES per user
 
 .. _MAUI: https://docs.adaptivecomputing.com/maui/
 .. _Throttling_Policies: https://docs.adaptivecomputing.com/maui/throttling306.php
