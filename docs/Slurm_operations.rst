@@ -223,6 +223,9 @@ Enable this feature in slurm.conf_ by adding ``rl_enable`` and other parameters 
 
   SlurmctldParameters=rl_enable,rl_refill_period=5
 
+**NOTE:** After changing ``SlurmctldParameters`` the ``slurmctld`` must be restarted, see bug_18067_.
+This seems to be undocumented as of 23.02.6.
+
 This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
 You can define:
 
@@ -241,6 +244,7 @@ We have written a small script sratelimit_ for summarizing such log entries.
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 .. _sratelimit: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/sratelimit
 .. _bug_17835: https://bugs.schedmd.com/show_bug.cgi?id=17835
+.. _bug_18067: https://bugs.schedmd.com/show_bug.cgi?id=18067
 
 Utilities for Slurm
 ===================
