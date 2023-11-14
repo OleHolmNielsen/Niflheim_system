@@ -146,6 +146,25 @@ The simplest way to achieve this is described in bug_9832_:
 
 .. _bug_9832: https://bugs.schedmd.com/show_bug.cgi?id=9832
 
+Delay start of slurmd until InfiniBand/Omni-Path network is up
+-----------------------------------------------------------------
+
+Unfortunately, slurmd_ may start up before the InfiniBand/Omni-Path network ports are up.
+The reason is that InfiniBand ports may take a number of seconds to become activated at system boot time,
+and NetworkManager_ cannot be configured to wait for InfiniBand,
+but will claim that the network is online as soon as one interface is ready (typically Ethernet).
+
+If you have configured Node Health Check (NHC_) to check the InfiniBand ports,
+the NHC_ check is going to fail until the InfiniBand ports are up.
+Please note that slurmd_ will call NHC_ at startup, if HealthCheckProgram has been configured in slurm.conf_.
+Jobs started by slurmd_ may fail if the InfiniBand port is not yet up.
+
+We have written some InfiniBand_tools_ to delay the NetworkManager_ network-online.target for InfiniBand/Omni-Path
+so that slurmd_ gets started only after all networks are actually up.
+
+.. _NetworkManager: https://en.wikipedia.org/wiki/NetworkManager
+.. _InfiniBand_tools: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/InfiniBand
+
 Configuring a custom slurmd service
 -----------------------------------
 
