@@ -223,8 +223,9 @@ Enable this feature in slurm.conf_ by adding ``rl_enable`` and other parameters 
 
   SlurmctldParameters=rl_enable,rl_refill_period=5
 
-**NOTE:** After changing ``SlurmctldParameters`` the ``slurmctld`` must be restarted, see bug_18067_.
-This seems to be undocumented as of 23.02.6.
+**NOTE:** After changing ``SlurmctldParameters`` make an ``scontrol reconfig``,
+or  restart the ``slurmctld``, see bug_18067_.
+The correct action seems to be undocumented as of 23.02.6.
 
 This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
 You can define:
