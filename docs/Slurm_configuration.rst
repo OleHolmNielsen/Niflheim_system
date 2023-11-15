@@ -160,8 +160,8 @@ the NHC_ check is going to fail until the InfiniBand ports are up.
 Please note that slurmd_ will call NHC_ at startup, if HealthCheckProgram has been configured in slurm.conf_.
 Jobs started by slurmd_ may fail if the InfiniBand port is not yet up.
 
-We have written some InfiniBand_tools_ to delay the NetworkManager_ network-online.target for InfiniBand/Omni-Path
-so that slurmd_ gets started only after all networks are actually up.
+We have written some InfiniBand_tools_ to delay the NetworkManager_ ``network-online.target`` for InfiniBand/Omni-Path networks
+so that slurmd_ gets started only after **all** networks are actually up.
 
 .. _NetworkManager: https://en.wikipedia.org/wiki/NetworkManager
 .. _InfiniBand_tools: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/InfiniBand
