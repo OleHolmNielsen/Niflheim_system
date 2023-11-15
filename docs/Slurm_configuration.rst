@@ -153,6 +153,7 @@ Unfortunately, slurmd_ may start up before the InfiniBand/Omni-Path network port
 The reason is that InfiniBand ports may take a number of seconds to become activated at system boot time,
 and NetworkManager_ cannot be configured to wait for InfiniBand,
 but will claim that the network is online as soon as one interface is ready (typically Ethernet).
+This issue seems to be serious on EL8 (RHEL 8 and clones) with 10-15 seconds of delay, whereas CentOS 7.9 starts up InfiniBand much quicker.
 
 If you have configured Node Health Check (NHC_) to check the InfiniBand ports,
 the NHC_ check is going to fail until the InfiniBand ports are up.
