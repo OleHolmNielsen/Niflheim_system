@@ -465,7 +465,7 @@ Configure Slurm logging
 Upgrading Slurm
 ===============
 
-New Slurm_ updates are released rather often.
+New Slurm_ updates are released about every 9 months.
 Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
