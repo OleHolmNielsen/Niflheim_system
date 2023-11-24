@@ -475,7 +475,7 @@ Pay attention to these statements:
   * Slurm daemons will support RPCs and state files from the **two previous major releases** (e.g. a version 23.11.x SlurmDBD will support slurmctld daemons and commands with a version of 23.11.x, 23.02.x or 22.05.x). 
 
 * In other words, when changing the version to a higher release number (e.g from 22.05.x to 23.02.x) always upgrade the slurmdbd_ daemon first.
-* Be mindful of your configured `SlurmdTimeout` and `SlurmctldTimeout` values.
+* Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values.
 * The recommended upgrade order is that versions may be mixed as follows::
 
     slurmdbd >= slurmctld >= slurmd >= commands
