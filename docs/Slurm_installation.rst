@@ -708,10 +708,10 @@ Here is a suggested procedure:
 
 11. When all tests have been completed successfully, reinstall the compute node to its default installation.
 
-Upgrading on CentOS 7
----------------------
+Upgrading on EL8 and CentOS 7
+---------------------------------
 
-Let's assume that you have built the updated RPM packages for CentOS 7 and copied them to the current directory so you can use ``yum`` on the files directly.
+Let's assume that you have built the updated RPM packages for EL8 or CentOS 7 and copied them to the current directory so you can use ``yum`` on the files directly.
 
 Prerequisites before upgrading
 ..............................
