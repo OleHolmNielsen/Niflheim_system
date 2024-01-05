@@ -717,7 +717,7 @@ Prerequisites before upgrading
 ..............................
 
 If you have installed the pdsh_ tool, there may be a module that has been linked against a specific library version ``libslurm.so.30``,
-and ``yum`` will then refuse to update the slurm* RPMs.
+and ``yum`` will then refuse to update the ``slurm-xxx`` RPMs.
 You must first do::
 
   yum remove pdsh-mod-slurm
