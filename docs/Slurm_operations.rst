@@ -816,6 +816,8 @@ Slurm can reboot nodes by::
     Accepts an option list of nodes to reboot.
     By default all nodes are rebooted. 
 
+**NOTE**: The reboot request will be ignored for hosts in the following states: FUTURE, POWER_DOWN, POWERED_DOWN, POWERING_DOWN, REBOOT_ISSUED, REBOOT_REQUESTED.
+
 Compute node OS and firmware updates
 ------------------------------------
 
