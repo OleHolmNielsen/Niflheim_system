@@ -818,6 +818,7 @@ Slurm can reboot nodes by::
 
 **NOTE**: The reboot request will be ignored for hosts in the following states: ``FUTURE, POWER_DOWN, POWERED_DOWN, POWERING_DOWN, REBOOT_ISSUED, REBOOT_REQUESTED``,
 see bug_18505_.
+Currently, no warning is issued in such cases.
 From Slurm_ 24.08 an error message will be printed by ``scontrol reboot`` when a node reboot request is ignored due to the current node state.
 
 .. _bug_18505: https://bugs.schedmd.com/show_bug.cgi?id=18505
