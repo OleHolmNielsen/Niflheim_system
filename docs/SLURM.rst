@@ -1,13 +1,7 @@
 .. _SLURM:
 
-===========================
 Slurm batch queueing system
 ===========================
-
-**Notice:**
-These pages were migrated to a Sphinx_ system from the
-previous MoinMoin_ system on 14-Oct-2022.
-Please report any broken links to Ole.H.Nielsen@fysik.dtu.dk.
 
 .. _MoinMoin: https://moinmo.in/
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
