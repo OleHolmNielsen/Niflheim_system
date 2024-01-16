@@ -780,13 +780,6 @@ On each type of compute node to be monitored, test whether the power values can 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
-Note that some vendors' BMC_ (verified January 2024: *Huawei* and *Xfusion*)
-do **NOT** currently support reading power usage values with the IPMI_ DCMI_ extensions,
-which you can verify by this command::
-
-  [xfusion]$ ipmi-dcmi --get-system-power-statistics
-  ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
-
 Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.02.7!)
 in compute nodes by this slurm.conf_ configuration (activate it by ``scontrol reconfig``)::
 
@@ -802,6 +795,17 @@ Configure simultaneously the acct_gather.conf_ file in ``/etc/slurm/``::
   You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
+
+**NOTE:** Some vendors' BMC_ (verified January 2024: *Huawei* and *Xfusion*)
+do **NOT** currently support reading power usage values with the IPMI_ DCMI_ extensions,
+which you can verify by this command::
+
+  [xfusion]$ ipmi-dcmi --get-system-power-statistics
+  ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
+
+The ``slurmd.log`` may contain errors such as::
+
+  error: _get_dcmi_power_reading: get DCMI power reading failed: command invalid or unsupported
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
