@@ -780,7 +780,8 @@ On each type of compute node to be monitored, test whether the power values can 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
-Note that some BMC_ (Huawei, Xfusion) do not support reading power usage values with the IPMI_ DCMI_ extensions,
+Note that some types of BMC_ (verified January 2024: *Huawei* and *Xfusion*)
+do **NOT** currently support reading power usage values with the IPMI_ DCMI_ extensions,
 which you can verify by this command::
 
   $ ipmi-dcmi --get-system-power-statistics
@@ -797,9 +798,8 @@ Configure simultaneously the acct_gather.conf_ file in ``/etc/slurm/``::
   EnergyIPMIFrequency=60
   EnergyIPMICalcAdjustment=yes
 
-**IMPORTANT**:
-
-* You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
+* **IMPORTANT**:
+  You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
 
