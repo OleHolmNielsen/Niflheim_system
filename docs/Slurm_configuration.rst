@@ -784,7 +784,7 @@ Note that some vendors' BMC_ (verified January 2024: *Huawei* and *Xfusion*)
 do **NOT** currently support reading power usage values with the IPMI_ DCMI_ extensions,
 which you can verify by this command::
 
-  xfusion$ ipmi-dcmi --get-system-power-statistics
+  [xfusion]$ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
 Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.02.7!)
