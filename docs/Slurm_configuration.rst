@@ -803,7 +803,7 @@ which you can verify by this command::
   [xfusion]$ ipmi-dcmi --get-system-power-statistics
   ipmi_cmd_dcmi_get_power_reading: command invalid or unsupported
 
-The ``slurmd.log`` may contain errors such as::
+The ``slurmd.log`` may contain IPMI_ DCMI_ error messages such as::
 
   error: _get_dcmi_power_reading: get DCMI power reading failed: command invalid or unsupported
 
