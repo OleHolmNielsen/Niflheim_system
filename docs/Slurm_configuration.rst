@@ -796,7 +796,13 @@ Configure simultaneously the acct_gather.conf_ file in ``/etc/slurm/``::
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
 
-**NOTE:** Some vendors' BMC_ (verified January 2024: *Huawei* and *Xfusion*)
+.. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+
+Non DCMI compliant BMCs
+.......................
+
+Some vendors' BMC_ (verified January 2024: *Huawei* and *Xfusion*)
 do **NOT** currently support reading power usage values with the IPMI_ DCMI_ extensions,
 which you can verify by this command::
 
@@ -806,9 +812,6 @@ which you can verify by this command::
 The ``slurmd.log`` may contain IPMI_ DCMI_ error messages such as::
 
   error: _get_dcmi_power_reading: get DCMI power reading failed: command invalid or unsupported
-
-.. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
-.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 
 Monitoring power with Slurm
 ...............................
