@@ -772,7 +772,7 @@ Using IPMI power monitoring (from Slurm 23.02.7)
 
 * The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.02.7!
   The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
-  This issue was fixed in bug_17639_ which will be included only from Slurm_ 23.02.7.
+  This issue was fixed in bug_17639_ from Slurm_ 23.02.7.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
