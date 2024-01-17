@@ -813,6 +813,10 @@ The ``slurmd.log`` may contain IPMI_ DCMI_ error messages such as::
 
   error: _get_dcmi_power_reading: get DCMI power reading failed: command invalid or unsupported
 
+For such BMC_ types it is unfortunately not possible to perform power reading with the IPMI_ DCMI_ extensions,
+which is what has been implemented by Slurm_.
+The ``scontrol show node`` will report zero values for ``CurrentWatts`` and ``AveWatts`` for such nodes.
+
 Monitoring power with Slurm
 ...............................
 
