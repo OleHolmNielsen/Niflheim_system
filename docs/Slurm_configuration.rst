@@ -714,12 +714,17 @@ Building in IPMI power monitoring
 ........................................
 
 Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
-Install the FreeIPMI_ packages on the Slurm_ RPM build server **before** building packages::
+Note that Slurm_ version 23.02.7 (or later) should be used for correct functionality (read about issues below).
 
-  dnf install freeipmi freeipmi-devel
+Install the FreeIPMI_ prerequisite packages version 1.6.12 (or later, read about issues below) on the Slurm_ RPM build server, for example::
 
-When building Slurm_ RPM packages make sure to use ``rpmbuild ... --with freeipmi``.
-When installing ``slurm`` RPM packages the ``freeipmi`` package is going to be installed as a prerequisite.
+  dnf install freeipmi-1.6.12*rpm freeipmi-devel-1.6.12*rpm
+
+Then build Slurm_ RPM packages with FreeIPMI_::
+
+   rpmbuild <options> --with freeipmi
+
+When installing ``slurm`` RPM packages the ``freeipmi`` package is now going to be installed as a prerequisite.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
   IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
@@ -744,14 +749,13 @@ FreeIPMI issues
 
 **WARNING:**
 As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
-because it uses the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
+because older versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
 Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 
-It is probably a good idea to install the latest FreeIPMI_ ``version 1.6.12`` or later.
-Since the official RPM repos may contain old versions,
-you can build newer ``freeipmi`` RPMs from a tar-ball version:
+For correct functionality with Slurm_ you must install FreeIPMI_ ``version 1.6.12`` or later.
+Since the official RPM repos may contain old versions, you can build newer ``freeipmi`` RPMs from a tar-ball version:
 
 * Install prerequisites for the build::
 
