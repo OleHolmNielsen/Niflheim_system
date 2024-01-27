@@ -743,15 +743,15 @@ FreeIPMI issues
 ................
 
 **WARNING:**
-As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.7
+As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
 because it uses the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
 Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 
-It is probably a good idea to install the latest FreeIPMI_ development version 1.7.0 or later.
+It is probably a good idea to install the latest FreeIPMI_ ``version 1.6.12`` or later.
 Since the official RPM repos may contain old versions,
-you can build newer ``freeipmi`` RPMs from a development version (such as *master*):
+you can build newer ``freeipmi`` RPMs from a tar-ball version:
 
 * Install prerequisites for the build::
 
