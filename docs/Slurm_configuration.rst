@@ -710,21 +710,18 @@ and do a ``scontrol reconfig``.
 
 .. _ipmi_power_monitoring:
 
-Building in IPMI power monitoring
-........................................
+Building IPMI power monitoring into Slurm
+.........................................
 
 Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
 Note that Slurm_ version 23.02.7 (or later) should be used for correct functionality (read about issues below).
 
-Install the FreeIPMI_ prerequisite packages version 1.6.12 (or later, read about issues below) on the Slurm_ RPM build server, for example::
+Install the FreeIPMI_ prerequisite packages ``version 1.6.12 or later`` on the Slurm_ RPM-building server as shown in the next section.
+Then build Slurm_ RPM packages **including** ``freeipmi`` libraries::
 
-  dnf install freeipmi-1.6.12*rpm freeipmi-devel-1.6.12*rpm
+  rpmbuild -ta slurm-<version>.tar.bz2 --with mysql --with freeipmi
 
-Then build Slurm_ RPM packages with FreeIPMI_::
-
-   rpmbuild <options> --with freeipmi
-
-When installing ``slurm`` RPM packages the ``freeipmi`` package is now going to be installed as a prerequisite.
+When installing ``slurm`` RPM packages the ``freeipmi`` packages are now going to be required as prerequisites.
 Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
   IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
@@ -744,8 +741,8 @@ and verify if the ``libfreeipmi.so.*`` library file is also available on the sys
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
 
-FreeIPMI issues
-................
+Build the latest FreeIPMI version
+.......................................
 
 **WARNING:**
 As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
@@ -761,15 +758,17 @@ Since the official RPM repos may contain old versions, you can build newer ``fre
 
     dnf install libtool libgcrypt-devel texinfo
 
-* Download a source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
+* Download the latest source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
 
-* Unpack the ``freeipmi`` tar-ball and configure and build RPMS::
+* Build RPM packages including Systemd_::
 
-    ./autogen.sh
-    ./configure
-    make
-    make dist
-    rpmbuild -ta --with systemd *.tar.gz 
+    rpmbuild -ta --with systemd freeipmi-1.6.14.tar.gz
+
+Install the required *freeipmi* RPM packages on the Slurm_ RPM-building server as well as on all compute nodes::
+
+  dnf install freeipmi-1.6.14*rpm freeipmi-devel-1.6.14*rpm
+
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Using IPMI power monitoring (from Slurm 23.02.7)
 ................................................
