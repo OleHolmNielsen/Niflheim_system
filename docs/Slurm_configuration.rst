@@ -714,7 +714,7 @@ Building IPMI power monitoring into Slurm
 .........................................
 
 Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
-Note that Slurm_ version 23.02.7 (or later) should be used for correct functionality (read about issues below).
+Note that Slurm_ ``version 23.02.7 (or later)`` should be used for correct functionality, see bug_17639_.
 
 Install the FreeIPMI_ prerequisite packages ``version 1.6.12 or later`` on the Slurm_ RPM-building server as shown in the next section.
 Then build Slurm_ RPM packages **including** ``freeipmi`` libraries::
