@@ -831,7 +831,7 @@ After reconfiguring the power values become available::
 
 Notice some potentially incorrect power and CPU load values:
 
-* bug_17759_: scontrol show node shows CurrentWatts and CPULoad greater than zero for nodes that are powered off (fixed in 24.08).
+* bug_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in 24.08).
 * Beware that the Slurm bug_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
 
 .. _bug_17759: https://bugs.schedmd.com/show_bug.cgi?id=17759
