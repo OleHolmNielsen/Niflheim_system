@@ -829,9 +829,12 @@ After reconfiguring the power values become available::
   ...
     CurrentWatts=641 AveWatts=480
 
-Please beware that the Slurm bug_9956_ states:
-*RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
+Notice some incorrect power and CPU load values:
 
+* bug_17759_: scontrol show node shows CurrentWatts and CPULoad greater than zero for nodes that are powered off (fixed in 24.08).
+* Beware that the Slurm bug_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
+
+.. _bug_17759: https://bugs.schedmd.com/show_bug.cgi?id=17759
 .. _bug_9956: https://bugs.schedmd.com/show_bug.cgi?id=9956
 
 A convenient script showpower_ is available for printing node power values as well as the total/average for sets of nodes with 1 line per node::
