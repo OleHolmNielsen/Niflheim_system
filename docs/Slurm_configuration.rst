@@ -1874,17 +1874,17 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
 
 **NOTE:** If some field is **undefined** in the user's job script, for example ``max_nodes``, slurmctld_ sets an "invalid" value (see bug_15012_) which can be tested for in ``/etc/slurm/job_submit.lua``:
 
-* Numeric values (a Lua double) if absent will be set to ``slurm.NO_VAL`` (32-bit, as defined in ``/usr/include/slurm/slurm.h``).
+* Numeric values (a Lua_ double) if absent will be set to ``slurm.NO_VAL`` (32-bit, as defined in ``/usr/include/slurm/slurm.h``).
 
   For completeness, there are both 16, 32, and 64-bit integer values ``NO_VAL16, NO_VAL, NO_VAL64`` defined in ``slurm.h`` struct ``job_desc_msg_t``.
 
-* String values (if absent) will be set to the nil_ Lua type.
+* String values (if absent) will be set to the nil_ Lua_ type.
 
 .. _bug_15012:  https://bugs.schedmd.com/show_bug.cgi?id=15012.
 .. _nil: https://www.lua.org/pil/2.1.html
 
 Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also bug_14500_.
-Note that only a few selected symbols ``ESLURM*`` are exposed to the Lua script, but from Slurm_ 23.02 all the error codes in ``/usr/include/slurm/slurm_errno.h`` are exposed.
+Note that only a few selected symbols ``ESLURM*`` are exposed to the Lua_ script, but from Slurm_ 23.02 all the error codes in ``/usr/include/slurm/slurm_errno.h`` are exposed.
 
 Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in this example::
 
@@ -1898,7 +1898,12 @@ Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in 
     return slurm.ESLURM_INVALID_PARTITION_NAME
   end
 
+It is worth noting that the Lua_ version 5.1.4 from RHEL/CentOS 7 does not handle nil_ values well in all cases as discussed in bug_19564_:
+When printing a string with a nil_ value an error such as *bad argument #2 to 'format' (string expected, got nil)* may occur.
+The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
+
 .. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L458
+.. _bug_19564: https://bugs.schedmd.com/show_bug.cgi?id=19564
 
 Configure Slurm for Lua JobSubmitPlugins
 ........................................
