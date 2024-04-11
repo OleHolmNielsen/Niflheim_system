@@ -156,6 +156,8 @@ Increase munged number of threads
 On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
 On such servers it is recommended to increase the number of munged_ threads, see *man munged*.
+The issue is discussed in 
+`excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
 On RHEL/CentOS systems the procedure is:
 
