@@ -176,14 +176,16 @@ In the accounting_ page section *Slurm Accounting Configuration Before Build* so
   This helps when converting large tables over to the new database schema and when purging old records.
   Setting ``innodb_lock_wait_timeout`` and ``innodb_log_file_size`` to larger values than the default is also recommended.
 
-The following is recommended for ``/etc/my.cnf``, but on CentOS 7 you should create a new file ``/etc/my.cnf.d/innodb.cnf`` containing::
+The following is recommended for ``/etc/my.cnf``,
+but on EL7/EL8 you should create a new file ``/etc/my.cnf.d/innodb.cnf`` containing::
 
   [mysqld]
-  innodb_buffer_pool_size=1024M
+  innodb_buffer_pool_size=32768M
   innodb_log_file_size=64M
   innodb_lock_wait_timeout=900
 
-The innodb_buffer_pool_size_ might be even larger, like 50%-80% of the server's RAM size.
+The innodb_buffer_pool_size_ could be even larger,
+like 50%-80% of the server's RAM size.
 
 To implement this change you have to shut down the database and move/remove logfiles::
 
