@@ -77,7 +77,7 @@ Documentation from other sources:
 .. _Command_Summary: https://slurm.schedmd.com/pdfs/summary.pdf
 .. _Slurm_FAQ: https://slurm.schedmd.com/faq.html
 .. _Slurm_download: https://slurm.schedmd.com/download.html
-.. _Slurm_mailing_lists: https://lists.schedmd.com/cgi-bin/dada/mail.cgi/list
+.. _Slurm_mailing_lists: https://lists.schedmd.com/mailman3/postorius/lists/
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
