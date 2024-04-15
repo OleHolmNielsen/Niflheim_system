@@ -1268,7 +1268,7 @@ There are several possible solutions:
 
   * Configure the node local temporary directory as ``/scratch/slurm-<slurm_jobid>`` (choose whatever scratch disk is appropriate for your cluster installation)::
 
-      cmake3 -DSLURM_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DAUTO_TMPDIR_DEFAULT_LOCAL_PREFIX=/scratch/slurm- ..
+      cmake3 -DSLURM_PREFIX=/usr -DSLURM_MODULES_DIR=/usr/lib64 -DCMAKE_BUILD_TYPE=Release -DAUTO_TMPDIR_DEFAULT_LOCAL_PREFIX=/scratch/slurm- ..
       make package
 
     Here the ``..`` just refers to the parent directory.
