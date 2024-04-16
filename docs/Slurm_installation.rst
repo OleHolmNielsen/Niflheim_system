@@ -233,7 +233,7 @@ Optional prerequisites
 
 Certain Slurm tools and plugins require additional prerequisites **before** building Slurm:
 
-1. **IPMI library:** If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
+1. IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
      yum install freeipmi-devel
 
@@ -260,6 +260,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
    The `libyaml` provided by EL8 or CentOS 7 is version 0.1.X and should not be used!
    The EL9 provides version 0.2.5.
    
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
