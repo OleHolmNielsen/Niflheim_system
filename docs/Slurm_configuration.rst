@@ -1756,9 +1756,11 @@ You may also consider increasing the SOMAXCONN limit::
 
 see `Large Cluster Administration Guide <https://slurm.schedmd.com/big_sys.html>`_.
 
-Then reread this configuration file::
+Furthermore, on nodes with a large core count increase the maximum number of files::
 
-  /sbin/sysctl -p
+  fs.file-max = 131072
+
+Finally reread this configuration file by ``sysctl -p``.
 
 Slurm plugins
 =============
