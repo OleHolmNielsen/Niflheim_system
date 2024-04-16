@@ -233,7 +233,7 @@ Optional prerequisites
 
 Certain Slurm tools and plugins require additional prerequisites **before** building Slurm:
 
-1. If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
+1. **IPMI library:** If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
      yum install freeipmi-devel
 
@@ -245,16 +245,25 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 2. If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
    then you must install these prerequisites also::
 
-     yum install http-parser-devel json-c-devel libjwt-devel libyaml-devel 
+     yum install http-parser-devel json-c-devel libjwt-devel 
 
    See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
    You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
    
      dnf install jq
+
+3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing this library::
+
+     dnf install libyaml-devel
+
+   **Important:** The `libyaml` must be version 0.2.5 or later, see bug_17673_.
+   The `libyaml` provided by EL8 or CentOS 7 is version 0.1.X and should not be used!
+   The EL9 provides version 0.2.5.
    
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _bug_17673: https://bugs.schedmd.com/show_bug.cgi?id=17673
 
 Install MariaDB database
 ------------------------
@@ -338,6 +347,8 @@ The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and 
 Build Slurm with optional features
 .......................................
 
+You may build Slurm_ packages including optional features:
+
 * If you want to implement power saving as described in the Power_Saving_Guide_ then you can ensure that FreeIPMI_ gets built in by adding::
 
     rpmbuild <...> --with freeipmi
@@ -347,6 +358,12 @@ Build Slurm with optional features
 * If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer) you must add::
 
     rpmbuild <...> --with slurmrestd
+
+* Enable YAML_ command output (for example, ``sinfo --yaml``)::
+
+    rpmbuild <...> --with yaml
+
+  Note that `libyaml` version 0.2.5 or later is required (see above), and this is only available starting with EL9.
 
 .. _bug_17900: https://bugs.schedmd.com/show_bug.cgi?id=17900
 
