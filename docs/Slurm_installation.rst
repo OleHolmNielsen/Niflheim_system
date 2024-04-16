@@ -45,7 +45,7 @@ see the Slurm_Quick_Start_ Administrator Guide.
 It is not necessary to permit user logins to the control hosts (*ControlMachine* or *BackupController*), but the users and groups must be configured on those hosts.
 To restrict user login by SSH, use the ``AllowUsers`` parameter in ``/etc/ssh/sshd_config``.
 
-Slurm_ and MUNGE_ require consistent UID and GID across **all servers and nodes in the cluster**, including the *slurm* and *munge* users.
+Slurm_ and Munge_ require consistent UID and GID across **all servers and nodes in the cluster**, including the *slurm* and *munge* users.
 
 It is very important to **avoid UID and GID below 1000**, as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
 see also https://en.wikipedia.org/wiki/User_identifier.
@@ -64,50 +64,37 @@ This must be done **prior to installing RPMs** (which would create random UID/GI
 
 Please note that UIDs and GIDs up to 1000 are currently reserved for the CentOS system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_ and the file */etc/login.defs*.
 
-MUNGE authentication service
+Munge authentication service
 ============================
 
-The MUNGE_ authentication plugins identifies the user originating a message.
+The Munge_ authentication plugins identifies the user originating a message.
 You should read the Munge_installation_ guide and the Munge_wiki_.
 
-.. _MUNGE: https://dun.github.io/munge/
+The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, install them by::
+
+  dnf install munge munge-libs munge-devel
+
+However, Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
+which might cause the `munged.log` file to fill up the system disk.
+It is therefore recommended to build the latest Munge_release_ RPMs, for example::
+
+  wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
+  rpmbuild -ta munge-0.5.16.tar.xz
+
+and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
+
+For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
+
+.. _Munge: https://dun.github.io/munge/
+.. _Munge_release: https://github.com/dun/munge/releases
 .. _Munge_installation: https://github.com/dun/munge/wiki/Installation-Guide
 .. _Munge_wiki: https://github.com/dun/munge/wiki
+.. _issue_94: https://github.com/dun/munge/issues/94
 
-The MUNGE_ RPM for RHEL7 is in the EPEL_ repository, where you install the newest version of *epel-release* RPM for EL7, for example::
-
-  CentOS8: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-  CentOS7: yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-  RHEL7:   yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
-**Warning:** EPEL contains Slurm 20.11 (January 2021) and most likely you do not want automatic Slurm updates from EPEL.
-If so, you must add manually to the file ``/etc/yum.repos.d/epel.repo`` the ``exclude`` line::
-
-  [epel]
-  name=Extra Packages for Enterprise Linux 7 - $basearch
-  #baseurl=https://download.fedoraproject.org/pub/epel/7/$basearch
-  metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch&infra=$infra&content=$contentdir
-  failovermethod=priority
-  enabled=1
-  gpgcheck=1
-  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-  exclude=slurm*
-
-
-.. _EPEL: https://fedoraproject.org/wiki/EPEL
-
-Install the MUNGE_ RPM packages from the EPEL_ repository::
-
-  yum install munge munge-libs munge-devel
-
-To download packages directly (using statically in compute nodes):
-
-* RHEL/CentOS 7: https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
-
-MUNGE configuration and testing
+Munge configuration and testing
 -------------------------------
 
-By default MUNGE_ uses an AES_ AES-128 cipher and SHA-256 HMAC_ (*Hash-based Message Authentication Code*).
+By default Munge_ uses an AES_ AES-128 cipher and SHA-256 HMAC_ (*Hash-based Message Authentication Code*).
 Display these encryption options by::
 
   munge -C
@@ -138,7 +125,7 @@ Make sure to set the correct ownership and mode on all nodes::
   chown -R munge: /etc/munge/ /var/log/munge/
   chmod 0700 /etc/munge/ /var/log/munge/
 
-Then enable and start the MUNGE_ service on all nodes::
+Then enable and start the Munge_ service on all nodes::
 
   systemctl enable munge
   systemctl start  munge
@@ -146,7 +133,7 @@ Then enable and start the MUNGE_ service on all nodes::
 Run some **tests** as described in the Munge_installation_ guide::
 
   munge -n 
-  munge -n | unmunge          # Displays information about the MUNGE key
+  munge -n | unmunge          # Displays information about the Munge key
   munge -n | ssh somehost unmunge 
   remunge 
 
@@ -198,7 +185,7 @@ You must decide which Slurm_ plugins to activate in the RPM packages which you b
 
 * MySQL_ for accounting support
 * cgroup_ Task Affinity
-* MUNGE_ support
+* Munge_ support
 * Lua Support
 * PAM support
 * NUMA Affinity
@@ -227,6 +214,8 @@ Furthermore, enable the EPEL_ repository::
 and install the following EPEL_ packages::
 
   yum install libssh2-devel man2html
+
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 Optional prerequisites
 ........................
