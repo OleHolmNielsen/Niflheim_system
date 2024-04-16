@@ -263,6 +263,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _YAML: https://en.wikipedia.org/wiki/YAML
 .. _bug_17673: https://bugs.schedmd.com/show_bug.cgi?id=17673
 
 Install MariaDB database
