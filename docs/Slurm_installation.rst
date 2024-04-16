@@ -76,12 +76,23 @@ The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, instal
 
 However, Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
 which might cause the `munged.log` file to fill up the system disk.
+In this context the system may hit the limit on number of files,
+showing syslog lines like::
+
+  kernel: VFS: file-max limit 65536 reached 
+
 It is therefore recommended to build the latest Munge_release_ RPMs, for example::
 
   wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
   rpmbuild -ta munge-0.5.16.tar.xz
 
 and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
+
+You can increase the file limit in ``/etc/sysctl.conf``:: 
+
+  fs.file-max = 131072
+
+and do ``sysctl -p``.
 
 For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
