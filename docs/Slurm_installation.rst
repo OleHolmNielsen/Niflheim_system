@@ -76,15 +76,11 @@ The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, instal
 
 For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
-On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
+On busy servers such as the slurmctld_ server, the `munged` daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
-On such servers it is recommended to increase the number of munged_ threads, see *man munged*.
+On such servers it is recommended to increase the number of munged_ threads, see ``man munged``.
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
-
-The **default** EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
-see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
-In the next sections we describe how to increase the number of threads.
 
 .. _Munge: https://dun.github.io/munge/
 .. _Munge_installation: https://github.com/dun/munge/wiki/Installation-Guide
@@ -107,7 +103,7 @@ and you may for example add this configuration to increase the number of threads
   OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
 
 Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
-which might cause the `munged.log` file to fill up the system disk.
+which might cause the `munged.log` file to **fill up the system disk**.
 In this context the system may hit the limit on number of files,
 showing syslog lines like::
 
@@ -122,17 +118,19 @@ It may be necessary to increase the file limit in ``/etc/sysctl.conf``::
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
 
-Increase munged number of threads
----------------------------------
+Increase number of threads in munged 0.5.11/0.5.13
+-------------------------------------------------------
 
-See the above section for configuring the more modern Munge_ version 0.5.16.
-On the other hand, if you use EL7/EL8/EL9 systems with the **default** Munge_ version 0.5.11 or 0.5.13,
-you can copy the Systemd_ unit file::
+The **default** EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
+see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_,
+so this is how you can increase the number of threads in `munged`:
+
+Copy the Systemd_ unit file::
 
   cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
 
 See `Modify systemd unit file without altering upstream unit file <https://serverfault.com/questions/840996/modify-systemd-unit-file-without-altering-upstream-unit-file>`_.
-Edit this line in the copied unit file::
+Then edit this line in the copied unit file::
 
   ExecStart=/usr/sbin/munged --num-threads 10
 
