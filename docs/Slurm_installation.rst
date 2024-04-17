@@ -82,10 +82,9 @@ On such servers it is recommended to increase the number of munged_ threads, see
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
-The older Munge_ 0.5.11 and 0.5.13 do not honor an options file,
+The default EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
 see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
-
-In the next section we describe how to increase the number of threads.
+In the next sections we describe how to increase the number of threads.
 
 .. _Munge: https://dun.github.io/munge/
 .. _Munge_installation: https://github.com/dun/munge/wiki/Installation-Guide
@@ -120,6 +119,28 @@ You can increase the file limit in ``/etc/sysctl.conf``::
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
+
+Increase munged number of threads
+---------------------------------
+
+With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service, see above.
+This is the recommended solution.
+
+On RHEL/EL7/EL8/EL9 systems with the default Munge_ 0.5.11 or 0.5.13 you can copy the Systemd_ unit file::
+
+  cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
+
+See `Modify systemd unit file without altering upstream unit file <https://serverfault.com/questions/840996/modify-systemd-unit-file-without-altering-upstream-unit-file>`_.
+Edit this line in the copied unit file::
+
+  ExecStart=/usr/sbin/munged --num-threads 10
+
+and restart the `munge` service::
+
+  systemctl daemon-reload 
+  systemctl restart munge
+
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Munge configuration and testing
 -------------------------------
@@ -166,28 +187,6 @@ Run some **tests** as described in the Munge_installation_ guide::
   munge -n | unmunge          # Displays information about the Munge key
   munge -n | ssh somehost unmunge 
   remunge 
-
-Increase munged number of threads
----------------------------------
-
-With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service, see above.
-This is the recommended solution.
-
-On RHEL/EL7/EL8/EL9 systems with the default Munge_ 0.5.11 or 0.5.13 you can copy the Systemd_ unit file::
-
-  cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
-
-See `Modify systemd unit file without altering upstream unit file <https://serverfault.com/questions/840996/modify-systemd-unit-file-without-altering-upstream-unit-file>`_.
-Edit this line in the copied unit file::
-
-  ExecStart=/usr/sbin/munged --num-threads 10
-
-and restart the `munge` service::
-
-  systemctl daemon-reload 
-  systemctl restart munge
-
-.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Build Slurm RPMs
 ================
