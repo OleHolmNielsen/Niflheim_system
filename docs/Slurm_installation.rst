@@ -145,6 +145,8 @@ and restart the `munge` service::
 Munge configuration and testing
 -------------------------------
 
+You may check the `munged` log file ``/var/log/munge/munged.log`` for any warnings or errors.
+
 By default Munge_ uses an AES_ AES-128 cipher and SHA-256 HMAC_ (*Hash-based Message Authentication Code*).
 Display these encryption options by::
 
