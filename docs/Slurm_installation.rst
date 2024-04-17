@@ -82,7 +82,7 @@ On such servers it is recommended to increase the number of munged_ threads, see
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
-The default EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
+The **default** EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
 see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
 In the next sections we describe how to increase the number of threads.
 
@@ -93,6 +93,19 @@ In the next sections we describe how to increase the number of threads.
 Munge 0.5.16 upgrade
 -------------------------
 
+It is advantageous to install the latest Munge_release_ RPMs (currently 0.5.16) due to new features and bug fixes.
+Build the latest Munge_release_ RPMs (currently 0.5.16), for example::
+
+  wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
+  rpmbuild -ta munge-0.5.16.tar.xz
+
+and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
+
+With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
+and you may for example add this configuration to increase the number of threads to 10::
+
+  OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
+
 Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
 which might cause the `munged.log` file to fill up the system disk.
 In this context the system may hit the limit on number of files,
@@ -100,22 +113,11 @@ showing syslog lines like::
 
   kernel: VFS: file-max limit 65536 reached 
 
-It is therefore recommended to build the latest Munge_release_ RPMs (currently 0.5.16), for example::
-
-  wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
-  rpmbuild -ta munge-0.5.16.tar.xz
-
-and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
-With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
-and you may for example add this configuration to increase the number of threads to 10::
-
-  OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
-
-You can increase the file limit in ``/etc/sysctl.conf``:: 
+It may be necessary to increase the file limit in ``/etc/sysctl.conf``:: 
 
   fs.file-max = 131072
 
-(or a higher number!) and do ``sysctl -p``.
+(or an even higher number) and do ``sysctl -p``.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
