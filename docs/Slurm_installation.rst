@@ -87,12 +87,16 @@ It is therefore recommended to build the latest Munge_release_ RPMs, for example
   rpmbuild -ta munge-0.5.16.tar.xz
 
 and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
+With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
+and you may for example add this configuration::
+
+  OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
 
 You can increase the file limit in ``/etc/sysctl.conf``:: 
 
   fs.file-max = 131072
 
-and do ``sysctl -p``.
+(or a higher number!) and do ``sysctl -p``.
 
 For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
