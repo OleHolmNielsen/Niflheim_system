@@ -123,10 +123,9 @@ You can increase the file limit in ``/etc/sysctl.conf``::
 Increase munged number of threads
 ---------------------------------
 
-With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service, see above.
-This is the recommended solution.
-
-On RHEL/EL7/EL8/EL9 systems with the default Munge_ 0.5.11 or 0.5.13 you can copy the Systemd_ unit file::
+See the above section for configuring the more modern Munge_ version 0.5.16.
+On the other hand, if you use EL7/EL8/EL9 systems with the **default** Munge_ version 0.5.11 or 0.5.13,
+you can copy the Systemd_ unit file::
 
   cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
 
