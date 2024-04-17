@@ -94,12 +94,12 @@ Munge 0.5.16 upgrade
 -------------------------
 
 It is advantageous to install the latest Munge_release_ RPMs (currently 0.5.16) due to new features and bug fixes.
-Build the latest Munge_release_ RPMs (currently 0.5.16), for example::
+Build RPMs by::
 
   wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
   rpmbuild -ta munge-0.5.16.tar.xz
 
-and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
+and install them from `~/rpmbuild/RPMS/x86_64/`.
 
 With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
 and you may for example add this configuration to increase the number of threads to 10::
