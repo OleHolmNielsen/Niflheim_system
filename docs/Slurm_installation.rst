@@ -76,6 +76,17 @@ The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, instal
 
 For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
+On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
+see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
+On such servers it is recommended to increase the number of munged_ threads, see *man munged*.
+The issue is discussed in 
+`excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
+
+The older Munge_ 0.5.11 and 0.5.13 do not honor an options file,
+see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
+
+In the next section we describe how to increase the number of threads.
+
 .. _Munge: https://dun.github.io/munge/
 .. _Munge_installation: https://github.com/dun/munge/wiki/Installation-Guide
 .. _Munge_wiki: https://github.com/dun/munge/wiki
@@ -97,7 +108,7 @@ It is therefore recommended to build the latest Munge_release_ RPMs (currently 0
 
 and install RPMs from `~/rpmbuild/RPMS/x86_64/`.
 With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
-and you may for example add this configuration::
+and you may for example add this configuration to increase the number of threads to 10::
 
   OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
 
@@ -159,38 +170,24 @@ Run some **tests** as described in the Munge_installation_ guide::
 Increase munged number of threads
 ---------------------------------
 
-On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
-see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
-On such servers it is recommended to increase the number of munged_ threads, see *man munged*.
-The issue is discussed in 
-`excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
+With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service, see above.
+This is the recommended solution.
 
-On RHEL/CentOS systems the procedure is:
+On RHEL/EL7/EL8/EL9 systems with the default Munge_ 0.5.11 or 0.5.13 you can copy the Systemd_ unit file::
 
-1. The current Munge_ 0.5.11 does not honor an options file in ``/etc/sysconfig/``, see `PR 68 <https://github.com/dun/munge/pull/68>`_.
+  cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
 
-2. Edit the Systemd_ unit file::
+See `Modify systemd unit file without altering upstream unit file <https://serverfault.com/questions/840996/modify-systemd-unit-file-without-altering-upstream-unit-file>`_.
+Edit this line in the copied unit file::
 
-     export EDITOR=vim    # Configure your favorite editor
-     systemctl edit munge --full
+  ExecStart=/usr/sbin/munged --num-threads 10
 
-   Alternatively, you can copy the Systemd_ unit file::
+and restart the `munge` service::
 
-     cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
-
-   See also https://serverfault.com/questions/840996/modify-systemd-unit-file-without-altering-upstream-unit-file
-
-3. Edit this line in the unit file::
-
-     ExecStart=/usr/sbin/munged --num-threads 10
-
-4. Restart the munged_ service::
-
-     systemctl daemon-reload 
-     systemctl restart munge
+  systemctl daemon-reload 
+  systemctl restart munge
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
-.. _munged: https://www.systutorials.com/docs/linux/man/8-munged/
 
 Build Slurm RPMs
 ================
