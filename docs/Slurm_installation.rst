@@ -252,6 +252,9 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 
      yum install http-parser-devel json-c-devel libjwt-devel 
 
+   The minimum version requirements are listed in the rest_quickstart_ guide:
+   HTTP Parser (>= v2.6.0), LibYAML (optional, >= v0.2.5), JSON-C (>= v1.12.0).
+
    See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
    You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
    
@@ -267,6 +270,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
+.. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 .. _YAML: https://en.wikipedia.org/wiki/YAML
