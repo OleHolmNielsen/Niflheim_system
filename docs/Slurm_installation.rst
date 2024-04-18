@@ -78,7 +78,7 @@ For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pu
 
 On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
-On such servers it is recommended to increase the number of munged_ threads, see ``man munged``.
+On such servers it is recommended to increase the number of threads, see the munged_ manual page.
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
