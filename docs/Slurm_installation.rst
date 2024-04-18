@@ -82,9 +82,10 @@ On such servers it is recommended to increase the number of munged_ threads, see
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
-.. _Munge: https://dun.github.io/munge/
+.. _Munge: https://github.com/dun/munge
 .. _Munge_installation: https://github.com/dun/munge/wiki/Installation-Guide
 .. _Munge_wiki: https://github.com/dun/munge/wiki
+.. _munged: https://github.com/dun/munge/wiki/Man-8-munged
 
 Munge 0.5.16 upgrade
 -------------------------
