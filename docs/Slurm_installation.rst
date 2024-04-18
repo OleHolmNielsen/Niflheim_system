@@ -76,7 +76,7 @@ The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, instal
 
 For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
-On busy servers such as the slurmctld_ server, the `munged` daemon could become a bottleneck,
+On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
 On such servers it is recommended to increase the number of munged_ threads, see ``man munged``.
 The issue is discussed in 
