@@ -1006,6 +1006,7 @@ The High_Throughput_Computing_Administration_Guide_ contains Slurm_ administrato
 See also Large_Cluster_Administration_Guide_.
 
 .. _High_Throughput_Computing_Administration_Guide: https://slurm.schedmd.com/high_throughput.html
+.. _Large_Cluster_Administration_Guide: https://slurm.schedmd.com/big_sys.html
 
 Configure ARP cache for large networks
 ......................................
@@ -1035,7 +1036,6 @@ You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Adminis
 .. _ARP_Cache: https://en.wikipedia.org/wiki/ARP_cache
 .. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
 .. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
-.. _Large Cluster Administration Guide: https://slurm.schedmd.com/big_sys.html
 
 Configure maximum number of open files
 ......................................
