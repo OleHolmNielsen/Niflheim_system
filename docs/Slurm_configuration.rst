@@ -1170,7 +1170,7 @@ so any limits must be defined in the service file, see ``man systemd.exec``.
 
 For slurmd_ running under systemd_ the default limits are configured in ``/usr/lib/systemd/system/slurmd.service`` as::
 
-  LimitNOFILE=51200
+  LimitNOFILE=131072
   LimitMEMLOCK=infinity
   LimitSTACK=infinity
 

@@ -1220,7 +1220,7 @@ Slurm configuration
 MPI jobs and other tasks using the :ref:`OmniPath` fabric must have **unlimited locked memory**, see above.
 For ``slurmd`` running under systemd_ the limits are configured in ``/usr/lib/systemd/system/slurmd.service`` as::
 
-  LimitNOFILE=51200
+  LimitNOFILE=131072
   LimitMEMLOCK=infinity
   LimitSTACK=infinity
 
