@@ -891,19 +891,6 @@ We describe the power_save_ configuration in the Slurm_cloud_bursting_ page sect
 .. _power_save: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
 
-High throughput configuration or large clusters
------------------------------------------------
-
-The following document contains Slurm_ administrator information specifically for high throughput computing, namely the execution of many short jobs.
-Getting optimal performance for high throughput computing does require some tuning and this document should help you off to a good start:
-
-* https://slurm.schedmd.com/high_throughput.html
-
-The following document contains Slurm administrator information specifically for clusters containing 1,024 nodes or more:
-
-* https://slurm.schedmd.com/big_sys.html
-
-
 Head/Master server configuration
 ================================
 
@@ -1007,15 +994,79 @@ Start and enable the slurmd_ daemon::
 
 .. _SNC: https://software.intel.com/content/www/us/en/develop/articles/intel-xeon-processor-scalable-family-technical-overview.html
 
+Kernel configuration
+------------------------
+
+It is recommended to consider some of the default limits in the Linux kernel:
+
+High throughput configuration or large clusters
+.................................................
+
+The High_Throughput_Computing_Administration_Guide_ contains Slurm_ administrator information specifically for high throughput computing, namely the execution of many short jobs.
+See also Large_Cluster_Administration_Guide_.
+
+.. _High_Throughput_Computing_Administration_Guide: https://slurm.schedmd.com/high_throughput.html
+
+Configure ARP cache for large networks
+......................................
+
+If the number of network devices (cluster nodes, servers, switches, etc.) approaches or exceeds 512,
+you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_ manual page.
+
+The best solution to this ARP_Cache_ trashing problem is to increase the kernel's ARP_Cache_ garbage collection (gc) parameters by adding these lines to ``/etc/sysctl.conf``::
+
+  # Don't allow the arp table to become bigger than(clusters containing 1024 nodes or more). this
+  net.ipv4.neigh.default.gc_thresh3 = 4096
+  # Tell the gc when to become aggressive with arp table cleaning.
+  # Adjust this based on size of the LAN.
+  net.ipv4.neigh.default.gc_thresh2 = 2048
+  # Adjust where the gc will leave arp table alone
+  net.ipv4.neigh.default.gc_thresh1 = 1024
+  # Adjust to arp table gc to clean-up more often
+  net.ipv4.neigh.default.gc_interval = 3600
+  # ARP cache entry timeout
+  net.ipv4.neigh.default.gc_stale_time = 3600
+
+You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Administration_Guide_)::
+
+  # Limit of socket listen() backlog, known in userspace as SOMAXCONN
+  net.core.somaxconn = 1024
+
+.. _ARP_Cache: https://en.wikipedia.org/wiki/ARP_cache
+.. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
+.. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
+.. _Large Cluster Administration Guide: https://slurm.schedmd.com/big_sys.html
+
+Configure maximum number of open files
+......................................
+
+The slurmd_ service is configured by default with a Systemd_ limit on the number of open files in the service file
+``/usr/lib/systemd/system/slurmd.service``::
+
+  LimitNOFILE=131072
+
+A customized service file ``/etc/systemd/system/slurmd.service`` may also be used and takes precedence.
+
+The ``LimitNOFILE`` puts a limit on individual Slurm_ job steps.
+A compute node may run multiple jobs, each of which may have ``LimitNOFILE`` open files.
+
+If up to `N` jobs might run in each node, the Linux kernel must allow for `N * LimitNOFILE` open files,
+in addition to open files used by the OS.
+
+Therefore a line should be configured in ``/etc/sysctl.conf``, for example 100 times the ``LimitNOFILE``::
+
+  fs.file-max = 13107200
+
+Reread this configuration file by ``sysctl -p``.
+
 Partition limits
 ----------------
 
-If EnforcePartLimits is set to "ALL" then jobs which exceed a partition's size and/or limits will be rejected at submission time::
+If ``EnforcePartLimits`` is set to "ALL" in slurm.conf_ then jobs which exceed a partition's size and/or limits will be rejected at submission time::
 
   EnforcePartLimits=ALL
 
 NOTE: The partition limits being considered are its configured MaxMemPerCPU, MaxMemPerNode, MinNodes, MaxNodes,  MaxTime,  AllocNodes,  AllowAccounts,  AllowGroups, AllowQOS, and QOS usage threshold.
-
 
 Job limits
 ----------
@@ -1029,7 +1080,8 @@ It is important to configure slurm.conf_ so that the *locked memory* limit isn't
 as explained in https://slurm.schedmd.com/faq.html#memlock.
 A possible memory limit error with :ref:`OmniPath` was discussed in `Slurm bug 3363 <https://bugs.schedmd.com/show_bug.cgi?id=3363>`_.
 
-In fact, if you have imposed any non-default limits in ``/etc/security/limits.conf`` or ``/etc/security/limits.d/\*.conf`` in the login nodes, you probably want to prohibit these from the batch jobs by configuring::
+In fact, if you have imposed any non-default limits in ``/etc/security/limits.conf`` or ``/etc/security/limits.d/\*.conf`` in the login nodes,
+you probably want to prohibit these from the batch jobs by configuring::
 
   PropagateResourceLimitsExcept=ALL
 
@@ -1728,39 +1780,6 @@ One may also run the daemons interactively as described in Slurm_Quick_Start_ (*
 You can use one window to execute *slurmctld -D -vvvvvv*, a second window to execute *slurmd -D -vvvvv*.
 
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
-
-Configure ARP cache for large networks
-======================================
-
-If the number of network devices (cluster nodes plus switches etc.) approaches or exceeds 512, you must consider the Linux kernel's limited dynamic ARP-cache size. 
-Please read the man-page *man 7 arp* about the kernel's ARP-cache.
-
-The best solution to this ARP-cache trashing problem is to increase the kernel's ARP-cache garbage collection (gc) parameters by adding these lines to ``/etc/sysctl.conf``::
-
-  # Don't allow the arp table to become bigger than(clusters containing 1024 nodes or more). this
-  net.ipv4.neigh.default.gc_thresh3 = 4096
-  # Tell the gc when to become aggressive with arp table cleaning.
-  # Adjust this based on size of the LAN.
-  net.ipv4.neigh.default.gc_thresh2 = 2048
-  # Adjust where the gc will leave arp table alone
-  net.ipv4.neigh.default.gc_thresh1 = 1024
-  # Adjust to arp table gc to clean-up more often
-  net.ipv4.neigh.default.gc_interval = 3600
-  # ARP cache entry timeout
-  net.ipv4.neigh.default.gc_stale_time = 3600
-
-You may also consider increasing the SOMAXCONN limit::
-
-  # Limit of socket listen() backlog, known in userspace as SOMAXCONN
-  net.core.somaxconn = 1024
-
-see `Large Cluster Administration Guide <https://slurm.schedmd.com/big_sys.html>`_.
-
-Furthermore, on nodes with a large core count increase the maximum number of files::
-
-  fs.file-max = 131072
-
-Finally reread this configuration file by ``sysctl -p``.
 
 Slurm plugins
 =============
