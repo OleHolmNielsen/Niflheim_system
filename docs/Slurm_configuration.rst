@@ -997,13 +997,10 @@ Start and enable the slurmd_ daemon::
 Kernel configuration
 ------------------------
 
-It is recommended to consider some of the default limits in the Linux kernel:
-
-High throughput configuration or large clusters
-.................................................
+It is recommended to consider some of the default limits in the Linux kernel.
 
 The High_Throughput_Computing_Administration_Guide_ contains Slurm_ administrator information specifically for high throughput computing, namely the execution of many short jobs.
-See also Large_Cluster_Administration_Guide_.
+See also the Large_Cluster_Administration_Guide_.
 
 .. _High_Throughput_Computing_Administration_Guide: https://slurm.schedmd.com/high_throughput.html
 .. _Large_Cluster_Administration_Guide: https://slurm.schedmd.com/big_sys.html
@@ -1050,7 +1047,7 @@ A customized service file ``/etc/systemd/system/slurmd.service`` may also be use
 The ``LimitNOFILE`` puts a limit on individual Slurm_ job steps.
 A compute node may run multiple jobs, each of which may have ``LimitNOFILE`` open files.
 
-If up to `N` jobs might run in each node, the Linux kernel must allow for `N * LimitNOFILE` open files,
+If up to `N` jobs might run in each node, the Linux kernel must allow for `N` * ``LimitNOFILE`` open files,
 in addition to open files used by the OS.
 
 Therefore a line should be configured in ``/etc/sysctl.conf``, for example 100 times the ``LimitNOFILE``::
