@@ -1043,6 +1043,7 @@ The slurmd_ service is configured by default with a Systemd_ limit on the number
   LimitNOFILE=131072
 
 A customized service file ``/etc/systemd/system/slurmd.service`` may also be used and takes precedence.
+Please note that the usual limits defined in ``/etc/security/limits.conf`` are **not** relevant to jobs running under the slurmd_ service!
 
 The ``LimitNOFILE`` puts a limit on individual Slurm_ job steps.
 A compute node may run multiple jobs, each of which may have ``LimitNOFILE`` open files.
