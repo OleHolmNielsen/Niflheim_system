@@ -113,8 +113,8 @@ and rebuild all RPMs with mysql support as shown in :ref:`Slurm_installation`::
 
 If you will use Ansible_ to manage the database, Ansible_ needs this Python package::
 
+  dnf install python3-mysql   # EL8 and EL9
   yum install MySQL-python    # CentOS7/RHEL7
-  dnf install python3-mysql   # CentOS8/RHEL8
 
 .. _Ansible: https://www.ansible.com/
  

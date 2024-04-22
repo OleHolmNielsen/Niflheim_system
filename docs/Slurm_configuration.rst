@@ -1008,7 +1008,7 @@ See also the Large_Cluster_Administration_Guide_.
 Configure ARP cache for large networks
 ......................................
 
-If the number of network devices (cluster nodes, servers, switches, etc.) approaches or exceeds 512,
+If the number of network devices (cluster nodes, BMCs, servers, switches, etc.) approaches or exceeds 512,
 you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_ manual page.
 
 The best solution to this ARP_Cache_ trashing problem is to increase the kernel's ARP_Cache_ garbage collection (gc) parameters by adding these lines to ``/etc/sysctl.conf``::
