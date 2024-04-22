@@ -1278,19 +1278,16 @@ There are several possible solutions:
   The job_container_tmpfs_ plugin uses Linux_namespaces_.
 
   **WARNING:** 
-  NFS automount and ``job_container/tmpfs`` do not play well together prior to 23.02:
+  NFS automount and ``job_container/tmpfs`` do not play well together prior to Slurm_ 23.02:
   If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
   The issue has been resolved in Slurm_ 23.02 according to bug_12567_.
 
-  The configuration file ``/etc/slurm/job_container.conf`` must be created, and it is **important** to configure the new 23.02 option::
-
-    Shared=true
-
-  See the job_container.conf_ manual page.
-  An example job_container.conf_ file might contain::
+  The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
 
     AutoBasePath=true
     BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
+
+  It is **important** to use the new 23.02 option ``Shared=true``.
 
 * The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
 
