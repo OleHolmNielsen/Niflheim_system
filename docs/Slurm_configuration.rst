@@ -1289,6 +1289,11 @@ There are several possible solutions:
 
   It is **important** to use the new 23.02 option ``Shared=true``.
 
+  The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
+
+    JobContainerType=job_container/tmpfs
+    PrologFlags=Contain
+
 * The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
 
   A great advantage of this plugin that it actually works correctly with NFS home directories automounted by autofs_,
