@@ -1061,7 +1061,7 @@ Therefore a line should be configured in ``/etc/sysctl.conf``, for example 100 t
 
 System `default values <https://access.redhat.com/solutions/23733>`_ of ``fs.file-max``:
 
-* The EL8 ``fs.file-max`` calculated by the kernel at boot time is approximately 1/10 of physical RAM size.
+* The EL8 ``fs.file-max`` calculated by the kernel at boot time is approximately 1/10 of physical RAM size in units of MB.
 * The EL9 ``fs.file-max`` is set to max value itself which is 9223372036854775807 (2^63-1).
 
 Partition limits
