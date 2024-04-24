@@ -162,7 +162,7 @@ Prerequisite modules are listed in Dependencies_.
 
 .. _Dependencies: https://docs.easybuild.io/installation/#dependencies
 
-For RHEL/CentOS 7 these packages seem to suffice::
+For EL8 as well as RHEL/CentOS 7 these packages seem to suffice::
 
   yum install tar gzip bzip2 unzip xz make patch python3 python3-setuptools gcc-c++ Lmod 
 
@@ -172,7 +172,7 @@ Modules such as UCX require some OS dependencies::
 
 Old versions of EasyBuild might also require the *python-mock* RPM, see https://github.com/easybuilders/easybuild-framework/issues/2712
 
-Some optional packages from EPEL_ may perhaps be needed, see Dependencies_::
+RHEL/CentOS 7: Some optional packages from EPEL_ may perhaps be needed, see Dependencies_::
 
   yum install GitPython pysvn graphviz 
 
