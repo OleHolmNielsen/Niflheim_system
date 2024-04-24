@@ -191,7 +191,7 @@ The steps required for a normal (**non-root**) user are:
 
 * Read the Installation_ page, especially the *Bootstrapping procedure* section.
 
-  You may want to use `Installing EasyBuild with EasyBuild <https://docs.easybuild.io/installation/#eb_as_module>`_
+  **IMPORTANT:** You may want to use `Installing EasyBuild with EasyBuild <https://docs.easybuild.io/installation/#eb_as_module>`_
   to build an EasyBuild_ module.
   This is assumed in the sections below.
   At our site we install modules into the ``/home/modules`` using this bootstrap command::
