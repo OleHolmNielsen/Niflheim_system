@@ -531,6 +531,8 @@ If you use a database, also make sure to:
 
 .. _Upgrades: https://slurm.schedmd.com/quickstart_admin.html#upgrade
 .. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
+.. _sinfo: https://slurm.schedmd.com/sinfo.html
+.. _squeue: https://slurm.schedmd.com/squeue.html
 
 This command can report current jobs that have been orphaned on the local cluster and are now runaway::
 
