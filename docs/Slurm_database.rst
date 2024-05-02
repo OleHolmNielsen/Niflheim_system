@@ -463,6 +463,17 @@ For compressing the (large) database dumps, install the *gzip*, *bzip2*, and per
 .. _Bug_10295: https://bugs.schedmd.com/show_bug.cgi?id=10295
 .. _mysqldump: https://mariadb.com/kb/en/mysqldump/
 
+Backup of MariaDB 10.1 and later
+--------------------------------
+
+In MariaDB_ 10.1 and later, Mariabackup_ is the recommended backup method to use instead of Percona XtraBackup,
+see `this page <https://mariadb.com/kb/en/backing-up-and-restoring-databases-percona-xtrabackup/>`_.
+
+However, the usual mysqldump_for_MariaDB_ utility still exists for MariaDB_.
+
+.. _Mariabackup: https://mariadb.com/kb/en/mariabackup/
+.. _mysqldump_for_MariaDB: https://mariadb.com/kb/en/mysqldump/
+
 Backup script with crontab
 --------------------------
 
@@ -533,16 +544,6 @@ See the logrotate_selinux_ manual page and this Red Hat solution: https://access
 .. _logrotate: https://linux.die.net/man/8/logrotate
 .. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 .. _logrotate_selinux: https://linux.die.net/man/8/logrotate_selinux
-
-Backup of MariaDB 10.1 and later
---------------------------------
-
-In MariaDB_ 10.1 and later, Mariabackup_ is the recommended backup method to use instead of Percona XtraBackup, see `this page <https://mariadb.com/kb/en/backing-up-and-restoring-databases-percona-xtrabackup/>`_.
-
-The mysqldump_for_MariaDB_ utility still exists for MariaDB_.
-
-.. _Mariabackup: https://mariadb.com/kb/en/mariabackup/
-.. _mysqldump_for_MariaDB: https://mariadb.com/kb/en/mysqldump/
 
 Restore of a database backup
 ----------------------------
