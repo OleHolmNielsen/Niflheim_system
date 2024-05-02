@@ -513,7 +513,7 @@ Pay attention to these statements:
 
     slurmdbd >= slurmctld >= slurmd >= commands
 
-  Actually, ``commands`` mostly refers to the use of **login nodes** because all Slurm commands (sinfo_, squeue_ etc.)
+  Actually, ``commands`` mostly refers to the use of **login nodes** because all Slurm commands (sinfo_ , squeue_ etc.)
   are **not interoperable** with an older slurmctld_ version, as explained in bug_17418_, due to RPC changes!
 
 If you use a database, also make sure to:
