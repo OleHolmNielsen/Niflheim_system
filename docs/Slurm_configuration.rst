@@ -744,10 +744,11 @@ and verify if the ``libfreeipmi.so.*`` library file is also available on the sys
 Build the latest FreeIPMI version
 .......................................
 
-**WARNING:**
-As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
-because older FreeIPMI_ versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
-Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
+**WARNING**:
+
+* As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
+  because older FreeIPMI_ versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
+  Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 
