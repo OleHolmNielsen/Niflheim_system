@@ -295,13 +295,11 @@ There exist a number of Open Source tools for graphical monitoring of Slurm:
 * Open XDMoD_ is an open source tool to facilitate the management of high performance computing resources. 
 
 * `Graphing sdiag with Graphite <https://giovannitorres.me/graphing-sdiag-with-graphite.html>`_ using Graphite_.
-
   See also `slurm-diamond-collector <https://github.com/fasrc/slurm-diamond-collector>`_.
 
 * `Prometheus Slurm Exporter <https://github.com/vpenso/prometheus-slurm-exporter>`_ with a Grafana_ Slurm_dashboard_.
 
 * `Slurmbrowser <https://source.uit.no/roy.dragseth/slurmbrowser/blob/master/README.md>`_ A really thin web layer above Slurm.
-
   This tool requires *Ganglia*.  Install first the RPMs ``python-virtualenv python2-bottle``.
 
 .. _Slurm-web: https://slurm-web.com/
