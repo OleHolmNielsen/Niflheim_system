@@ -288,7 +288,9 @@ Here we list some useful third-party utilities that Slurm administrators or user
 Graphical monitoring tools
 --------------------------
 
-There exist a few Open Source tools for graphical monitoring of Slurm:
+There exist a number of Open Source tools for graphical monitoring of Slurm:
+
+* Slurm-web_ provides a web interface on top of Slurm with intuitive graphical views, clear insights and advanced visualizations to track your jobs and monitor status of HPC supercomputers in your organization.
 
 * Open XDMoD_ is an open source tool to facilitate the management of high performance computing resources. 
 
@@ -302,6 +304,7 @@ There exist a few Open Source tools for graphical monitoring of Slurm:
 
   This tool requires *Ganglia*.  Install first the RPMs ``python-virtualenv python2-bottle``.
 
+.. _Slurm-web: https://slurm-web.com/
 .. _XDMoD: https://open.xdmod.org/
 .. _Graphite: https://graphite.readthedocs.org/en/latest/
 .. _Grafana: https://grafana.com/
