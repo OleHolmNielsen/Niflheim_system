@@ -746,13 +746,14 @@ Build the latest FreeIPMI version
 
 **WARNING:**
 As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
-because older versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
+because older FreeIPMI_ versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
 Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 
 For correct functionality with Slurm_ you must install FreeIPMI_ ``version 1.6.12`` or later.
-Since the official RPM repos may contain old versions, you can build newer ``freeipmi`` RPMs from a tar-ball version:
+Since the official RPM repos may contain old versions,
+you can build newer ``freeipmi`` RPMs from a tar-ball version by these steps:
 
 * Install prerequisites for the build::
 
@@ -760,18 +761,24 @@ Since the official RPM repos may contain old versions, you can build newer ``fre
 
 * Download the latest source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
 
-* Build RPM packages including Systemd_::
+* Build RPM packages including Systemd_ functionality::
 
     rpmbuild -ta --with systemd freeipmi-1.6.14.tar.gz
 
-Install the required *freeipmi* RPM packages on the Slurm_ RPM-building server as well as on all compute nodes::
+Install the required ``freeipmi`` RPM packages on the Slurm_ server used for RPM-building::
 
   dnf install freeipmi-1.6.14*rpm freeipmi-devel-1.6.14*rpm
+
+Install also on all compute nodes::
+
+  dnf install freeipmi-1.6.14*rpm 
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Using IPMI power monitoring (from Slurm 23.02.7)
 ................................................
+
+**IMPORTANT**:
 
 * The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.02.7!
   The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
@@ -783,21 +790,27 @@ On each type of compute node to be monitored, test whether the power values can 
   ipmi-dcmi --get-system-power-statistics
   ipmi-dcmi --get-enhanced-system-power-statistics
 
-Slurm_ can be configured for IPMI_ power monitoring by slurmd_ (but note the bug_17639_ prior to 23.02.7!)
-in compute nodes by this slurm.conf_ configuration (activate it by ``scontrol reconfig``)::
+Slurm_ can be configured for IPMI_ power monitoring by slurmd_ in the compute nodes by this slurm.conf_ configuration::
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
 
-Configure simultaneously the acct_gather.conf_ file in ``/etc/slurm/``::
+Configure **simultaneously** the acct_gather.conf_ file in ``/etc/slurm/``::
 
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=60
   EnergyIPMICalcAdjustment=yes
 
 * **IMPORTANT**:
-  You must configure simultaneously *acct_gather_energy/ipmi* parameters in acct_gather.conf_.
+  You must configure simultaneously ``acct_gather_energy/ipmi`` parameters in acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
+
+When the configuration files are ready and have been distributed to all nodes (not needed with Configless_),
+perform a reconfiguration::
+
+  scontrol reconfigure
+
+As a test you can monitor the power values as shown below.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
@@ -831,7 +844,8 @@ After reconfiguring the power values become available::
 
 Notice some potentially incorrect power and CPU load values:
 
-* bug_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in 23.11).
+* bug_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in Slurm_ 23.11).
+
 * Beware that the Slurm bug_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
 
 .. _bug_17759: https://bugs.schedmd.com/show_bug.cgi?id=17759
