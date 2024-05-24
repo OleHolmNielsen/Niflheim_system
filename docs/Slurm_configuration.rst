@@ -781,9 +781,9 @@ Using IPMI power monitoring (from Slurm 23.02.7)
 
 **IMPORTANT**:
 
-* The *acct_gather_energy/ipmi* should **not be used** with Slurm_ prior to 23.02.7!
-  The reason is that this plugin has a bug where file descriptors are not closed when making IPMI_ DCMI_ library calls.
-  This issue was fixed in bug_17639_ from Slurm_ 23.02.7.
+* The *acct_gather_energy/ipmi* plugin should **not be used** with Slurm_ prior to 23.02.7!
+  The reason is that this plugin has a bug where file descriptors in slurmd_ are not closed when making IPMI_ DCMI_ library calls.
+  This issue was fixed in bug_17639_ starting with Slurm_ 23.02.7.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
@@ -795,23 +795,25 @@ Slurm_ can be configured for IPMI_ power monitoring by slurmd_ in the compute no
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
 
-Configure **simultaneously** the acct_gather.conf_ file in ``/etc/slurm/``::
+Configure the acct_gather.conf_ file in ``/etc/slurm/``::
 
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=60
   EnergyIPMICalcAdjustment=yes
 
 * **IMPORTANT**:
-  You must configure simultaneously ``acct_gather_energy/ipmi`` parameters in acct_gather.conf_.
+
+  You **must** configure ``acct_gather_energy/ipmi`` parameters in slurm.conf_ 
+  and at the same time create the above file acct_gather.conf_.
   All slurmd's may crash if one is configured without the other!
   If done incorrectly the ``slurmd.log`` will report ``fatal: Could not open/read/parse acct_gather.conf file ...``.
 
-When the configuration files are ready and have been distributed to all nodes (not needed with Configless_),
-perform a reconfiguration::
+When the above configuration files are ready and have been distributed to all nodes (not needed with Configless_),
+then perform a reconfiguration::
 
   scontrol reconfigure
 
-As a test you can monitor the power values as shown below.
+As a test you can monitor some power values as shown below.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
