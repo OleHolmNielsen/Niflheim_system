@@ -105,16 +105,13 @@ and you may for example add this configuration to increase the number of threads
 
 Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
 which might cause the `munged.log` file to **fill up the system disk**.
-In this context the system may hit the limit on number of files,
-showing syslog lines like::
 
-  kernel: VFS: file-max limit 65536 reached 
+See also the page section :ref:`Configure maximum number of open files`.
+It is highly recommended to increase the file limit in ``/etc/sysctl.conf`` significantly, for example:: 
 
-It may be necessary to increase the file limit in ``/etc/sysctl.conf``:: 
+  fs.file-max = 13107200
 
-  fs.file-max = 131072
-
-(or an even higher number) and do ``sysctl -p``.
+and do ``sysctl -p``.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
