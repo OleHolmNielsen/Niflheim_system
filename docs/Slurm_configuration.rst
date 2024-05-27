@@ -1055,7 +1055,7 @@ You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Adminis
 .. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
 .. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
 
-.. _configure-maximum-number-of-open-files:
+.. _configure_maximum_number_of_open_files:
 
 Configure maximum number of open files
 ......................................
