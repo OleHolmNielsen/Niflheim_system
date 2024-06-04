@@ -64,9 +64,19 @@ This must be done **prior to installing RPMs** (which would create random UID/GI
 
 Please note that UIDs and GIDs up to 1000 are currently reserved for the CentOS system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_ and the file */etc/login.defs*.
 
+Slurm authentication plugin
+============================
+
+For an overview of authentication see the Authentication_Plugins_ page.
+Beginning with version 23.11, Slurm has its own plugin that can create and validate credentials.
+It validates that the requests come from legitimate UIDs and GIDs on other hosts with matching users and groups.
+
+.. _Authentication_Plugins: https://slurm.schedmd.com/authentication.html
+
 Munge authentication service
 ============================
 
+For an overview of authentication see the Authentication_Plugins_ page.
 The Munge_ authentication plugins identifies the user originating a message.
 You should read the Munge_installation_ guide and the Munge_wiki_.
 
