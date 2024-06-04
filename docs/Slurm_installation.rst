@@ -984,6 +984,19 @@ Again, consult the Upgrades_ page before you start!
 
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 
+Migrate the slurmctld service to another server
+=================================================
+
+It may be required to migrate the slurmctld_ service to another server, for example,
+when a major OS version update is needed or when the server must be migrated to newer hardware.
+Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
+
+* Stop all Slurm daemons.
+* Modify the SlurmctldHost values in the slurm.conf_ file.
+* Distribute the updated slurm.conf_ file to all nodes.
+* Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
+* Restart all Slurm daemons.
+
 Log file rotation
 =================
 
