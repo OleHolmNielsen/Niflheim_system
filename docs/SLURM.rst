@@ -51,6 +51,8 @@ Documentation from SchedMD_ about Slurm_:
 * Subscribe to Slurm_mailing_lists_.
 * The slurm_devel_archive_.
 * Slurm_publications_ and presentations.
+* Citing academic work involving Slurm from JSSPP 2023: `Architecture of the Slurm Workload Manager <https://doi.org/10.1007/978-3-031-43943-8_1>`_,
+  see https://slurm.schedmd.com/faq.html#cite
 * Youtube `videos about Slurm <https://www.youtube.com/c/SchedMDSlurm/videos>`_.
 * Slurm_tutorials_.
 * Slurm_man_pages_ overview of man-pages, configuration files, and daemons.
