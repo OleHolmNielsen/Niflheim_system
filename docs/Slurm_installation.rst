@@ -1020,7 +1020,7 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 Configless Slurm migration
 --------------------------
 
-When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record to point to the new slurmctld_ server.
+When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record in your cluster's DNS service to point to the new slurmctld_ server.
 Start well in advance by changing the DNS SRV record's *TTL* to a small value such as 300 or 600 seconds (restart the *named* service).
 After stopping slurmctld_ on the old ``SlurmctldHost``,
 change the server name in the DNS SRV record (restart the *named* service).
