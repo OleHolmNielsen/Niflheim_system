@@ -991,12 +991,16 @@ It may be required to migrate the slurmctld_ service to another server, for exam
 when a major OS version update is needed or when the server must be migrated to newer hardware.
 
 With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
+and **does not** require to stop all running jobs,
 since a major improvement is stated in the
 `Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_ ::
 
   Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
 
-The migration process for Slurm_ 23.11 and later is now as discussed in bug_20070_ :
+This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting so that running jobs will report back to the new controller when they finish.
+
+The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
+as is discussed in bug_20070_ :
 
 1. Stop slurmctld_.
 2. Update DNS SRV record (see next section).
@@ -1008,6 +1012,7 @@ The migration process for Slurm_ 23.11 and later is now as discussed in bug_2007
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
+.. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
 
 Configless Slurm migration
@@ -1023,6 +1028,7 @@ Later, after the new ``SlurmctldHost`` has been tested successfully, restore the
 Migrate slurmctld version <= 23.02
 ------------------------------------
 
+First you have to **stop all running jobs**, for example by making a :ref:`resource_reservation`.
 Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
 
 * Stop all Slurm daemons.
