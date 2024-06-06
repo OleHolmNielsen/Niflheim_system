@@ -91,7 +91,8 @@ The pulled slurmd_ conguration files are stored in this folder::
 Testing configless setup
 ........................
 
-The slurmctld_ server information can preferably be provided in a DNS SRV_ record for your DNS zone, pointing to port 6817 on your slurmctld_ server(s)::
+The slurmctld_ server information can preferably be provided in a DNS SRV_ record for your DNS zone,
+pointing to port 6817 on your slurmctld_ server(s) and with a suggested Time_to_live_ (TTL) of 3600 seconds::
 
   _slurmctld._tcp 3600 IN SRV 10 0 6817 slurm-backup
   _slurmctld._tcp 3600 IN SRV 0 0 6817 slurm-master
@@ -107,6 +108,7 @@ Lookup the SRV_ record by either of::
 
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _SRV: https://en.wikipedia.org/wiki/SRV_record
+.. _TTL: https://en.wikipedia.org/wiki/Time_to_live
 
 Add login and submit nodes to slurm.conf
 ........................................
