@@ -989,11 +989,44 @@ Migrate the slurmctld service to another server
 
 It may be required to migrate the slurmctld_ service to another server, for example,
 when a major OS version update is needed or when the server must be migrated to newer hardware.
+
+With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
+since a major improvement is stated in the
+`Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_ ::
+
+  Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
+
+The migration process is now as discussed in bug_20070_ :
+
+1. Stop slurmctld_.
+2. Update DNS SRV record (see next section).
+3. Migrate slurmctld_ to new machine.
+4. Update slurm.conf_ with new ``SlurmctldHost`` name and distribute to all nodes.
+   **Remember** to update the slurmdbd_ server's slurm.conf_ as well!
+5. Start slurmctld_.
+6. If nodes are not communicating, run ``scontrol reconfigure`` or restart slurmd_ on the nodes.
+
+If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes.
+
+Configless Slurm migration
+--------------------------
+
+When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record to point to the new slurmctld_ server.
+Start well in advance by changing the DNS SRV record's *TTL* to a small value such as 300 or 600 seconds (restart the *named* service).
+After stopping slurmctld_ on the old ``SlurmctldHost``,
+change the server name in the DNS SRV record (restart the *named* service).
+
+Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's *TTL* value.
+
+Migrate slurmctld version <= 23.02
+------------------------------------
+
 Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
 
 * Stop all Slurm daemons.
-* Modify the SlurmctldHost values in the slurm.conf_ file.
+* Modify the ``SlurmctldHost`` values in the slurm.conf_ file.
 * Distribute the updated slurm.conf_ file to all nodes.
+  When using :ref:`configless-slurm-setup` see the notes above.
 * Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
 * Restart all Slurm daemons.
 
