@@ -996,7 +996,7 @@ since a major improvement is stated in the
 
   Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
 
-The migration process is now as discussed in bug_20070_ :
+The migration process for Slurm_ 23.11 and later is now as discussed in bug_20070_ :
 
 1. Stop slurmctld_.
 2. Update DNS SRV record (see next section).
