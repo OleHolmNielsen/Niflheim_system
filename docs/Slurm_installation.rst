@@ -998,6 +998,7 @@ since a major improvement is stated in a
   Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
 
 This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting so that running jobs will report back to the new controller when they finish.
+See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
 
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 as is discussed in bug_20070_ :
@@ -1029,13 +1030,14 @@ Later, after the new ``SlurmctldHost`` has been tested successfully, restore the
 Migrate slurmctld version <= 23.02
 ------------------------------------
 
-First you have to **stop all running jobs**, for example by making a :ref:`resource_reservation`.
+In Slurm_ 23.02 and older, changes to ``SlurmctldHost`` are not possible with jobs running on the system.
+Therefore you have to **stop all running jobs**, for example by making a :ref:`resource_reservation`.
 Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
 
 * Stop all Slurm daemons.
 * Modify the ``SlurmctldHost`` values in the slurm.conf_ file.
 * Distribute the updated slurm.conf_ file to all nodes.
-  When using :ref:`configless-slurm-setup` see the notes above.
+  When using :ref:`configless-slurm-setup` see the section above.
 * Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
 * Restart all Slurm daemons.
 
