@@ -1001,12 +1001,13 @@ The migration process is now as discussed in bug_20070_ :
 1. Stop slurmctld_.
 2. Update DNS SRV record (see next section).
 3. Migrate slurmctld_ to new machine.
-4. Update slurm.conf_ with new ``SlurmctldHost`` name and distribute to all nodes.
-   **Remember** to update the slurmdbd_ server's slurm.conf_ as well!
+4. Update slurm.conf_ with new ``SlurmctldHost`` name.
+
+   **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
 5. Start slurmctld_.
 6. If nodes are not communicating, run ``scontrol reconfigure`` or restart slurmd_ on the nodes.
 
-If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes.
+If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
 
