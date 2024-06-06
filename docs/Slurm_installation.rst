@@ -1008,6 +1008,8 @@ The migration process is now as discussed in bug_20070_ :
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes.
 
+.. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
+
 Configless Slurm migration
 --------------------------
 

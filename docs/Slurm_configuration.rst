@@ -108,7 +108,7 @@ Lookup the SRV_ record by either of::
 
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _SRV: https://en.wikipedia.org/wiki/SRV_record
-.. _TTL: https://en.wikipedia.org/wiki/Time_to_live
+.. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 
 Add login and submit nodes to slurm.conf
 ........................................
