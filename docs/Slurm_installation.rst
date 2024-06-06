@@ -988,12 +988,12 @@ Migrate the slurmctld service to another server
 =================================================
 
 It may be required to migrate the slurmctld_ service to another server, for example,
-when a major OS version update is needed or when the server must be migrated to newer hardware.
+when a major OS version update is needed or when the server must be migrated to another hardware.
 
 With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
 and **does not** require to stop all running jobs,
-since a major improvement is stated in the
-`Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_ ::
+since a major improvement is stated in a
+`Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_ line::
 
   Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
 
