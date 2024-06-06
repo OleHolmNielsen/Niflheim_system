@@ -1005,6 +1005,7 @@ as is discussed in bug_20070_ :
 1. Stop slurmctld_.
 2. Update DNS SRV record (see next section).
 3. Migrate slurmctld_ to new machine.
+   Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
 4. Update slurm.conf_ with new ``SlurmctldHost`` name.
    **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
 5. Start slurmctld_.
