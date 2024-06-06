@@ -867,6 +867,8 @@ Users and root can clean up unused data by::
 
 .. _Bug_7232: https://bugs.schedmd.com/show_bug.cgi?id=7232
 
+.. _resource_reservation:
+
 Resource Reservation
 ====================
 
