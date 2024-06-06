@@ -1002,7 +1002,6 @@ The migration process is now as discussed in bug_20070_ :
 2. Update DNS SRV record (see next section).
 3. Migrate slurmctld_ to new machine.
 4. Update slurm.conf_ with new ``SlurmctldHost`` name.
-
    **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
 5. Start slurmctld_.
 6. If nodes are not communicating, run ``scontrol reconfigure`` or restart slurmd_ on the nodes.
