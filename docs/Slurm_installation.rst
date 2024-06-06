@@ -993,7 +993,7 @@ when a major OS version update is needed or when the server must be migrated to 
 With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
 and **does not** require to stop all running jobs,
 since a major improvement is stated in a
-`Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_ line::
+`Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_::
 
   Update slurmstepd processes with current SlurmctldHost settings, allowing for controller changes without draining all compute jobs. 
 
@@ -1003,13 +1003,13 @@ See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by T
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 as is discussed in bug_20070_ :
 
-1. Stop slurmctld_.
-2. Update DNS SRV record (see next section).
+1. Stop slurmctld_ on the old server.
+2. Update the *Configless* DNS SRV record (see next section).
 3. Migrate slurmctld_ to new machine:
    Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
 4. Update slurm.conf_ with new ``SlurmctldHost`` name.
    **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
-5. Start slurmctld_.
+5. Start slurmctld_ on the new server.
 6. If nodes are not communicating, run ``scontrol reconfigure`` or restart slurmd_ on the nodes.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
