@@ -1010,7 +1010,7 @@ the details are discussed in bug_20070_ :
 4. Update slurm.conf_ with new ``SlurmctldHost`` name.
    **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
 5. Start slurmctld_ on the new server.
-6. If nodes are not communicating, run ``scontrol reconfigure`` or restart slurmd_ on the nodes.
+6. If some nodes are not communicating, restart the slurmd_ service on those nodes.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
