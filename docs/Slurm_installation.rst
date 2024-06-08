@@ -1001,16 +1001,17 @@ This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting s
 See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
 
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
-the details are discussed in bug_20070_ :
+and the details are discussed in bug_20070_ :
 
 1. Stop slurmctld_ on the old server.
 2. Update the *Configless* DNS SRV record (see next section).
 3. Migrate slurmctld_ to new machine:
    Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the *SlurmUser* to read and write it.
-4. Update slurm.conf_ with new ``SlurmctldHost`` name.
-   **Remember** to update the slurmdbd_ server's slurm.conf_ and the login nodes as well!
-5. Start slurmctld_ on the new server.
-6. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+4. Update slurm.conf_ with the new ``SlurmctldHost`` name.
+   Remember to update the login nodes as well!
+5. Update the slurmdbd_ server's slurm.conf_ with the new ``SlurmctldHost`` name and restart the slurmdbd_ service.
+6. Start slurmctld_ on the new server.
+7. If some nodes are not communicating, restart the slurmd_ service on those nodes.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
