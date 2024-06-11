@@ -25,7 +25,9 @@ See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutoria
 .. _Slurm_bugs: https://bugs.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
+.. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
+.. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
 .. _pdsh: https://github.com/grondo/pdsh
 .. _ClusterShell: https://clustershell.readthedocs.io/en/latest/intro.html
@@ -318,7 +320,7 @@ For building Slurm you need to install these MariaDB 10.4 (or later) packages::
   yum install MariaDB-client MariaDB-shared MariaDB-devel
 
 The MariaDB-shared package contains the required shared libraries for Slurm.
-The *slurmdbd* server host will need to install also::
+The slurmdbd_ server host will need to install also::
 
   yum install MariaDB-server MariaDB-backup
 
@@ -397,7 +399,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
     export VER=23.11.7
     yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
 
-  On the **master node** explicitly enable the *slurmctld* service::
+  On the **master node** explicitly enable the slurmctld_ service::
 
     systemctl enable slurmctld
 
@@ -493,8 +495,6 @@ Configure Slurm logging
 
   See the more general description in Bug_8272_.
 
-.. _slurmctld: https://slurm.schedmd.com/slurmctld.html
-.. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
 .. _Administrator_Guide: https://slurm.schedmd.com/quickstart_admin.html
 .. _Bug_8272: https://bugs.schedmd.com/show_bug.cgi?id=8272
 
@@ -676,9 +676,8 @@ Here is a suggested procedure:
      $ ls -lad /etc/slurm
      drwxr-xr-x. 5 root root 4096 Feb 22 10:12 /etc/slurm
 
-   Copy the configuration files from the main server to the compute node::
+   Copy the configuration file from the main server to the compute node::
 
-     /etc/slurm/slurm.conf
      /etc/slurm/slurmdbd.conf
 
    **Important**: Edit these files to replace the database server name by ``localhost`` so that all further actions take place on the compute node, **not** the *real* database server.
@@ -1009,9 +1008,8 @@ and the details are discussed in bug_20070_ :
    Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the *SlurmUser* to read and write it.
 4. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
-5. Update the slurmdbd_ server's slurm.conf_ with the new ``SlurmctldHost`` name and restart the slurmdbd_ service.
-6. Start slurmctld_ on the new server.
-7. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+5. Start slurmctld_ on the new server.
+6. If some nodes are not communicating, restart the slurmd_ service on those nodes.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
