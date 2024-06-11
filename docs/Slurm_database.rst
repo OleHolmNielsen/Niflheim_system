@@ -294,7 +294,7 @@ Slurm uses the InnoDB_ storage engine in MySQL_ to make rollback possible.
 This must be available on your MySQL_ installation or rollback will not work. 
 
 slurmdbd_ requires its own configuration file called slurmdbd.conf_. 
-Start by copying the example file from the *slurmdbd.conf* man-page.
+Start by copying the example file from the slurmdbd.conf_ man-page.
 
 The file ``/etc/slurm/slurmdbd.conf`` should be only on the computer where slurmdbd_ executes and should only be readable by the user which executes slurmdbd_ (e.g. "slurm"). 
 It must be protected from unauthorized access since it contains a database login name and password::
@@ -400,9 +400,9 @@ We recommend to explicitly set the slurmdbd_ hostname (for example, ``slurmdbd.m
 
     DbdHost=slurmdbd.my.domain
 
-* On the slurmctld_ server configure ``AccountingStorageHost`` in slurm.conf_ so that slurmctld_ knows the slurmdbd_ server's hostname::
+* On the slurmctld_ server configure ``AccountingStorageHost`` in slurm.conf_ so that slurmctld_ points to the slurmdbd_ server's hostname::
 
-    AccountingStorageHost=slurmdbd.my.domain
+    AccountingStorageHost=<slurmdbd.my.domain>
 
 After restarting the slurmctld_ and slurmdbd_ services, verify the setup by::
 
@@ -655,8 +655,7 @@ The following steps should be made:
 Configure database accounting in slurm.conf
 ===========================================
 
-Finally, when you have made sure that the slurmdbd_ service is working correctly, you must configure slurm.conf_ to use slurmdbd_.
-
+Finally, when you have made sure that the slurmdbd_ service is working correctly, you must configure the Slurm_ controller's slurm.conf_ to use slurmdbd_.
 In slurm.conf_ you must configure accounting so that the database will be used through the slurmdbd_ database daemon::
 
   AccountingStorageType=accounting_storage/slurmdbd
