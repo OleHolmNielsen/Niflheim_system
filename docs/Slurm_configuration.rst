@@ -838,6 +838,14 @@ For such BMC_ types it is unfortunately not possible to perform power reading wi
 which is what has been implemented by Slurm_.
 The ``scontrol show node`` will report zero values for ``CurrentWatts`` and ``AveWatts`` for such nodes.
 
+For nodes which do not support the IPMI_ DCMI_ extensions,
+some error messages may be logged to ``slurmd.log``::
+
+  error: _get_joules_task: can't get info from slurmd
+  error: slurm_get_node_energy: Zero Bytes were transmitted or received
+
+This issue has been fixed in Slurm_ 23.11.8.
+
 Monitoring power with Slurm
 ...............................
 
