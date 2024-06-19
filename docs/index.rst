@@ -5,7 +5,8 @@ This page contains system technical documentation for Niflheim
 describing the installation of Slurm batch queue system, software modules, and networking topics.
 (Note: This information is probably not useful for end users of Niflheim,
 please refer to the page_for_users_ in stead).
-Older archived versions of these pages may be found in the archive_.
+
+Older archived versions of these pages with information related to pre-23.02 Slurm and CentOS 7 may be found in the archive_.
 
 .. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
 .. _Ansible_configuration: https://wiki.fysik.dtu.dk/ITwiki/Ansible_configuration/
