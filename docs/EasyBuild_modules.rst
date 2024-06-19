@@ -462,7 +462,7 @@ Now the ``/etc/auto.home`` file is independent of CPU architecture, since this i
 
 
 .. _automount: https://linuxconfig.org/how-to-configure-the-autofs-daemon-on-centos-7-rhel-7
-.. _autofs: https://linuxconfig.org/how-to-configure-the-autofs-daemon-on-centos-7-rhel-7
+.. _autofs: https://wiki.archlinux.org/title/autofs
 
 Install common packages
 =======================

@@ -810,9 +810,7 @@ Now you have automatic mounting of the Azure NFSv3 storage on both Azure_ VMs an
 
 The autofs_ will unmount filesystems after some minutes of inactivity.
 
-.. _autofs: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/assembly_mounting-file-systems-on-demand_managing-file-systems
-
-
+.. _autofs: https://wiki.archlinux.org/title/autofs
 
 Cloud node configuration
 ========================
