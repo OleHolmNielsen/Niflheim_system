@@ -10,7 +10,7 @@ Older archived versions of these pages may be found in the archive_.
 .. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
 .. _Ansible_configuration: https://wiki.fysik.dtu.dk/ITwiki/Ansible_configuration/
 .. _Hardware_documentation: https://wiki.fysik.dtu.dk/ITwiki/Hardware/
-.. _archive: archive/
+.. _archive: https://wiki.fysik.dtu.dk/archive/
 
 .. toctree::
    :maxdepth: 1
