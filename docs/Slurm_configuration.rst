@@ -1323,7 +1323,7 @@ There are several possible solutions:
     AutoBasePath=true
     BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
 
-  It is **important** to use the new 23.02 option ``Shared=true``.
+  It is **important** to use the new 23.02 option ``Shared=true`` since it enables using autofs_ on the node. 
 
   The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
 
