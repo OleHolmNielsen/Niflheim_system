@@ -50,9 +50,9 @@ To restrict user login by SSH, use the ``AllowUsers`` parameter in ``/etc/ssh/ss
 Slurm_ and Munge_ require consistent UID and GID across **all servers and nodes in the cluster**, including the *slurm* and *munge* users.
 
 It is very important to **avoid UID and GID below 1000**, as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
-see also https://en.wikipedia.org/wiki/User_identifier.
+see also the User_identifier_ page.
 
-Create the users/groups for *slurm* and *munge*, for example::
+Create the users/groups for ``slurm`` and ``munge``, for example::
 
   export MUNGEUSER=1005
   groupadd -g $MUNGEUSER munge
@@ -67,11 +67,13 @@ This must be done **prior to installing RPMs** (which would create random UID/GI
 Please note that UIDs and GIDs up to 1000 are currently reserved for system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_
 and the file ``/etc/login.defs``.
 
+.. _User_identifier: https://en.wikipedia.org/wiki/User_identifier
+
 Slurm authentication plugin
 ============================
 
 For an overview of authentication see the Authentication_Plugins_ page.
-Beginning with version 23.11, Slurm has its own plugin that can create and validate credentials.
+Beginning with version 23.11, Slurm_ has its own plugin that can create and validate credentials.
 It validates that the requests come from legitimate UIDs and GIDs on other hosts with matching users and groups.
 
 .. _Authentication_Plugins: https://slurm.schedmd.com/authentication.html
@@ -107,7 +109,7 @@ Build RPMs by::
   wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
   rpmbuild -ta munge-0.5.16.tar.xz
 
-and install them from `~/rpmbuild/RPMS/x86_64/`.
+and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
 With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
 and you may for example add this configuration to increase the number of threads to 10::
@@ -127,13 +129,14 @@ and do ``sysctl -p``.
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
 
-Increase number of threads in munged 0.5.11/0.5.13
--------------------------------------------------------
+Munge 0.5.13: Increase number of threads 
+-----------------------------------------------
 
-The **default** EL7/EL8/EL9 Munge_ versions 0.5.11 and 0.5.13 do not honor an options file,
-see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_,
-so this is how you can increase the number of threads in `munged`:
+If you use the **default** EL8/EL9 Munge_ version 0.5.13,
+it does not honor an options file,
+see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
 
+This is how you can increase the number of threads in `munged`.
 Copy the Systemd_ unit file::
 
   cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
