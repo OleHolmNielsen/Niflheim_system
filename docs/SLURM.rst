@@ -16,9 +16,6 @@ The present pages are **not** official documents from SchedMD_ but only a user's
 The information has been subdivided into sub-pages for separate Slurm topics:
 
 * :ref:`Slurm_operations` for daily management.   
-
-  * **Note:** Content previously on the current page has been moved to this new sub-page.
-
 * :ref:`Slurm_installation`.
 * :ref:`Slurm_configuration` setting up the services.
 * :ref:`Slurm_database` for storing user and job data.
