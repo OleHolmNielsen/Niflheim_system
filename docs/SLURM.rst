@@ -27,6 +27,7 @@ The information has been subdivided into sub-pages for separate Slurm topics:
 * :ref:`Slurm_cloud_bursting` extending the local cluster with nodes in the Cloud.
 * Some Slurm tools at https://github.com/OleHolmNielsen/Slurm_tools
 
+.. _archive: https://wiki.fysik.dtu.dk/Niflheim_system_archive/
 .. _HowTo: https://www.thefreedictionary.com/Howto
 .. _AlmaLinux: https://www.almalinux.org
 .. _RockyLinux: https://www.rockylinux.org
