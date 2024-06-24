@@ -7,7 +7,7 @@ Slurm batch queueing system
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
 
 These pages constitute a HowTo_ guide for setting up a Slurm workload manager software installation
-based on the RHEL_ 7 and 8 Linux and their clones such as CentOS_, AlmaLinux_ and RockyLinux_
+based on RHEL_ 8 Linux and clones such as AlmaLinux_ and RockyLinux_
 
 Much of the information should be relevant on other Linux versions as well.
 These pages are **not** official documents from SchedMD_ but only a user's contribution to the Slurm community.
@@ -27,7 +27,6 @@ The information has been subdivided into sub-pages for separate Slurm topics:
 * Some Slurm tools at https://github.com/OleHolmNielsen/Slurm_tools
 
 .. _HowTo: https://www.thefreedictionary.com/Howto
-.. _CentOS: https://www.centos.org
 .. _AlmaLinux: https://www.almalinux.org
 .. _RockyLinux: https://www.rockylinux.org
 .. _RHEL: https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux

@@ -64,7 +64,8 @@ Create the users/groups for *slurm* and *munge*, for example::
 and make sure that these same users are created identically on **all nodes**.
 This must be done **prior to installing RPMs** (which would create random UID/GID pairs if these users don't exist).
 
-Please note that UIDs and GIDs up to 1000 are currently reserved for the CentOS system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_ and the file */etc/login.defs*.
+Please note that UIDs and GIDs up to 1000 are currently reserved for system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_
+and the file ``/etc/login.defs``.
 
 Slurm authentication plugin
 ============================
@@ -85,8 +86,6 @@ You should read the Munge_installation_ guide and the Munge_wiki_.
 The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, install them by::
 
   dnf install munge munge-libs munge-devel
-
-For RHEL/CentOS 7: Download Munge_ packages from https://dl.fedoraproject.org/pub/epel/7/x86_64/m/
 
 On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
@@ -226,20 +225,19 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 
 Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
-  yum install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth 
+  dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth 
 
 If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install::
 
-  yum install munge munge-libs munge-devel
+  dnf install munge munge-libs munge-devel
 
-Furthermore, enable the EPEL_ repository::
+Furthermore, enable the EPEL_ repository for EL8::
 
-  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm  # EL8
-  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  # EL7
+  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 and install the following EPEL_ packages::
 
-  yum install libssh2-devel man2html
+  dnf install libssh2-devel man2html
 
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 
@@ -250,17 +248,17 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 
 1. IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
-     yum install freeipmi-devel
+     dnf install freeipmi-devel
 
    See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page.
 
    Since the official RPM repos may contain old versions, it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as master),
    see the section on :ref:`ipmi_power_monitoring`.
 
-2. If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer),
+2. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
 
-     yum install http-parser-devel json-c-devel libjwt-devel 
+     dnf install http-parser-devel json-c-devel libjwt-devel 
 
    The minimum version requirements are listed in the rest_quickstart_ guide:
    HTTP Parser (>= v2.6.0), LibYAML (optional, >= v0.2.5), JSON-C (>= v1.12.0).
@@ -274,8 +272,8 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 
      dnf install libyaml-devel
 
-   **Important:** The `libyaml` must be version 0.2.5 or later, see bug_17673_.
-   The `libyaml` provided by EL8 or CentOS 7 is version 0.1.X and should not be used!
+   **Important:** The `libyaml` **must** be version 0.2.5 or later, see bug_17673_.
+   The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    The EL9 provides version 0.2.5.
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
@@ -289,48 +287,15 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 Install MariaDB database
 ------------------------
 
-**Important:** If you want to enable accounting, you must install the MariaDB_ (a replacement for MySQL_) 
-version 5.5 from CentOS7/RHEL7 packages **before** you build Slurm_ RPMs::
-
-  yum install mariadb-server mariadb-devel
-
-CentOS8/RHEL8 has the newer MariaDB_ version 10.3 which is installed by::
+First install the MariaDB_ database 10.3 (a replacement for MySQL_)::
 
   dnf install mariadb-server mariadb-devel
 
 **NOTICE:** Do not forget to configure the database as described in the :ref:`Slurm_database` page!
 
-**Needs testing**: Alternatively, you can install the MariaDB_ version 10.3 database from the CentOS 7 Software Collections (SCL_) Repository::
+If you plan to use Ansible_ to manage the database, Ansible_ needs this Python EL8 package::
 
-  yum install centos-release-scl
-  yum install rh-mariadb103-mariadb-server rh-mariadb103-mariadb-devel rh-mariadb103-mariadb rh-mariadb103-mariadb-backup
-
-.. _SCL: https://wiki.centos.org/AdditionalResources/Repositories/SCL
-
-Install the latest MariaDB version
-..................................
-
-**Optional:** Install the latest MariaDB_ version.  This is not required, and installation is somewhat involved.
-
-For best results with RPM and DEB packages, use the `Repository Configuration Tool <https://downloads.mariadb.org/mariadb/repositories/>`_.
-Configure the Yum repository as instructed and read the `MariaDB Yum page <https://mariadb.com/kb/en/library/yum/>`_.
-
-For building Slurm you need to install these MariaDB 10.4 (or later) packages::
-
-  yum install MariaDB-client MariaDB-shared MariaDB-devel
-
-The MariaDB-shared package contains the required shared libraries for Slurm.
-The slurmdbd_ server host will need to install also::
-
-  yum install MariaDB-server MariaDB-backup
-
-Install MySQL Python tools
---------------------------
-
-If you will use Ansible_ to manage the database, Ansible_ needs this Python package::
-
-  yum install MySQL-python    # CentOS7/RHEL7
-  dnf install python3-mysql   # CentOS8/RHEL8
+  dnf install python3-mysql
 
 .. _Ansible: https://www.ansible.com/
 
@@ -338,11 +303,10 @@ Build Slurm packages
 --------------------
 
 Get the Slurm_ source code from the Slurm_download_ page.
-At this point you must decide whether to build in Slurm plugins, for example, *mysql* for accounting (see above).
 
-Set the version (for example, 23.11.7) and build Slurm_ RPM packages by::
+Set the version (for example, 23.11.8) and build Slurm_ RPM packages by::
 
-  export VER=23.11.7
+  export VER=23.11.8
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql
 
 Notes about the ``--with mysql`` option:
@@ -396,8 +360,8 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Head/Master** Node (where the slurmctld_ daemon runs), **Compute**, and **Login** nodes::
 
-    export VER=23.11.7
-    yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
+    export VER=23.11.8
+    dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
 
   On the **master node** explicitly enable the slurmctld_ service::
 
@@ -408,8 +372,8 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
   Only if the **database service** will run on the Head/Master node:
   Install the database service RPM::
 
-    export VER=23.11.7
-    yum install slurm-slurmdbd-$VER*rpm
+    export VER=23.11.8
+    dnf install slurm-slurmdbd-$VER*rpm
 
   Explicitly enable the service::
 
@@ -417,11 +381,11 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * On **Compute nodes** you may additionally install the slurm-pam_slurm RPM package to prevent rogue users from logging in::
 
-    yum install slurm-pam_slurm-$VER*rpm
+    dnf install slurm-pam_slurm-$VER*rpm
 
   You may consider this RPM as well with special PMIx libraries::
 
-    yum install slurm-libpmi-$VER*rpm
+    dnf install slurm-libpmi-$VER*rpm
 
   Explicitly enable the service::
 
@@ -429,8 +393,8 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Database-only** (slurmdbd_ service) node::
 
-    export VER=23.11.7
-    yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
+    export VER=23.11.8
+    dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
   Explicitly enable the service::
 
@@ -438,7 +402,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * Servers (from Slurm 20.02 and newer) which should offer slurmrestd_ (which can be used also by normal users) should install also this package::
 
-    yum install slurm-slurmrestd-$VER*rpm
+    dnf install slurm-slurmrestd-$VER*rpm
 
   The slurmctld_ server and the login nodes would typically include slurmrestd_.
 
@@ -447,7 +411,7 @@ Study the configuration information in the Quick Start Administrator_Guide_.
 Update Systemd service files
 ----------------------------
 
-On CentOS/RHEL 8 (EL8) systems the Slurm_ daemons may fail starting up at reboot, when Slurm_ is running in configless_ mode, 
+On EL8 systems the Slurm_ daemons may fail starting up at reboot, when Slurm_ is running in configless_ mode, 
 apparently due to DNS failures.
 This is actually due to the daemons starting too soon, before the network is fully online.
 The issue is tracked in bug_11878_.
@@ -547,48 +511,10 @@ This command can report current jobs that have been orphaned on the local cluste
 
   sacctmgr show runawayjobs
 
-Database upgrade from Slurm 17.02 and older
--------------------------------------------
-
-If you are upgrading from **Slurm 17.02 and older** to **Slurm 17.11 and newer**, you must be extremely cautious about long database update times, 
-since in Slurm 17.11 (and newer) some database structures were changed. 
-Read the mailing list thread `Extreme long db upgrade 16.05.6 -> 17.11.3 <https://lists.schedmd.com/pipermail/slurm-users/2019-April/003178.html>`_,
-where Lech Nieroda states:
-
-* To sum it up, the issue affects those users who still have 17.02 or prior versions, use their distribution defaults for mysql/mariadb from RHEL6/CentOS6 and RHEL7/CentOS7, have millions of jobs in their database *and* would like to upgrade slurm without upgrading mysql.
-
-The patch is also available from and is discussed in bug_6796_.
-
-Furthermore, the `17.11 Release Notes <https://github.com/SchedMD/slurm/blob/slurm-17.11/RELEASE_NOTES>`_ states::
-
-  NOTE FOR THOSE UPGRADING SLURMDBD: The database conversion process from SlurmDBD 16.05 or 17.02 may not work properly with MySQL 5.1 (as was the default version for RHEL 6).
-  Upgrading to a newer version of MariaDB or MySQL is strongly encouraged to prevent this problem. 
-
-and the `18.08 Release Notes <https://github.com/SchedMD/slurm/blob/slurm-18.08/RELEASE_NOTES>`_ added::
-
-  NOTE FOR THOSE UPGRADING SLURMDBD:
-  The database conversion process from SlurmDBD 16.05 or 17.02 may not work properly with MySQL 5.1 or 5.5 (as was the default version for RHEL 6).
-  Upgrading to a newer version of MariaDB or MySQL is strongly encouraged to prevent this problem.
-
-**NOTE:** MariaDB_ version 5.5 is the default database version delivered with RHEL7/CentOS 7!
-
-More recent MariaDB_ versions 10.x can be downloaded from the MariaDB_repository_.
-Some further information:
-
-* This `MariaDB blog <https://mariadb.com/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/>`_ explains the upgrade process from 5.5 to 10.x.
-* `Installing MariaDB with yum/dnf <https://mariadb.com/kb/en/library/yum/>`_.
-
-.. _MariaDB_repository: https://downloads.mariadb.org/mariadb/repositories/
-
-The patch in the above thread should be applied **manually** to Slurm 17.11 before upgrading the database from 17.02 or 16.05 to 17.11 (**do not** upgrade by more than 2 Slurm releases!).
-
-.. _bug_6796: https://bugs.schedmd.com/show_bug.cgi?id=6796
-
 Upgrade of MySQL/MariaDB
 ------------------------
 
 If you restore a database dump (see :ref:`Slurm_database`) onto a different server running a **newer MySQL/MariaDB version**, 
-for example upgrading MySQL_ 5.1 on CentOS 6 to MariaDB_ 5.5 on CentOS 7,
 there are some extra steps.
 
 See `Upgrading from MySQL to MariaDB <https://mariadb.com/kb/en/library/upgrading-from-mysql-to-mariadb/>`_ 
@@ -598,18 +524,9 @@ about running the mysql_upgrade_ command::
 
 whenever major (or even minor) version upgrades are made, or when migrating from MySQL_ to MariaDB_.
 
-It may be necessary to restart the *mysqld* service or reboot the server after this upgrade (??).
+It may be necessary to restart the ``mysqld`` service or reboot the server after this upgrade (??).
 
 .. _mysql_upgrade: https://mariadb.com/kb/en/library/mysql_upgrade/
-
-Slurm database modifications required for MariaDB 10.2.1 and above
-..................................................................
-
-In MariaDB_ 10.2.1 and above there are some important changes to Slurm database tables,
-please read instructions in the page :ref:`MariaDB_10.2.1_modifications` (with a reference to bug_15168_).
-This has been resolved in Slurm 22.05.7.
-
-.. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
 
 Make a dry run database upgrade
 -------------------------------
@@ -626,7 +543,7 @@ Here is a suggested procedure:
 
 2. Install the database RPM packages and configure the database **EXACTLY** as described in the :ref:`Slurm_database` page::
 
-     yum install mariadb-server mariadb-devel
+     dnf install mariadb-server mariadb-devel
 
    Configure the MySQL_/MariaDB_ database as described in the :ref:`Slurm_database` page.
 
@@ -667,7 +584,7 @@ Here is a suggested procedure:
    Install the **OLD** (the cluster's current version, say, NN.NN) additional slurmdbd_ database RPMs as described above::
 
      VER=NN.NN
-     yum install slurm-slurmdbd-$VER*rpm 
+     dnf install slurm-slurmdbd-$VER*rpm 
 
    Information about building RPMs is in the :ref:`Slurm_installation` page.
 
@@ -715,14 +632,14 @@ Here is a suggested procedure:
 8. At this point you have a Slurm database server running an exact copy of your main Slurm database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 23.11.7) built as shown above::
+   Update all Slurm_ RPMs to the new version (say, 23.11.8) built as shown above::
 
-     export VER=23.11.7
-     yum update slurm*$VER*.rpm
+     export VER=23.11.8
+     dnf update slurm*$VER*.rpm
 
    If you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the upgrade::
 
-     yum remove auto_tmpdir
+     dnf remove auto_tmpdir
 
    See also `Temporary job directories <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#temporary-job-directories>`_
 
@@ -754,21 +671,10 @@ Here is a suggested procedure:
 
 11. When all tests have been completed successfully, reinstall the compute node to its default installation.
 
-Upgrading on EL8 and CentOS 7
----------------------------------
+Upgrading on EL8 
+--------------------
 
-Let's assume that you have built the updated RPM packages for EL8 or CentOS 7 and copied them to the current directory so you can use ``yum`` on the files directly.
-
-Prerequisites before upgrading
-..............................
-
-If you have installed the pdsh_ tool, there may be a module that has been linked against a specific library version ``libslurm.so.30``,
-and ``yum`` will then refuse to update the ``slurm-xxx`` RPMs.
-You must first do::
-
-  yum remove pdsh-mod-slurm
-
-and then later rebuild and reinstall pdsh-mod-slurm, see the :ref:`SLURM` page.
+Let's assume that you have built the updated RPM packages for EL8 and copied them to the current directory so you can use ``dnf`` commands on the files directly.
 
 Upgrade slurmdbd
 ................
@@ -788,8 +694,8 @@ The upgrading steps for the slurmdbd_ host are:
 
 3. Update all RPMs::
 
-     export VER=23.11.7
-     yum update slurm*$VER*.rpm
+     export VER=23.11.8
+     dnf update slurm*$VER*.rpm
 
 4. Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
    In stead of starting the slurmdbd_ service, it is most likely necessary to **start the daemon manually**.
@@ -856,8 +762,8 @@ The upgrading steps for the slurmctld_ host are:
 
 4. Upgrade the RPMs, for example::
 
-     export VER=23.11.7
-     yum update slurm*$VER-*.rpm
+     export VER=23.11.8
+     dnf update slurm*$VER-*.rpm
 
 5. Enable and restart the slurmctld_ service::
 
@@ -880,7 +786,7 @@ Install slurm-libpmi
 
 On the compute nodes, only, you may consider this RPM as well with special PMIx libraries::
 
-    yum install slurm-libpmi-$VER*rpm
+    dnf install slurm-libpmi-$VER*rpm
 
 Upgrade MPI applications
 ........................
@@ -921,9 +827,9 @@ First determine which Slurm_ version the nodes are running::
 
 See the :ref:`SLURM` page about ClusterShell_ or PDSH_.
 
-The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.11.7) on all nodes::
+The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.11.8) on all nodes::
 
-  clush -bw <nodelist> 'yum -y update /some/path/slurm*23.11.7-*.rpm'
+  clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.8-*.rpm'
 
 This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
 
@@ -942,9 +848,9 @@ For the compute nodes running slurmd_ the **safe procedure** could be:
 
      clush -bw <nodelist> systemctl stop slurmd
 
-3. Update the RPMs (here: version 23.11.7) on nodes::
+3. Update the RPMs (here: version 23.11.8) on nodes::
 
-     clush -bw <nodelist> 'yum -y update /some/path/slurm*23.11.7-*.rpm'
+     clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.8-*.rpm'
 
    and make sure to install also the new ``slurm-slurmd`` and ``slurm-contribs`` packages.
 
@@ -1047,14 +953,14 @@ The Slurm_ log files may be stored in ``/var/log/slurm``, and they may grow rapi
 Especially the ``slurmctld.log`` file on the controller machine may grow very big.
 
 Therefore you probably want to configure logrotate_ to administer your log files.
-On RHEL and CentOS the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
+On RHEL the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
 
 Manual configuration is required because the SchedMD_ RPM files do not contain the logrotate setup, see bug_3904_ and bug_2215_ and bug_4393_.
 See also the section *LOGGING* at the end of the slurm.conf_ page with an example logrotate script.
 
 First install the relevant RPM::
 
-  yum install logrotate
+  dnf install logrotate
 
 Create the following script ``/etc/logrotate.d/slurm`` which will rotate and compress the slurmctld_ log file on a weekly basis::
 
