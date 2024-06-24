@@ -194,13 +194,6 @@ Nvidia drivers
 ..............
 
 Download Nvidia drivers from https://www.nvidia.com/Download/index.aspx and select the appropriate GPU_ version and host operating system.
-Installation instructions are provided on the download page::
-
-  rpm -i nvidia-diag-driver-local-repo-rhel7-375.66-1.x86_64.rpm
-  yum clean all
-  yum install cuda-drivers
-  reboot
-
 You can also download and install Nvidia `UNIX drivers <https://www.nvidia.com/en-us/drivers/unix/>`_,
 and the CUDA toolkit from https://developer.nvidia.com/cuda-downloads.
 
@@ -269,17 +262,6 @@ Here we list some useful third-party utilities that Slurm administrators or user
   *jobinfo* tries to collect information for a full job.
 
 * `slurm_showq <https://github.com/fasrc/slurm_showq>`_ A *showq* style job summary utility for SLURM.
-
-* schedtop_ cluster monitoring tool (see also bug_1868_).
-  
-  Build a new RPM by::
-
-    rpmbuild --rebuild --with slurm schedtop-5.02-1.sdl6.src.rpm
-    yum install ~/rpmbuild/RPMS/x86_64/slurmtop-5.02-1.el7.centos.x86_64.rpm
-
-  Then run::
-
-    slurmtop
 
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
@@ -360,9 +342,9 @@ To install this tool (make sure to download the latest release)::
 
   wget https://www.nsc.liu.se/~kent/python-hostlist/python-hostlist-1.21.tar.gz
   rpmbuild -ta python-hostlist-1.21.tar.gz
-  yum install python3-devel
-  yum install ~/rpmbuild/RPMS/noarch/python2-hostlist-1.21-1.noarch.rpm
-  yum install ~/rpmbuild/RPMS/noarch/python3-hostlist-1.21-1.noarch.rpm
+  dnf install python3-devel
+  dnf install ~/rpmbuild/RPMS/noarch/python2-hostlist-1.21-1.noarch.rpm
+  dnf install ~/rpmbuild/RPMS/noarch/python3-hostlist-1.21-1.noarch.rpm
   
 For usage see the python-hostlist_, but a useful example is::
 
@@ -441,7 +423,7 @@ Please beware that:
 
 * It is a good idea to configure the slurm-pam-adopt_ module on the nodes to control and restrict SSH access, see `<Slurm_configuration#pam-module-restrictions>`_.
 
-Here are the steps for configuring Host-based_Authentication_ on CentOS 7 systems:
+Here are the steps for configuring Host-based_Authentication_:
 
 1. First populate all SSH keys in the file ``/etc/ssh/ssh_known_hosts`` as shown above.
 
@@ -522,13 +504,8 @@ There is a ClusterShell_manual_ and a ClusterShell_configuration_ guide.
 
 Install the ClusterShell_tool_ from the EPEL_ repository::
 
-  yum install epel-release
-  yum install clustershell
-
-On CentOS/RHEL 7 this will be using the system default Python 2.7.
-To install the Python 3 version::
-
-  yum install python36-clustershell
+  dnf install epel-release
+  dnf install clustershell
 
 Copy the example file for Slurm.conf_::
 
@@ -617,45 +594,6 @@ When ClusterShell_tool_ has been set up, it's very simply to copy files and fold
 Example::
 
   clush -bw node[001-099] --copy /etc/slurm/slurm.conf --dest /etc/slurm/
-
-PDSH - Parallel Distributed Shell
----------------------------------
-
-A crucial tool for the sysadmin is to execute commands in parallel on the compute nodes.
-The widely used pdsh_ tool may be used for this (see also ClusterShell_tool_ above).
-
-.. _pdsh: https://github.com/grondo/pdsh
-
-The pdsh_ RPM package may be installed from the EPEL_ repository, but unfortunately the slurm module hasn't been built in.
-Therefore you must manually rebuild the pdsh_ RPM:
-
-* Download the pdsh_ version 2.31 source RPM from https://dl.fedoraproject.org/pub/epel/7/SRPMS/p/::
-
-    wget https://dl.fedoraproject.org/pub/epel/7/SRPMS/p/pdsh-2.31-1.el7.src.rpm
-
-* Install prerequisite packages::
-
-    yum install libnodeupdown-devel libgenders-devel whatsup
-
-* Rebuild the pdsh_ RPMs::
-
-    rpmbuild --rebuild --with=slurm --without=torque pdsh-2.31-1.el7.src.rpm
-
-  Notice: On CentOS 5 and 6 you must apparently remove the "=" signs due to a bug in rpmbuild.
-
-* Install the relevant (according to your needs) RPMs::
-
-    cd $HOME/rpmbuild/RPMS/x86_64/
-    yum install pdsh-2.31-1* pdsh-mod-slurm* pdsh-rcmd-ssh* pdsh-mod-dshgroup* pdsh-mod-nodeupdown* 
-
-The pdsh_ command now knows about Slurm partitions and jobs::
-
-  pdsh -P <partition-name> date
-  pdsh -j <job-name> date
-
-See ``man pdsh`` for further details.
-
-The ``whatsup`` command may also be useful, see ``man whatsup`` for further details.
 
 Listing nodes
 -------------
