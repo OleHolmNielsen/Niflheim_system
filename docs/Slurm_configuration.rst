@@ -1590,7 +1590,7 @@ Install firewalld_ by::
   dnf install firewalld firewall-config
 
 Head/Master node
-................
+--------------------
 
 Open port 6817 (slurmctld_)::
 
@@ -1605,7 +1605,7 @@ Alternatively, completely whitelist the compute nodes' private subnet (here: 10.
 The configuration is stored in the file ``/etc/firewalld/direct.xml``.
 
 Database (slurmdbd) node
-........................
+---------------------------------------
 
 The slurmdbd_ service by default listens to port 6819, see slurmdbd.conf_.
 
@@ -1618,7 +1618,7 @@ Open port 6819 (slurmdbd_)::
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
 
 Compute node firewall must be off
-.................................
+---------------------------------------
 
 Quoting Moe Jette from `[slurm-dev] No route to host: Which ports are used? <https://groups.google.com/forum/#!topic/slurm-devel/wOHcXopbaXw>`_::
 
