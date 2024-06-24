@@ -496,7 +496,7 @@ and the verbose output should inform you::
 ClusterShell
 ------------
 
-The ClusterShell_tool_ is an alternative to pdsh_ (see below) which is more actively maintained and has some better features.
+ClusterShell_ provides a light and unified command execution Python framework to help administer GNU/Linux or BSD clusters.
 There is a ClusterShell_manual_ and a ClusterShell_configuration_ guide.
 
 .. _ClusterShell_manual: https://clustershell.readthedocs.io/en/latest/
@@ -551,7 +551,7 @@ For a Slurm partition::
 
   clush -g <partition-name> date
 
-If option *-b* or *--dshbak* (like with PDSH_) is specified, clush_ waits for command completion while displaying a progress indicator and then displays gathered output results::
+If option *-b* or *--dshbak* is specified, clush_ waits for command completion while displaying a progress indicator and then displays gathered output results::
 
   clush -b -g <partition-name> date
 
@@ -598,7 +598,7 @@ Example::
 Listing nodes
 -------------
 
-Use sinfo_ to list nodes that are responding (for example, to be used in pdsh_ scripts)::
+Use sinfo_ to list nodes that are responding (for example, to be used in clush_ scripts)::
 
   sinfo -r -h -o '%n'
   sinfo --responding --noheader --format='%n'
