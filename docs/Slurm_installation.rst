@@ -467,12 +467,12 @@ Configure Slurm logging
 Upgrading Slurm
 ===============
 
-New Slurm_ updates are released about every 9 months.
+New Slurm_ updates are released about every 6 months (the interval was 9 months prior to 24.05).
 Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
 
-* You may upgrade at most by 2 major versions, see the Upgrades_ page:
+* You may upgrade at most by 3 major versions, see the Upgrades_ page:
 
   * Slurm daemons will support RPCs and state files from the **two previous major releases**
     (e.g. a version 23.11.x SlurmDBD will support slurmctld daemons and commands with a version of 23.11.x, 23.02.x or 22.05.x). 
@@ -501,7 +501,7 @@ If you use a database, also make sure to:
 
   See further info below.
 
-.. _Upgrades: https://slurm.schedmd.com/quickstart_admin.html#upgrade
+.. _Upgrades: https://slurm.schedmd.com/upgrades.html
 .. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
