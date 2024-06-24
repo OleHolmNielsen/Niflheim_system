@@ -38,6 +38,7 @@ Slurm documentation
 Documentation from SchedMD_ about Slurm_:
 
 * The Slurm_homepage_.
+* The Slurm_documentation_ pages.
 * Quick_Start_User_Guide_.
 * Slurm_Quick_Start_ admin guide.
 * Commercial Support by SchedMD®: https://www.schedmd.com/support.php
