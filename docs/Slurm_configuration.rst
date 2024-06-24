@@ -719,7 +719,7 @@ Many types of *Baseboard Management Controllers* (BMC_) permit the reading of po
 Note that Slurm_ ``version 23.02.7 (or later)`` should be used for correct functionality, see bug_17639_.
 
 Install the FreeIPMI_ prerequisite packages **version 1.6.12 or later** on the Slurm_ RPM-building server.
-FreeIPMI_ version 1.6.14 is available with RockyLinux_ and AlmaLinux_ (EL8) 8.10:
+FreeIPMI_ version 1.6.14 is available with RockyLinux_ and AlmaLinux_ (EL8) 8.10::
 
   dnf install freeipmi freeipmi-devel
 
