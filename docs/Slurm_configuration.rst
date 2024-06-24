@@ -718,7 +718,11 @@ Building IPMI power monitoring into Slurm
 Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
 Note that Slurm_ ``version 23.02.7 (or later)`` should be used for correct functionality, see bug_17639_.
 
-Install the FreeIPMI_ prerequisite packages ``version 1.6.12 or later`` on the Slurm_ RPM-building server as shown in the next section.
+Install the FreeIPMI_ prerequisite packages **version 1.6.12 or later** on the Slurm_ RPM-building server.
+FreeIPMI_ version 1.6.14 is available with RockyLinux_ and AlmaLinux_ (EL8) 8.10:
+
+  dnf install freeipmi freeipmi-devel
+
 Then build Slurm_ RPM packages **including** ``freeipmi`` libraries::
 
   rpmbuild -ta slurm-<version>.tar.bz2 --with mysql --with freeipmi
@@ -739,44 +743,12 @@ and verify if the ``libfreeipmi.so.*`` library file is also available on the sys
         libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00007f58177a8000)
         ...
 
+.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
+.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
+.. _RockyLinux: https://www.rockylinux.org
+.. _AlmaLinux: https://www.almalinux.org
 .. _BMC: https://www.techopedia.com/definition/15941/baseboard-management-controller-bmc
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
-.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
-
-Build the latest FreeIPMI version
-.......................................
-
-**WARNING**:
-
-* As discussed in bug_17639_ there is an issue in FreeIPMI_ prior to version 1.6.12
-  because older FreeIPMI_ versions used the obsolete ``select()`` system call in ``driver/ipmi-openipmi-driver.c`` in stead of ``poll()``.
-  Hence slurmd_ may exhaust the maximum number of file descriptors (1024) after some time.
-
-.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
-
-For correct functionality with Slurm_ you must install FreeIPMI_ ``version 1.6.12`` or later.
-Since the official RPM repos may contain old versions,
-you can build newer ``freeipmi`` RPMs from a tar-ball version by these steps:
-
-* Install prerequisites for the build::
-
-    dnf install libtool libgcrypt-devel texinfo
-
-* Download the latest source tar-ball from the `freeipmi Git repo <https://git.savannah.gnu.org/cgit/freeipmi.git/>`_.
-
-* Build RPM packages including Systemd_ functionality::
-
-    rpmbuild -ta --with systemd freeipmi-1.6.14.tar.gz
-
-Install the required ``freeipmi`` RPM packages on the Slurm_ server used for RPM-building::
-
-  dnf install freeipmi-1.6.14*rpm freeipmi-devel-1.6.14*rpm
-
-Install also on all compute nodes::
-
-  dnf install freeipmi-1.6.14*rpm 
-
-.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Using IPMI power monitoring (from Slurm 23.02.7)
 ................................................
@@ -1064,7 +1036,6 @@ You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Adminis
 .. _ARP_Cache: https://en.wikipedia.org/wiki/ARP_cache
 .. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
 .. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
-
 .. _configure_maximum_number_of_open_files:
 
 Configure maximum number of open files
@@ -1092,6 +1063,8 @@ System `default values <https://access.redhat.com/solutions/23733>`_ of ``fs.fil
 
 * The EL8 ``fs.file-max`` calculated by the kernel at boot time is approximately 1/10 of physical RAM size in units of MB.
 * The EL9 ``fs.file-max`` is set to max value itself which is 9223372036854775807 (2^63-1).
+
+.. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Partition limits
 ----------------
