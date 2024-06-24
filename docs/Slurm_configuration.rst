@@ -61,17 +61,6 @@ Configless Slurm setup
 
 With Slurm_ 20.02 there is a new configless_ feature that allows the compute nodes — specifically the slurmd_ process — 
 and user commands running on login nodes to pull configuration information directly from the slurmctld_ instead of from a pre-distributed local file. 
-
-Notes: 
-
-* Slurm versions 20.02.0 and 20.02.1 had a `slurm_pam_adopt issue <https://lists.schedmd.com/pipermail/slurm-users/2020-March/005044.html>`_ when using configless_ mode, see bug_8712_.
-
-* Slurm versions up to an including 20.11.7 may start the slurmd_ service before the network is fully up, causing slurmd_ to fail.  Observed on some CentOS 8 systems, see bug_11878_.  
-  The workaround is to restart the slurmd_ service manually.
-
-.. _bug_8712: https://bugs.schedmd.com/show_bug.cgi?id=8712
-.. _bug_11878: https://bugs.schedmd.com/show_bug.cgi?id=11878
-
 The order of precedence for determining what configuration source to use is listed in the configless_ page.
 
 On startup the compute node slurmd_ will query the slurmctld_ server that you specify, and the configuration files will be pulled to the node's local disk.
@@ -99,7 +88,7 @@ pointing to port 6817 on your slurmctld_ server(s) and with a suggested Time_to_
 
 To verify the DNS setup, install these packages with tools required below::
 
-  yum install bind-utils hostname
+  dnf install bind-utils hostname
 
 Lookup the SRV_ record by either of::
 
@@ -155,7 +144,7 @@ Unfortunately, slurmd_ may start up before the InfiniBand/Omni-Path network port
 The reason is that InfiniBand ports may take a number of seconds to become activated at system boot time,
 and NetworkManager_ cannot be configured to wait for InfiniBand,
 but will claim that the network is online as soon as one interface is ready (typically Ethernet).
-This issue seems to be serious on EL8 (RHEL 8 and clones) with 10-15 seconds of delay, whereas CentOS 7.9 starts up InfiniBand much quicker.
+This issue seems to be serious on EL8 (RHEL 8 and clones) with 10-15 seconds of delay.
 
 If you have configured Node Health Check (NHC_) to check the InfiniBand ports,
 the NHC_ check is going to fail until the InfiniBand ports are up.
@@ -193,8 +182,8 @@ Configurator for slurm.conf
 
 You can generate an initial slurm.conf_ file using several tools:
 
-* The *Slurm Version 17.02 Configuration Tool* configurator_.
-* The *Slurm Version 17.02 Configuration Tool - Easy Version* configurator.easy_.
+* The *Slurm Configuration Tool* configurator_.
+* The *Slurm Configuration Tool - Easy Version* configurator.easy_.
 * Build a configuration file using your favorite web browser and open ``file://$HOME/slurm/html/configurator.html`` or the simpler file ``configurator.easy.html``.
 * Copy the more extensive sample configuration file ``.../etc/slurm.conf.example`` from the source tar-ball and use it as a starting point.
 
@@ -223,29 +212,6 @@ Enable startup of services as appropriate for the given node::
   systemctl enable slurmdbd    # Database server
 
 The systemd_ service files are ``/usr/lib/systemd/system/slurm*.service``.
-
-Slurm 16.05 init script bug
-...........................
-
-The Slurm_ **16.05** RPM packages install and configure (it's `bug 3371 <https://bugs.schedmd.com/show_bug.cgi?id=3371>`_) the init boot script ``/etc/init.d/slurm`` - even for systems like RHEL/CentOS 7 which use systemd_!
-The bug has been fixed in Slurm_ 17.02.
-
-If you have Slurm_ 16.05 (or older) on RHEL/CentOS 7, check if you have enabled the init script::
-
-  chkconfig --list slurm
-
-We should modify this setup to use systemd_ exclusively.
-First disable the init script on all nodes, including login-nodes::
-
-  chkconfig --del slurm
-
-In order to avoid accidentally starting services with ``/etc/init.d/slurm``, it is best to also remove the offending script::
-
-  rm -f /etc/init.d/slurm
-
-Then enable the services properly as shown above.
-
-Beware that any update of the Slurm_ 16.05 RPMs will recreate the missing ``/etc/init.d/slurm`` file, so you must remember to remove it after every update.
 
 .. _systemd: https://en.wikipedia.org/wiki/Systemd
 
@@ -343,8 +309,6 @@ Cgroup configuration
 
 Documentation about the usage of Cgroups_:
 
-* `RHEL7 Resource Management Guide <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7-Beta/html/Resource_Management_Guide/>`_.
-
 * `RHEL8 Understanding control groups <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/setting-limits-for-applications_managing-monitoring-and-updating-the-kernel>`_.
 
 To list current Cgroups_ use the command::
@@ -429,41 +393,10 @@ You may also consider defining **MemSpecLimit** in slurm.conf_:
 
 See an interesting discussion in `bug 2713 <https://bugs.schedmd.com/show_bug.cgi?id=2713>`_.
 
-If compute nodes mount Lustre or NFS file systems, it may be a good idea to configure cgroup.conf_ with::
-
-  ConstrainKmemSpace=no
-
-See the cgroup.conf_ man-page, bug_3874_ and 
-`[slurm-dev] Interaction between cgroups and NFS <https://groups.google.com/forum/#!search/slurm-dev/slurm-devel/pOSFvh86_Vw/h2Nz6IjyAgAJ>`_.
-This requires Slurm_ 17.02.5 or later, see NEWS_.
 After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfigure``.
 
 .. _bug_3874: https://bugs.schedmd.com/show_bug.cgi?id=3874
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
-
-
-Activating Cgroups
-..................
-
-Now propagate the updated files slurm.conf_ and cgroup.conf_ to all compute nodes and restart their slurmd_ service.
-
-Cgroup bugs
-...........
-
-There may be some problems with Cgroups.
-
-Jobs may crash with an error like::
-
-  slurmstepd: error: xcgroup_instantiate: unable to create cgroup '/sys/fs/cgroup/memory/slurm/uid_207887' : No space left on device
-
-The bug_3890_ explains this, it may be a kernel bug (CentOS 7 has kernel 3.10), see:
-
-* https://github.com/torvalds/linux/commit/73f576c04b9410ed19660f74f97521bee6e1c546
-* https://github.com/torvalds/linux/commit/24ee3cf89bef04e8bc23788aca4e029a3f0f06d9
-
-**Workaround**: Reboot the node.
-
-.. _bug_3890: https://bugs.schedmd.com/show_bug.cgi?id=3890
 
 Node Health Check
 -----------------
@@ -514,7 +447,7 @@ Nvidia has a new *Data Center GPU Manager* (DCGM_) suite of tools which includes
 Download of DCGM_ requires membership of the Data Center GPU Manager (DCGM_) Program.
 Install the RPM by::
 
-  yum install datacenter-gpu-manager-1.7.1-1.x86_64.rpm
+  dnf install datacenter-gpu-manager-1.7.1-1.x86_64.rpm
 
 Run the NVVS_ tool::
 
@@ -921,10 +854,6 @@ Start and enable the slurmctld_ daemon::
   systemctl start slurmctld.service
   systemctl status slurmctld.service
 
-**Warning:** 
-With Slurm 14.x and a compute node running RHEL 7 there is a bug `systemctl start/stop does not work on RHEL 7 <https://bugs.schedmd.com/show_bug.cgi?id=1182>`_.
-This problem has apparently been resolved in Slurm 15.08.
-
 Copy slurm.conf to all nodes
 ----------------------------
 
@@ -1125,7 +1054,7 @@ Documentation of pam_slurm_adopt_ is discussed in bug_3567_.
 .. _pam_slurm_adopt: https://slurm.schedmd.com/pam_slurm_adopt.html
 .. _pam: https://github.com/SchedMD/slurm/tree/master/contribs/pam
 
-The PAM usage of, for example, ``/etc/pam.d/system-auth`` on CentOS/RHEL is configured through the authconfig_ command.
+The PAM usage of, for example, ``/etc/pam.d/system-auth`` on RHEL is configured through the authconfig_ command.
 
 .. _pam_slurm: https://slurm.schedmd.com/faq.html#pam
 .. _authconfig: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System-Level_Authentication_Guide/authconfig-addl-auth.html
@@ -1313,9 +1242,8 @@ There are several possible solutions:
   * CMake_ version 3.6 (or greater) is required.
     Make sure the EPEL repo is enabled, then install this package::
 
-      yum install epel-release
-      yum install cmake3    # CentOS 7 and other EL7 systems
-      dnf install cmake     # EL8 systems and newer
+      dnf install epel-release
+      dnf install cmake
 
   * Download the source::
 
@@ -1333,13 +1261,13 @@ There are several possible solutions:
       make package
 
     Here the ``..`` just refers to the parent directory.
-    The generated RPM package may be named similar to ``auto_tmpdir-1.0.1-21.08.8.el8.x86_64.rpm``.
+    The generated RPM package may be named similar to ``auto_tmpdir-1.0.1-23.11.8.el8.x86_64.rpm``.
 
-  * **Note:** If you are **upgrading Slurm** to a new major version (like 21.08 to 22.05), you **must use a test node** to build the new auto_tmpdir_ RPM:
+  * **Note:** If you are **upgrading Slurm** to a new major version (like 23.11 to 24.05), you **must use a test node** to build the new auto_tmpdir_ RPM:
 
     1. Uninstall any preexisting RPM::
 
-         yum remove auto_tmpdir
+         dnf remove auto_tmpdir
 
     2. Upgrade Slurm_ to the new version.
 
@@ -1655,20 +1583,11 @@ In the configuration file these ports are by default (see slurm.conf_)::
   SlurmdPort=6818
   SchedulerPort=7321
 
-CentOS7/RHEL7 firewall
-----------------------
-
-The CentOS7/RHEL7 default firewall service is firewalld_ and **not** the well-known *iptables* service.
-The dynamic firewall daemon firewalld_ provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. 
-See `Introduction to firewalld <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html>`_.
-
-A nice introduction is `RHEL7: How to get started with Firewalld <https://www.certdepot.net/rhel7-get-started-firewalld/>`_.
-
 .. _firewalld: https://fedoraproject.org/wiki/FirewallD
 
 Install firewalld_ by::
 
-  yum install firewalld firewall-config
+  dnf install firewalld firewall-config
 
 Head/Master node
 ................
@@ -1844,12 +1763,12 @@ Please note that job_submit.lua.example_ has an issue with use of ``log.user()``
 
 On the slurmctld_ server you may start with this example::
 
-  cp ~/rpmbuild/BUILD/slurm-22.05.8/etc/job_submit.lua.example /etc/slurm/job_submit.lua
+  cp ~/rpmbuild/BUILD/slurm-23.11.8/etc/job_submit.lua.example /etc/slurm/job_submit.lua
 
-(replace the 22.05 version number) and read in the Lua_manual_ about Lua_ programming.
+(replace the 23.11 version number) and read in the Lua_manual_ about Lua_ programming.
 Install also the Lua_ package::
 
-  yum install lua
+  dnf install lua
 
 Inspiration for writing you custom ``job_submit.lua`` script can be found in:
 
@@ -1928,7 +1847,7 @@ Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in 
     return slurm.ESLURM_INVALID_PARTITION_NAME
   end
 
-It is worth noting that the Lua_ version 5.1.4 from RHEL/CentOS 7 does not handle nil_ values well in all cases as discussed in bug_19564_:
+It is worth noting that the Lua_ version 5.1.4 from EL7 does not handle nil_ values well in all cases as discussed in bug_19564_:
 When printing a string with a nil_ value an error such as *bad argument #2 to 'format' (string expected, got nil)* may occur.
 Therefore arguments to a print function must be checked for nil_ values when using Lua_ 5.1.4.
 The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
@@ -1941,7 +1860,7 @@ Configure Slurm for Lua JobSubmitPlugins
 
 The Job_Submit_Plugin_ will only execute the Lua_ script named ``/etc/slurm/job_submit.lua`` on the slurmctld_ host, and it is not used by any other nodes.
 
-Then configure slurm.conf_ with this parameter (undocumented prior to 22.05.3)::
+Then configure slurm.conf_ with this parameter::
 
   JobSubmitPlugins=lua
 
