@@ -211,7 +211,6 @@ See the Slurm_Quick_Start_ Administrator Guide, especially the section below thi
 
 You must decide which Slurm_ plugins to activate in the RPM packages which you build, especially items such as:
 
-* MySQL_ for accounting support
 * cgroup_ Task Affinity
 * Munge_ support
 * Lua Support
@@ -228,9 +227,10 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 
 Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm plugins::
 
+  dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth 
 
-If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install::
+If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_ (see above about newer versions)::
 
   dnf install munge munge-libs munge-devel
 
@@ -253,10 +253,8 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 
      dnf install freeipmi-devel
 
-   See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page.
-
-   Since the official RPM repos may contain old versions, it may be necessary to build newer ``freeipmi`` RPMs from a development version (such as master),
-   see the section on :ref:`ipmi_power_monitoring`.
+   See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page,
+   and the section on :ref:`ipmi_power_monitoring`.
 
 2. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
@@ -271,9 +269,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
    
      dnf install jq
 
-3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing this library::
-
-     dnf install libyaml-devel
+3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library.
 
    **Important:** The `libyaml` **must** be version 0.2.5 or later, see bug_17673_.
    The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
@@ -290,7 +286,7 @@ Certain Slurm tools and plugins require additional prerequisites **before** buil
 Install MariaDB database
 ------------------------
 
-First install the MariaDB_ database 10.3 (a replacement for MySQL_)::
+First install the MariaDB_ database version 10.3::
 
   dnf install mariadb-server mariadb-devel
 
