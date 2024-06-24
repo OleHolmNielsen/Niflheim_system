@@ -35,7 +35,7 @@ Read more in the Slurm_ Network_Configuration_Guide_.
 Slurm configuration and slurm.conf
 ==================================
 
-Starting from Slurm_ 17.11 you probably want to look at the example configuration files found in this RPM::
+You probably want to look at the example configuration files found in this RPM::
 
   rpm -q slurm-example-configs
 
@@ -59,7 +59,7 @@ Copy the HTML files to your $HOME directory, for example::
 Configless Slurm setup
 ----------------------
 
-With Slurm_ 20.02 there is a new configless_ feature that allows the compute nodes — specifically the slurmd_ process — 
+The configless_ feature that allows the compute nodes — specifically the slurmd_ process — 
 and user commands running on login nodes to pull configuration information directly from the slurmctld_ instead of from a pre-distributed local file. 
 The order of precedence for determining what configuration source to use is listed in the configless_ page.
 
@@ -899,16 +899,6 @@ This will cause each processor socket to have **two NUMA domains**, one for each
   slurmd: Considering each NUMA node as a socket
   CPUs=40 Boards=1 SocketsPerBoard=4 CoresPerSocket=10 ThreadsPerCore=1 RealMemory=385380
 
-**Note for Slurm 20.02**: The *Boards=1 SocketsPerBoard=2* configuration gives error messages, see bug_9241_ and bug_9233_.
-Use *Sockets=* in stead::
-
-  NodeName=test001 Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 RealMemory=8010 TmpDisk=32752 Feature=xeon
-
-This has been fixed in Slurm 20.02.4.
-
-.. _bug_9241: https://bugs.schedmd.com/show_bug.cgi?id=9241
-.. _bug_9233: https://bugs.schedmd.com/show_bug.cgi?id=9233
-
 Here the ``TmpDisk`` is defined in slurm.conf_ as the size of the **TmpFS** file system (default: ``/tmp``).
 It is possible to define another temporary file system in slurm.conf_, for example::
 
@@ -1211,7 +1201,7 @@ Jobs may be storing temporary files in ``/tmp``, ``/scratch``, and ``/dev/shm/``
 These directories may be filled up, and no clean-up is done after the job exits.
 There are several possible solutions:
 
-* The job_container_tmpfs_ plugin which was introduced in Slurm_ 20.11.5.
+* The job_container_tmpfs_ plugin.
   You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as bug_11183_ and bug_11135_ for further details.
   The job_container_tmpfs_ plugin uses Linux_namespaces_.
 
@@ -1468,16 +1458,9 @@ Some *defaults* may be configured in slurm.conf_ for similar compute nodes, for 
   NodeName=q002
   ...
 
-**Note for Slurm 20.02**: The *Boards=1 SocketsPerBoard=2* configuration gives error messages, see bug_9241_.
-Use this in stead::
+Node **features** (similar to node **properties** used in the Torque_ resource manager) are defined for each *NodeName* in slurm.conf_ by:
 
-  NodeName=DEFAULT Sockets=2 CoresPerSocket=2 ThreadsPerCore=1 RealMemory=8000 TmpDisk=32752 Weight=1
-
-.. _Torque: https://adaptivecomputing.com/cherry-services/torque-resource-manager/
-
-Node **features**, similar to node **properties** used in the Torque_ resource manager are defined for each *NodeName* in slurm.conf_ by:
-
-* Feature:
+* Feature::
 
     A comma delimited list of arbitrary strings indicative of some characteristic associated with the node.
     There is no value associated with a feature at this time, a node either has a feature or it does not.
@@ -1490,11 +1473,12 @@ Some examples are::
   NodeName=q001
   NodeName=q002
 
+.. _Torque: https://adaptivecomputing.com/cherry-services/torque-resource-manager/
+
 NodeSet configuration
 ---------------------
 
-From Slurm 20.02 a new *NodeSet* configuration is available in slurm.conf_.
-
+A new *NodeSet* configuration is available in slurm.conf_.
 The nodeset configuration allows you to define a name for a specific set of nodes which can be used to simplify the partition configuration section, 
 especially for heterogenous or condo-style systems. 
 Each nodeset may be defined by an explicit list of nodes, and/or by filtering the nodes by a particular configured feature.
