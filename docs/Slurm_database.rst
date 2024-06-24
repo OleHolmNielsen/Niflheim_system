@@ -65,8 +65,6 @@ or even better on a PCIe_ NVMe_ disk drive.
 
 Such disks must be qualified for high-volume random small read/write operations relevant for databases,
 and should be built with the *Non-Volatile Memory Express* (NVMe_) storage interface standard for reliability and performance.
-It seems that NVMe_ support was added to Linux kernel 3.3 (and later), so it should work with RHEL7/CentOS7.
-A new scalable block layer for high-performance SSD storage was added in kernel 3.13.
 
 A disk size of 200 GB or 400 GB should be sufficient.
 Consider installing 2 disk drives and run them in a RAID-1 mirrored configuration.
@@ -80,8 +78,8 @@ Install slurmdbd package
 
 Install the slurm database RPM on the database-only (slurmdbd service) node::
 
-  export VER=22.05.8-1  # Use the latest version
-  yum install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm
+  export VER=23.11.8-1  # Use the latest version
+  dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm
 
 Explicitly enable the service::
 
@@ -91,10 +89,7 @@ Set up MariaDB database
 =======================
 
 The accounting_ page has a section named *MySQL Configuration* which should be studied first.
-Please note:
-
-* CentOS7/RHEL7 has replaced MySQL_ by the MariaDB_ database version 5.5.
-* CentOS8/RHEL8 contains the MariaDB_ database version 10.3.
+RHEL8 and EL8 clones contain the MariaDB_ database version 10.3.
 
 .. _MariaDB: https://mariadb.org/
 
@@ -105,7 +100,7 @@ Make sure the MariaDB_ packages were installed **before** you built the Slurm_ R
 
 Otherwise you must install MariaDB_ packages::
 
-  yum install mariadb-server mariadb-devel
+  dnf install mariadb-server mariadb-devel
 
 and rebuild all RPMs with mysql support as shown in :ref:`Slurm_installation`::
 
@@ -114,7 +109,6 @@ and rebuild all RPMs with mysql support as shown in :ref:`Slurm_installation`::
 If you will use Ansible_ to manage the database, Ansible_ needs this Python package::
 
   dnf install python3-mysql   # EL8 and EL9
-  yum install MySQL-python    # CentOS7/RHEL7
 
 .. _Ansible: https://www.ansible.com/
  
@@ -457,8 +451,8 @@ You can show the tables by::
 
 For compressing the (large) database dumps, install the *gzip*, *bzip2*, and perhaps the *lbzip2* package::
 
-  yum install gzip bzip2
-  yum install lbzip2    # From EPEL
+  dnf install gzip bzip2
+  dnf install lbzip2    # From EPEL
 
 .. _Bug_10295: https://bugs.schedmd.com/show_bug.cgi?id=10295
 .. _mysqldump: https://mariadb.com/kb/en/mysqldump/
@@ -581,7 +575,7 @@ You should run the mysql_upgrade_ command whenever **major (or even minor) versi
   mysql_upgrade -p
 
 It may be necessary to force an upgrade if you have restored a database dump made on an earlier version of MariaDB_,
-say, when migrating from CentOS7/RHEL7 to CentOS8/RHEL8::
+say, when migrating from CentOS7/RHEL7 to EL8::
 
   mysql_upgrade -p --force
 
@@ -593,7 +587,6 @@ since there are some incompatible changes between 5.5 and 10.
 
 .. _mysql_upgrade: https://mariadb.com/kb/en/library/mysql_upgrade/
 .. _Upgrading_MariaDB: https://mariadb.com/kb/en/upgrading/
-
 .. _MariaDB_10.2.1_modifications:
 
 Slurm database modifications required for MariaDB 10.2.1 and above
@@ -603,7 +596,7 @@ In MariaDB_ 10.2.1 and above there are some **important changes** which have bee
 Several Slurm database tables must be altered while the slurmdbd_ is stopped.
 Please note that EL7 contains MariaDB_ version 5.5, and EL8 contains MariaDB_ version 10.3,
 so this point is **important**, for example, when upgrading from EL7 to EL8!
-This has been resolved from Slurm 22.05.7.
+This has been resolved from Slurm_ 22.05.7.
 
 We have discussed the procedure for MariaDB_ 10.2.1 and above in details in bug_15168_.
 A future version of Slurm may perform these changes automatically.
