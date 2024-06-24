@@ -10,6 +10,9 @@ These pages constitute a HowTo_ guide for setting up a Slurm workload manager so
 based on RHEL_ 8 Linux and clones such as AlmaLinux_ and RockyLinux_.
 It is strongly recommended to first read the official Slurm_documentation_ pages.
 
+Older archived versions of these pages with information related to pre-23.02 Slurm and CentOS 7 Linux may be found in the archive_
+or in the v24.06 release of these pages.
+
 Much of the information should be relevant on other Linux versions as well.
 The present pages are **not** official documents from SchedMD_ but only a user's contribution to the Slurm community.
 
