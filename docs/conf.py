@@ -8,11 +8,11 @@
 import sphinx_rtd_theme
 
 project = 'Niflheim'
-copyright = '2022, Ole Holm Nielsen'
+copyright = '2024, Ole Holm Nielsen'
 author = 'Ole Holm Nielsen'
 
-version = '2.0'
-release = '2.0'
+version = '24.07'
+release = '24.07'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
