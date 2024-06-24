@@ -430,7 +430,7 @@ into::
 The *network-online* target will ensure that the network is online before starting the daemons.
 Reboot the system to verify the daemon startup.
 
-This modification may be beneficial on all Systemd_ systems, including EL8 and EL7.
+This modification may be beneficial on all Systemd_ systems including EL8.
 
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _bug_11878: https://bugs.schedmd.com/show_bug.cgi?id=11878
