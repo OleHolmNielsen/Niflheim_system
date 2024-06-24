@@ -472,11 +472,7 @@ Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
 
-* You may upgrade at most by 3 major versions, see the Upgrades_ page:
-
-  * Slurm daemons will support RPCs and state files from the **two previous major releases**
-    (e.g. a version 23.11.x SlurmDBD will support slurmctld daemons and commands with a version of 23.11.x, 23.02.x or 22.05.x). 
-
+* You may upgrade at most by 2 (3 from 24.11) major versions, see the Upgrades_ page:
 * In other words, when changing the version to a higher release number (e.g from 22.05.x to 23.02.x) always upgrade the slurmdbd_ daemon first.
 * Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values.
 * The recommended upgrade order is that versions may be mixed as follows::
@@ -814,12 +810,12 @@ TODO: Find a way to read relevant MPI libraries like this example::
 Upgrade slurmd on nodes
 .......................
 
-First determine which Slurm_ version the nodes are running::
+.. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 
-  clush -bg <partition> slurmd -V         # Using ClusterShell
-  pdsh -g <partition> slurmd -V | dshbak  # Using PDSH
+First determine which Slurm_ version the nodes are running,
+using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
 
-See the :ref:`SLURM` page about ClusterShell_ or PDSH_.
+  clush -bg <partition> slurmd -V
 
 The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.11.8) on all nodes::
 
