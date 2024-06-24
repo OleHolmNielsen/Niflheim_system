@@ -7,7 +7,7 @@ describing the installation of Slurm batch queue system, software modules, and n
 please refer to the page_for_users_ in stead).
 
 Older archived versions of these pages with information related to pre-23.02 Slurm and CentOS 7 Linux may be found in the archive_
-or in the v24.06 release of these GitHub pages.
+or in the v24.06 release of these pages.
 
 .. _page_for_users: https://wiki.fysik.dtu.dk/Niflheim_users/Niflheim_Getting_Started/
 .. _Ansible_configuration: https://wiki.fysik.dtu.dk/ITwiki/Ansible_configuration/
