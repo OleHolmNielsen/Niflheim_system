@@ -41,12 +41,9 @@ Slurm configuration for cloud nodes
 Prerequisites
 -------------
 
-Prior to Slurm_ 22.05.6 it is required to enable JSON_ in the slurmctld_ in order to use *ResumeProgram* as specified in the Power_Saving_Guide_,  
-see bug_14925_.
-If you run an older Slurm_ version, 
-you must make sure to install these prerequisites before building Slurm_ RPM packages::
+Make sure to install these prerequisites before building Slurm_ RPM packages::
 
-  yum install http-parser-devel json-c-devel
+  dnf install http-parser-devel json-c-devel
 
 Check that slurmctld_ has JSON_ support::
 
@@ -84,13 +81,6 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
   In stead define it only on any relevant partitions, for example::
 
     PartitionName=my_partition SuspendTime=3600
-
-* For Slurm_ prior to 23.02 you must set this in slurm.conf_, see bug_14270_::
-
-    PrivateData=cloud
-
-  This is documented from Slurm_ 22.05.2, and the issue has been fixed in 23.02.
-  Without this flag, cloud nodes will not appear in the output of commands like sinfo_ unless they are powered on, even for the *slurm* and *root* users.
 
 * The ``SlurmctldParameters=idle_on_node_suspend`` causes nodes drained for maintenance purposes to become idle and available
   for running jobs.
@@ -203,9 +193,9 @@ See:
 * `What is Azure CLI <https://docs.microsoft.com/en-us/cli/azure/what-is-azure-cli>`_
 * `Get started with Azure CLI <https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli>`_.
 
-Install Azure_CLI_ using `yum <https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-yum>`_:
+Install Azure_CLI_ using `dnf <https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=dnf>`_:
 
-* On CentOS/RHEL import the Microsoft repository key::
+* On RHEL import the Microsoft repository key::
 
     rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
@@ -220,7 +210,7 @@ Install Azure_CLI_ using `yum <https://docs.microsoft.com/en-us/cli/azure/instal
 
 * Install the azure-cli package::
 
-    yum install azure-cli
+    dnf install azure-cli
 
 Alternatively, the following Ansible_ role may be used::
 
@@ -595,7 +585,7 @@ Increasing machine size
 
 .. _HelpSupport: https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview
 
-Create a CentOS virtual machine
+Create a virtual machine
 -------------------------------
 
 Some RedHat resources:
