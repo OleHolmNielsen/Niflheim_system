@@ -795,10 +795,16 @@ An example output is::
   TOTAL       280    283.2     3169     2589        0        0        0
   Average      56     56.6      633      517        0        0        0
 
+Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
+One Kilowatt-hour_ is 3.6 Mega Joule_ . 
+
 
 .. _showpower: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
 .. _RAPL: https://dl.acm.org/doi/10.1145/1840845.1840883
 .. _turbostat: https://www.linux.org/docs/man8/turbostat.html
+.. _Joule: https://en.wikipedia.org/wiki/Joule
+.. _watt: https://en.wikipedia.org/wiki/Watt
+.. _Kilowatt-hour: https://en.wikipedia.org/wiki/Kilowatt-hour
 
 turbostat utility
 .................
