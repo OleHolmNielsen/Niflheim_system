@@ -81,12 +81,7 @@ It is most convenient to install an Lmod_ RPM package on all nodes.
 If you don't have **root** permissions on the system, you can install Lmod_ as described in
 `Installing Lmod without root permissions <https://docs.easybuild.io/installing-lmod-without-root-permissions/>`_.
 
-There are no official Lmod_ RPM packages available from the authors, so for CentOS/RHEL Linux you need to install Lmod_ from the EPEL_ repository.
-First you install the newest version of *epel-release* RPM for EL7, for example::
-
-  CentOS7: yum install epel-release
-  RHEL7:  yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
+There are no official Lmod_ RPM packages available from the authors, so for RHEL Linux and clones you need to install Lmod_ from the EPEL_ repository.
 On EL8 systems install EPEL_ and enable the Powertools::
 
   dnf config-manager --set-enabled powertools
@@ -97,11 +92,11 @@ On EL8 systems install EPEL_ and enable the Powertools::
 To download the Lmod_ and prerequisite Lua_ packages directly (for compute nodes) get them from https://dl.fedoraproject.org/pub/epel/7/x86_64/l/.
 The Lua_ packages required are::
 
-  yum install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
+  dnf install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
 
 Then install Lmod_ and prerequisite Lua_ packages::
 
-  yum install Lmod
+  dnf install Lmod
 
 The minimum Lmod_ version is 6.5.1 as of EasyBuild_ 3.7.
 
@@ -162,19 +157,13 @@ Prerequisite modules are listed in Dependencies_.
 
 .. _Dependencies: https://docs.easybuild.io/installation/#dependencies
 
-For EL8 as well as RHEL/CentOS 7 these packages seem to suffice::
+For EL8 these packages seem to suffice::
 
-  yum install tar gzip bzip2 unzip xz make patch python3 python3-setuptools gcc-c++ Lmod 
+  dnf install tar gzip bzip2 unzip xz make patch python3 python3-setuptools gcc-c++ Lmod 
 
 Modules such as UCX require some OS dependencies::
 
-  yum install libibverbs-devel rdma-core-devel
-
-Old versions of EasyBuild might also require the *python-mock* RPM, see https://github.com/easybuilders/easybuild-framework/issues/2712
-
-RHEL/CentOS 7: Some optional packages from EPEL_ may perhaps be needed, see Dependencies_::
-
-  yum install GitPython pysvn graphviz 
+  dnf install libibverbs-devel rdma-core-devel
 
 Bootstrapping
 -------------
@@ -208,11 +197,9 @@ The steps required for a normal (**non-root**) user are:
 
     export EASYBUILD_PREFIX=/home/opt/modules
 
-  If your environment is inhomogeneous with different OS versions and/or CPU architectures, you could create separate subdirectories for each.
-  For example, you may have both CentOS 7 (el7) and CentOS 6 (el6)::
+  If your environment is inhomogeneous with different OS versions and/or CPU architectures, you could create separate subdirectories for each, for example::
 
-    export EASYBUILD_PREFIX=/home/opt/modules/el7/x86_64
-    export EASYBUILD_PREFIX=/home/opt/modules/el6/i686
+    export EASYBUILD_PREFIX=/home/opt/modules/<os-type>/x86_64
 
   Obviously, you would need to select somehow the appropriate top-level directory for each computer.
 
@@ -312,9 +299,9 @@ Building in a RAM disk
 Building may be a lot faster if the (temporary) software build directory is located in a RAM disk in stead of a hard disk or on a remote server.
 Define this variable in your ``.bashrc`` file::
 
-  export EASYBUILD_BUILDPATH=/dev/shm                  # CentOS/RHEL  
+  export EASYBUILD_BUILDPATH=/dev/shm                  # RHEL  
   export EASYBUILD_BUILDPATH=/dev/shm/$USER            # Debian based
-  export EASYBUILD_BUILDPATH=/run/user/$UID/eb_build   # CentOS/RHEL  
+  export EASYBUILD_BUILDPATH=/run/user/$UID/eb_build   # RHEL  
 
 Beware of the file system sizes:
 
@@ -343,7 +330,7 @@ see:
 * `Providing A Standard Set Of Modules for all Users <http://lmod.readthedocs.io/en/latest/070_standard_modules.html>`_.
 * Mailing list thread https://lists.ugent.be/wws/arc/easybuild/2016-10/msg00052.html
 
-On CentOS systems the shell initialization scripts are in ``/etc/profile.d/``.
+On RHEL based systems the shell initialization scripts are in ``/etc/profile.d/``.
 The Lmod_ RPM has installed several scripts here.
 See also the Lmod_User_Guide_.
 
@@ -485,11 +472,11 @@ Notes:
 
 * The ASE module requires the *openssl-devel* and *libibverbs-devel* (Infiniband) RPMs (to be installed by the *root* user)::
 
-     root# yum install openssl-devel libibverbs-devel libX11-devel
+     root# dnf install openssl-devel libibverbs-devel libX11-devel
 
 * If you build the Tk package, there is a TK_bug_ requiring you to preinstall the *libX11-devel* library::
 
-     root# yum install libX11-devel
+     root# dnf install libX11-devel
 
 .. _Tk_bug: https://github.com/hpcugent/easybuild-easyconfigs/issues/2261
 
@@ -590,100 +577,7 @@ Search for available foss_ toolchains::
 
 To build one of the foss_ toolchains::
 
-  eb foss-2019b.eb -r
-
-Intel compiler toolchains
--------------------------
-
-Read `Using Environment Modules with Intel Development Tools <https://software.intel.com/en-us/articles/using-environment-modules-with-the-intel-development-tools>`_ (refers to old Tcl modules).
-
-Search for the Intel compiler suite toolchains::
-
-    eb -S '^intel*'
-
-The Intel® Parallel_Studio_ XE 2019 compiler (see `Featured Documentation <https://software.intel.com/en-us/parallel-studio-xe/documentation/featured-documentation>`_) 
-installation tar-ball files must first be downloaded under your license with Intel.
-Download separately the tar-balls for ICC, IFORT and MKL_.
-
-The Intel_Performance_Libraries_ including MKL_ and Intel_MPI_ are now available as **free downloads** (from version 2018.2 and onwards).
-Please see also https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-yum-repo
-
-.. _Parallel_Studio: https://software.intel.com/en-us/intel-parallel-studio-xe
-.. _Intel_Release_notes: https://software.intel.com/en-us/articles/intel-parallel-studio-xe-2016-update-3-readme
-.. _Intel_Performance_Libraries: https://software.intel.com/en-us/performance-libraries
-.. _Intel_MPI: https://software.intel.com/en-us/intel-mpi-library
-.. _MKL: https://software.intel.com/en-us/mkl
-
-Installation procedure
-......................
-
-As the *modules* user create source directories where EasyBuild_ is going to look::
-
-  mkdir -p $HOME/sources/iccifort $HOME/sources/imkl $HOME/sources/impi
-
-Then move the tar-balls into place.  For example, with a 2019 compiler version (and the recommended 2018 version of Intel MPI)::
-
-  mv parallel_studio_xe_2019_update5_composer_edition.tgz $HOME/modules/sources/i/iccifort/
-  mv l_mkl_2019.5.281.tgz $HOME/modules/sources/i/imkl/
-  mv l_mpi_2018.5.288.tgz $HOME/modules/sources/i/impi/
-
-or alternatively make soft-links in these 3 directories pointing to where you put the tar-ball files.
-
-The Intel compiler easyconfig_ files specify the location of the Intel license file as an **absolute path** (current directory or relative paths will not work)::
-
-  license_file = HOME + '/licenses/intel/license.lic'
-
-so it is recommended to use this convention and copy your site's private license file (for example, ``license.lic``)::
-
-  mkdir -p $HOME/licenses/intel
-  cp license.lic $HOME/licenses/intel/license.lic
-
-If you use a FlexLM_ license manager server it is possible to use another approach (see https://lists.ugent.be/wws/arc/easybuild/2016-11/msg00008.html), for example::
-
-  env INTEL_LICENSE_FILE=28518@<license-server> eb ifort-xxx.eb
-
-It is recommended that *<license-server>* is a CNAME address pointing in DNS to the real license server. 
-
-.. _FlexLM: https://software.intel.com/en-us/articles/intel-software-license-manager-getting-started-tutorial
-
-In summary:
-
-* Intel license_file must be specified.  Select a long-term valid name.
-* Can be overridden by setting the environment variable INTEL_LICENSE_FILE before running eb.
-* Absolute path example: license_file = HOME + '/licenses/intel/license.lic'
-* License server example: license_file = port-number@license-server 
-
-If you have the full *Intel® Parallel Studio XE 2019 Cluster Edition* you can build the full Intel compiler toolchain (including icc, ifort, impi, imkl)::
-
-  eb intel-2019b.eb -r
-
-To try out the latest Development_EB_files_.
-
-.. _Development_EB_files: https://github.com/hpcugent/easybuild-easyconfigs/tree/develop/easybuild/easyconfigs/
-
-It turns out that 2016 updates 2 and 3, and perhaps also the 2017 versions (?) may cause code crashes, see https://lists.ugent.be/wws/arc/easybuild/2016-11/msg00004.html
-
-Intel iomkl toolchain
----------------------
-
-The *OpenMPI 2.1.3* build of iomkl_ has some prerequisite CentOS packages::
-
-  yum install libpciaccess-devel libxml2-devel
-
-.. _iomkl: https://docs.easybuild.io/version-specific/supported-software/#iomkl
-
-We have built an old 2016 version of the iomkl_ toolchain using modified EB files with these steps::
-
-  eb icc-2016.3.210-GCC-5.4.0-2.26.eb iccifort-2016.3.210-GCC-5.4.0-2.26.eb ifort-2016.3.210-GCC-5.4.0-2.26.eb -r   # Build compiler modules
-  eb OpenMPI-1.10.3-iccifort-2016.3.210-GCC-5.4.0-2.26.eb                                                           # Only for Slurm support
-  eb iompi-2016.09-GCC-5.4.0-2.26.eb imkl-11.3.3.210-iompi-2016.09-GCC-5.4.0-2.26.eb -r                             # Build OpenMPI and MKL modules
-  eb iomkl-2016.09-GCC-5.4.0-2.26.eb -r                                                                             # Build iomkl toolchain
-
-Here we have configured our pre-existing GCC-5.4.0 compiler together with the Intel compilers, which requires tweaking some Development_EB_files_.
-
-Slurm support in OpenMPI requires adding this line to the EB file::
-
-  configopts += '--with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr '  # Support of Slurm
+  eb foss-2023b.eb -r
 
 Toolchain step by step guide
 ----------------------------

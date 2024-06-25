@@ -17,10 +17,6 @@ and the `Linux Ethernet Bonding Driver HOWTO <http://www.mjmwired.net/kernel/Doc
 The *kernel-doc* RPM also documents port bonding in the file ``/usr/share/doc/kernel-doc-*/Documentation/networking/bonding.txt``
 or in http://www.kernel.org/doc/Documentation/networking/bonding.txt.
 
-For CentOS5 Linux this is documented in 14.2.3 Channel_Bonding_Interfaces_.
-
-.. _Channel_Bonding_Interfaces: http://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-networkscripts-interfaces-chan.html
-
 .. _bonding_Module_Directives: http://www.centos.org/docs/5/html/5.2/Deployment_Guide/s3-modules-bonding-directives.html
 
 Loading the bonding kernel module
@@ -70,70 +66,6 @@ Switch forward delay is related to the Spanning Tree Protocol (if it's configure
 `Spanning Tree Protocol Timers <http://www.cisco.com/en/US/tech/tk389/tk621/technologies_tech_note09186a0080094954.shtml>`_::
 
       forward delay: The forward delay is the time that is spent in the listening and learning state.
-
-Modifying network scripts on RHEL6/CentOS6
-==========================================
-
-For RHEL6 read `Using Channel Bonding <http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/sec-Using_Channel_Bonding.html>`_.
-
-Create the file ``/etc/modprobe.d/bonding.conf`` with the contents::
-
-  alias bond0 bonding
-
-Edit the files ``/etc/sysconfig/network-scripts/ifcfg-*`` to configure bonding as described in 
-`8.2.4. Channel Bonding Interfaces <http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-networkscripts-interfaces-chan.html>`_.
-For using DHCP the file ``ifcfg-bond0`` should contain::
-
-  DEVICE=bond0
-  BOOTPROTO=dhcp
-  ONBOOT=yes
-  USERCTL=no
-  BONDING_OPTS="mode=6 miimon=100"
-
-and the interface files ``ifcfg-eth0,1`` should contain::
-
-  DEVICE=eth0 # or eth1
-  ONBOOT=yes
-  BOOTPROTO=dhcp
-  MASTER=bond0
-  SLAVE=yes
-  USERCTL=no
-
-Now restart the network::
-
-  service network restart
-
-or reboot the machine.
-
-Setting up port bonding in SystemImager cloning
-===============================================
-
- When using systemimager to clone the nodes these steps can be performed automatically using
- post-install scripts,
- e.g., `/var/lib/systemimager/scripts/post-install/20q.eth_bonding_config` script for the step 2.::
-
-   #!/bin/sh
-
-   # Get the Systemimager variables
-   . /tmp/post-install/variables.txt
-
-   # Name of the central server on this network
-   SERVER=audhumbla1
-   DOMAINNAME=dcsc.fysik.dtu.dk
-
-   # Correct the SystemImager eth0 config, turning eth0 into an Ethernet bonding device (bond0=eth0+eth1)
-   cp -p /etc/sysconfig/network-scripts/ifcfg-eth0 /tmp/ifcfg-eth0.BAK
-   cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-eth0
-   DEVICE=eth0
-   ONBOOT=yes
-   BOOTPROTO=dhcp
-   MASTER=bond0
-   SLAVE=yes
-   USERCTL=no
-   EOF
-
-   # Finished
-   cd
 
 Restart network services
 ========================

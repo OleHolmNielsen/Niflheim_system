@@ -122,7 +122,7 @@ Unfortunately, the switches' SSH server only accepts some obsolete ciphers as sh
 
 This was observed on OPA switches running firmware 10.8.4.0.5 (current as of March 2022).
 
-This will occur on all systems with **OpenSSH version 7.6** and later, for example, in RHEL 8, CentOS 8, and clones, but not on older RHEL 7 systems.
+This will occur on all systems with **OpenSSH version 7.6** and later, for example, in RHEL 8 and clones, but not on older RHEL 7 systems.
 See the `OpenSSH 7.6 release notes <https://www.openssh.com/txt/release-7.6>`_::
 
   ssh(1): do not offer CBC ciphers by default.
