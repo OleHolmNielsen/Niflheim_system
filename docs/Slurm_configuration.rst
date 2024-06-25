@@ -741,7 +741,7 @@ The ``slurmd.log`` may contain IPMI_ DCMI_ error messages such as::
 
 For such BMC_ types it is unfortunately not possible to perform power reading with the IPMI_ DCMI_ extensions,
 which is what has been implemented by Slurm_.
-The ``scontrol show node`` will report zero values for ``CurrentWatts`` and ``AveWatts`` for such nodes.
+The ``scontrol show node`` will report zero values for ``CurrentWatts`` and ``AveWatts`` for such nodes (note the definition of Watt_).
 
 For nodes which do not support the IPMI_ DCMI_ extensions,
 some error messages may be logged to ``slurmd.log``::
@@ -759,6 +759,8 @@ After reconfiguring the power values become available::
   $ scontrol show node n123
   ...
     CurrentWatts=641 AveWatts=480
+
+Note the definition of Watt_ .
 
 Notice some potentially incorrect power and CPU load values:
 
@@ -803,7 +805,7 @@ One Kilowatt-hour_ is 3.6 Mega Joule_ .
 .. _RAPL: https://dl.acm.org/doi/10.1145/1840845.1840883
 .. _turbostat: https://www.linux.org/docs/man8/turbostat.html
 .. _Joule: https://en.wikipedia.org/wiki/Joule
-.. _watt: https://en.wikipedia.org/wiki/Watt
+.. _Watt: https://en.wikipedia.org/wiki/Watt
 .. _Kilowatt-hour: https://en.wikipedia.org/wiki/Kilowatt-hour
 
 turbostat utility
