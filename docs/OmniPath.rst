@@ -7,6 +7,10 @@ Omni-Path network fabric by Cornelis Networks
 The Niflheim_ cluster has a 100 Gbit/s Intel OmniPath high speed network fabric.
 
 This page assumes a RHEL 8 Linux or EL8 clones system.
+Older archived versions of these pages with information related to CentOS 7 Linux may be found in the archive_ or in the v24.06 release of these pages.
+
+.. _archive: https://wiki.fysik.dtu.dk/Niflheim_system_archive/
+
 
 .. Contents::
 
