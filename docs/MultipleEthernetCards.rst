@@ -22,7 +22,7 @@ or in http://www.kernel.org/doc/Documentation/networking/bonding.txt.
 Loading the bonding kernel module
 =================================
 
-Read the Channel_Bonding_Interfaces_ manual and bonding_Module_Directives_ for the parameter values.
+Read the Channel_Bonding_Interfaces_ manual for the parameter values.
 Apparently it is preferred to enter bonding parameters in the file ``/etc/sysconfig/network-scripts/ifcfg-bond0``.
 
 For RHEL6 read `Using Channel Bonding <http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/sec-Using_Channel_Bonding.html>`_.

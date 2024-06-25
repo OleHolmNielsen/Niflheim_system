@@ -482,7 +482,7 @@ We attach the file psm2-demo.c__ for convenience.
 
 __ attachment:attachments/psm2-demo.c
 
-Make sure the PSM2_ packages have been installed::
+Make sure the PSM2 packages have been installed::
 
   rpm -q libpsm2 libpsm2-devel
 
@@ -516,7 +516,7 @@ Users may verify the correct locked memory limits by the command::
   # ulimit -l
   unlimited
 
-If the locked memory limit is too low, a rather strange error will be printed by the PSM2_ library::
+If the locked memory limit is too low, a rather strange error will be printed by the PSM2 library::
 
   PSM2 can't open hfi unit: -1 (err=23)
   PSM2 was unable to open an endpoint. Please make sure that the network link is
