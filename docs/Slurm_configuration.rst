@@ -707,7 +707,9 @@ Configure the acct_gather.conf_ file in ``/etc/slurm/``::
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=60
 
-and also this slurm.conf_ parameter, for example::
+You should disable ``EnergyIPMICalcAdjustment`` in acct_gather.conf_, see bug_20207_.
+
+Set also this slurm.conf_ parameter where example values may be::
 
   JobAcctGatherFrequency=task=120,energy=120
 
