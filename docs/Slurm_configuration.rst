@@ -713,6 +713,12 @@ Set also this slurm.conf_ parameter, where example values may be::
 
   JobAcctGatherFrequency=task=30,energy=30
 
+as described in the manual page::
+
+  The default value for task sampling interval is 30 seconds.
+  The default  value  for  all other intervals is 0.
+  Smaller (non-zero) values have a greater impact upon job performance,  but a value of 30 seconds is not likely to be noticeable for applications having less than 10,000 tasks.
+
 The ``JobAcctGatherFrequency`` should be >= ``EnergyIPMIFrequency``, see bug_20207_.
 
 * **IMPORTANT**:
