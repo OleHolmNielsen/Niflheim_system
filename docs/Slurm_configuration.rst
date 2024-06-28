@@ -702,14 +702,14 @@ Slurm_ can be configured for IPMI_ power monitoring by slurmd_ in the compute no
 
   AcctGatherEnergyType=acct_gather_energy/ipmi
 
-Configure the acct_gather.conf_ file in ``/etc/slurm/``::
+At the same time you must configure the acct_gather.conf_ file in ``/etc/slurm/``::
 
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=60
 
-You should disable ``EnergyIPMICalcAdjustment`` in acct_gather.conf_, see bug_20207_.
+Avoid, however, the ``EnergyIPMICalcAdjustment`` parameter in acct_gather.conf_, see bug_20207_.
 
-Set also this slurm.conf_ parameter where example values may be::
+Set also this slurm.conf_ parameter, where example values may be::
 
   JobAcctGatherFrequency=task=120,energy=120
 
