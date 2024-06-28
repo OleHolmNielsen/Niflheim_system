@@ -706,7 +706,12 @@ Configure the acct_gather.conf_ file in ``/etc/slurm/``::
 
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=60
-  EnergyIPMICalcAdjustment=yes
+
+and also this slurm.conf_ parameter, for example::
+
+  JobAcctGatherFrequency=task=120,energy=120
+
+The ``JobAcctGatherFrequency`` should be >= ``EnergyIPMIFrequency``, see bug_20207_.
 
 * **IMPORTANT**:
 
@@ -724,6 +729,7 @@ As a test you can monitor some power values as shown below.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _bug_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
 
 Non DCMI compliant BMCs
 .......................
