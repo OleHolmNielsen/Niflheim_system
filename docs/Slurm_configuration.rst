@@ -1221,103 +1221,109 @@ Temporary job directories
 
 Jobs may be storing temporary files in ``/tmp``, ``/scratch``, and ``/dev/shm/``.
 These directories may be filled up, and no clean-up is done after the job exits.
-There are several possible solutions:
+There are several possible solutions discussed below.
 
-* The job_container_tmpfs_ plugin.
-  You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as bug_11183_ and bug_11135_ for further details.
-  The job_container_tmpfs_ plugin uses Linux_namespaces_.
+The job_container_tmpfs_ plugin
+..................................
 
-  **WARNING:** 
-  NFS automount and ``job_container/tmpfs`` do not play well together prior to Slurm_ 23.02:
-  If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
-  The issue has been resolved in Slurm_ 23.02 according to bug_12567_.
+You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as bug_11183_ and bug_11135_ for further details.
+The job_container_tmpfs_ plugin uses Linux_namespaces_.
 
-  The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
+**WARNING:** 
+NFS automount and ``job_container/tmpfs`` do not play well together prior to Slurm_ 23.02:
+If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
+The issue has been resolved in Slurm_ 23.02 according to bug_12567_.
 
-    AutoBasePath=true
-    BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
+The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
 
-  It is **important** to use the new 23.02 option ``Shared=true`` since it enables using autofs_ on the node. 
+  AutoBasePath=true
+  BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
 
-  The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
+It is **important** to use the new 23.02 option ``Shared=true`` since it enables using autofs_ on the node. 
 
-    JobContainerType=job_container/tmpfs
-    PrologFlags=Contain
+The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
 
-* The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
+  JobContainerType=job_container/tmpfs
+  PrologFlags=Contain
 
-  A great advantage of this plugin that it actually works correctly with NFS home directories automounted by autofs_,
-  in contrast to Slurm's job_container_tmpfs_ plugin prior to 23.02 (see more below).
+The auto_tmpdir_ plugin 
+.................................
 
-  You can build a customized RPM package for this plugin:
+The auto_tmpdir_ SPANK_ plugin provides automated handling of temporary directories for jobs (see also `this page <https://docs.hpc.udel.edu/technical/slurm/caviness/auto_tmpdir>`_).
 
-  * CMake_ version 3.6 (or greater) is required.
-    Make sure the EPEL repo is enabled, then install this package::
+A great advantage of this plugin that it actually works correctly with NFS home directories automounted by autofs_,
+in contrast to Slurm's job_container_tmpfs_ plugin prior to 23.02 (see more below),
+however, it is a bit more complicated to install and maintain third-party plugins.
 
-      dnf install epel-release
-      dnf install cmake
+You can build a customized RPM package for the auto_tmpdir_ plugin:
 
-  * Download the source::
+* CMake_ version 3.6 (or greater) is required.
+  Make sure the EPEL repo is enabled, then install this package::
 
-      git checkout git@github.com:University-of-Delaware-IT-RCI/auto_tmpdir.git 
-      or:
-      git clone https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir.git
+    dnf install epel-release
+    dnf install cmake
 
-      cd auto_tmpdir
-      mkdir builddir
-      cd builddir
+* Download the source::
 
-  * Configure the node local temporary directory as ``/scratch/slurm-<slurm_jobid>`` (choose whatever scratch disk is appropriate for your cluster installation)::
+    git checkout git@github.com:University-of-Delaware-IT-RCI/auto_tmpdir.git 
+    or:
+    git clone https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir.git
 
-      cmake3 -DSLURM_PREFIX=/usr -DSLURM_MODULES_DIR=/usr/lib64 -DCMAKE_BUILD_TYPE=Release -DAUTO_TMPDIR_DEFAULT_LOCAL_PREFIX=/scratch/slurm- ..
-      make package
+    cd auto_tmpdir
+    mkdir builddir
+    cd builddir
 
-    Here the ``..`` just refers to the parent directory.
-    The generated RPM package may be named similar to ``auto_tmpdir-1.0.1-23.11.8.el8.x86_64.rpm``.
+* Configure the node local temporary directory as ``/scratch/slurm-<slurm_jobid>`` (choose whatever scratch disk is appropriate for your cluster installation)::
 
-  * **Note:** If you are **upgrading Slurm** to a new major version (like 23.11 to 24.05), you **must use a test node** to build the new auto_tmpdir_ RPM:
+    cmake3 -DSLURM_PREFIX=/usr -DSLURM_MODULES_DIR=/usr/lib64 -DCMAKE_BUILD_TYPE=Release -DAUTO_TMPDIR_DEFAULT_LOCAL_PREFIX=/scratch/slurm- ..
+    make package
 
-    1. Uninstall any preexisting RPM::
+  Here the ``..`` just refers to the parent directory.
+  The generated RPM package may be named similar to ``auto_tmpdir-1.0.1-23.11.8.el8.x86_64.rpm``.
 
-         dnf remove auto_tmpdir
+* **Note:** If you are **upgrading Slurm** to a new major version (like 23.11 to 24.05), you **must use a test node** to build the new auto_tmpdir_ RPM:
 
-    2. Upgrade Slurm_ to the new version.
+  1. Uninstall any preexisting RPM::
 
-    3. Rebuild the auto_tmpdir_ RPM as shown above.
+       dnf remove auto_tmpdir
 
-    4. Copy the auto_tmpdir_ RPM to where you keep the Slurm_ RPMs so that you can upgrade compute nodes with the ``slurm-*`` as well as ``auto_tmpdir`` simultaneously.
+  2. Upgrade Slurm_ to the new version.
 
-  * Install the ``auto_tmpdir`` RPM package on all slurmd_ compute nodes, as well as all submit/login nodes (see notes below).
+  3. Rebuild the auto_tmpdir_ RPM as shown above.
 
-  * Now you can create the file ``/etc/slurm/plugstack.conf`` (see the SPANK_ page) with contents::
+  4. Copy the auto_tmpdir_ RPM to where you keep the Slurm_ RPMs so that you can upgrade compute nodes with the ``slurm-*`` as well as ``auto_tmpdir`` simultaneously.
 
-      required    auto_tmpdir.so          mount=/tmp mount=/var/tmp
+* Install the ``auto_tmpdir`` RPM package on all slurmd_ compute nodes, as well as all submit/login nodes (see notes below).
 
-    Notes:
+* Now you can create the file ``/etc/slurm/plugstack.conf`` (see the SPANK_ page) with contents::
 
-    * The ``/etc/slurm/plugstack.conf`` file name can be changed by the *PlugStackConfig* parameter in slurm.conf_.
+    required    auto_tmpdir.so          mount=/tmp mount=/var/tmp
 
-    * If you use configless_ Slurm_ the ``/etc/slurm/plugstack.conf`` file is automatically distributed from the slurmctld_ host.
+  Notes:
 
-    * It is not required that ``plugstack.conf`` is identical or even installed on every node in the cluster, since Slurm_ does not check for that.
-      Therefore you can have different configurations on different nodes (except when you use configless_ Slurm_).
+  * The ``/etc/slurm/plugstack.conf`` file name can be changed by the *PlugStackConfig* parameter in slurm.conf_.
 
-    * If the ``plugstack.conf`` file is installed on a submit/login or compute node, it is **mandatory** that all plugins listed in the file are actually installed as well,
-      otherwise user commands or slurmd_ will fail with errors.
-      See a discussion in bug_14483_.
+  * If you use configless_ Slurm_ the ``/etc/slurm/plugstack.conf`` file is automatically distributed from the slurmctld_ host.
 
-  * **Quickly restart** the slurmd_ service on **all compute nodes** to actually activate the ``/etc/slurm/plugstack.conf`` feature::
+  * It is not required that ``plugstack.conf`` is identical or even installed on every node in the cluster, since Slurm_ does not check for that.
+    Therefore you can have different configurations on different nodes (except when you use configless_ Slurm_).
 
-      systemctl restart slurmd
+  * If the ``plugstack.conf`` file is installed on a submit/login or compute node, it is **mandatory** that all plugins listed in the file are actually installed as well,
+    otherwise user commands or slurmd_ will fail with errors.
+    See a discussion in bug_14483_.
 
-    This is required in order for new srun_ commands etc. to run correctly with the SPANK_ plugin.
-    See the SPANK_ manual page::
+* **Quickly restart** the slurmd_ service on **all compute nodes** to actually activate the ``/etc/slurm/plugstack.conf`` feature::
 
-      Note: Plugins loaded in slurmd context persist for the entire time slurmd is running, so if configuration is changed or plugins are updated, slurmd must be restarted for the changes to take effect. 
+    systemctl restart slurmd
 
-  * For information about Linux_namespaces_ currently mounted on the compute nodes use::
+  This is required in order for new srun_ commands etc. to run correctly with the SPANK_ plugin.
+  See the SPANK_ manual page::
 
-      lsns -t mnt
+    Note: Plugins loaded in slurmd context persist for the entire time slurmd is running, so if configuration is changed or plugins are updated, slurmd must be restarted for the changes to take effect. 
+
+* For information about Linux_namespaces_ currently mounted on the compute nodes use::
+
+    lsns -t mnt
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir 
 .. _autofs: https://wiki.archlinux.org/title/autofs
@@ -1329,17 +1335,19 @@ There are several possible solutions:
 .. _bug_12567: https://bugs.schedmd.com/show_bug.cgi?id=12567
 .. _bug_14483: https://bugs.schedmd.com/show_bug.cgi?id=14483
 .. _Linux_namespaces: https://en.wikipedia.org/wiki/Linux_namespaces
+.. _SPANK: https://slurm.schedmd.com/spank.html
+.. _CMake: https://cmake.org/
+
+Other tmpdir solutions
+...........................
 
 * Another SPANK_ plugin is at https://github.com/hpc2n/spank-private-tmp.
   This plugin does not do any cleanup, so cleanup will have to be handled separately.
 
-* A manual cleanup could be made (if needed) by a crontab job on the compute node, for example for the ``/scratch`` directory::
+* A manual cleanup of temporary files could be made (if needed) by a crontab job on the compute node, for example for the ``/scratch`` directory::
 
     # Remove files > 7 days old under /scratch/XXX (mindepth=2)
     find /scratch -depth -mindepth 2 -mtime +7 -exec rm -rf {} \;
-
-.. _SPANK: https://slurm.schedmd.com/spank.html
-.. _CMake: https://cmake.org/
 
 Configure Prolog and Epilog scripts
 ===================================
