@@ -908,19 +908,21 @@ and the details are discussed in bug_20070_ :
      systemctl stop slurmctld
      systemctl disable slurmctld
 
-3. Update the *Configless* DNS SRV record (see next section).
-4. Migrate slurmctld_ to new machine:
+3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the new server.
+
+4. Update the *Configless* DNS SRV record (see next section).
+5. Migrate slurmctld_ to new machine:
    Make a tar-ball or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
-5. Update slurm.conf_ with the new ``SlurmctldHost`` name.
+6. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
-6. Start and enable the slurmctld_ service on the new server::
+7. Start and enable the slurmctld_ service on the new server::
 
      systemctl start slurmctld
      systemctl enable slurmctld
 
-7. If some nodes are not communicating, restart the slurmd_ service on those nodes.
-8. When everything is working correctly, restore the timeout values in slurm.conf_ to their defaults, for example::
+8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+9. When everything is working correctly, restore the timeout values in slurm.conf_ to their defaults, for example::
 
      SlurmctldTimeout=600
      SlurmdTimeout=300 
