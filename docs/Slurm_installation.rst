@@ -922,6 +922,10 @@ and the details are discussed in bug_20070_ :
      systemctl enable slurmctld
 
 8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+   To cover all nodes do::
+
+     clush -ba systemctl restart slurmd
+
 9. When everything is working correctly, restore the timeout values in slurm.conf_ to their defaults, for example::
 
      SlurmctldTimeout=600
