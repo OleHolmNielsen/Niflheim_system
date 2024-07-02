@@ -898,14 +898,31 @@ See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by T
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 and the details are discussed in bug_20070_ :
 
-1. Stop and disable the slurmctld_ service on the old server.
-2. Update the *Configless* DNS SRV record (see next section).
-3. Migrate slurmctld_ to new machine:
+1. Change the timeout values in slurm.conf_ to::
+
+     SlurmctldTimeout=3600
+     SlurmdTimeout=3600 
+
+2. Stop and disable the slurmctld_ service on the old server::
+
+     systemctl stop slurmctld
+     systemctl disable slurmctld
+
+3. Update the *Configless* DNS SRV record (see next section).
+4. Migrate slurmctld_ to new machine:
    Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the *SlurmUser* to read and write it.
-4. Update slurm.conf_ with the new ``SlurmctldHost`` name.
+5. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
-5. Start and enable the slurmctld_ service on the new server.
-6. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+6. Start and enable the slurmctld_ service on the new server::
+
+     systemctl start slurmctld
+     systemctl enable slurmctld
+
+7. If some nodes are not communicating, restart the slurmd_ service on those nodes.
+8. When everything is working correctly, restore the timeout values in slurm.conf_ to their defaults, for example::
+
+     SlurmctldTimeout=600
+     SlurmdTimeout=300 
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
