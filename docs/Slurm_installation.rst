@@ -914,6 +914,10 @@ and the details are discussed in bug_20070_ :
 5. Migrate slurmctld_ to new machine:
    Make a tar-ball or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
+   Also make sure the slurmctld_ logfile has correct ownership::
+
+     chown slurm: /var/log/slurm/slurmctld.log
+
 6. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
 7. Start and enable the slurmctld_ service on the new server::
