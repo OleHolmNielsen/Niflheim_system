@@ -910,7 +910,8 @@ and the details are discussed in bug_20070_ :
 
 3. Update the *Configless* DNS SRV record (see next section).
 4. Migrate slurmctld_ to new machine:
-   Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the *SlurmUser* to read and write it.
+   Make a tar-ball or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
+   to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
 5. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
 6. Start and enable the slurmctld_ service on the new server::
