@@ -931,6 +931,7 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 
 .. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
+.. _rsync: https://en.wikipedia.org/wiki/Rsync
 
 Configless Slurm migration
 --------------------------
