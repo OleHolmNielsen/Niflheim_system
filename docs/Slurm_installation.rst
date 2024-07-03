@@ -904,6 +904,8 @@ and the details are discussed in bug_20070_ :
      SlurmctldTimeout=3600
      SlurmdTimeout=3600 
 
+   and make a ``scontrol reconfigure``.
+
 2. Stop and disable the slurmctld_ service on the old server::
 
      systemctl stop slurmctld
@@ -936,6 +938,8 @@ and the details are discussed in bug_20070_ :
 
      SlurmctldTimeout=600
      SlurmdTimeout=300 
+
+   and make a ``scontrol reconfigure``.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
