@@ -435,6 +435,8 @@ This modification may be beneficial on all Systemd_ systems including EL8.
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _bug_11878: https://bugs.schedmd.com/show_bug.cgi?id=11878
 
+.. _configure-slurm-logging:
+
 Configure Slurm logging
 -----------------------
 
@@ -460,7 +462,6 @@ Configure Slurm logging
 
 .. _Administrator_Guide: https://slurm.schedmd.com/quickstart_admin.html
 .. _Bug_8272: https://bugs.schedmd.com/show_bug.cgi?id=8272
-
 
 .. _upgrading-slurm:
 
@@ -909,15 +910,16 @@ and the details are discussed in bug_20070_ :
      systemctl disable slurmctld
 
 3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the new server.
+   Also make sure the Slurm_ logfile directory exists and has correct ownership (see :ref:`configure-slurm-logging`)::
+
+     mkdir -pv /var/log/slurm
+     touch /var/log/slurm/slurmctld.log
+     chown -R slurm.slurm /var/log/slurm
 
 4. Update the *Configless* DNS SRV record (see next section).
 5. Migrate slurmctld_ to new machine:
    Make a tar-ball or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
-   Also make sure the slurmctld_ logfile has correct ownership::
-
-     chown slurm: /var/log/slurm/slurmctld.log
-
 6. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
 7. Start and enable the slurmctld_ service on the new server::
