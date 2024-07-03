@@ -940,6 +940,7 @@ and the details are discussed in bug_20070_ :
      SlurmdTimeout=300 
 
    and make a ``scontrol reconfigure``.
+   Restore the original DNS SRV record's Time_to_live_ (TTL) value.
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
@@ -953,11 +954,13 @@ Configless Slurm migration
 --------------------------
 
 When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record in your cluster's DNS service to point to the new slurmctld_ server.
-Start well in advance by changing the DNS SRV record's *TTL* to a small value such as 300 or 600 seconds (restart the *named* service).
+Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a small value such as 300 or 600 seconds (restart the *named* service).
 After stopping slurmctld_ on the old ``SlurmctldHost``,
 change the server name in the DNS SRV record (restart the *named* service).
 
-Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's *TTL* value.
+Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's Time_to_live_ (TTL) value.
+
+.. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 
 Migrate slurmctld version <= 23.02
 ------------------------------------
