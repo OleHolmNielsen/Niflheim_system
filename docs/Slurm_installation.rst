@@ -916,9 +916,9 @@ and the details are discussed in bug_20070_ :
      touch /var/log/slurm/slurmctld.log
      chown -R slurm.slurm /var/log/slurm
 
-4. Update the *Configless* DNS SRV record (see next section).
+4. Update the *Configless* DNS SRV record (see :ref:`configless-slurm-migration`).
 5. Migrate slurmctld_ to new machine:
-   Make a tar-ball or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
+   Make a tar-ball copy or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
 6. Update slurm.conf_ with the new ``SlurmctldHost`` name.
    Remember to update the login nodes as well!
@@ -928,7 +928,7 @@ and the details are discussed in bug_20070_ :
      systemctl enable slurmctld
 
 8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
-   To cover all nodes do::
+   It may be safer to restart slurmd_ on all nodes::
 
      clush -ba systemctl restart slurmd
 
@@ -942,6 +942,8 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 .. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
 .. _rsync: https://en.wikipedia.org/wiki/Rsync
+
+.. _configless-slurm-migration:
 
 Configless Slurm migration
 --------------------------
