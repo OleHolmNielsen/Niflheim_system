@@ -897,14 +897,16 @@ This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting s
 See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
 
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
-and the details are discussed in bug_20070_ :
+and the details are discussed in bug_20070_ .
+
+We have successfully performed a slurmctld_ migration following this procedure:
 
 1. Change the timeout values in slurm.conf_ to::
 
      SlurmctldTimeout=3600
      SlurmdTimeout=3600 
 
-   and make a ``scontrol reconfigure``.
+   and make an ``scontrol reconfigure``.
 
 2. Stop and disable the slurmctld_ service on the old server::
 
