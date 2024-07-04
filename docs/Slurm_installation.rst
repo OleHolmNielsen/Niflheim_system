@@ -960,12 +960,14 @@ Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a 
 
   _slurmctld._tcp 600 IN SRV 0 0 6817 <DNS-server-name>
 
-and make a ``systemctl restart named``.
+Update the DNS zone's timestamp and make a ``systemctl restart named``.
 
 After stopping slurmctld_ on the old ``SlurmctldHost``,
-change the server name in the DNS SRV record (restart the *named* service).
+change the server name in the DNS SRV record.
+Update the DNS zone's timestamp and make a ``systemctl restart named``.
 
 Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's Time_to_live_ (TTL) value.
+Update the DNS zone's timestamp and make a ``systemctl restart named``.
 
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 
