@@ -357,40 +357,52 @@ Installing RPMs
 
 The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can vary by configuration, but here is a suggested starting point:
 
-* **Head/Master** Node (where the slurmctld_ daemon runs), **Compute**, and **Login** nodes::
+* **Head/Master** node where the slurmctld_ daemon runs::
 
     export VER=23.11.8
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
-
-  On the **master node** explicitly enable the slurmctld_ service::
-
     systemctl enable slurmctld
+
+  The following must be done on the Head/Master node because the RPM installation does not include this.
+  Create the spool and log directories and make them owned by the slurm user::
+
+    mkdir /var/spool/slurmctld /var/log/slurm
+    chown slurm: /var/spool/slurmctld /var/log/slurm
+    chmod 755 /var/spool/slurmctld /var/log/slurm
+
+  Create log files::
+
+    touch /var/log/slurm/slurmctld.log 
+    chown slurm: /var/log/slurm/slurmctld.log 
+
+  Servers which should offer slurmrestd_ should install also this package::
+
+    dnf install slurm-slurmrestd-$VER*rpm
 
   The *slurm-torque* package could perhaps be omitted, but it does contain a useful ``/usr/bin/mpiexec`` wrapper script.
 
-  Only if the **database service** will run on the Head/Master node:
-  Install the database service RPM::
+* On **Compute nodes** install slurmd_ and possibly also the *slurm-pam_slurm* RPM package to prevent rogue users from logging in::
 
-    export VER=23.11.8
-    dnf install slurm-slurmdbd-$VER*rpm
+    dnf install slurm-slurmd-$VER*rpm slurm-pam_slurm-$VER*rpm
+    systemctl enable slurmd
 
-  Explicitly enable the service::
+  The following must be done on each compute node because the RPM installation does not include this.
+  Create the slurmd_ spool and log directories and make the correct ownership::
 
-    systemctl enable slurmdbd
+    mkdir /var/spool/slurmd /var/log/slurm
+    chown slurm: /var/spool/slurmd  /var/log/slurm
+    chmod 755 /var/spool/slurmd  /var/log/slurm
 
-* On **Compute nodes** you may additionally install the slurm-pam_slurm RPM package to prevent rogue users from logging in::
+  Create log files::
 
-    dnf install slurm-pam_slurm-$VER*rpm
+    touch /var/log/slurm/slurmd.log 
+    chown slurm: /var/log/slurm/slurmd.log 
 
   You may consider this RPM as well with special PMIx libraries::
 
     dnf install slurm-libpmi-$VER*rpm
 
-  Explicitly enable the service::
-
-    systemctl enable slurmd
-
-* **Database-only** (slurmdbd_ service) node::
+* **Database** (slurmdbd_ service) node::
 
     export VER=23.11.8
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
@@ -398,12 +410,6 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
   Explicitly enable the service::
 
     systemctl enable slurmdbd
-
-* Servers (from Slurm 20.02 and newer) which should offer slurmrestd_ (which can be used also by normal users) should install also this package::
-
-    dnf install slurm-slurmrestd-$VER*rpm
-
-  The slurmctld_ server and the login nodes would typically include slurmrestd_.
 
 Study the configuration information in the Quick Start Administrator_Guide_.
 
