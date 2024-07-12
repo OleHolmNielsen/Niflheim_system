@@ -879,7 +879,9 @@ Start and enable the slurmctld_ daemon::
 Copy slurm.conf to all nodes
 ----------------------------
 
-Finally copy ``/etc/slurm/slurm.conf`` to all compute nodes::
+This section is **not relevant** when running a configless-slurm-setup_.
+
+Copy ``/etc/slurm/slurm.conf`` to all compute nodes::
 
   clush -bw <node-list> --copy /etc/slurm/slurm.conf --dest /etc/slurm/slurm.conf
 
