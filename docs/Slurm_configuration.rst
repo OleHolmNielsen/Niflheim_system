@@ -258,13 +258,13 @@ On the master node make the daemons reread the configuration files::
 
 From the scontrol_ man-page about the *reconfigure* option:
 
-*  Instruct all Slurm daemons to re-read the configuration file.  This command does not restart the daemons.
-   This mechanism would be used to modify configuration parameters (Epilog, Prolog, SlurmctldLogFile, SlurmdLogFile, etc.).   The
-   Slurm  controller (slurmctld_)  forwards  the request all other daemons (slurmd_ daemon on each compute node). Running jobs continue execution.
-*  Most configuration parameters can be changed by just running this command, however, Slurm
-   daemons should be shutdown and **restarted** if any of these parameters are to be changed:
+* Instruct all slurmctld_ and slurmd_ daemons to re-read the configuration file.
+  This mechanism can be used to modify configuration parameters set in slurm.conf_ without interrupting running jobs.
 
-   - AuthType, BackupAddr, BackupController, ControlAddr, ControlMach, PluginDir, StateSaveLocation, SlurmctldPort or SlurmdPort.
+* **New:** Starting in 23.11, this command operates by creating new processes for the daemons, then **passing control to the new processes**
+  when or if they start up successfully.
+  This allows it to gracefully catch configuration problems and keep running with the previous configuration if there is a problem.
+  This will not be able to change the daemons' listening TCP port settings or authentication mechanism.
 
 *  The slurmctld_ daemon and all slurmd_ daemons must be **restarted** if **nodes are added to or removed from the cluster**.
 
@@ -1474,7 +1474,7 @@ The procedure is:
      clush -ba systemctl restart slurmd
 
 Here we have used :ref:`ClusterShell` to run the command on all nodes.
-One **must not** make a ``scontrol reconfig`` during this process!
+One **must not** make a ``scontrol reconfigure`` during this process!
 
 .. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
 
@@ -1883,7 +1883,7 @@ Make sure to distribute slurm.conf_ to all nodes (or use a configless_ setup).
 
 Then reconfigure ``slurmctld``::
 
-  scontrol reconfig
+  scontrol reconfigure
 
 If ``slurmctld`` gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
 (see `comment 15 <https://bugs.schedmd.com/show_bug.cgi?id=14472#c15>`_ in bug_14472_).
