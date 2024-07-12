@@ -355,6 +355,7 @@ You may build Slurm_ packages including optional features:
 Installing RPMs
 ===============
 
+Study the configuration information in the Quick Start Administrator_Guide_.
 The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can vary by configuration, but here is a suggested starting point:
 
 * **Head/Master** node where the slurmctld_ daemon runs::
@@ -411,7 +412,9 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
     systemctl enable slurmdbd
 
-Study the configuration information in the Quick Start Administrator_Guide_.
+* On **Login nodes** install just the *slurm* RPM package::
+
+    dnf install slurm-$VER*rpm 
 
 Update Systemd service files
 ----------------------------
