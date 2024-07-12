@@ -212,13 +212,14 @@ This can potentially make the slurmctld_ unresponsive and therefore affect the e
 
 The ability to do ``RPC rate limiting`` on a per-user basis is a new feature with Slurm_ 23.02.
 It acts as a virtual bucket of tokens that users consume with *Remote Procedure Calls* (RPC_).
-Enable this feature in slurm.conf_ by adding ``rl_enable`` and other parameters such as ``rl_refill_period``, for example::
+The ``RPC logging frequency`` (rl_log_freq) is a new feature with Slurm_ 23.11.
 
-  SlurmctldParameters=rl_enable,rl_refill_period=5
+Enable RPC rate limiting in slurm.conf_ by adding ``rl_enable`` and other parameters such as ``rl_refill_period``, for example::
 
-**NOTE:** After changing ``SlurmctldParameters`` make an ``scontrol reconfig``,
-or  restart the ``slurmctld``, see bug_18067_.
-The correct action seems to be undocumented as of 23.02.6.
+  SlurmctldParameters=rl_enable,rl_refill_rate=10,rl_bucket_size=50,rl_log_freq=10
+
+**NOTE:** After changing ``SlurmctldParameters`` make an ``scontrol reconfig`` to restart slurmctld_.
+See also bug_18067_.
 
 This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
 You can define:
