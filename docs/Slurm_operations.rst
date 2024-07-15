@@ -212,9 +212,9 @@ This can potentially make the slurmctld_ unresponsive and therefore affect the e
 
 The ability to do ``RPC rate limiting`` on a per-user basis is a new feature with Slurm_ 23.02.
 It acts as a virtual bucket of tokens that users consume with *Remote Procedure Calls* (RPC_).
-The ``RPC logging frequency`` (rl_log_freq) is a new feature with Slurm_ 23.11.
+The ``RPC logging frequency`` (`rl_log_freq`) is a new feature with Slurm_ 23.11.
 
-Enable RPC rate limiting in slurm.conf_ by adding ``rl_enable`` and other parameters such as ``rl_refill_period``, for example::
+Enable RPC rate limiting in slurm.conf_ by adding ``rl_enable`` and other parameters, for example::
 
   SlurmctldParameters=rl_enable,rl_refill_rate=10,rl_bucket_size=50,rl_log_freq=10
 
