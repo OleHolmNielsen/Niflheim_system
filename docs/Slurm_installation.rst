@@ -6,7 +6,7 @@ Slurm installation and upgrading
 
 .. Contents::
 
-Jump to our top-level Slurm page: :ref:`SLURM`
+Jump to our top-level Slurm_ page: :ref:`SLURM`
 
 To get started with Slurm_ see the Slurm_Quick_Start_ Administrator Guide.
 See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutorial.html>`_.
@@ -247,7 +247,7 @@ and install the following EPEL_ packages::
 Optional prerequisites
 ........................
 
-Certain Slurm tools and plugins require additional prerequisites **before** building Slurm:
+Certain Slurm_ tools and plugins require additional prerequisites **before** building Slurm:
 
 1. IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
@@ -313,7 +313,7 @@ Notes about the ``--with mysql`` option:
 * The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmdbd`` package will be built by default, 
   but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
   and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
-* From Slurm 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
+* From Slurm_ 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
 
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
@@ -335,7 +335,7 @@ You may build Slurm_ packages including optional features:
 
   This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see bug_17900_.
 
-* If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm 20.02 and newer) you must add::
+* If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer) you must add::
 
     rpmbuild <...> --with slurmrestd
 
@@ -485,7 +485,7 @@ Pay attention to these statements:
 
     slurmdbd >= slurmctld >= slurmd >= commands
 
-  Actually, ``commands`` mostly refers to the use of **login nodes** because all Slurm commands (sinfo_ , squeue_ etc.)
+  Actually, ``commands`` mostly refers to the use of **login nodes** because all Slurm_ commands (sinfo_ , squeue_ etc.)
   are **not interoperable** with an older slurmctld_ version, as explained in bug_17418_, due to RPC changes!
   It is OK to upgrade Slurm_ on login nodes **after** slurmctld_ has been upgraded.
   The slurmd_ on compute nodes can be upgraded over a period of time, and older slurmd_ versions will continue to work with an upgraded slurmctld_.
@@ -630,7 +630,7 @@ Here is a suggested procedure:
 
      systemctl stop slurmdbd
 
-8. At this point you have a Slurm database server running an exact copy of your main Slurm database!
+8. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
 
    Now it is time to do some testing.
    Update all Slurm_ RPMs to the new version (say, 23.11.8) built as shown above::
@@ -983,12 +983,12 @@ In Slurm_ 23.02 and older, changes to ``SlurmctldHost`` are not possible with jo
 Therefore you have to **stop all running jobs**, for example by making a :ref:`resource_reservation`.
 Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
 
-* Stop all Slurm daemons.
+* Stop all Slurm_ daemons.
 * Modify the ``SlurmctldHost`` values in the slurm.conf_ file.
 * Distribute the updated slurm.conf_ file to all nodes.
   When using :ref:`configless-slurm-setup` see the section above.
 * Copy the ``StateSaveLocation`` directory to the new host and make sure the permissions allow the SlurmUser to read and write it.
-* Restart all Slurm daemons.
+* Restart all Slurm_ daemons.
 
 Log file rotation
 =================
