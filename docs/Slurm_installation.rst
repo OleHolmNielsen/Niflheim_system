@@ -316,10 +316,6 @@ Notes about the ``--with mysql`` option:
 * From Slurm 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
 
-Note about RHEL 9 (and derivatives):
-
-* You must (currently) disable LTO_ in the SPEC file, see bug_14565_.
-
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
 .. _LTO: https://johanengelen.github.io/ldc/2016/11/10/Link-Time-Optimization-LDC.html
