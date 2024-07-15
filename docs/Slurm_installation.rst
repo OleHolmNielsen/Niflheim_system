@@ -120,7 +120,7 @@ Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspende
 which might cause the `munged.log` file to **fill up the system disk**.
 
 See also the page section :ref:`configure_maximum_number_of_open_files`.
-It is highly recommended to increase the file limit in ``/etc/sysctl.conf`` significantly, for example:: 
+It is highly recommended to increase the file limit in ``/etc/sysctl.conf`` significantly on **all Slurm nodes**, for example:: 
 
   fs.file-max = 13107200
 
