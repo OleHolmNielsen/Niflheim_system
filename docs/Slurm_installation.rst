@@ -224,6 +224,13 @@ You must decide which Slurm_ plugins to activate in the RPM packages which you b
 Install prerequisites
 ---------------------
 
+You will need to enable the repositories ``PowerTools`` (EL8) or ``CRB`` (EL9),
+see the discussion of Rocky_Linux_Repositories_, and then add the EPEL_ repository::
+
+  dnf config-manager --set-enabled powertools # EL8
+  dnf config-manager --set-enabled crb        # EL9
+  dnf install epel-release
+
 Slurm_ can be built with a number of **optional plugins**, each of which has some prerequisite library.
 The Slurm_Quick_Start_ guide lists these in the section `Building and Installing Slurm <https://slurm.schedmd.com/quickstart_admin.html#build_install>`_.
 
@@ -236,14 +243,11 @@ If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.c
 
   dnf install munge munge-libs munge-devel
 
-Furthermore, enable the EPEL_ repository for EL8::
-
-  dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-
-and install the following EPEL_ packages::
+Install the following packages from EPEL_::
 
   dnf install libssh2-devel man2html
 
+.. _Rocky_Linux_Repositories: https://wiki.rockylinux.org/rocky/repo/
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 Optional prerequisites
