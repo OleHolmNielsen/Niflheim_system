@@ -311,6 +311,10 @@ Documentation about the usage of Cgroups_:
 
 * `RHEL8 Understanding control groups <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/setting-limits-for-applications_managing-monitoring-and-updating-the-kernel>`_.
 
+Install Cgroups_ tools::
+
+  dnf install libcgroup-tools
+
 To list current Cgroups_ use the command::
 
   lscgroup
@@ -1112,8 +1116,10 @@ Create a new file in ``/etc/pam.d/`` where the line with ``pam_systemd.so`` has 
 
 The reason is (quoting pam_slurm_adopt_) that:
 
-* ``pam_systemd.so`` is known to not play nice with Slurm's usage of cgroups.
+* ``pam_systemd.so`` is known to not play nice with Slurm's usage of cgroup_.
   It is recommended that you disable it or possibly add ``pam_slurm_adopt.so`` after ``pam_systemd.so``.
+
+.. _cgroup: https://slurm.schedmd.com/cgroups.html
 
 Insert some new lines in the file ``/etc/pam.d/sshd`` at this place::
 
