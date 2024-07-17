@@ -305,33 +305,33 @@ However, such *future* nodes must not be members of any partition.
 Cgroup configuration
 --------------------
 
-*Control Groups* (Cgroups_ v1) provide a Linux kernel mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
+*Control Groups* (cgroups_ v1) provide a Linux kernel mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
 
-Documentation about the usage of Cgroups_:
+Documentation about the usage of cgroups_:
 
 * `RHEL8 Understanding control groups <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/setting-limits-for-applications_managing-monitoring-and-updating-the-kernel>`_.
 
-Install Cgroups_ tools::
+Install cgroups_ tools::
 
   dnf install libcgroup-tools
 
-To list current Cgroups_ use the command::
+To list current cgroups_ use the command::
 
   lscgroup
   lscgroup -g cpu:/
 
-To list processes that are not properly constrained by Slurm_ Cgroups_::
+To list processes that are not properly constrained by Slurm_ cgroups_::
 
   ps --no-headers -eo pid,user,comm,cgroup | egrep -vw 'root|freezer:/slurm.*devices:/slurm.*cpuacct,cpu:/slurm.*memory:/slurm|cpuset:/slurm.*|dbus-daemon|munged|ntpd|gmond|polkitd|chrony|smmsp|rpcuser|rpc' 
 
-Usage of Cgroups_ within Slurm_ is described in the Cgroups_Guide_.
-Slurm_ provides Cgroups_ versions of a number of plugins:
+Usage of cgroups_ within Slurm_ is described in the Cgroups_Guide_.
+Slurm_ provides cgroups_ versions of a number of plugins:
 
 * proctrack (process tracking)
 * task (task management)
 * jobacct_gather (job accounting statistics)
 
-See also the cgroup.conf_ configuration file for the Cgroups_ support.
+See also the cgroup.conf_ configuration file for the cgroups_ support.
 
 If you use *jobacct_gather*, change the default *ProctrackType* in slurm.conf_::
 
@@ -343,16 +343,16 @@ otherwise you'll get this warning in the slurmctld_ log::
 
 Notice: Linux kernel 2.6.38 or greater is strongly recommended, see the Cgroups_Guide_ *General Usage Notes*.
 
-.. _Cgroups: https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt
+.. _cgroups: https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt
 .. _Cgroups_Guide: https://slurm.schedmd.com/cgroups.html
 .. _cgroup.conf: https://slurm.schedmd.com/cgroup.conf.html
 
-Getting started with Cgroups
+Getting started with cgroups
 ............................
 
 In this example we want to constrain jobs to the number of CPU cores as well as RAM memory requested by the job.
 
-Configure slurm.conf_ to use Cgroups_ as well as the *affinity* plugin::
+Configure slurm.conf_ to use cgroups_ as well as the *affinity* plugin::
 
   TaskPlugin=affinity,cgroup
 
