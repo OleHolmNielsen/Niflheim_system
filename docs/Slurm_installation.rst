@@ -212,12 +212,14 @@ See the Slurm_Quick_Start_ Administrator Guide, especially the section below thi
 You must decide which Slurm_ plugins to activate in the RPM packages which you build, especially items such as:
 
 * cgroup_ Task Affinity
+* cgroup_v2_ plugin (requires `dbus-devel` and `libbpf` libraries)
 * Munge_ support
 * Lua Support
 * PAM support
 * NUMA Affinity
 
 .. _cgroup: https://slurm.schedmd.com/cgroups.html
+.. _cgroup_v2: https://slurm.schedmd.com/cgroup_v2.html
 
 Install prerequisites
 ---------------------
