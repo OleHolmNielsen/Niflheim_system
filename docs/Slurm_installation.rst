@@ -100,6 +100,8 @@ The issue is discussed in
 .. _Munge_wiki: https://github.com/dun/munge/wiki
 .. _munged: https://github.com/dun/munge/wiki/Man-8-munged
 
+.. _munge_0.5.16_upgrade:
+
 Munge 0.5.16 upgrade
 -------------------------
 
@@ -225,7 +227,7 @@ Install prerequisites
 ---------------------
 
 You will need to enable the repositories ``PowerTools`` (EL8) or ``CRB`` (EL9),
-see the discussion of Rocky_Linux_Repositories_, and then add the EPEL_ repository::
+see the discussion of Rocky_Linux_Repositories_, and then enable also the EPEL_ repository::
 
   dnf config-manager --set-enabled powertools # EL8
   dnf config-manager --set-enabled crb        # EL9
@@ -239,7 +241,7 @@ Install required Slurm_ prerequisites, as well as several optional packages that
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf
 
-If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_ (see above about newer versions)::
+If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_ (see munge_0.5.16_upgrade_ about newer versions)::
 
   dnf install munge munge-libs munge-devel
 
