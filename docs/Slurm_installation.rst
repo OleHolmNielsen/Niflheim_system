@@ -100,10 +100,10 @@ The issue is discussed in
 .. _Munge_wiki: https://github.com/dun/munge/wiki
 .. _munged: https://github.com/dun/munge/wiki/Man-8-munged
 
-.. _munge_0.5.16_upgrade:
+.. _install_latest_munge_version:
 
-Munge 0.5.16 upgrade
--------------------------
+Install latest Munge version
+-----------------------------
 
 It is advantageous to install the latest Munge_release_ RPMs (currently 0.5.16) due to new features and bug fixes.
 Build RPMs by::
@@ -241,7 +241,8 @@ Install required Slurm_ prerequisites, as well as several optional packages that
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf
 
-If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_ (see munge_0.5.16_upgrade_ about newer versions)::
+If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_
+(recommended: install_latest_munge_version_)::
 
   dnf install munge munge-libs munge-devel
 
