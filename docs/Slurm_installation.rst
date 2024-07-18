@@ -232,6 +232,7 @@ see the discussion of Rocky_Linux_Repositories_, and then enable also the EPEL_ 
   dnf config-manager --set-enabled powertools # EL8
   dnf config-manager --set-enabled crb        # EL9
   dnf install epel-release
+  dnf clean all
 
 Slurm_ can be built with a number of **optional plugins**, each of which has some prerequisite library.
 The Slurm_Quick_Start_ guide lists these in the section `Building and Installing Slurm <https://slurm.schedmd.com/quickstart_admin.html#build_install>`_.
