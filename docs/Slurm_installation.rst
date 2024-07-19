@@ -29,6 +29,7 @@ See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutoria
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
 .. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
+.. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _pdsh: https://github.com/grondo/pdsh
 .. _ClusterShell: https://clustershell.readthedocs.io/en/latest/intro.html
 
@@ -345,7 +346,7 @@ You may build Slurm_ packages including optional features:
 
   This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see bug_17900_.
 
-* If you want to build the **Slurm REST API** daemon named slurmrestd_ (from Slurm_ 20.02 and newer) you must add::
+* If you want to build the **Slurm REST API** daemon named slurmrestd_ you must add::
 
     rpmbuild <...> --with slurmrestd
 
@@ -421,34 +422,6 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 * On **Login nodes** install just the *slurm* RPM package::
 
     dnf install slurm-$VER*rpm 
-
-Update Systemd service files
-----------------------------
-
-On EL8 systems the Slurm_ daemons may fail starting up at reboot, when Slurm_ is running in configless_ mode, 
-apparently due to DNS failures.
-This is actually due to the daemons starting too soon, before the network is fully online.
-The issue is tracked in bug_11878_.
-
-The solution (which may be solved in 21.08) is to modify the Systemd_ service files for slurmd_, slurmctld_ and slurmdbd_, for example::
-
-  cp /usr/lib/systemd/system/slurmd.service /etc/systemd/system/
-
-and edit the line in the *service* file::
-
-  After=munge.service network.target remote-fs.target
-
-into::
-
-  After=munge.service network-online.target remote-fs.target
-
-The *network-online* target will ensure that the network is online before starting the daemons.
-Reboot the system to verify the daemon startup.
-
-This modification may be beneficial on all Systemd_ systems including EL8.
-
-.. _configless: https://slurm.schedmd.com/configless_slurm.html
-.. _bug_11878: https://bugs.schedmd.com/show_bug.cgi?id=11878
 
 .. _configure-slurm-logging:
 
