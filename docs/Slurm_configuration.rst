@@ -674,11 +674,9 @@ See also the discussion about IPMI_ *Data Center Manageability Interface* (DCMI_
 You can check if Slurm_ has been built with the **acct_gather_energy/ipmi** accounting plugin,
 and verify if the ``libfreeipmi.so.*`` library file is also available on the system::
 
-  $ ldd /usr/lib64/slurm/acct_gather_energy_ipmi.so
-        ...
-        libipmimonitoring.so.6 => /usr/lib64/libipmimonitoring.so.6 (0x00007f5817f88000)
-        libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00007f58177a8000)
-        ...
+  $ ldd /usr/lib64/slurm/acct_gather_energy_ipmi.so | grep ipmi
+  	libipmimonitoring.so.6 => /usr/lib64/libipmimonitoring.so.6 (0x00001552d1fa4000)
+	libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00001552d186f000)
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 .. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
