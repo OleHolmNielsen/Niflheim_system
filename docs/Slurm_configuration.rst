@@ -672,11 +672,15 @@ Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstar
 See also the discussion about IPMI_ *Data Center Manageability Interface* (DCMI_) in bug bug_17704_.
 
 You can check if Slurm_ has been built with the **acct_gather_energy/ipmi** accounting plugin,
-and verify if the ``libfreeipmi.so.*`` library file is also available on the system::
+and verify that the ``libfreeipmi.so.*`` library file is also available on the system::
 
   $ ldd /usr/lib64/slurm/acct_gather_energy_ipmi.so | grep ipmi
   	libipmimonitoring.so.6 => /usr/lib64/libipmimonitoring.so.6 (0x00001552d1fa4000)
 	libfreeipmi.so.17 => /usr/lib64/libfreeipmi.so.17 (0x00001552d186f000)
+  $ ls -l /usr/lib64/libfreeipmi.so*
+  lrwxrwxrwx 1 root root      22 Apr  6 17:05 /usr/lib64/libfreeipmi.so.17 -> libfreeipmi.so.17.2.12
+  -rwxr-xr-x 1 root root 5469832 Apr  6 17:05 /usr/lib64/libfreeipmi.so.17.2.12
+
 
 .. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
 .. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
