@@ -953,7 +953,7 @@ Configless Slurm migration
 When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record in your cluster's DNS service to point to the new slurmctld_ server.
 Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
 
-  _slurmctld._tcp 600 IN SRV 0 0 6817 <DNS-server-name>
+  _slurmctld._tcp 600 IN SRV 0 0 6817 <slurmctld-server-name>
 
 Update the DNS zone's ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
 
