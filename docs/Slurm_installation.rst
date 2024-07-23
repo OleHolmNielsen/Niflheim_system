@@ -951,20 +951,22 @@ Configless Slurm migration
 --------------------------
 
 When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record in your cluster's DNS service to point to the new slurmctld_ server.
+Read about DNS_zone_ files.
 Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
 
   _slurmctld._tcp 600 IN SRV 0 0 6817 <slurmctld-server-name>
 
-Update the DNS zone's ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
+Update the DNS_zone_'s ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
 
 After stopping slurmctld_ on the old ``SlurmctldHost``,
 change the server name in the DNS SRV record.
-Update the DNS zone's serial number and make a ``systemctl restart named``.
+Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
 Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's Time_to_live_ (TTL) value.
-Update the DNS zone's serial number and make a ``systemctl restart named``.
+Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
+.. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
 
 Migrate slurmctld version <= 23.02
 ------------------------------------
