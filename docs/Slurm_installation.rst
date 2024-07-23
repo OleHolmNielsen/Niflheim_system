@@ -887,7 +887,7 @@ See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by T
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 and the details are discussed in bug_20070_ .
 
-**WARNING:** As of Slurm_ 23.11.8 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV record (see :ref:`configless-slurm-migration`),
+**WARNING:** As of Slurm_ 23.11.8 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV_record_ (see :ref:`configless-slurm-migration`),
 therefore slurmd_ has to be restarted at this time.
 The issue is tracked in bug_20462_.
 
@@ -912,7 +912,7 @@ We have successfully performed a slurmctld_ migration following this procedure:
      touch /var/log/slurm/slurmctld.log
      chown -R slurm.slurm /var/log/slurm
 
-4. Update the *Configless* DNS SRV record (see :ref:`configless-slurm-migration`).
+4. Update the *Configless* DNS SRV_record_ (see :ref:`configless-slurm-migration`).
 5. Migrate slurmctld_ to new machine:
    Make a tar-ball copy or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
@@ -936,10 +936,11 @@ We have successfully performed a slurmctld_ migration following this procedure:
      SlurmdTimeout=300 
 
    and make a ``scontrol reconfigure``.
-   Restore the original DNS SRV record's Time_to_live_ (TTL) value (see :ref:`configless-slurm-migration`).
+   Restore the original DNS SRV_record_'s Time_to_live_ (TTL) value (see :ref:`configless-slurm-migration`).
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
+.. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 .. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
 .. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
@@ -950,19 +951,19 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 Configless Slurm migration
 --------------------------
 
-When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV record in your cluster's DNS service to point to the new slurmctld_ server.
+When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV_record_ in your cluster's DNS service to point to the new slurmctld_ server.
 Read about DNS_zone_ files.
-Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
+Start well in advance by changing the DNS SRV_record_'s Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
 
   _slurmctld._tcp 600 IN SRV 0 0 6817 <slurmctld-server-name>
 
 Update the DNS_zone_'s ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
 
 After stopping slurmctld_ on the old ``SlurmctldHost``,
-change the server name in the DNS SRV record.
+change the server name in the DNS SRV_record_.
 Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
-Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's Time_to_live_ (TTL) value.
+Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV_record_'s Time_to_live_ (TTL) value.
 Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
