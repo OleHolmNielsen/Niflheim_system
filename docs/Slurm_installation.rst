@@ -887,6 +887,10 @@ See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by T
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 and the details are discussed in bug_20070_ .
 
+**WARNING:** As of Slurm_ 23.11.8 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV record (see :ref:`configless-slurm-migration`),
+therefore slurmd_ has to be restarted at this time.
+The issue is tracked in bug_20462_.
+
 We have successfully performed a slurmctld_ migration following this procedure:
 
 1. Change the timeout values in slurm.conf_ to::
@@ -920,7 +924,7 @@ We have successfully performed a slurmctld_ migration following this procedure:
      systemctl enable slurmctld
 
 8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
-   It may be safer to restart slurmd_ on all nodes::
+   As discussed in bug_20462_ it is currently necessary to restart slurmd_ on **all nodes**::
 
      clush -ba systemctl restart slurmd
 
@@ -936,6 +940,7 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 
 .. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
+.. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 .. _rsync: https://en.wikipedia.org/wiki/Rsync
 
 .. _configless-slurm-migration:
@@ -948,14 +953,14 @@ Start well in advance by changing the DNS SRV record's Time_to_live_ (TTL) to a 
 
   _slurmctld._tcp 600 IN SRV 0 0 6817 <DNS-server-name>
 
-Update the DNS zone's timestamp and make a ``systemctl restart named``.
+Update the DNS zone's ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
 
 After stopping slurmctld_ on the old ``SlurmctldHost``,
 change the server name in the DNS SRV record.
-Update the DNS zone's timestamp and make a ``systemctl restart named``.
+Update the DNS zone's serial number and make a ``systemctl restart named``.
 
 Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV record's Time_to_live_ (TTL) value.
-Update the DNS zone's timestamp and make a ``systemctl restart named``.
+Update the DNS zone's serial number and make a ``systemctl restart named``.
 
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 
