@@ -32,6 +32,7 @@ See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutoria
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _pdsh: https://github.com/grondo/pdsh
 .. _ClusterShell: https://clustershell.readthedocs.io/en/latest/intro.html
+.. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 
 Hardware optimization for the slurmctld master server
 =====================================================
@@ -751,7 +752,8 @@ The upgrading steps for the slurmctld_ host are:
 
 6. Check the cluster nodes' health using ``sinfo`` and check for any
    ``Nodes ... not responding`` errors in ``slurmctld.log``.
-   It may be necessary to restart all the ``slurmd`` on all nodes::
+   It may be necessary to restart all the ``slurmd`` on all nodes
+   using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
 
      clush -ba systemctl restart slurmd
 
@@ -798,8 +800,6 @@ TODO: Find a way to read relevant MPI libraries like this example::
 
 Upgrade slurmd on nodes
 .......................
-
-.. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 
 First determine which Slurm_ version the nodes are running,
 using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
@@ -924,7 +924,9 @@ We have successfully performed a slurmctld_ migration following this procedure:
      systemctl enable slurmctld
 
 8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
-   As discussed in bug_20462_ it is currently necessary to restart slurmd_ on **all nodes**::
+   As discussed in bug_20462_ it is currently necessary to restart slurmd_ on **all nodes**
+   using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
+
 
      clush -ba systemctl restart slurmd
 
