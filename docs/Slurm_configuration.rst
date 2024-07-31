@@ -743,15 +743,15 @@ then perform a reconfiguration::
 As a test you can monitor some power values as shown in the section below.
 
 When IPMI power monitoring has been enabled, it becomes possible to make **energy accounting of individual jobs**.
-The sacct_ command has a ``ConsumedEnergyRaw`` field that can be specified with the --format option::
+The accounting command sacct_ command has an output field ``ConsumedEnergyRaw`` that can be specified using the `--format` option::
 
   ConsumedEnergyRaw: Total energy consumed by all tasks in a job, in joules.  Note: Only in the case of an exclusive job allocation does this value reflect the job's real energy consumption.
 
-Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
-One Kilowatt-hour_ is 3.6 Mega Joule_ . 
-
 However, job energy accounting is not fully reliable as of Slurm_ 23.11.8 (July 2024) due to a number of issues in slurmd_ that are tracked in bug_20207_, 
 see the list of issues in Comment 31.
+
+Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
+One Kilowatt-hour_ is 3.6 Mega Joule_ . 
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
