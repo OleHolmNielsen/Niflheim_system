@@ -749,7 +749,8 @@ As a test you can monitor some power values as shown in the section below.
 Energy accounting of individual jobs
 ........................................
 
-When IPMI power monitoring has been enabled, it becomes possible to make **energy accounting of individual jobs**.
+When power monitoring has been enabled as shown above,
+it becomes possible to make **energy accounting of individual jobs**.
 The accounting command sacct_ command has an output field ``ConsumedEnergyRaw`` that can be specified using the ``--format`` option::
 
   ConsumedEnergyRaw: Total energy consumed by all tasks in a job, in joules.  Note: Only in the case of an exclusive job allocation does this value reflect the job's real energy consumption.
