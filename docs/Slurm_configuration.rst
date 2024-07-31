@@ -759,7 +759,7 @@ However, job energy accounting is not fully reliable as of Slurm_ 23.11.8 (July 
 see the list of issues in Comment 31.
 
 Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
-One Kilowatt-hour_ is 3.6 Mega Joule_ . 
+One Kilowatt-hour_ (i.e., 1000 Watt_ consumed for 3600 seconds) is 3.6 Mega Joule_ . 
 
 .. _sacct: https://slurm.schedmd.com/sacct.html
 
@@ -836,7 +836,7 @@ An example output is::
   Average      56     56.6      633      517        0        0        0
 
 Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
-One Kilowatt-hour_ is 3.6 Mega Joule_ . 
+One Kilowatt-hour_ (i.e., 1000 Watt_ consumed for 3600 seconds) is 3.6 Mega Joule_ . 
 
 
 .. _showpower: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
