@@ -714,7 +714,7 @@ At the same time you must configure the acct_gather.conf_ file in ``/etc/slurm/`
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=30
 
-Avoid, however, the ``EnergyIPMICalcAdjustment`` parameter in acct_gather.conf_, see bug_20207_.
+However, **avoid** the ``EnergyIPMICalcAdjustment`` parameter in acct_gather.conf_, see bug_20207_ Comment 26.
 
 Set also this slurm.conf_ parameter, where example values may be::
 
@@ -740,11 +740,23 @@ then perform a reconfiguration::
 
   scontrol reconfigure
 
-As a test you can monitor some power values as shown below.
+As a test you can monitor some power values as shown in the section below.
+
+When IPMI power monitoring has been enabled, it becomes possible to make **energy accounting of individual jobs**.
+The sacct_ command has a ``ConsumedEnergyRaw`` field that can be specified with the --format option::
+
+  ConsumedEnergyRaw: Total energy consumed by all tasks in a job, in joules.  Note: Only in the case of an exclusive job allocation does this value reflect the job's real energy consumption.
+
+Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
+One Kilowatt-hour_ is 3.6 Mega Joule_ . 
+
+However, job energy accounting is not fully reliable as of Slurm_ 23.11.8 (July 2024) due to a number of issues in slurmd_ that are tracked in bug_20207_, 
+see the list of issues in Comment 31.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 .. _bug_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
+.. _sacct: https://slurm.schedmd.com/sacct.html
 
 Non DCMI compliant BMCs
 .......................
