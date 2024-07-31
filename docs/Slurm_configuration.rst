@@ -724,7 +724,7 @@ as described in the manual page::
 
   The default value for task sampling interval is 30 seconds.
   The default  value  for  all other intervals is 0.
-  Smaller (non-zero) values have a greater impact upon job performance,  but a value of 30 seconds is not likely to be noticeable for applications having less than 10,000 tasks.
+  Smaller (non-zero) values have a greater impact upon job performance, but a value of 30 seconds is not likely to be noticeable for applications having less than 10,000 tasks.
 
 The ``JobAcctGatherFrequency`` should be >= ``EnergyIPMIFrequency``, see bug_20207_.
 
@@ -742,8 +742,15 @@ then perform a reconfiguration::
 
 As a test you can monitor some power values as shown in the section below.
 
+.. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _bug_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
+
+Energy accounting of individual jobs
+........................................
+
 When IPMI power monitoring has been enabled, it becomes possible to make **energy accounting of individual jobs**.
-The accounting command sacct_ command has an output field ``ConsumedEnergyRaw`` that can be specified using the `--format` option::
+The accounting command sacct_ command has an output field ``ConsumedEnergyRaw`` that can be specified using the ``--format`` option::
 
   ConsumedEnergyRaw: Total energy consumed by all tasks in a job, in joules.  Note: Only in the case of an exclusive job allocation does this value reflect the job's real energy consumption.
 
@@ -753,9 +760,6 @@ see the list of issues in Comment 31.
 Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
 One Kilowatt-hour_ is 3.6 Mega Joule_ . 
 
-.. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
-.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
-.. _bug_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
 .. _sacct: https://slurm.schedmd.com/sacct.html
 
 Non DCMI compliant BMCs
