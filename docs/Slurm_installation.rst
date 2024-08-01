@@ -471,7 +471,7 @@ Pay attention to these statements:
 
   Actually, the term "commands" here primarily refers to the **login nodes**,
   because all Slurm_ commands (sinfo_ , squeue_ etc.) are **not interoperable** with an older slurmctld_ version,
-  as explained in bug_17418_, due to RPC changes!
+  as explained in bug_17418_, due to RPC_ changes!
   It is OK to upgrade Slurm_ on login nodes **after** slurmctld_ has been upgraded.
   The slurmd_ on compute nodes can be upgraded over a period of time, and older slurmd_ versions will continue to work with an upgraded slurmctld_.
 
@@ -492,6 +492,7 @@ If you use a database, also make sure to:
 .. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
+.. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 
 This command can report current jobs that have been orphaned on the local cluster and are now runaway::
 
@@ -701,7 +702,7 @@ The upgrading steps for the slurmdbd_ host are:
      sacctmgr show user -s
 
 **WARNING:** Newer versions of user commands like ``sinfo``, ``squeue`` etc. are **not interoperable** with an older 
-slurmctld_ version, as explained in bug_17418_, due to RPC changes!
+slurmctld_ version, as explained in bug_17418_, due to RPC_ changes!
 
 .. _bug_17418: https://bugs.schedmd.com/show_bug.cgi?id=17418
 
