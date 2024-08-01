@@ -479,7 +479,7 @@ If you use a database, also make sure to:
 
 * Make a database dump (see :ref:`Slurm_database`) prior to the slurmdbd_ upgrade.
 * Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
-  In stead of starting the slurmdbd_ service, it is most likely necessary to **start the daemon manually**.
+  In stead of starting the slurmdbd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
   If you use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
   
   The recommended way to perform the slurmdbd_ database upgrade is therefore::
