@@ -469,8 +469,9 @@ Pay attention to these statements:
 
     slurmdbd >= slurmctld >= slurmd >= commands
 
-  Actually, ``commands`` mostly refers to the use of **login nodes** because all Slurm_ commands (sinfo_ , squeue_ etc.)
-  are **not interoperable** with an older slurmctld_ version, as explained in bug_17418_, due to RPC changes!
+  Actually, the term "commands" here primarily refers to the **login nodes**,
+  because all Slurm_ commands (sinfo_ , squeue_ etc.) are **not interoperable** with an older slurmctld_ version,
+  as explained in bug_17418_, due to RPC changes!
   It is OK to upgrade Slurm_ on login nodes **after** slurmctld_ has been upgraded.
   The slurmd_ on compute nodes can be upgraded over a period of time, and older slurmd_ versions will continue to work with an upgraded slurmctld_.
 
