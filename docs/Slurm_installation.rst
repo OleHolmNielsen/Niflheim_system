@@ -462,7 +462,7 @@ Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
 
-* You may upgrade at most by 2 (3 from 24.11) major versions, see the Upgrades_ page:
+* You may upgrade at most by 2 (3 from 24.11) major versions, see the Upgrades_ page.
 * In other words, when changing the version to a higher release number (e.g from 22.05.x to 23.02.x) always upgrade the slurmdbd_ daemon first.
 * Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values.
 * The recommended upgrade order is that versions may be mixed as follows::
