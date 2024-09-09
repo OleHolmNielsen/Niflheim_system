@@ -430,18 +430,14 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
     export VER=23.11.10
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
-  Create the slurmdbd_ log directory and make the correct ownership::
+  Create the slurmdbd_ log directory and log file, and make the correct ownership::
 
     mkdir /var/log/slurm
-    chown slurm: /var/log/slurm
     chmod 755 /var/log/slurm
-
-  Create the log file::
-
     touch /var/log/slurm/slurmdbd.log 
-    chown slurm: /var/log/slurm/slurmdbd.log 
+    chown slurm: /var/log/slurm /var/log/slurm/slurmdbd.log
 
-  Explicitly enable the service::
+  Explicitly enable the slurmdbd_ service::
 
     systemctl enable slurmdbd
 
