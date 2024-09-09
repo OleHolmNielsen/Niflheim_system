@@ -54,7 +54,7 @@ To restrict user login by SSH, use the ``AllowUsers`` parameter in sshd_config_.
 Slurm_ and Munge_ require consistent UID and GID across **all servers and nodes in the cluster**,
 including the ``slurm`` and ``munge`` users.
 
-It is very important to **avoid UID and GID below 1000**,
+**Very important: Avoid UID and GID values below 1000**,
 as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
 see also the User_identifier_ page.
 
@@ -71,7 +71,8 @@ Create the users/groups for ``slurm`` and ``munge``, for example::
 User/group creation must be done **prior to installing RPMs**
 (which would create random UID/GID pairs if these users don't exist).
 
-Please note that UIDs and GIDs up to 1000 are currently reserved for system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_
+Please note that UIDs and GIDs up to 1000 are currently reserved for EL Linux system users,
+see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_
 and the file ``/etc/login.defs``.
 
 .. _User_identifier: https://en.wikipedia.org/wiki/User_identifier
@@ -93,13 +94,17 @@ For an overview of authentication see the Authentication_Plugins_ page.
 The Munge_ authentication plugins identifies the user originating a message.
 You should read the Munge_installation_ guide and the Munge_wiki_.
 
-The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13, install them by::
+The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13,
+but it is preferred to install a later version as discussed below.
+The in-distro packages may be installed by::
 
   dnf install munge munge-libs munge-devel
 
-On busy servers such as the slurmctld_ server, the munged_ daemon could become a bottleneck,
+On busy servers such as the slurmctld_ server,
+the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
-On such servers it is recommended to increase the number of threads, see the munged_ manual page.
+On busy servers it is recommended to increase the number of threads,
+see the munged_ manual page, however, this is the default in the latest Munge_release_.
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
 
@@ -113,8 +118,9 @@ The issue is discussed in
 Install latest Munge version
 -----------------------------
 
-It is advantageous to install the latest Munge_release_ RPMs (currently 0.5.16) due to new features and bug fixes.
-Build RPMs by::
+We recommend to install the latest Munge_release_ RPMs (currently 0.5.16)
+due to new features and bug fixes.
+Build RPM packages by::
 
   wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
   rpmbuild -ta munge-0.5.16.tar.xz
@@ -142,11 +148,11 @@ and do ``sysctl -p``.
 Munge 0.5.13: Increase number of threads 
 -----------------------------------------------
 
-If you use the **default** EL8/EL9 Munge_ version 0.5.13,
-it does not honor an options file,
+Only in case you decided to use the **default** EL8/EL9 Munge_ version 0.5.13,
+this version does not honor an options file,
 see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
 
-This is how you can increase the number of threads in `munged`.
+You can increase the number of threads in `munged` as follows.
 Copy the Systemd_ unit file::
 
   cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
