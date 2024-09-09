@@ -146,7 +146,7 @@ Delay start of slurmd until InfiniBand/Omni-Path network is up
 Unfortunately, slurmd_ may start up before the Infiniband_ or :ref:`OmniPath` network fabric ports are up.
 The reason is that Infiniband_ ports may take a number of seconds to become activated at system boot time,
 and NetworkManager_ unfortunately cannot be configured to wait for Infiniband_,
-but will claim that the network is online as soon as one of the NIC interfaces is ready (typically Ethernet).
+but will claim that the network is online as soon as one of the NIC interfaces is ready (typically Ethernet_).
 This issue seems to be serious on EL8 (RHEL 8 and clones) with 10-15 seconds of delay.
 
 If you have configured Node Health Check (NHC_) to check the Infiniband_ ports,
@@ -985,8 +985,13 @@ If configurations in ``/etc/sysctl.conf`` are updated, you need to run::
 Configure ARP cache for large networks
 ......................................
 
-If the number of network devices (cluster nodes, BMCs, servers, switches, etc.) approaches or exceeds 512,
+If the number of network devices (including cluster nodes, BMC_ s, servers, switches, etc.) approaches or exceeds the value ``512``,
 you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_ manual page.
+
+ARP_ (*Address Resolution Protocol*) is the Linux kernel’s mapping between IP-address_ (such as 10.1.2.3) and Ethernet_ MAC_address_ (such as *00:08:02:8E:05:F2*).
+If the soft maximum number of entries to keep in the ARP_Cache_, ``gc_thresh2=512``, is exceeded, the kernel will try to remove ARP_Cache_ entries by a garbage collection process.
+This is going to hit you in terms of sporadic loss of connectivitiy between pairs of nodes.
+No garbage collection will take place if the ARP_Cache_ has fewer than ``gc_thresh1=128`` entries, so you should be safe if your network is smaller than this number.
 
 The best solution to this ARP_Cache_ trashing problem is to increase the kernel's ARP_Cache_ garbage collection (gc) parameters by adding these lines to ``/etc/sysctl.conf``::
 
@@ -1002,12 +1007,20 @@ The best solution to this ARP_Cache_ trashing problem is to increase the kernel'
   # ARP cache entry timeout
   net.ipv4.neigh.default.gc_stale_time = 3600
 
+Display the current ARP_Cache_ values by::
+
+  sysctl net.ipv4.neigh.default
+
 You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Administration_Guide_)::
 
   # Limit of socket listen() backlog, known in userspace as SOMAXCONN
   net.core.somaxconn = 1024
 
+.. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
+.. _IP_address: https://en.wikipedia.org/wiki/IP_address
+.. _ARP: https://en.wikipedia.org/wiki/Address_Resolution_Protocol
 .. _ARP_Cache: https://en.wikipedia.org/wiki/ARP_cache
+.. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
 .. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
 .. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
 
@@ -1721,7 +1734,7 @@ See the *Related Networking Notes* slides in the presentation:
 Open firewall between servers
 -----------------------------
 
-On these servers, insert a firewalld_ direct_rule_ so that any incoming source IP packet (src) from a specific IP address (A.B.C.D) gets accepted, for example::
+On these servers, insert a firewalld_ direct_rule_ so that any incoming source IP packet (src) from a specific IP_address_ (A.B.C.D) gets accepted, for example::
 
   firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT_direct 0 -s A.B.C.D/32 -j ACCEPT
 
