@@ -986,7 +986,7 @@ Configure ARP cache for large networks
 ......................................
 
 If the number of network devices (including cluster nodes, BMC_ s, servers, switches, etc.) approaches or exceeds the value ``512``,
-you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_ manual page.
+you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_command_ manual page.
 
 ARP_ (*Address Resolution Protocol*) is the Linux kernel’s mapping between IP-address_ (such as 10.1.2.3) and Ethernet_ MAC_address_ (such as *00:08:02:8E:05:F2*).
 If the soft maximum number of entries to keep in the ARP_Cache_, ``gc_thresh2=512``, is exceeded, the kernel will try to remove ARP_Cache_ entries by a garbage collection process.
@@ -1022,7 +1022,7 @@ You may also consider increasing the SOMAXCONN_ limit
 .. _ARP: https://en.wikipedia.org/wiki/Address_Resolution_Protocol
 .. _ARP_Cache: https://en.wikipedia.org/wiki/ARP_cache
 .. _MAC_address: https://en.wikipedia.org/wiki/MAC_address
-.. _arp: https://man7.org/linux/man-pages/man8/arp.8.html
+.. _arp_command: https://man7.org/linux/man-pages/man8/arp.8.html
 .. _SOMAXCONN: https://docs.kernel.org/networking/ip-sysctl.html?highlight=net+core+somaxconn
 
 .. _configure_maximum_number_of_open_files:
