@@ -1009,7 +1009,10 @@ You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Adminis
 Configure maximum number of open files
 ......................................
 
-The slurmd_ service is configured by default with a Systemd_ limit on the number of open files in the service file
+We strongly recommend to increase significantly the kernel's ``fs.file-max`` limit on **all Slurm compute nodes**!
+
+The default slurmd_ service is configured with a Systemd_ limit on the
+number of open files in the service file
 ``/usr/lib/systemd/system/slurmd.service``::
 
   LimitNOFILE=131072
