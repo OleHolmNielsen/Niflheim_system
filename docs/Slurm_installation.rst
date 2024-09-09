@@ -683,10 +683,11 @@ Here is a suggested procedure:
 
 11. When all tests have been completed successfully, reinstall the compute node to its default installation.
 
-Upgrading on EL8 
---------------------
+Upgrading on EL8 and EL9
+-------------------------
 
-Let's assume that you have built the updated RPM packages for EL8 and copied them to the current directory so you can use ``dnf`` commands on the files directly.
+Let's assume that you have built the updated RPM packages for EL8 or EL9
+and copied them to the current directory so you can use ``dnf`` commands on the files directly.
 
 Upgrade slurmdbd
 ................
@@ -704,25 +705,27 @@ The upgrading steps for the slurmdbd_ host are:
      export VER=23.11.10
      dnf update slurm*$VER*.rpm
 
-4. Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
-   In stead of starting the slurmdbd_ service, it is most likely necessary to **start the daemon manually**.
-   If you use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
+4. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see bug_4450_).
+   In stead of starting the slurmdbd_ service with ``systemctl``, it is most likely necessary to **start the daemon manually**.
+   If you were to use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
+
    Perform and time the actual database upgrade::
 
      time slurmdbd -D -vvv
 
-   The completion of the database conversion may be printed as::
+   The completion of the database conversion may be printed with text like::
 
      slurmdbd: debug2: accounting_storage/as_mysql: as_mysql_roll_usage: Everything rolled up
 
-   Then do a *Control-C*.
-   Please note that the database table conversions may take **several minutes** or longer, depending on the size of the tables.
+   Then stop slurmdbd_ with a Control-C_.
+   Please note that the database table conversions may take **a number of minutes** or longer,
+   depending on the size of the database tables.
 
-5. Restart the slurmdbd_ service normally::
+5. Now start the slurmdbd_ service normally::
 
      systemctl start slurmdbd
 
-6. Make some query to test slurmdbd_::
+6. Make some database query to test slurmdbd_::
 
      sacctmgr show user -s
 
@@ -730,6 +733,7 @@ The upgrading steps for the slurmdbd_ host are:
 slurmctld_ version, as explained in bug_17418_, due to RPC_ changes!
 
 .. _bug_17418: https://bugs.schedmd.com/show_bug.cgi?id=17418
+.. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
 Upgrade slurmctld
 .................
