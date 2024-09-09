@@ -135,20 +135,16 @@ and you may for example add this configuration to increase the number of threads
 Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
 which might cause the `munged.log` file to **fill up the system disk**.
 
-See also the page section :ref:`configure_maximum_number_of_open_files`.
-It is highly recommended to increase the file limit in ``/etc/sysctl.conf`` significantly on **all Slurm nodes**, for example:: 
-
-  fs.file-max = 13107200
-
-and do ``sysctl -p``.
+See also the page :ref:`configure_maximum_number_of_open_files`
+where it is **highly recommended** to increase the file limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
 
-Munge 0.5.13: Increase number of threads 
+Munge 0.5.13 only: Increase number of threads 
 -----------------------------------------------
 
-Only in case you decided to use the **default** EL8/EL9 Munge_ version 0.5.13,
+Only in case you have decided to use the **default** EL8/EL9 Munge_ version 0.5.13,
 this version does not honor an options file,
 see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
 
