@@ -29,6 +29,7 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
 .. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
 .. _MySQL: https://www.mysql.com/
+.. _Ansible: https://www.ansible.com/
 
 Database documentation
 ======================
@@ -68,7 +69,6 @@ and should be built with the *Non-Volatile Memory Express* (NVMe_) storage inter
 
 A disk size of 200 GB or 400 GB should be sufficient.
 Consider installing 2 disk drives and run them in a RAID-1 mirrored configuration.
-Example hardware could be the Intel *SSD P3700 series* or the Kingston *E1000 series*.
 
 .. _PCIe: https://en.wikipedia.org/wiki/PCI_Express
 .. _NVMe: https://en.wikipedia.org/wiki/NVM_Express
@@ -108,9 +108,8 @@ and rebuild all RPMs with mysql support as shown in :ref:`Slurm_installation`::
 
 If you will use Ansible_ to manage the database, Ansible_ needs this Python package::
 
-  dnf install python3-mysql   # EL8 and EL9
-
-.. _Ansible: https://www.ansible.com/
+  dnf install python3-mysql (EL8)
+  dnf install python3-PyMySQL (EL9)
  
 Now start the MariaDB_ service::
 
@@ -132,7 +131,7 @@ Now follow the accounting_ page instructions (using -p to enter the database pas
   create database slurm_acct_db;
   quit;
 
-**WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
+**WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``!
 
 Optional: If you would like to grant read-only (SELECT) access to the database, set up a ``readonly`` user with access from ``%`` (meaning any host)::
 
