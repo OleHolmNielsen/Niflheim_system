@@ -1011,10 +1011,11 @@ Display the current ARP_Cache_ values by::
 
   sysctl net.ipv4.neigh.default
 
-You may also consider increasing the SOMAXCONN_ limit (see Large_Cluster_Administration_Guide_)::
+You may also consider increasing the SOMAXCONN_ limit
+(see Large_Cluster_Administration_Guide_)::
 
   # Limit of socket listen() backlog, known in userspace as SOMAXCONN
-  net.core.somaxconn = 1024
+  net.core.somaxconn = 2048
 
 .. _Ethernet: https://en.wikipedia.org/wiki/Ethernet
 .. _IP_address: https://en.wikipedia.org/wiki/IP_address
@@ -1052,7 +1053,7 @@ Therefore a line should be configured in ``/etc/sysctl.conf``, for example 100 t
 
 System `default values <https://access.redhat.com/solutions/23733>`_ of ``fs.file-max``:
 
-* The EL8 ``fs.file-max`` calculated by the kernel at boot time is approximately 1/10 of physical RAM size in units of MB.
+* The EL8 ``fs.file-max`` calculated by the kernel at boot time is approximately 1/10 of physical RAM size in units of MB (no explanation is given).
 * The EL9 ``fs.file-max`` is set to max value itself which is 9223372036854775807 (2^63-1).
 
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
@@ -1088,8 +1089,8 @@ See the slurm.conf_ page for the list of all ``PropagateResourceLimitsExcept`` l
 PAM module restrictions
 -----------------------
 
-On Compute nodes you may additionally install the ``slurm-pam_slurm`` RPM package to prevent rogue users from logging in.
-A more important functions is the *containment* of SSH tasks, for example, by some MPI libraries **not** using Slurm_ for spawning tasks.
+On Compute nodes you may optionally install the ``slurm-pam_slurm`` RPM package which can prevent rogue users from logging in.
+A more important function is the *containment* of SSH tasks, for example, by some MPI libraries **not** using Slurm_ for spawning tasks.
 The pam_slurm_adopt_ module makes sure that child SSH tasks are controlled by Slurm on the job's master node.
 
 SELinux_ may conflict with pam_slurm_adopt_, so it might need to be disabled by this command::
@@ -1100,7 +1101,8 @@ Disable SELinux_ permanently in ``/etc/selinux/config``::
 
   SELINUX=disabled
 
-For further details, the pam_slurm_adopt_ module is described by its author in `Caller ID: Handling ssh-launched processes in Slurm  <https://tech.ryancox.net/2015/04/caller-id-handling-ssh-launched-processes-in-slurm.html>`_.
+For further details, the pam_slurm_adopt_ module is described by its author in
+`Caller ID: Handling ssh-launched processes in Slurm  <https://tech.ryancox.net/2015/04/caller-id-handling-ssh-launched-processes-in-slurm.html>`_.
 Features include:
 
 * This module restricts access to compute nodes in a cluster where Slurm is in use.
@@ -1110,14 +1112,12 @@ Usage of pam_slurm_adopt_ is described in the source files pam_slurm_adopt_.
 There is also a nice description in bug_4098_.
 Documentation of pam_slurm_adopt_ is discussed in bug_3567_.
 
+The PAM usage of, for example, ``/etc/pam.d/system-auth`` on RHEL and clones is configured through the authconfig_ command.
+
 .. _bug_4098: https://bugs.schedmd.com/show_bug.cgi?id=4098
 .. _bug_3567: https://bugs.schedmd.com/show_bug.cgi?id=3567
-
 .. _pam_slurm_adopt: https://slurm.schedmd.com/pam_slurm_adopt.html
 .. _pam: https://github.com/SchedMD/slurm/tree/master/contribs/pam
-
-The PAM usage of, for example, ``/etc/pam.d/system-auth`` on RHEL is configured through the authconfig_ command.
-
 .. _pam_slurm: https://slurm.schedmd.com/faq.html#pam
 .. _authconfig: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System-Level_Authentication_Guide/authconfig-addl-auth.html
 .. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
@@ -1145,7 +1145,7 @@ PAM configuration
 **Warnings:** 
 
 * First make the ``PrologFlags=contain`` configuration described above.
-* Do **NOT** configure ``UsePAM=1`` in slurm.conf_.
+* **DO NOT** configure ``UsePAM=1`` in slurm.conf_!
 * Reconfiguration of the PAM setup should only be done on compute nodes that can't run jobs (for example, drained nodes).
 * You should only configure this on Slurm_ 17.02.2 or later.
 
@@ -1253,20 +1253,6 @@ To ensure that job tasks running under Slurm_ have the desired configuration, ve
 If slurmd_ has a memory lock limited less than expected, it may be due to slurmd_ having been started at boot time by the old init-script ``/etc/init.d/slurm``
 rather than by systemctl.
 To remedy this problem see the section *Starting slurm daemons at boot time* above.
-
-Setting job limits with PAM
----------------------------
-
-By default jobs started by *slurmd* do not use PAM and therefore do not honor the ``/etc/security/limits.conf`` file.
-This behavior may be changed by adding to ``slurm.conf`` (see the man-page)::
-
-  UsePAM=1
-
-Then you can create a file ``/etc/pam.d/slurm`` containing::
-
-  auth            required        pam_localuser.so
-  account         required        pam_unix.so
-  session         required        pam_limits.so
 
 Temporary job directories
 -------------------------
