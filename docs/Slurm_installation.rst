@@ -180,7 +180,7 @@ Display these encryption options by::
 .. _AES: https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 .. _HMAC: https://en.wikipedia.org/wiki/Hash-based_message_authentication_code
 
-On the **Head/Master node (only)** create a secret key to be used globally on every node (see the Munge_installation_ guide)::
+On the **Head node (only)** create a secret key to be used globally on every node (see the Munge_installation_ guide)::
 
   dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key   
   chown munge: /etc/munge/munge.key
@@ -379,13 +379,13 @@ Installing RPMs
 Study the configuration information in the Quick Start Administrator_Guide_.
 The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can vary by configuration, but here is a suggested starting point:
 
-* **Head/Master** node where the slurmctld_ daemon runs::
+* **Head** node where the slurmctld_ daemon runs::
 
     export VER=23.11.10
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
     systemctl enable slurmctld
 
-  The following must be done on the Head/Master node because the RPM installation does not include this.
+  The following must be done on the Head node because the RPM installation does not include this.
   Create the spool and log directories and make them owned by the slurm user::
 
     mkdir /var/spool/slurmctld /var/log/slurm

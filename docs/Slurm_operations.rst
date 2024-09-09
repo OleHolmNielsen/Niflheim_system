@@ -34,7 +34,7 @@ Testing basic functionality
 
 We assume that you have carried out the above deployment along the lines of :ref:`Slurm_installation`, :ref:`Slurm_configuration`, :ref:`Slurm_database`, :ref:`Slurm_accounting` and :ref:`Slurm_scheduler`.
 
-From the *Head/Master* node try to submit an interactive job::
+From the *Head* node try to submit an interactive job::
 
   srun -N1 /bin/hostname
 

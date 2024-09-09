@@ -8,7 +8,7 @@ Slurm accounting
 
 Jump to our top-level Slurm page: :ref:`SLURM`
 
-The following configuration is relevant for the Head/Master node only.
+The following configuration is relevant for the Slurm_ Head node only.
 
 .. _Slurm_Quick_Start: https://slurm.schedmd.com/quickstart_admin.html
 .. _Slurm: https://www.schedmd.com/

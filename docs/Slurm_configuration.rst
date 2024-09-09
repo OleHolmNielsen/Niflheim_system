@@ -37,9 +37,9 @@ Slurm configuration and slurm.conf
 
 You probably want to look at the example configuration files found in this RPM::
 
-  rpm -q slurm-example-configs
+  rpm -ql slurm-example-configs
 
-On the *Head/Master* node you should build a slurm.conf_ configuration file.
+On the Slurm_ *Head* node you should build a slurm.conf_ configuration file.
 When it has been fully tested, then slurm.conf_ must be copied to all other nodes.
 
 It is **mandatory** that the slurm.conf_ file is identical on all nodes in the system!
@@ -209,7 +209,7 @@ Starting slurm daemons at boot time
 Enable startup of services as appropriate for the given node::
 
   systemctl enable slurmd      # Compute node
-  systemctl enable slurmctld   # Master/head server
+  systemctl enable slurmctld   # Head server
   systemctl enable slurmdbd    # Database server
 
 The systemd_ service files are ``/usr/lib/systemd/system/slurm*.service``.
@@ -408,14 +408,14 @@ After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfi
 Node Health Check
 -----------------
 
-To insure the health status of Head/Master node and compute nodes, install the *LBNL Node Health Check* (NHC_) package from LBL_.
+To insure the health status of Head node and compute nodes, install the *LBNL Node Health Check* (NHC_) package from LBL_.
 The NHC_ releases are in https://github.com/mej/nhc/releases/.
 
 .. _NHC: https://github.com/mej/nhc
 .. _LBL: https://www.lbl.gov/
 
 It's simple to configure NHC_ Slurm integration, see the NHC_ page.
-Add the following to slurm.conf_ on your *Head/Master* node **and** your compute nodes::
+Add the following to slurm.conf_ on your *Head* node **and** your compute nodes::
 
   HealthCheckProgram=/usr/sbin/nhc
   HealthCheckInterval=3600
@@ -871,10 +871,10 @@ We describe the power_save_ configuration in the Slurm_cloud_bursting_ page sect
 .. _power_save: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
 
-Head/Master server configuration
+Slurm head server configuration
 ================================
 
-The following must be done on the Head/Master node.
+The following must be done on the Slurm_ Head node.
 Create the spool and log directories and make them owned by the slurm user::
 
   mkdir /var/spool/slurmctld /var/log/slurm
@@ -911,7 +911,7 @@ Copy ``/etc/slurm/slurm.conf`` to all compute nodes::
 
   clush -bw <node-list> --copy /etc/slurm/slurm.conf --dest /etc/slurm/slurm.conf
 
-It is important to keep this file **identical** on both the *Head/Master* server and all Compute nodes.
+It is important to keep this file **identical** on both the *Head* server and all Compute nodes.
 Remember to include all of the *NodeName=* lines for all compute nodes.
 
 Compute node configuration
@@ -1624,7 +1624,7 @@ Check consistency of ``/etc/slurm/topology.conf`` with nodelist in ``/etc/slurm/
 Configure firewall for Slurm daemons
 ====================================
 
-The Slurm_ compute nodes must be allowed to connect to the Head/Master node's slurmctld_ daemon.
+The Slurm_ compute nodes must be allowed to connect to the Head node's slurmctld_ daemon.
 In the configuration file these ports are by default (see slurm.conf_)::
 
   SlurmctldPort=6817
@@ -1637,7 +1637,7 @@ Install firewalld_ by::
 
   dnf install firewalld firewall-config
 
-Head/Master node
+Head node
 --------------------
 
 Open port 6817 (slurmctld_)::
