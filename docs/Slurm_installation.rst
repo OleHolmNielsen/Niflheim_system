@@ -293,14 +293,12 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    
      dnf install jq
 
-3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library.
+3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
 
-   **Important**: 
-
-   * The `libyaml` **must** be version 0.2.5 or later, see bug_17673_.
+   * **Important**: The `libyaml` **must** be version >= 0.2.5, see bug_17673_.
 
    The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
-   The EL9 provides version 0.2.5.
+   The EL9 provides the required version 0.2.5.
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
