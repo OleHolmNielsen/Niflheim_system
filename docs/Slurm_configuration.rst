@@ -992,6 +992,7 @@ ARP_ (*Address Resolution Protocol*) is the Linux kernel’s mapping between IP_
 If the soft maximum number of entries to keep in the ARP_Cache_, ``gc_thresh2=512``, is exceeded, the kernel will try to remove ARP_Cache_ entries by a garbage collection process.
 This is going to hit you in terms of sporadic loss of connectivitiy between pairs of nodes.
 No garbage collection will take place if the ARP_Cache_ has fewer than ``gc_thresh1=128`` entries, so you should be safe if your network is smaller than this number.
+Documentation is in the kernel page for `ip-sysctl <https://docs.kernel.org/next/networking/ip-sysctl.html>`_.
 
 The best solution to this ARP_Cache_ trashing problem is to increase the kernel's ARP_Cache_ garbage collection (gc) parameters by adding these lines to ``/etc/sysctl.conf``::
 
