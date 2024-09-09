@@ -328,9 +328,9 @@ Build Slurm packages
 
 Get the Slurm_ source code from the Slurm_download_ page.
 
-Set the version (for example, 23.11.8) and build Slurm_ RPM packages by::
+Set the version (for example, 23.11.10 and build Slurm_ RPM packages by::
 
-  export VER=23.11.8
+  export VER=23.11.10
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql
 
 Notes about the ``--with mysql`` option:
@@ -381,7 +381,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Head/Master** node where the slurmctld_ daemon runs::
 
-    export VER=23.11.8
+    export VER=23.11.10
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
     systemctl enable slurmctld
 
@@ -426,7 +426,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Database** (slurmdbd_ service) node::
 
-    export VER=23.11.8
+    export VER=23.11.10
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
   Explicitly enable the service::
@@ -632,9 +632,9 @@ Here is a suggested procedure:
 8. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 23.11.8) built as shown above::
+   Update all Slurm_ RPMs to the new version (say, 23.11.10 built as shown above::
 
-     export VER=23.11.8
+     export VER=23.11.10
      dnf update slurm*$VER*.rpm
 
    If you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the upgrade::
@@ -689,7 +689,7 @@ The upgrading steps for the slurmdbd_ host are:
 
 3. Update all RPMs::
 
-     export VER=23.11.8
+     export VER=23.11.10
      dnf update slurm*$VER*.rpm
 
 4. Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
@@ -757,7 +757,7 @@ The upgrading steps for the slurmctld_ host are:
 
 4. Upgrade the RPMs, for example::
 
-     export VER=23.11.8
+     export VER=23.11.10
      dnf update slurm*$VER-*.rpm
 
 5. Enable and restart the slurmctld_ service::
@@ -821,9 +821,9 @@ for example, using the clush_ command (see the :ref:`SLURM` page about ClusterSh
 
   clush -bg <partition> slurmd -V
 
-The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.11.8) on all nodes::
+The **quick and usually OK procedure** would be to simply update the RPMs (here: version 23.11.10 on all nodes::
 
-  clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.8-*.rpm'
+  clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.10*.rpm'
 
 This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
 
@@ -842,9 +842,9 @@ For the compute nodes running slurmd_ the **safe procedure** could be:
 
      clush -bw <nodelist> systemctl stop slurmd
 
-3. Update the RPMs (here: version 23.11.8) on nodes::
+3. Update the RPMs (here: version 23.11.10 on nodes::
 
-     clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.8-*.rpm'
+     clush -bw <nodelist> 'dnf -y update /some/path/slurm*23.11.10*.rpm'
 
    and make sure to install also the new ``slurm-slurmd`` and ``slurm-contribs`` packages.
 
@@ -902,7 +902,7 @@ See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by T
 The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
 and the details are discussed in bug_20070_ .
 
-**WARNING:** As of Slurm_ 23.11.8 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV_record_ (see :ref:`configless-slurm-migration`),
+**WARNING:** As of Slurm_ 23.11.10 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV_record_ (see :ref:`configless-slurm-migration`),
 therefore slurmd_ has to be restarted at this time.
 The issue is tracked in bug_20462_.
 
