@@ -988,7 +988,7 @@ Configure ARP cache for large networks
 If the number of network devices (including cluster nodes, BMC_ s, servers, switches, etc.) approaches or exceeds the value ``512``,
 you must consider the Linux kernel's limited dynamic ARP_Cache_ size, see the arp_command_ manual page.
 
-ARP_ (*Address Resolution Protocol*) is the Linux kernel’s mapping between IP-address_ (such as 10.1.2.3) and Ethernet_ MAC_address_ (such as *00:08:02:8E:05:F2*).
+ARP_ (*Address Resolution Protocol*) is the Linux kernel’s mapping between IP_address_ (such as 10.1.2.3) and Ethernet_ MAC_address_ (such as *00:08:02:8E:05:F2*).
 If the soft maximum number of entries to keep in the ARP_Cache_, ``gc_thresh2=512``, is exceeded, the kernel will try to remove ARP_Cache_ entries by a garbage collection process.
 This is going to hit you in terms of sporadic loss of connectivitiy between pairs of nodes.
 No garbage collection will take place if the ARP_Cache_ has fewer than ``gc_thresh1=128`` entries, so you should be safe if your network is smaller than this number.
