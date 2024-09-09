@@ -420,7 +420,7 @@ First try to run *slurmdbd* manually to see the log::
 
   slurmdbd -D -vvv
 
-Terminate the process by Control-C when the testing is OK.
+Terminate the process by Control-C_ when the testing is OK.
 
 Start the slurmdbd_ service::
 
@@ -434,6 +434,8 @@ If you get this error in ``/var/log/slurm/slurmdbd.log``::
 
 then the file ``/usr/lib64/slurm/accounting_storage_mysql.so`` is missing because you forgot to install the *mariadb-devel* RPM before building Slurm_ RPMs.
 You must install the *mariadb-devel* RPM and rebuild and reinstall Slurm_ RPMs as shown above.
+
+.. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
 .. _backup-and-restore-of-database:
 
@@ -710,7 +712,7 @@ and wait for the output::
 
      slurmdbd: debug2: Everything rolled up
 
-and do a *Control-C*.
+and do a Control-C_.
 
 .. _time_command: https://man7.org/linux/man-pages/man1/time.1.html
 
@@ -761,7 +763,7 @@ On the ``db2`` server:
  
      slurmdbd: debug2: Everything rolled up
 
-   and do a *Control-C*.
+   and do a Control-C_.
 
 4. Start and enable slurmdbd_ and make sure the status is up::
 

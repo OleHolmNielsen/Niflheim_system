@@ -231,9 +231,11 @@ For example::
   slurmctld -Dvvvv
 
 Watch the the output for any signs of problems.
-If the daemon looks sane, type Control-C and start the service in the normal way::
+If the daemon looks sane, type Control-C_ and start the service in the normal way::
 
   systemctl start slurmctld
+
+.. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
 E-mail notification setup
 -------------------------

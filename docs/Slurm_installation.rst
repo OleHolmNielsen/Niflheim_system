@@ -665,7 +665,7 @@ Here is a suggested procedure:
 
      slurmdbd: debug2: accounting_storage/as_mysql: as_mysql_roll_usage: Everything rolled up
 
-   and do a *Control-C*.
+   and do a Control-C_.
    Please note that the database table conversions may take **several minutes** or longer, depending on the size of the tables.
 
    Write down the timing information from the ``time`` command, since this will be the expected approximate time when you later perform the *real* upgrade.
