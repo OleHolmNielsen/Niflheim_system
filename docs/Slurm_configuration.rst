@@ -1087,6 +1087,8 @@ you probably want to prohibit these from the batch jobs by configuring::
 
 See the slurm.conf_ page for the list of all ``PropagateResourceLimitsExcept`` limits.
 
+.. _pam-module-restrictions:
+
 PAM module restrictions
 -----------------------
 

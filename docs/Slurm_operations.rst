@@ -334,25 +334,6 @@ When the server does not have the *slurm* RPM installed,
 or for more sophisticated host list processing,
 some non-Slurm tools may be used as shown below.
 
-The hostlist command
-....................
-
-The python-hostlist_ tool is very convenient for expanding or compressing node lists.
-
-To install this tool (make sure to download the latest release)::
-
-  dnf install python3-devel
-  wget https://www.nsc.liu.se/~kent/python-hostlist/python-hostlist-1.22.tar.gz
-  rpmbuild -ta python-hostlist-1.22.tar.gz
-  dnf install ~/rpmbuild/RPMS/noarch/python3-hostlist-1.22-1.el8.noarch.rpm
-  
-For usage see the python-hostlist_, but a useful example is::
-
-  # hostlist --expand --sep " "  n[001-012]
-  n001 n002 n003 n004 n005 n006 n007 n008 n009 n010 n011 n012
-
-.. _python-hostlist: https://www.nsc.liu.se/~kent/python-hostlist/
-
 The nodeset command
 ...................
 
@@ -362,11 +343,30 @@ For example::
   $ nodeset --expand node[13-15,17-19]
   node13 node14 node15 node17 node18 node19
 
+The hostlist command
+....................
+
+The python-hostlist_ tool is very convenient for expanding or compressing node lists.
+
+To install this tool (make sure to download the latest release)::
+
+  dnf install python3-devel
+  wget https://www.nsc.liu.se/~kent/python-hostlist/python-hostlist-1.23.tar.gz
+  rpmbuild -ta python-hostlist-1.23.tar.gz
+  dnf install ~/rpmbuild/RPMS/noarch/python3-hostlist-1.23-1.el8.noarch.rpm
+  
+For usage see the python-hostlist_, but a useful example is::
+
+  # hostlist --expand --sep " "  n[001-012]
+  n001 n002 n003 n004 n005 n006 n007 n008 n009 n010 n011 n012
+
+.. _python-hostlist: https://www.nsc.liu.se/~kent/python-hostlist/
 
 SSH keys for password-less access to cluster nodes
 --------------------------------------------------
 
-Users may have a need for SSH access to Slurm compute nodes, for example, if their MPI library is using SSH in stead of Slurm to start MPI tasks.
+Users may have a need for SSH access to Slurm compute nodes, for example,
+if they have to use an MPI library which is using SSH in stead of Slurm to start MPI tasks.
 
 However, it is a good idea to configure the slurm-pam-adopt_ module on the nodes to control and restrict SSH access, 
 see `<Slurm_configuration#pam-module-restrictions>`_.
@@ -384,12 +384,13 @@ Remember to set the SELinux context correctly for the files in ``/etc/ssh``::
 
   chcon system_u:object_r:etc_t:s0 /etc/ssh/ssh_known_hosts
 
-When all SSH *public keys* of the Slurm nodes are available in ``/etc/ssh/ssh_known_hosts``, each individual user can configure his password-less SSH login.
-First the user must generate SSH keys (placed in the ``$HOME/.ssh/`` folder) using the ssh-keygen_ tool.
+When all SSH *public keys* of the Slurm nodes are available in ``/etc/ssh/ssh_known_hosts``, each individual user can configure a password-less SSH login.
+First the user must generate personal SSH keys (placed in the ``$HOME/.ssh/`` folder) using the ssh-keygen_ tool.
 
 Each user may use the convenient tool authorized_keys_ for generating SSH keys and adding them to the ``$HOME/.ssh/authorized_keys`` file.
 
-For external computers the personal SSH_authorized_keys_ (preferably with a *passphrase* or *Multi-Factor Authentication*) should be used.
+For external computers the personal SSH_authorized_keys_
+(preferably protected with a *passphrase* or *Multi-Factor Authentication*) should be used.
 
 For the servers running the slurmctld_ and slurmdbd_ services it is strongly recommended **not** to permit login by normal users because they have no business on those servers!
 To restrict which users can login to the management hosts, append this line to the SSH server ``/etc/ssh/sshd_config`` file::
@@ -413,15 +414,15 @@ Please beware that:
   because normal users have no business on those servers!
 * For security reasons the **root** user is not allowed to use Host-based_Authentication_.
   You can add root's public key to the ``/root/.ssh/authorized_keys`` file on all compute nodes for easy SSH access.
-* Furthermore, personal computers and other computers outside the cluster **must not be trusted** by the cluster nodes!
-  For external computers the personal SSH_authorized_keys_ (preferably with a *passphrase* or Multi_Factor_Authentication_) should be used.
+* Furthermore, personal computers and other computers outside the cluster **MUST NOT be trusted** by the cluster nodes!
+  For external computers the personal SSH_authorized_keys_ (preferably protected with a *passphrase* or Multi_Factor_Authentication_) should be used.
 * You need to understand that Host-based_Authentication_ is a *bad idea in general*,
   but that it is a good and secure solution within a single Linux cluster's security perimeter, see for example:
 
   * `Implementing ssh hostbased authentication <https://hea-www.harvard.edu/~fine/Tech/ssh-host-based.html>`_.
   * The mailing list thread at https://lists.schedmd.com/pipermail/slurm-users/2020-June/005578.html
 
-* It is a good idea to configure the slurm-pam-adopt_ module on the nodes to control and restrict SSH access, see `<Slurm_configuration#pam-module-restrictions>`_.
+* It is recommended to configure the slurm-pam-adopt_ module on the nodes to control and restrict SSH access, see :ref:`pam-module-restrictions`.
 
 Here are the steps for configuring Host-based_Authentication_:
 
