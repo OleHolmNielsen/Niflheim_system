@@ -891,7 +891,8 @@ Finally, restore the timeout values in slurm.conf_ to their defaults, for exampl
      SlurmctldTimeout=600
      SlurmdTimeout=300 
 
-and copy ``/etc/slurm/slurm.conf`` to all nodes. Then reconfigure the running daemons::
+and copy ``/etc/slurm/slurm.conf`` to all nodes (not needed in configless_ Slurm_ clusters).
+Then reconfigure the running daemons::
 
      scontrol reconfigure
 
@@ -903,7 +904,7 @@ Migrate the slurmctld service to another server
 =================================================
 
 It may be required to migrate the slurmctld_ service to another server, for example,
-when a major OS version update is needed or when the server must be migrated to another hardware.
+when a major OS version update is needed, or when the server must be migrated to another hardware.
 
 With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
 and **does not** require to stop all running jobs,
@@ -958,7 +959,6 @@ We have successfully performed a slurmctld_ migration following this procedure:
    As discussed in bug_20462_ it is currently necessary to restart slurmd_ on **all nodes**,
    for example, using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
 
-
      clush -ba systemctl restart slurmd
 
 9. When everything is working correctly, restore the timeout values in slurm.conf_ to their defaults, for example::
@@ -983,19 +983,20 @@ Configless Slurm migration
 --------------------------
 
 When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV_record_ in your cluster's DNS service to point to the new slurmctld_ server.
-Read about DNS_zone_ files.
+
+First read about DNS_zone_ files.
 Start well in advance by changing the DNS SRV_record_'s Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
 
   _slurmctld._tcp 600 IN SRV 0 0 6817 <slurmctld-server-name>
 
-Update the DNS_zone_'s ``serial number`` (might be a *timestamp*) and make a ``systemctl restart named``.
+Increase the DNS_zone_'s ``serial number`` (which might be a *timestamp* number) and make a ``systemctl restart named``.
 
 After stopping slurmctld_ on the old ``SlurmctldHost``,
 change the server name in the DNS SRV_record_.
-Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
+Increase the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
 Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV_record_'s Time_to_live_ (TTL) value.
-Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
+Increase the DNS_zone_'s serial number and make a ``systemctl restart named``.
 
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 .. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
@@ -1003,7 +1004,7 @@ Update the DNS_zone_'s serial number and make a ``systemctl restart named``.
 Migrate slurmctld version <= 23.02
 ------------------------------------
 
-In Slurm_ 23.02 and older, changes to ``SlurmctldHost`` are not possible with jobs running on the system.
+In Slurm_ 23.02 and older, changes to ``SlurmctldHost`` are not possible while jobs are running on the system.
 Therefore you have to **stop all running jobs**, for example by making a :ref:`resource_reservation`.
 Read the FAQ `How should I relocate the primary or backup controller? <https://slurm.schedmd.com/faq.html#controller>`_ with the procedure:
 
@@ -1017,13 +1018,13 @@ Read the FAQ `How should I relocate the primary or backup controller? <https://s
 Log file rotation
 =================
 
-The Slurm_ log files may be stored in ``/var/log/slurm``, and they may grow rapidly on a busy system.
-Especially the ``slurmctld.log`` file on the controller machine may grow very big.
+The Slurm_ log files may be stored in the ``/var/log/slurm`` directory, and they may grow rapidly on a busy system.
+Especially the ``slurmctld.log`` file on the controller machine may grow very large.
 
 Therefore you probably want to configure logrotate_ to administer your log files.
-On RHEL the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
+On RHEL Linux and clones the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
 
-Manual configuration is required because the SchedMD_ RPM files do not contain the logrotate setup, see bug_3904_ and bug_2215_ and bug_4393_.
+Manual configuration of logging is required because the SchedMD_ RPM files do not contain the logrotate setup, see bug_3904_, bug_2215_, and bug_4393_.
 See also the section *LOGGING* at the end of the slurm.conf_ page with an example logrotate script.
 
 First install the relevant RPM::
