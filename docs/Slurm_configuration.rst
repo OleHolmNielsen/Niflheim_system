@@ -1706,16 +1706,16 @@ Firewall between slurmctld and slurmdbd
 See advice from the Slurm_publications_ presentation *Technical: Field Notes Mark 2: Random Musings From Under A New Hat, Tim Wickberg, SchedMD* (2018).
 
 SchedMD recommends to run slurmctld_ and slurmdbd_ daemons on **separate servers**, see the *My Preferred Deployment Pattern* slides in the presentation.
-
 If you use this configuration, the firewall is an important issue.
-
 See the *Related Networking Notes* slides in the presentation:
 
 * This is almost always an issue with a firewall in between slurmctld and slurmdbd.
-* slurmdbd opens a new connection to slurmctld to push changes.
+* slurmdbd_ opens a new connection to slurmctld to push changes.
 * If you’ve firewalled that off, the update will not be propogated.
 
-**Conclusion:** Open the firewall for **all ports** between slurmctld_ and slurmdbd_ servers.
+**Conclusion**:
+
+* Open the firewall for **all ports** between slurmctld_ and slurmdbd_ servers.
 
 Open firewall between servers
 -----------------------------
