@@ -46,12 +46,16 @@ Create global user accounts
 
 There must be a uniform user and group name space (including UIDs and GIDs) across the cluster,
 see the Slurm_Quick_Start_ Administrator Guide.
-It is not necessary to permit user logins to the control hosts (*ControlMachine* or *BackupController*), but the users and groups must be configured on those hosts.
-To restrict user login by SSH, use the ``AllowUsers`` parameter in ``/etc/ssh/sshd_config``.
 
-Slurm_ and Munge_ require consistent UID and GID across **all servers and nodes in the cluster**, including the *slurm* and *munge* users.
+It is not necessary to permit user logins to the control hosts (*ControlMachine* or *BackupController*),
+but the users and groups must be configured on those hosts.
+To restrict user login by SSH, use the ``AllowUsers`` parameter in sshd_config_.
 
-It is very important to **avoid UID and GID below 1000**, as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
+Slurm_ and Munge_ require consistent UID and GID across **all servers and nodes in the cluster**,
+including the ``slurm`` and ``munge`` users.
+
+It is very important to **avoid UID and GID below 1000**,
+as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
 see also the User_identifier_ page.
 
 Create the users/groups for ``slurm`` and ``munge``, for example::
@@ -63,13 +67,15 @@ Create the users/groups for ``slurm`` and ``munge``, for example::
   groupadd -g $SlurmUSER slurm
   useradd  -m -c "Slurm workload manager" -d /var/lib/slurm -u $SlurmUSER -g slurm  -s /bin/bash slurm
 
-and make sure that these same users are created identically on **all nodes**.
-This must be done **prior to installing RPMs** (which would create random UID/GID pairs if these users don't exist).
+**Important:** Make sure that these same users are **created identically on all nodes**.
+User/group creation must be done **prior to installing RPMs**
+(which would create random UID/GID pairs if these users don't exist).
 
 Please note that UIDs and GIDs up to 1000 are currently reserved for system users, see `this article <https://unix.stackexchange.com/questions/343445/user-id-less-than-1000-on-centos-7>`_
 and the file ``/etc/login.defs``.
 
 .. _User_identifier: https://en.wikipedia.org/wiki/User_identifier
+.. _sshd_config: https://linux.die.net/man/5/sshd_config
 
 Slurm authentication plugin
 ============================
@@ -494,7 +500,7 @@ If you use a database, also make sure to:
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 
-This command can report current jobs that have been orphaned on the local cluster and are now runaway::
+The following command can report current jobs that have been orphaned on the local cluster and are now runaway::
 
   sacctmgr show runawayjobs
 
