@@ -60,10 +60,12 @@ Configless Slurm setup
 ----------------------
 
 The configless_ feature that allows the compute nodes — specifically the slurmd_ process — 
-and user commands running on login nodes to pull configuration information directly from the slurmctld_ instead of from a pre-distributed local file. 
-The order of precedence for determining what configuration source to use is listed in the configless_ page.
+and user commands running on login nodes to pull configuration information
+directly from the slurmctld_ controller instead of from a pre-distributed local file. 
+The *order of precedence* for determining what configuration source to use is listed in the configless_ page.
 
-On startup the compute node slurmd_ will query the slurmctld_ server that you specify, and the configuration files will be pulled to the node's local disk.
+On startup the compute node slurmd_ will query the slurmctld_ server that you specify,
+and the configuration files will be pulled to the node's local disk.
 The pulled slurmd_ conguration files are stored in this folder::
 
   $ ls -ld /run/slurm/conf
@@ -90,7 +92,7 @@ To verify the DNS setup, install these packages with tools required below::
 
   dnf install bind-utils hostname
 
-Lookup the SRV_record_ by either of::
+Lookup the SRV_record_ by either of these commands::
 
   dig +short -t SRV -n _slurmctld._tcp.`dnsdomainname`
   host -t SRV _slurmctld._tcp.`dnsdomainname`
@@ -118,9 +120,9 @@ The simplest way to achieve this is described in bug_9832_:
 
    Remember to add these nodes to the ``topology.conf`` file as well, for example::
 
-     SwitchName=switch1 Nodes=login1,login2
+     SwitchName=public_switch Nodes=login1,login2
 
-   and open the firewall on these nodes (see the firewall section below).
+   and open the firewall on the login nodes (see the firewall section below).
 
 2. Install the *slurm-slurmd* RPM on the login nodes and make sure to create the logging directory::
 
@@ -141,19 +143,19 @@ The simplest way to achieve this is described in bug_9832_:
 Delay start of slurmd until InfiniBand/Omni-Path network is up
 -----------------------------------------------------------------
 
-Unfortunately, slurmd_ may start up before the InfiniBand/Omni-Path network ports are up.
-The reason is that InfiniBand ports may take a number of seconds to become activated at system boot time,
-and NetworkManager_ cannot be configured to wait for InfiniBand,
-but will claim that the network is online as soon as one interface is ready (typically Ethernet).
+Unfortunately, slurmd_ may start up before the Infiniband_ or :ref:`OmniPath` network fabric ports are up.
+The reason is that Infiniband_ ports may take a number of seconds to become activated at system boot time,
+and NetworkManager_ unfortunately cannot be configured to wait for Infiniband_,
+but will claim that the network is online as soon as one of the NIC interfaces is ready (typically Ethernet).
 This issue seems to be serious on EL8 (RHEL 8 and clones) with 10-15 seconds of delay.
 
-If you have configured Node Health Check (NHC_) to check the InfiniBand ports,
-the NHC_ check is going to fail until the InfiniBand ports are up.
+If you have configured Node Health Check (NHC_) to check the Infiniband_ ports,
+the NHC_ check is going to fail until the Infiniband_ ports are up.
 Please note that slurmd_ will call NHC_ at startup, if HealthCheckProgram has been configured in slurm.conf_.
-Jobs started by slurmd_ may fail if the InfiniBand port is not yet up.
+Jobs started by slurmd_ may fail if the Infiniband_ port is not yet up.
 
-We have written some InfiniBand_tools_ to delay the NetworkManager_ ``network-online.target`` for InfiniBand/Omni-Path networks
-so that slurmd_ gets started only after **all** networks including InfiniBand are actually up.
+We have written some InfiniBand_tools_ to delay the NetworkManager_ ``network-online.target`` for Infiniband_/:ref:`OmniPath` networks
+so that slurmd_ gets started only after **all** networks including Infiniband_ are actually up.
 
 .. _NetworkManager: https://en.wikipedia.org/wiki/NetworkManager
 .. _InfiniBand_tools: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/InfiniBand
