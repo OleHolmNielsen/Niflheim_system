@@ -405,6 +405,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * On **Compute nodes** install slurmd_ and possibly also the *slurm-pam_slurm* RPM package to prevent rogue users from logging in::
 
+    export VER=23.11.10
     dnf install slurm-slurmd-$VER*rpm slurm-pam_slurm-$VER*rpm
     systemctl enable slurmd
 
@@ -433,9 +434,10 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
     systemctl enable slurmdbd
 
-* On **Login nodes** install just the *slurm* RPM package::
+* On **Login nodes** install these packages::
 
-    dnf install slurm-$VER*rpm 
+    export VER=23.11.10
+    dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-contribs-$VER*rpm slurm-perlapi-$VER*rpm 
 
 .. _configure-slurm-logging:
 
