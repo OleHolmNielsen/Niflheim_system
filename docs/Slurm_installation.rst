@@ -136,7 +136,8 @@ Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspende
 which might cause the `munged.log` file to **fill up the system disk**.
 
 See also the page :ref:`configure_maximum_number_of_open_files`
-where it is **highly recommended** to increase the file limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
+where it is **highly recommended** to increase the ``fs.file-max``
+limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
@@ -216,7 +217,7 @@ Run some **tests** as described in the Munge_installation_ guide::
 Build Slurm RPMs
 ================
 
-See the Slurm_Quick_Start_ Administrator Guide, especially the section below this text::
+Read the Slurm_Quick_Start_ Administrator Guide, especially the section below this text::
 
   Optional Slurm plugins will be built automatically when the configure script detects that the required build requirements are present. 
   Build dependencies for various plugins and commands are denoted below: 
@@ -252,8 +253,8 @@ Install required Slurm_ prerequisites, as well as several optional packages that
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel munge munge-libs munge-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf
 
-If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_, then you must also install Munge_
-(recommended: install_latest_munge_version_)::
+If you use the recommended ``AuthType=auth/munge`` in slurm.conf_ and slurmdbd.conf_,
+then you must also install Munge_ (**Recommendation:**: install_latest_munge_version_)::
 
   dnf install munge munge-libs munge-devel
 
@@ -267,7 +268,7 @@ Install the following packages from EPEL_::
 Optional prerequisites
 ........................
 
-Certain Slurm_ tools and plugins require additional prerequisites **before** building Slurm:
+Certain Slurm_ tools and plugins require additional prerequisites **before** building Slurm_ RPM packages:
 
 1. IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
@@ -281,8 +282,11 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
      dnf install http-parser-devel json-c-devel libjwt-devel 
 
-   The minimum version requirements are listed in the rest_quickstart_ guide:
-   HTTP Parser (>= v2.6.0), LibYAML (optional, >= v0.2.5), JSON-C (>= v1.12.0).
+   **Notice:** The minimum version requirements are listed in the rest_quickstart_ guide:
+
+   * HTTP Parser (>= v2.6.0),
+   * LibYAML (optional, >= v0.2.5),
+   * JSON-C (>= v1.12.0).
 
    See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
    You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
@@ -291,7 +295,10 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
 3. Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library.
 
-   **Important:** The `libyaml` **must** be version 0.2.5 or later, see bug_17673_.
+   **Important**: 
+
+   * The `libyaml` **must** be version 0.2.5 or later, see bug_17673_.
+
    The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    The EL9 provides version 0.2.5.
    
