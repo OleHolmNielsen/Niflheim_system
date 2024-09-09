@@ -319,7 +319,7 @@ First install the MariaDB_ database version 10.3::
 If you plan to use Ansible_ to manage the database, it will require this Python package::
 
   dnf install python3-mysql (EL8)
-  dnf install python3-mysqlclient (EL9)
+  dnf install python3-PyMySQL (EL9)
 
 .. _Ansible: https://www.ansible.com/
 
@@ -429,6 +429,17 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
     export VER=23.11.10
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
+
+  Create the slurmdbd_ log directory and make the correct ownership::
+
+    mkdir /var/log/slurm
+    chown slurm: /var/log/slurm
+    chmod 755 /var/log/slurm
+
+  Create the log file::
+
+    touch /var/log/slurm/slurmdbd.log 
+    chown slurm: /var/log/slurm/slurmdbd.log 
 
   Explicitly enable the service::
 
