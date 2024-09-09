@@ -321,33 +321,36 @@ Configure some of the slurmdbd.conf_ variables::
 Setting database purge parameters
 ---------------------------------
 
-A database with very many job records (maybe of the order of a million) is causing widespread problems when **upgrading** Slurm_ and the database.
-See the mailing list thread 
+A database with very many job records (maybe of the order of millions)
+might possibly cause widespread problems when **upgrading** the Slurm_ database,
+see the mailing list thread 
 `[slurm-users] Extreme long db upgrade 16.05.6 -> 17.11.3 <https://lists.schedmd.com/pipermail/slurm-users/2018-February/000612.html>`_.
 
-In order to solve this problem, it seems necessary to **purge job records** from the Slurm_ database.
-In slurmdbd.conf_ you may define a number of purge parameters such as::
+In order to solve this problem, it is advisable to **purge job records** from the Slurm_ database.
+In slurmdbd.conf_ you may define a number of purge parameters such as:
 
-  PurgeEventAfter
-  PurgeJobAfter
-  PurgeResvAfter
-  PurgeStepAfter
-  PurgeUsageAfter
+  * PurgeEventAfter
+  * PurgeJobAfter
+  * PurgeResvAfter
+  * PurgeStepAfter
+  * PurgeUsageAfter
 
-The values of these parameters depend on the number of jobs in the database, which differs a lot between sites.
+The values of these parameters depend on the number of jobs in the database,
+which differs a lot between sites.
 There does not seem to be any heuristics for determining good values, so some testing will be required.
 
-From the high_throughput_ page:
-You might also consider setting the *Purge* options in your slurmdbd.conf_ to clear out old Data. 
-A typical configuration might look like this::
+The high_throughput_ page has this advise:
 
-  PurgeEventAfter=12months
-  PurgeJobAfter=12months
-  PurgeResvAfter=2months
-  PurgeStepAfter=2months
-  PurgeSuspendAfter=1month
-  PurgeTXNAfter=12months
-  PurgeUsageAfter=12months
+* You might also consider setting the *Purge* options in your slurmdbd.conf_ to clear out old Data. 
+  A typical configuration might look like this::
+
+    PurgeEventAfter=12months
+    PurgeJobAfter=12months
+    PurgeResvAfter=2months
+    PurgeStepAfter=2months
+    PurgeSuspendAfter=1month
+    PurgeTXNAfter=12months
+    PurgeUsageAfter=12months
 
 The purge operation is done at the start of each time interval (see bug_4295_), which means on the 1st day of the month in this example.
 Monthly, daily or even hourly purge operations would occur when using different time units for the same interval::
@@ -357,7 +360,7 @@ Monthly, daily or even hourly purge operations would occur when using different 
   PurgeStepAfter=1440hours
 
 A monthly purge operation can be a huge amount of work for a database depending on its size, and you certainly want to cut down the amount of work required during the purges.
-If you did not use purges before, it is probably a good idea to try out a series of daily purges starting with::
+If you did not use any purges before, it is a good idea to make a series of daily purges starting with a very long interval, for example::
 
   PurgeEventAfter=2000days
   PurgeJobAfter=2000days
@@ -365,20 +368,16 @@ If you did not use purges before, it is probably a good idea to try out a series
   PurgeStepAfter=2000days
   PurgeSuspendAfter=2000days
 
-If this works well over a few days, decrease the purge interval 2000days little by little and try again (1800, 1500, etc) until you after many iterations come down to the desired final purge intervals. 
+If this works well over a few days, decrease the purge interval ``2000days`` little by little and try again (1800, 1500, etc)
+until you after *many iterations* have come down to the desired final purge intervals. 
 
 Logging of purge events can be configured in slurmdbd.conf_ using::
 
   DebugLevel=verbose
   DebugFlags=DB_ARCHIVE
 
-
 .. _high_throughput: https://slurm.schedmd.com/high_throughput.html
 .. _bug_4295: https://bugs.schedmd.com/show_bug.cgi?id=4295
-
-
-
-.. _systemd: https://en.wikipedia.org/wiki/Systemd
 .. _MUNGE: https://dun.github.io/munge/
 
 slurmdbd hostname configuration
