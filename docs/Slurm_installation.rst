@@ -364,11 +364,11 @@ You may build Slurm_ packages including optional features:
 
     rpmbuild <...> --with slurmrestd
 
-* Enable YAML_ command output (for example, ``sinfo --yaml``)::
+* For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``)::
 
     rpmbuild <...> --with yaml
 
-  Note that `libyaml` version 0.2.5 or later is required (see above), and this is only available starting with EL9,
+  **Notice** that `libyaml` version 0.2.5 or later is required (see above), and this is only available starting with EL9,
   so the ``--with yaml`` option should **not** be used on EL8 and older releases!
 
 .. _bug_17900: https://bugs.schedmd.com/show_bug.cgi?id=17900
