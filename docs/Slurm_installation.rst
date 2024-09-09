@@ -480,14 +480,15 @@ Configure Slurm logging
 Upgrading Slurm
 ===============
 
-New Slurm_ updates are released about every 6 months (the interval was 9 months prior to 24.05).
+New Slurm_ updates are released about every 6 months (the interval was 9 months prior to Slurm_ 24.05).
 Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
 
 * You may upgrade at most by 2 major versions (3 versions starting from 24.11), see the Upgrades_ page.
 * When changing the version to a higher release number (e.g from 22.05.x to 23.02.x) **always** upgrade the slurmdbd_ daemon first.
-* Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values.
+* Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values:
+  Increase/decrease them as needed.
 * The recommended upgrade order is that versions may be mixed as follows::
 
     slurmdbd >= slurmctld >= slurmd >= commands
@@ -496,14 +497,19 @@ Pay attention to these statements:
   because all Slurm_ commands (sinfo_ , squeue_ etc.) are **not interoperable** with an older slurmctld_ version,
   as explained in bug_17418_, due to RPC_ changes!
   It is OK to upgrade Slurm_ on login nodes **after** slurmctld_ has been upgraded.
-  The slurmd_ on compute nodes can be upgraded over a period of time, and older slurmd_ versions will continue to work with an upgraded slurmctld_.
+  The slurmd_ on compute nodes can be upgraded over a period of time,
+  and older slurmd_ versions will continue to work with an upgraded slurmctld_,
+  although it is recommended to upgrade as soon as possible.
+* The following command can report current jobs that have been orphaned on the local cluster and are now runaway::
 
-If you use a database, also make sure to:
+    sacctmgr show runawayjobs
+
+Regarding the Slurm_ database, also make sure to:
 
 * Make a database dump (see :ref:`Slurm_database`) prior to the slurmdbd_ upgrade.
 * Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
-  In stead of starting the slurmdbd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
-  If you use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
+  In stead of starting the slurmdbd_ Systemd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
+  If you use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed!
   
   The recommended way to perform the slurmdbd_ database upgrade is therefore::
 
@@ -516,10 +522,6 @@ If you use a database, also make sure to:
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
-
-The following command can report current jobs that have been orphaned on the local cluster and are now runaway::
-
-  sacctmgr show runawayjobs
 
 Upgrade of MySQL/MariaDB
 ------------------------
