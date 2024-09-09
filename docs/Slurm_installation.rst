@@ -317,9 +317,10 @@ First install the MariaDB_ database version 10.3::
 
 **NOTICE:** Do not forget to configure the database as described in the :ref:`Slurm_database` page!
 
-If you plan to use Ansible_ to manage the database, Ansible_ needs this Python EL8 package::
+If you plan to use Ansible_ to manage the database, it will require this Python package::
 
-  dnf install python3-mysql
+  dnf install python3-mysql (EL8)
+  dnf install python3-mysqlclient (EL9)
 
 .. _Ansible: https://www.ansible.com/
 
