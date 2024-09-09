@@ -772,12 +772,14 @@ so that we do not waste any resources.
 When entire partitions are upgraded in this way, there is no risk of starting new jobs on nodes with differing states of OS and firmware, 
 while running jobs continue on the not-yet-updated nodes.
 
-The basic idea (which was provided by Niels Carl Hansen, ncwh -at- cscaa.dk) is to run a crontab script ``update.sh`` whenever a node is rebooted.  
+The basic idea (which was provided by Niels Carl Hansen, ncwh -at- cscaa.dk) is to run a crontab_ script ``update.sh`` whenever a node is rebooted.  
 Use scontrol to reboot the nodes as they become idle, thereby performing the updates that you want.  
-Remove the crontab job as part of the ``update.sh`` script.
+Remove the crontab_ job as part of the ``update.sh`` script.
 
 The ``update.sh`` script and instructions for usage are in:
 https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
+
+.. _crontab: https://linux.die.net/man/5/crontab
 
 Shared Memory cleanup
 ---------------------

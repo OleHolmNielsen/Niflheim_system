@@ -470,8 +470,8 @@ However, the usual mysqldump_for_MariaDB_ utility still exists for MariaDB_.
 .. _Mariabackup: https://mariadb.com/kb/en/mariabackup/
 .. _mysqldump_for_MariaDB: https://mariadb.com/kb/en/mysqldump/
 
-Backup script with crontab
---------------------------
+Backup script with crontab_
+-----------------------------
 
 Make a *slurm_acct_db* database using mysqldump_, for example, 
 using this example script ``/root/mysqlbackup``
@@ -490,10 +490,12 @@ using this example script ``/root/mysqlbackup``
 Write permission to $BACKUPFILE is required.
 The script is also available in https://github.com/OleHolmNielsen/Slurm_tools/blob/master/database/.
 
-Make regular database dumps, for example by a *crontab* job::
+Make regular database dumps, for example by a crontab_ job::
 
   # MySQL database backup
   30 7 * * * /root/mysqlbackup
+
+.. _crontab: https://linux.die.net/man/5/crontab
 
 Backup script with logrotate
 ----------------------------
@@ -742,14 +744,14 @@ On the ``db1`` server:
    Copy the database dump to the ``db2`` server.
    Make a long-term copy of the database dump.
 
-3. Stop any crontab jobs that run MySQL_ database dumps.
+3. Stop any crontab_ jobs that run MySQL_ database dumps.
 
 db2: restore database and start slurmdbd
 ........................................
 
 On the ``db2`` server:
 
-1. Make sure the slurmdbd_ service is stopped and that no crontab jobs will run database dumps.
+1. Make sure the slurmdbd_ service is stopped and that no crontab_ jobs will run database dumps.
 
 2. Load the database dump from ``db1`` into MariaDB_ as shown above :ref:`backup-and-restore-of-database`.
 
@@ -817,6 +819,6 @@ db2: Enable database backups
 
 On the ``db2`` server:
 
-1. Make a crontab job for doing database dumps as in :ref:`backup-and-restore-of-database`.
+1. Make a crontab_ job for doing database dumps as in :ref:`backup-and-restore-of-database`.
 
 2. Make sure the ``db2`` server and the database dumps are backed up daily/regularly to your site's backup service.

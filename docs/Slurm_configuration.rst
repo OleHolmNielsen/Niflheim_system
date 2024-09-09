@@ -256,7 +256,10 @@ Another possibility is Goslmailer_ (*GoSlurmMailer*).
 Reconfiguration of slurm.conf
 -----------------------------
 
-When changing the configuration files slurm.conf_ and cgroup.conf_, they must first be distributed to all compute and login nodes.
+When changing configuration files such as slurm.conf_ and cgroup.conf_,
+they must first be distributed to all compute and login nodes
+(not needed in configless_ Slurm_ clusters).
+
 On the master node make the daemons reread the configuration files::
 
   scontrol reconfigure
@@ -289,7 +292,7 @@ For a configless_ setup the slurmctld_ must be restarted first, in this case the
 1. Stop slurmctld_
 2. Add/remove nodes in slurm.conf_
 3. Start slurmctld_
-4. Quickly restart slurmd_ on all nodes
+4. Quickly restart slurmd_ on all nodes using :ref:`ClusterShell`.
 
 It is also possible to add nodes to slurm.conf_ with a state of **future**::
 
@@ -299,11 +302,9 @@ It is also possible to add nodes to slurm.conf_ with a state of **future**::
     After these nodes are made available, change their State in the slurm.conf file.
     Until these nodes are made available, they will not be seen using any Slurm commands or nor will any attempt be made to contact them. 
 
-However, such *future* nodes must not be members of any partition.
+However, such **future** nodes must not be members of any Slurm_ partition.
 
 .. _bug_3973: https://bugs.schedmd.com/show_bug.cgi?id=3973
-
-
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 
@@ -426,7 +427,7 @@ Add the following to slurm.conf_ on your *Head* node **and** your compute nodes:
 This will execute NHC_ every 60 minutes on nodes in *ANY* states, see the slurm.conf_ documentation about ``Health*`` variables.
 There are other criteria for when to execute NHC_ as defined by HealthCheckNodeState in slurm.conf_: ALLOC, ANY, CYCLE, IDLE, MIXED.
 
-We add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` for nodes in the domain *nifl.fysik.dtu.dk*::
+At our site we add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` for nodes in the domain *nifl.fysik.dtu.dk*::
 
   * || NHC_RM=slurm
   # Flag df to list only local filesystems (omit NFS mounts)
@@ -439,12 +440,14 @@ We add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` 
   # Check OmniPath/Infiniband link
   x*.nifl.fysik.dtu.dk  || check_hw_ib 100
 
-If you want an E-mail alert from NHC_ you must add a *crontab* entry to execute the ``nhc-wrapper`` script, see the NHC_ page section *Periodic Execution*.
+If you want to receive E-mail alerts from NHC_, you can add a crontab_ entry to execute the ``nhc-wrapper`` script, see the NHC_ page section *Periodic Execution*.
 
-For example, to execute the NHC_ check once per hour with a specified E-mail interval of 1 day, add this to the system's crontab::
+For example, to execute the NHC_ check once per hour with a specified E-mail interval of 1 day, add this to the system's crontab_::
 
   # Node Health Check
   3 * * * * /usr/sbin/nhc-wrapper -X 1d
+
+.. _crontab: https://linux.die.net/man/5/crontab
 
 NHC and GPU nodes
 .................
@@ -1380,7 +1383,7 @@ Other tmpdir solutions
 * Another SPANK_ plugin is at https://github.com/hpc2n/spank-private-tmp.
   This plugin does not do any cleanup, so cleanup will have to be handled separately.
 
-* A manual cleanup of temporary files could be made (if needed) by a crontab job on the compute node, for example for the ``/scratch`` directory::
+* A manual cleanup of temporary files could be made (if needed) by a crontab_ job on the compute node, for example for the ``/scratch`` directory::
 
     # Remove files > 7 days old under /scratch/XXX (mindepth=2)
     find /scratch -depth -mindepth 2 -mtime +7 -exec rm -rf {} \;
