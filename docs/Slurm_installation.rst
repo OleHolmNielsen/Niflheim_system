@@ -652,7 +652,7 @@ Here is a suggested procedure:
 
    Optional:
    In case you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the Slurm_ upgrade,
-   see also `Temporary job directories <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#temporary-job-directories>`_
+   see also `Temporary job directories <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#temporary-job-directories>`_.
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir
 
@@ -905,7 +905,7 @@ Migrate the slurmctld service to another server
 It may be required to migrate the slurmctld_ service to another server, for example,
 when a major OS version update is needed, or when the server must be migrated to another hardware.
 
-With Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
+From Slurm_ 23.11 and later, migrating the slurmctld_ service is quite easy,
 and **does not** require to stop all running jobs,
 since a major improvement is stated in the
 `Release notes <https://github.com/SchedMD/slurm/blob/3dc79bd2eb1471b199159d2265618c6579f365c8/RELEASE_NOTES#L58>`_:
@@ -914,13 +914,13 @@ since a major improvement is stated in the
 
 This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting so that running jobs will report back to the new controller when they finish.
 See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
+Notice, however, that slurmd_ ignores any changes in slurm.conf_ or the DNS SRV_record_ after initial startup
+where slurmd_ has cached the configuration files, as is discussed in bug_20462_:
 
-The migration process for Slurm_ 23.11 and later does not require to stop all running jobs,
+* Therefore it is required to restart slurmd_ on all compute notes after modifying slurm.conf_ and the DNS SRV_record_.
+
+The slurmctld_ migration process for Slurm_ 23.11 and later does **not** require to stop all running jobs,
 and the details are discussed in bug_20070_ .
-
-**WARNING:** As of Slurm_ 23.11.10 there exists an issue in slurmd_ which causes it to ignore any changes in the DNS SRV_record_ (see :ref:`configless-slurm-migration`),
-therefore slurmd_ has to be restarted at this time.
-The issue is tracked in bug_20462_.
 
 We have successfully performed a slurmctld_ migration following this procedure:
 
@@ -943,20 +943,23 @@ We have successfully performed a slurmctld_ migration following this procedure:
      touch /var/log/slurm/slurmctld.log
      chown -R slurm.slurm /var/log/slurm
 
-4. Update the *Configless* DNS SRV_record_ (see :ref:`configless-slurm-migration`).
+4. In configless_ Slurm_ clusters update the DNS SRV_record_, see :ref:`configless-slurm-setup`
+
 5. Migrate slurmctld_ to new machine:
    Make a tar-ball copy or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
    to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
-6. Update slurm.conf_ with the new ``SlurmctldHost`` name.
-   Remember to update the login nodes as well!
+
+6. **Remember** to update slurm.conf_ with the new ``SlurmctldHost`` name,
+   and remember to update the login nodes as well!
+
 7. Start and enable the slurmctld_ service on the new server::
 
      systemctl start slurmctld
      systemctl enable slurmctld
 
-8. If some nodes are not communicating, restart the slurmd_ service on those nodes.
-   As discussed in bug_20462_ it is currently necessary to restart slurmd_ on **all nodes**,
-   for example, using the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
+8. As discussed in bug_20462_ it is necessary to restart slurmd_ on **all compute nodes**
+   so they can pick up the new ``SlurmctldHost`` value in slurm.conf_.
+   For example, use the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
 
      clush -ba systemctl restart slurmd
 
@@ -966,7 +969,6 @@ We have successfully performed a slurmctld_ migration following this procedure:
      SlurmdTimeout=300 
 
    and make a ``scontrol reconfigure``.
-   Restore the original DNS SRV_record_'s Time_to_live_ (TTL) value (see :ref:`configless-slurm-migration`).
 
 If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ manually to all nodes in step 4.
 
@@ -975,30 +977,6 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 .. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
 .. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 .. _rsync: https://en.wikipedia.org/wiki/Rsync
-
-.. _configless-slurm-migration:
-
-Configless Slurm migration
---------------------------
-
-When using :ref:`configless-slurm-setup` it is necessary to update the DNS SRV_record_ in your cluster's DNS service to point to the new slurmctld_ server.
-
-First read about DNS_zone_ files.
-Start well in advance by changing the DNS SRV_record_'s Time_to_live_ (TTL) to a small value such as 300 or 600 seconds, for example::
-
-  _slurmctld._tcp 600 IN SRV 0 0 6817 <slurmctld-server-name>
-
-Increase the DNS_zone_'s ``serial number`` (which might be a *timestamp* number) and make a ``systemctl restart named``.
-
-After stopping slurmctld_ on the old ``SlurmctldHost``,
-change the server name in the DNS SRV_record_.
-Increase the DNS_zone_'s serial number and make a ``systemctl restart named``.
-
-Later, after the new ``SlurmctldHost`` has been tested successfully, restore the original DNS SRV_record_'s Time_to_live_ (TTL) value.
-Increase the DNS_zone_'s serial number and make a ``systemctl restart named``.
-
-.. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
-.. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
 
 Migrate slurmctld version <= 23.02
 ------------------------------------
