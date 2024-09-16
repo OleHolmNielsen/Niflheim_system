@@ -914,10 +914,11 @@ since a major improvement is stated in the
 
 This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting so that running jobs will report back to the new controller when they finish.
 See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
-Notice, however, that slurmd_ ignores any changes in slurm.conf_ or the DNS SRV_record_ after initial startup
-where slurmd_ has cached the configuration files, as is discussed in bug_20462_:
+Notice, however, that slurmd_ ignores any changes in slurm.conf_ or the DNS SRV_record_ (i.e., when running a :ref:`configless-slurm-setup`):
 
-* Therefore it is required to restart slurmd_ on all compute notes after modifying slurm.conf_ and the DNS SRV_record_.
+* When slurmd_ is started, it caches its configuration files as is discussed in bug_20462_.
+
+* Therefore it is required to restart slurmd_ on all compute notes after modifying slurm.conf_ and the DNS SRV_record_ (if applicable).
 
 The slurmctld_ migration process for Slurm_ 23.11 and later does **not** require to stop all running jobs,
 and the details are discussed in bug_20070_ .
