@@ -605,9 +605,10 @@ Here is a suggested procedure:
      $ ls -lad /etc/slurm
      drwxr-xr-x. 5 root root 4096 Feb 22 10:12 /etc/slurm
 
-   Copy the configuration file from the main server to the compute node::
+   Copy the configuration files from the main server to the compute node::
 
      /etc/slurm/slurmdbd.conf
+     /etc/slurm/slurm.conf
 
    **Important**: Edit these files to replace the database server name by ``localhost`` so that all further actions take place on the compute node, **not** the *real* database server.
 
@@ -617,7 +618,7 @@ Here is a suggested procedure:
      StorageHost=localhost
      StoragePass=<slurm database user password>  # See above
 
-   Configure this in ``slurm.conf``::
+   and configure this in ``slurm.conf``::
 
      AccountingStorageHost=localhost
 
@@ -644,16 +645,14 @@ Here is a suggested procedure:
 8. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 23.11.10 built as shown above::
+   Update all Slurm_ RPMs to the new version (say, 23.11.10 built as shown above)::
 
      export VER=23.11.10
      dnf update slurm*$VER*.rpm
 
-   If you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the upgrade::
-
-     dnf remove auto_tmpdir
-
-   See also `Temporary job directories <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#temporary-job-directories>`_
+   Optional:
+   In case you use the auto_tmpdir_ RPM package, you have to remove it first because it will block the Slurm_ upgrade,
+   see also `Temporary job directories <https://wiki.fysik.dtu.dk/niflheim/Slurm_configuration#temporary-job-directories>`_
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir
 
