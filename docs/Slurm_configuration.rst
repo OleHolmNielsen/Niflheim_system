@@ -87,6 +87,8 @@ pointing to port 6817 on your slurmctld_ server(s) and with a suggested Time_to_
 
   _slurmctld._tcp 3600 IN SRV 10 0 6817 slurm-backup
   _slurmctld._tcp 3600 IN SRV 0 0 6817 slurm-master
+ 
+Note: The value TTL=3600 is unimportant because slurmd_ will never read the DNS SRV_record_ after the initial startup, see bug_20462_.
 
 To verify the DNS setup, install these packages with tools required below::
 
@@ -101,6 +103,7 @@ Lookup the SRV_record_ by either of these commands::
 .. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
 .. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
+.. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 
 Add login and submit nodes to slurm.conf
 ........................................
