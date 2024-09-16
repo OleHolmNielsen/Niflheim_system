@@ -925,19 +925,19 @@ and the details are discussed in bug_20070_ .
 
 We have successfully performed a slurmctld_ migration following this procedure:
 
-1. Change the timeout values in slurm.conf_ to::
+1. On the old ``SlurmctldHost`` server change the timeout values in slurm.conf_ to a high value::
 
      SlurmctldTimeout=3600
      SlurmdTimeout=3600 
 
    and make an ``scontrol reconfigure``.
 
-2. Stop and disable the slurmctld_ service on the old server::
+2. Stop and disable the slurmctld_ service on the old ``SlurmctldHost`` server::
 
      systemctl stop slurmctld
      systemctl disable slurmctld
 
-3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the new server.
+3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the new ``SlurmctldHost`` server.
    Also make sure the Slurm_ logfile directory exists and has correct ownership (see :ref:`configure-slurm-logging`)::
 
      mkdir -pv /var/log/slurm
