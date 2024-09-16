@@ -948,7 +948,11 @@ We have successfully performed a slurmctld_ migration following this procedure:
 
 5. Migrate slurmctld_ to new machine:
    Make a tar-ball copy or rsync_ the ``StateSaveLocation`` directory (typically ``/var/spool/slurmctld``)
-   to the new server and make sure the permissions allow the *SlurmUser* to read and write it.
+   to the new server, for example::
+
+     <old-server>: $ rsync -aq /var/spool/slurmctld/ <new-server>:/var/spool/slurmctld/
+
+   Make sure the permissions allow the *SlurmUser* to read and write it.
 
 6. **Remember** to update slurm.conf_ with the new ``SlurmctldHost`` name,
    and remember to update the login nodes as well!
