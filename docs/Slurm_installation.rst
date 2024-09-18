@@ -113,10 +113,10 @@ The issue is discussed in
 .. _Munge_wiki: https://github.com/dun/munge/wiki
 .. _munged: https://github.com/dun/munge/wiki/Man-8-munged
 
-.. _install_latest_munge_version:
+.. _install_the_latest_munge_version:
 
-Install latest Munge version
------------------------------
+Install the latest Munge version
+----------------------------------
 
 We recommend to install the latest Munge_release_ RPMs (currently 0.5.16)
 due to new features and bug fixes.
@@ -253,7 +253,7 @@ Install required Slurm_ prerequisites, as well as several optional packages that
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf bash-completion
 
-We recommend to install_latest_munge_version_ (currently 0.5.16) because of bug fixes improving the EL8/EL9 version::
+We recommend to install_the_latest_munge_version_ (currently 0.5.16) because of bug fixes improving the EL8/EL9 version::
 
   dnf install munge munge-libs munge-devel
 
