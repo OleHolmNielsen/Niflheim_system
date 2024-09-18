@@ -1412,8 +1412,7 @@ which is installed by RPM packages starting from Slurm_ 24.11 (see bug_20932_).
 The installed file is `/usr/share/bash-completion/completions/slurm_completion.sh`.
 
 To enable the slurm_completion_help_ script on Slurm_ 24.05 or older,
-you may copy the ``slurm_completion.sh`` file from the `contribs/slurm_completion_help/` source folder
-to the `/etc/bash_completion.d/` folder.
+you may copy the slurm_completion.sh_ file to the `/etc/bash_completion.d/` folder.
 When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 
   rm /etc/bash_completion.d/slurm_completion.sh
