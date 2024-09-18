@@ -248,7 +248,7 @@ see the discussion of Rocky_Linux_Repositories_, and then enable also the EPEL_ 
 Slurm_ can be built with a number of **optional plugins**, each of which has some prerequisite library.
 The Slurm_Quick_Start_ guide lists these in the section `Building and Installing Slurm <https://slurm.schedmd.com/quickstart_admin.html#build_install>`_.
 
-Install required Slurm_ prerequisites, as well as several optional packages that enable the desired Slurm_ plugins::
+Install required Slurm_ prerequisite packages, as well as several optional packages that enable the desired Slurm_ plugins::
 
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf bash-completion
