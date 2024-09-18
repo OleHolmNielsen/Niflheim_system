@@ -1393,6 +1393,38 @@ Other tmpdir solutions
     # Remove files > 7 days old under /scratch/XXX (mindepth=2)
     find /scratch -depth -mindepth 2 -mtime +7 -exec rm -rf {} \;
 
+Login node configuration
+===========================
+
+The login nodes should have the Slurm_ packages installed as described in the :ref:`Slurm_installation` page.
+See also the :ref:`login_node_firewall` section.
+
+Bash command completion for Slurm
+----------------------------------
+
+The Bash_ shell includes a TAB bash_command_completion_ feature (see also bash-completion_ on GitHub).
+On EL8/EL9 Linux enable this feature by::
+
+  dnf install bash-completion
+
+Slurm_ includes a slurm_completion_help_ script which offers completion for Slurm_ commands like squeue_, sbatch_ etc.,
+which is installed by RPM packages starting from Slurm_ 24.11 (see bug_20932_).
+The installed file is `/usr/share/bash-completion/completions/slurm_completion.sh`.
+
+To enable the slurm_completion_help_ script on Slurm_ 24.05 or older,
+you may copy the ``slurm_completion.sh`` file from the `contribs/slurm_completion_help/` source folder
+to the `/etc/bash_completion.d/` folder.
+When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
+
+  rm /etc/bash_completion.d/slurm_completion.sh
+
+.. _Bash: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+.. _bash_command_completion: https://www.gnu.org/software/gnuastro/manual/html_node/Bash-TAB-completion-tutorial.html
+.. _bash-completion: https://github.com/scop/bash-completion
+.. _slurm_completion_help: https://github.com/SchedMD/slurm/tree/master/contribs/slurm_completion_help
+.. _slurm_completion.sh: https://github.com/SchedMD/slurm/blob/master/contribs/slurm_completion_help/slurm_completion.sh
+.. _bug_20932: https://support.schedmd.com/show_bug.cgi?id=20932
+
 Configure Prolog and Epilog scripts
 ===================================
 
@@ -1688,6 +1720,8 @@ The simplest solution is to ensure that the compute nodes must have **no firewal
   systemctl disable firewalld
 
 However, you may run a firewall service, as long as you ensure that **all ports** are open between the compute nodes.
+
+.. _login_node_firewall:
 
 Login node firewall
 -------------------
