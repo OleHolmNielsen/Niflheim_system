@@ -1407,12 +1407,12 @@ On EL8/EL9 Linux enable this feature by::
 
   dnf install bash-completion
 
-Slurm_ includes a slurm_completion_help_ script which offers completion for Slurm_ commands like squeue_, sbatch_ etc.,
-which is installed by RPM packages starting from Slurm_ 24.11 (see bug_20932_).
-The installed file is `/usr/share/bash-completion/completions/slurm_completion.sh`.
+Slurm_ includes a slurm_completion_help_ script which offers completion for user commands like squeue_, sbatch_ etc.,
+which is installed by the ``slurm-contribs`` package starting from Slurm_ 24.11 (see bug_20932_).
+The installed file is ``/usr/share/bash-completion/completions/slurm_completion.sh``.
 
 To enable the slurm_completion_help_ script on Slurm_ 24.05 or older,
-you may copy the slurm_completion.sh_ file to the `/etc/bash_completion.d/` folder.
+you may manually copy the slurm_completion.sh_ file to the ``/etc/bash_completion.d/`` folder.
 When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 
   rm /etc/bash_completion.d/slurm_completion.sh
