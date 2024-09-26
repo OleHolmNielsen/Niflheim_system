@@ -88,7 +88,8 @@ pointing to port 6817 on your slurmctld_ server(s) and with a suggested Time_to_
   _slurmctld._tcp 3600 IN SRV 10 0 6817 slurm-backup
   _slurmctld._tcp 3600 IN SRV 0 0 6817 slurm-master
  
-Note: The value TTL=3600 is unimportant because slurmd_ will never read the DNS SRV_record_ after the initial startup, see bug_20462_.
+Note: The value TTL=3600 could be any value at all,
+because slurmd_ will only read the DNS SRV_record_ at initial startup and *never* thereafter, see bug_20462_.
 
 To verify the DNS setup, install these packages with tools required below::
 

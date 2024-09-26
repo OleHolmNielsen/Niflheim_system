@@ -933,10 +933,10 @@ We have successfully performed a slurmctld_ migration following this procedure:
 
 2. Stop and disable the slurmctld_ service on the old ``SlurmctldHost`` server::
 
-     systemctl stop slurmctld
-     systemctl disable slurmctld
+     <old-server>: systemctl stop slurmctld
+     <old-server>: systemctl disable slurmctld
 
-3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the new ``SlurmctldHost`` server.
+3. Copy all Slurm_ configuration files ``/etc/slurm/*.conf`` from the old server to the **new** ``SlurmctldHost`` server.
    Also make sure the Slurm_ logfile directory exists and has correct ownership (see :ref:`configure-slurm-logging`)::
 
      mkdir -pv /var/log/slurm
@@ -951,7 +951,7 @@ We have successfully performed a slurmctld_ migration following this procedure:
 
      <old-server>: $ rsync -aq /var/spool/slurmctld/ <new-server>:/var/spool/slurmctld/
 
-   Make sure the permissions allow the *SlurmUser* to read and write it.
+   Make sure the permissions allow the *SlurmUser* to read and write the folder!
 
 6. **Remember** to update slurm.conf_ with the new ``SlurmctldHost`` name,
    and remember to update the login nodes as well!
