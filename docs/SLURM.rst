@@ -85,7 +85,7 @@ Documentation from other sources:
 .. _Slurm_download: https://slurm.schedmd.com/download.html
 .. _Slurm_mailing_lists: https://lists.schedmd.com/mailman3/postorius/lists/
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
-.. _Slurm_publications: https://slurm.schedmd.com/publications/
+.. _Slurm_publications: https://www.schedmd.com/publications/
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
 .. _Slurm_bugs: https://bugs.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
