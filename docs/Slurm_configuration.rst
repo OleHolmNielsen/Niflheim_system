@@ -1429,6 +1429,7 @@ When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 
   rm /etc/bash_completion.d/slurm_completion.sh
 
+.. _squeue: https://slurm.schedmd.com/squeue.html
 .. _Bash: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 .. _bash_command_completion: https://www.gnu.org/software/gnuastro/manual/html_node/Bash-TAB-completion-tutorial.html
 .. _bash-completion: https://github.com/scop/bash-completion
