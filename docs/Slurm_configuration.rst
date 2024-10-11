@@ -1929,7 +1929,9 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
 Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also bug_14500_.
 Note that only a few selected symbols ``ESLURM*`` are exposed to the Lua_ script, but from Slurm_ 23.02 all the error codes in ``/usr/include/slurm/slurm_errno.h`` are exposed.
 
-Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in this example::
+Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in this example:
+
+.. code-block:: lua
 
   slurm.ESLURM_INVALID_PARTITION_NAME=2000
   if (job_desc.partition == nil) then
