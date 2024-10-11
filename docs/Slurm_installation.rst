@@ -58,7 +58,9 @@ including the ``slurm`` and ``munge`` users.
 as defined in the standard configuration file ``/etc/login.defs`` by the parameters ``UID_MIN, UID_MAX, GID_MIN, GID_MAX``,
 see also the User_identifier_ page.
 
-Create the users/groups for ``slurm`` and ``munge``, for example::
+Create the users/groups for ``slurm`` and ``munge``, for example:
+
+.. code-block:: bash
 
   export MUNGEUSER=1005
   groupadd -g $MUNGEUSER munge
