@@ -498,7 +498,9 @@ The physical presence of Nvidia devices can be tested by this command::
 NHC bugs
 ........
 
-It may be necessary to force the NHC_ configuration file ``/etc/nhc/nhc.conf`` to use the Slurm_ scheduler by adding this line near the top::
+It may be necessary to force the NHC_ configuration file ``/etc/nhc/nhc.conf`` to use the Slurm_ scheduler by adding this line near the top:
+
+.. code-block:: bash
 
   * || NHC_RM=slurm
 
@@ -931,13 +933,17 @@ Compute node configuration
 ==========================
 
 The following must be done on each compute node.
-Create the slurmd_ spool and log directories and make the correct ownership::
+Create the slurmd_ spool and log directories and make the correct ownership:
+
+.. code-block:: bash
 
   mkdir /var/spool/slurmd /var/log/slurm
   chown slurm: /var/spool/slurmd  /var/log/slurm
   chmod 755 /var/spool/slurmd  /var/log/slurm
 
-Create log files::
+Create log files:
+
+.. code-block:: bash
 
   touch /var/log/slurm/slurmd.log 
   chown slurm: /var/log/slurm/slurmd.log 
