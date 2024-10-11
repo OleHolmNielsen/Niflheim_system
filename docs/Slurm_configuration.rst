@@ -49,7 +49,9 @@ See also ``man slurm.conf`` or the on-line slurm.conf_ documentation.
 
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 
-Copy the HTML files to your $HOME directory, for example::
+Copy the HTML files to your $HOME directory, for example:
+
+.. code-block:: bash
 
   mkdir $HOME/slurm/
   cp -rp /usr/share/doc/slurm-*/html $HOME/slurm/
