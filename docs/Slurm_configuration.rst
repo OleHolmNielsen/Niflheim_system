@@ -1465,7 +1465,9 @@ See also the items:
 Prolog and epilog examples
 --------------------------
 
-An example script is shown in the FAQ https://slurm.schedmd.com/faq.html#task_prolog::
+An example script is shown in the FAQ https://slurm.schedmd.com/faq.html#task_prolog:
+
+.. code-block:: bash
 
   #!/bin/sh
   #
