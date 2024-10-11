@@ -122,7 +122,9 @@ Install the latest Munge version
 
 We recommend to install the latest Munge_release_ RPMs (currently 0.5.16)
 due to new features and bug fixes.
-Build RPM packages by::
+Build RPM packages by:
+
+.. code-block:: bash
 
   wget https://github.com/dun/munge/releases/download/munge-0.5.16/munge-0.5.16.tar.xz
   rpmbuild -ta munge-0.5.16.tar.xz
@@ -199,7 +201,9 @@ Securely propagate ``/etc/munge/munge.key`` (e.g., via SSH) to all other hosts w
 
   scp -p /etc/munge/munge.key hostXXX:/etc/munge/munge.key
 
-Make sure to set the correct ownership and mode on all nodes::
+Make sure to set the correct ownership and mode on all nodes:
+
+.. code-block:: bash
 
   chown -R munge: /etc/munge/ /var/log/munge/
   chmod 0700 /etc/munge/ /var/log/munge/
