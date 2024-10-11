@@ -436,7 +436,7 @@ There are other criteria for when to execute NHC_ as defined by HealthCheckNodeS
 At our site we add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` for nodes in the domain *nifl.fysik.dtu.dk*:
 
 .. code-block:: bash
-  :caption: Example configuration 
+  :caption: Example nhc.conf configuration 
 
   * || NHC_RM=slurm
   # Flag df to list only local filesystems (omit NFS mounts)
