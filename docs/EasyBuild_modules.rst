@@ -600,49 +600,32 @@ Instructions for creating a ``MATLAB`` module are given in https://github.com/ea
 
 * Adjust the 'license_server', 'license_server_port' and 'key' values in the example easyconfig file.
 
-* Steps to produce a 'source' tarball that EasyBuild can handle (example for 2020b):
+The MATLAB_ ISO_image_ may be about 13 GB in size, and you need > 2*13 GB of free space plus > 13 GB in the `modules` directory!
+The EasyBuild module files, for example ``MATLAB-2024b.eb``,
+The module file refers to the source `R20XXx_Linux.iso` ISO_image_::
 
-  * create a directory 2020b
-  * copy matlab-2020b.tar.gz in 2020b
-  * copy the 'archives' directory containing installation files for toolboxes into '2020b'
-  * unzip the matlab-2020b.tar.gz in 2020b
-  * remove matlab-2020b.tar.gz
-  * run 'chmod -R 755 \*' (overkill, yes, but it does the trick)
-  * check whether bin/glnxa64/libstdc++.so.6 is correct, fix if required
-  * tar the 2020b directory: 'tar cfvz matlab-2020b.tar.gz 2020b'
+  sources = ['R%s_Linux.iso' % (version)]
 
-Note that directories in the ISO are read-only, so you must do the *chmod* above!
+Now build the module as user `modules`::
+
+  $ eb MATLAB-2024b.eb
 
 .. _MATLAB: https://www.mathworks.com/products/matlab.html
+.. _ISO_image: https://en.wikipedia.org/wiki/Optical_disc_image
 
 COMSOL
 ------
 
-When you have a licensed COMSOL_ software, EB files are contributed in the mailing list thread https://lists.ugent.be/wws/arc/easybuild/2020-09/msg00019.html 
-
-Prepare the tar-ball file just like for *MATLAB* above.
-
-The EB file is very simple::
-
-  name = 'COMSOL'
-  version = '5.5.0.292'
-  homepage = 'https://www.comsol.com'
-  description = """
-  COMSOL Multiphysics is a general-purpose software platform, based on
-  advanced numerical methods, for modeling and simulating physics-based
-  problems. 
-  """
-  toolchain = {'name': 'dummy', 'version': ''}
-  sources = [
-    SOURCELOWER_TAR_GZ,
-  ]
-  license_file = HOME + '/licenses/comsol/license.lic'
-  moduleclass = 'phys'
+When you have a licensed COMSOL_ software, download the ISO_image_ file.
+EB files are in https://github.com/easybuilders/easybuild-easyconfigs/blob/main/easybuild/easyconfigs/c/COMSOL/
 
 You can point to a license server for building the module::
 
   env LMCOMSOL_LICENSE_FILE=port@lic-server-host eb COMSOL-xx.xx.eb
 
+Build the module::
+
+  eb COMSOL-6.2.0.290.eb
 
 .. _COMSOL: https://www.comsol.com/
 
