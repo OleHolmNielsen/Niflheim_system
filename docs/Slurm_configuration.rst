@@ -544,17 +544,19 @@ Timeout options
 A number of **Timeout** options may be configured in slurm.conf_.
 
 In bug_3941_ is discussed the problem of nodes being drained due to the killing of jobs taking too long to complete.
-To extend this timeout configure in slurm.conf_::
+To extend this timeout you can configure the UnkillableStepTimeout_ parameter in slurm.conf_, for example::
 
-  UnkillableStepTimeout=120
+  UnkillableStepTimeout=180
 
-Values above 127 should **not** be used, see bug_11103_.
+Ensure that UnkillableStepTimeout_ is at least 5 times larger than MessageTimeout_ (default is 10 seconds).
 
-This may also be accompanied by a custom command **UnkillableStepProgram**.
+This may also be accompanied by a custom command UnkillableStepProgram_.
 If this timeout is reached, the node will also be **drained** with reason *batch job complete failure*.
 
+.. _MessageTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_MessageTimeout
+.. _UnkillableStepTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepTimeout
+.. _UnkillableStepProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepProgram
 .. _bug_3941: https://bugs.schedmd.com/show_bug.cgi?id=3941
-.. _bug_11103: https://bugs.schedmd.com/show_bug.cgi?id=11103
 
 ReturnToService option
 ----------------------
