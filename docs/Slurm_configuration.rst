@@ -549,7 +549,6 @@ To extend this timeout you can configure the UnkillableStepTimeout_ parameter in
   UnkillableStepTimeout=180
 
 Ensure that UnkillableStepTimeout_ is at least 5 times larger than MessageTimeout_ (default is 10 seconds).
-
 This may also be accompanied by a custom command UnkillableStepProgram_.
 If this timeout is reached, the node will also be **drained** with reason *batch job complete failure*.
 
