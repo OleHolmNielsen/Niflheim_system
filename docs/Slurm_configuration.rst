@@ -211,6 +211,20 @@ In slurm.conf_ it's essential that the important spool directories and the slurm
 
 **NOTE:** These spool directories must be created manually and owned by user *slurm* (see below), as they are **not** part of the RPM installation.
 
+Configure AccountingStorageType in slurm.conf
+---------------------------------------------
+
+As shown in the slurm.conf_ manual page, the AccountingStorageType_ option (if defined) only has a single acceptable value::
+
+  AccountingStorageType=accounting_storage/slurmdbd
+
+If AccountingStorageType_ is omitted, or set to the obsolete value *accounting_storage/none* (removed from Slurm_ 23.11),
+then account records are not maintained, meaning that anything related to user accounts will not work!
+See also a discussion in bug_21398_.
+
+.. _AccountingStorageType: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageType
+.. _bug_21398: https://support.schedmd.com/show_bug.cgi?id=21398
+
 Starting slurm daemons at boot time
 -----------------------------------
 
