@@ -218,6 +218,8 @@ As shown in the slurm.conf_ manual page, the AccountingStorageType_ option (if d
 
   AccountingStorageType=accounting_storage/slurmdbd
 
+This basically means that the use of a :ref:`Slurm_database` with a slurmdbd_ service is strongly encouraged!
+
 If AccountingStorageType_ is omitted, or set to the obsolete value *accounting_storage/none* (removed from Slurm_ 23.11),
 then account records are not maintained, meaning that anything related to user accounts will not work!
 See also a discussion in bug_21398_.
