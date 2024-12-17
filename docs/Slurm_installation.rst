@@ -562,9 +562,9 @@ Here is a suggested procedure:
 
      dnf install mariadb-server mariadb-devel
 
-   Configure the MySQL_/MariaDB_ database as described in the :ref:`Slurm_database` page.
+3. Configure the MySQL_/MariaDB_ database as described in the :ref:`Slurm_database` page.
 
-3. Copy the latest database dump file (``/root/mysql_dump``, see :ref:`Slurm_database`) from the main server to the compute node.
+4. Copy the latest database dump file (``/root/mysql_dump``, see :ref:`Slurm_database`) from the main server to the compute node.
    Load the dump file into the testing database::
 
      time mysql -u root -p < /root/mysql_dump
@@ -580,7 +580,7 @@ Here is a suggested procedure:
 
    Verify the database contents on the compute node by making a new database dump and compare it to the original dump.
 
-4. Select a suitable *slurm* user's **database password**.
+5. Select a suitable *slurm* user's **database password**.
    Now follow the :ref:`Slurm_accounting` page instructions (using -p to enter the database password)::
 
      # mysql -p
@@ -592,7 +592,7 @@ Here is a suggested procedure:
 
    **WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``.
 
-5. The following actions must be performed on the drained compute node.
+6. The following actions must be performed on the drained compute node.
 
    First stop the regular slurmd_ daemons on the compute node::
 
@@ -605,7 +605,7 @@ Here is a suggested procedure:
 
    Information about building RPMs is in the :ref:`Slurm_installation` page.
 
-6. Make sure that the ``/etc/slurm`` directory exists (it is not needed in configless_ Slurm_ clusters)::
+7. Make sure that the ``/etc/slurm`` directory exists (it is not needed in configless_ Slurm_ clusters)::
 
      $ ls -lad /etc/slurm
      drwxr-xr-x. 5 root root 4096 Feb 22 10:12 /etc/slurm
@@ -634,7 +634,7 @@ Here is a suggested procedure:
      touch /var/log/slurm/slurmdbd.log
      chown slurm: /var/log/slurm/slurmdbd.log
 
-7. Make sure that slurmdbd_ is running, and start it if necessary::
+8. Make sure that slurmdbd_ is running, and start it if necessary::
 
      systemctl status slurmdbd
      systemctl start slurmdbd
@@ -647,7 +647,7 @@ Here is a suggested procedure:
 
      systemctl stop slurmdbd
 
-8. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
+9. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
 
    Now it is time to do some testing.
    Update all Slurm_ RPMs to the new version (say, 24.05.4 built as shown above)::
@@ -661,7 +661,7 @@ Here is a suggested procedure:
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir
 
-9. Perform and time the actual database upgrade::
+10. Perform and time the actual database upgrade::
 
      time slurmdbd -D -vvv
 
@@ -679,13 +679,13 @@ Here is a suggested procedure:
 
      systemctl start slurmdbd
 
-10. Make some query to test slurmdbd_::
+11. Make some query to test slurmdbd_::
 
      sacctmgr show user -s
 
    and make some other tests to verify that slurmdbd_ is responding correctly.
 
-11. When all tests have been completed successfully, reinstall the compute node to its default installation.
+12. When all tests have been completed successfully, reinstall the compute node to its default installation.
 
 Upgrading on EL8 and EL9
 -------------------------
