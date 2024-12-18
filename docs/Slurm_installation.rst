@@ -220,6 +220,72 @@ Run some **tests** as described in the Munge_installation_ guide::
   munge -n | ssh somehost unmunge 
   remunge 
 
+Configure the auth/slurm authentication plugin
+==============================================
+
+The ``auth/slurm`` authentication plugin available from 23.11 is an alternative to the Munge_ plugin.
+For an overview of authentication see the Authentication_Plugins_ page.
+Beginning with version 24.05, you may create a ``slurm.jwks`` file with multiple keys defined.
+
+Single Key Setup
+----------------------
+
+For the authentication to happen correctly you must have a shared key on the machine running slurmctld, slurmdbd and the nodes.
+You can create a key file by entering your own text or by generating random data::
+
+  dd if=/dev/random of=/etc/slurm/slurm.key bs=1024 count=1
+
+The slurm.key (or slurm.jwks) must be owned by SlurmUser and must not be readable or writable by other users::
+
+  chown slurm:slurm /etc/slurm/slurm.key
+  chmod 600 /etc/slurm/slurm.key
+
+Distribute the key file to the machines on the cluster.
+It needs to be on the machines running slurmctld, slurmdbd, slurmd and sackd.
+Update your slurm.conf and slurmdbd.conf to use the Slurm authentication type.
+In slurm.conf:
+
+* AuthType = auth/slurm
+* CredType = cred/slurm
+
+In slurmdbd.conf:
+
+* AuthType = auth/slurm
+
+Multiple key setup
+------------------
+
+Beginning with version 24.05, you may alternatively create a ``slurm.jwks`` file with multiple keys defined,
+see the Authentication_Plugins_ page.
+
+The slurm.jwks file aids with key rotation, as the cluster does not need to be restarted at once when a key is rotated.
+Instead, an ``scontrol reconfigure`` is sufficient.
+There are no slurm.conf parameters required to use the slurm.jwks file, instead, the presence of the slurm.jwks file enables this functionality.
+If the slurm.jwks is not present or cannot be read, the cluster defaults to the slurm.key file.
+
+The structure of ``/etc/slurm/slurm.jwks`` is documented as::
+
+  {
+    "keys": [
+      {
+        "alg": "HS256",
+        "kty": "oct",
+        "kid": "key-identifier-2",
+        "k": "Substitute me!!",
+        "use": "default"
+      }
+    ]
+  }
+
+Protect the file::
+
+  chown slurm:slurm /etc/slurm/slurm.jwks
+  chmod 600 /etc/slurm/slurm.jwks
+
+To generate a random secret key "k" string this command may be helpful::
+
+  dd if=/dev/urandom count=1 bs=1024 | base64 -w 0 
+
 Build Slurm RPMs
 ================
 
