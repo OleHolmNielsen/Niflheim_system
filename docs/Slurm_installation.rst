@@ -184,15 +184,21 @@ Display these encryption options by::
 .. _AES: https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 .. _HMAC: https://en.wikipedia.org/wiki/Hash-based_message_authentication_code
 
-On the **Head node (only)** create a secret key to be used globally on every node (see the Munge_installation_ guide)::
+Generate the Munge key
+......................
+
+On the **Head node (only)** create a **global secret key** file ``/etc/munge/munge.key`` with the mungekey_ command
+(see the Munge_installation_ guide) to be used on **every** node in the cluster::
+
+  mungekey --create --verbose
+
+.. _mungekey: https://github.com/dun/munge/wiki/Man-8-mungekey
+
+Alternatively use this command::
 
   dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key   
   chown munge: /etc/munge/munge.key
   chmod 400 /etc/munge/munge.key
-
-Alternatively use this command (slow)::
-
-  /usr/sbin/create-munge-key -r
 
 **NOTE:** For a discussion of using ``/dev/random`` in stead of ``/dev/urandom`` (pseudo-random) as recommended in the Munge_installation_ guide,
 see `Myths about /dev/urandom <https://www.2uo.de/myths-about-urandom/>`_.
@@ -208,7 +214,10 @@ Make sure to set the correct ownership and mode on all nodes:
   chown -R munge: /etc/munge/ /var/log/munge/
   chmod 0700 /etc/munge/ /var/log/munge/
 
-Then enable and start the Munge_ service on all nodes::
+Test the Munge service
+.........................
+
+Enable and start the Munge_ service on all nodes::
 
   systemctl enable munge
   systemctl start  munge
@@ -233,14 +242,14 @@ Single Key Setup
 For the authentication to happen correctly you must have a shared key on the machine running slurmctld, slurmdbd and the nodes.
 You can create a key file by entering your own text or by generating random data::
 
-  dd if=/dev/random of=/etc/slurm/slurm.key bs=1024 count=1
+  dd if=/dev/urandom of=/etc/slurm/slurm.key bs=1024 count=1
 
-The slurm.key (or slurm.jwks) must be owned by SlurmUser and must not be readable or writable by other users::
+The slurm.key file must be owned by ``SlurmUser`` and must not be readable or writable by other users::
 
   chown slurm:slurm /etc/slurm/slurm.key
   chmod 600 /etc/slurm/slurm.key
 
-Distribute the key file to the machines on the cluster.
+Distribute the slurm.key file to the machines on the cluster.
 It needs to be on the machines running slurmctld, slurmdbd, slurmd and sackd.
 Update your slurm.conf and slurmdbd.conf to use the Slurm authentication type.
 In slurm.conf:
