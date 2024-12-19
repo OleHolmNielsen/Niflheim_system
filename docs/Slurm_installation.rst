@@ -205,6 +205,10 @@ Securely propagate ``/etc/munge/munge.key`` (e.g., via SSH) to all other hosts w
 
   scp -p /etc/munge/munge.key hostXXX:/etc/munge/munge.key
 
+For multiple destination hosts use the clush_ command::
+
+  clush -w <node-list> --copy /etc/munge/munge.key --dest /etc/munge/munge.key
+
 Make sure to set the correct ownership and mode on all nodes:
 
 .. code-block:: bash
