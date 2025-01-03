@@ -87,9 +87,8 @@ For an overview of authentication see the Authentication_Plugins_ page.
 The authentication method for communications between Slurm components is defined in slurm.conf_
 by the AuthType_ parameter.
 
-**WARNING**:
-
-* All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_ and later be restarted.
+**WARNINGS**:
+* All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_!!
 * Changes to the AuthType_ value will interrupt outstanding job steps and prevent them from completing. 
 
 .. _Authentication_Plugins: https://slurm.schedmd.com/authentication.html
@@ -98,20 +97,13 @@ by the AuthType_ parameter.
 Munge authentication service
 ============================
 
-For an overview of authentication see the Authentication_Plugins_ page.
-The Munge_ authentication plugins identifies the user originating a message.
-You should read the Munge_installation_ guide and the Munge_wiki_.
-
-The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13,
-but it is preferred to install a later version as discussed below.
-The in-distro packages may be installed by::
-
-  dnf install munge munge-libs munge-devel
+The Munge_ authentication plugin identifies and authenticates the user originating a message within Slurm_.
+It is recommended to read the Munge_installation_ guide and the Munge_wiki_.
 
 On busy servers such as the slurmctld_ server,
 the munged_ daemon could become a bottleneck,
 see the presentation *Field Notes 5: From The Frontlines of Slurm Support* in the Slurm_publications_ page.
-On busy servers it is recommended to increase the number of threads,
+It is therefore recommended to increase the number of threads,
 see the munged_ manual page, however, this is the default in the latest Munge_release_.
 The issue is discussed in 
 `excessive logging of: "Suspended new connections while processing backlog" <https://github.com/dun/munge/issues/94>`_.
@@ -128,7 +120,14 @@ Install the latest Munge version
 
 We recommend to install the latest Munge_release_ RPMs (currently 0.5.16)
 due to new features and bug fixes.
-Build RPM packages by:
+Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
+which might cause the `munged.log` file to **fill up the system disk**.
+
+See also the page :ref:`configure_maximum_number_of_open_files`
+where it is **highly recommended** to increase the ``fs.file-max``
+limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
+
+Build Munge_ RPM packages by:
 
 .. code-block:: bash
 
@@ -137,29 +136,28 @@ Build RPM packages by:
 
 and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
-With Munge_ 0.5.16 a configuration file ``/etc/sysconfig/munge`` is now used by the `munge` service,
-and you may for example add this configuration to increase the number of threads to 10::
+With Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
+It is a good idea to increase the number of threads from 2 to 10 by::
 
   OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
-
-Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
-which might cause the `munged.log` file to **fill up the system disk**.
-
-See also the page :ref:`configure_maximum_number_of_open_files`
-where it is **highly recommended** to increase the ``fs.file-max``
-limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
 
-Munge 0.5.13 only: Increase number of threads 
------------------------------------------------
+Install in-distro version of Munge
+----------------------------------
+
+The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13,
+but it is preferred to install the latest version as discussed above.
+The in-distro packages may be installed by::
+
+  dnf install munge munge-libs munge-devel
 
 Only in case you have decided to use the **default** EL8/EL9 Munge_ version 0.5.13,
-this version does not honor an options file,
+note that this version does have an options file,
 see `Let systemd unit file use /etc/sysconfig/munge for munge options <https://github.com/dun/munge/pull/68>`_.
 
-You can increase the number of threads in `munged` as follows.
+You may want to increase the number of threads in munged_ as follows.
 Copy the Systemd_ unit file::
 
   cp /usr/lib/systemd/system/munge.service /etc/systemd/system/munge.service
@@ -243,12 +241,12 @@ Configure the auth/slurm authentication plugin
 ==============================================
 
 For an overview of authentication see the Authentication_Plugins_ page.
-Beginning with version 23.11, Slurm_ has its own plugin that can create and validate credentials.
+Beginning with version 23.11, Slurm_ has its own ``auth/slurm`` authentication plugin 
+(as an alternative to the Munge_ plugin) that can create and validate credentials.
 It validates that the requests come from legitimate UIDs and GIDs on other hosts with matching users and groups.
 
-The ``auth/slurm`` authentication plugin available from 23.11 is an alternative to the Munge_ plugin.
-
-**WARNING:** All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_!!
+**WARNING:** All **Slurm daemons, jobs and commands must be terminated**
+in the entire cluster prior to changing the value of AuthType_ in slurm.conf_!!
 
 For the ``auth/slurm`` authentication you must have a shared key file ``/etc/slurm/slurm.key``,
 but beginning with version 24.05 you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys as shown below.
