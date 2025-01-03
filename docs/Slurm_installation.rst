@@ -84,10 +84,16 @@ Slurm authentication plugin
 ============================
 
 For an overview of authentication see the Authentication_Plugins_ page.
-Beginning with version 23.11, Slurm_ has its own plugin that can create and validate credentials.
-It validates that the requests come from legitimate UIDs and GIDs on other hosts with matching users and groups.
+The authentication method for communications between Slurm components is defined in slurm.conf_
+by the AuthType_ parameter.
+
+**WARNING**:
+
+* All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_ and later be restarted.
+* Changes to the AuthType_ value will interrupt outstanding job steps and prevent them from completing. 
 
 .. _Authentication_Plugins: https://slurm.schedmd.com/authentication.html
+.. _AuthType: https://slurm.schedmd.com/slurm.conf.html#OPT_AuthType
 
 Munge authentication service
 ============================
@@ -236,44 +242,53 @@ You may check the Munge_ log file ``/var/log/munge/munged.log`` for any warnings
 Configure the auth/slurm authentication plugin
 ==============================================
 
-The ``auth/slurm`` authentication plugin available from 23.11 is an alternative to the Munge_ plugin.
 For an overview of authentication see the Authentication_Plugins_ page.
-Beginning with version 24.05, you may create a ``slurm.jwks`` file with multiple keys defined.
+Beginning with version 23.11, Slurm_ has its own plugin that can create and validate credentials.
+It validates that the requests come from legitimate UIDs and GIDs on other hosts with matching users and groups.
 
-Single Key Setup
+The ``auth/slurm`` authentication plugin available from 23.11 is an alternative to the Munge_ plugin.
+
+**WARNING:** All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_!!
+
+For the ``auth/slurm`` authentication you must have a shared key file ``/etc/slurm/slurm.key``,
+but beginning with version 24.05 you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys as shown below.
+**Note:** The key file(s) must be distributed securely to all nodes in the cluster (for example using clush_).
+
+Single slurm.key setup
 ----------------------
 
-For the authentication to happen correctly you must have a shared key on the machine running slurmctld, slurmdbd and the nodes.
-You can create a key file by entering your own text or by generating random data::
+For the authentication to happen correctly you must have a shared key file ``/etc/slurm/slurm.key``
+on the servers running slurmctld_, slurmdbd_, as well as slurmd_ on the nodes.
+
+You can create a ``/etc/slurm/slurm.key`` file by entering your own text or by generating random data::
 
   dd if=/dev/urandom of=/etc/slurm/slurm.key bs=1024 count=1
 
-The slurm.key file must be owned by ``SlurmUser`` and must not be readable or writable by other users::
+The key file must be owned by ``SlurmUser`` and must not be readable or writable by other users::
 
   chown slurm:slurm /etc/slurm/slurm.key
   chmod 600 /etc/slurm/slurm.key
 
-Distribute the slurm.key file to the machines on the cluster.
-It needs to be on the machines running slurmctld, slurmdbd, slurmd and sackd.
-Update your slurm.conf and slurmdbd.conf to use the Slurm authentication type.
-In slurm.conf:
+Distribute the ``/etc/slurm/slurm.key`` file to all nodes in the cluster (the clush_ command may be used).
+The key file needs to be on the machines running slurmctld_, slurmdbd_, slurmd_ and sackd_.
+Define these authentication type parameters in slurm.conf_:
 
 * AuthType = auth/slurm
 * CredType = cred/slurm
 
-In slurmdbd.conf:
+and in slurmdbd.conf_:
 
 * AuthType = auth/slurm
 
 Multiple key setup
 ------------------
 
-Beginning with version 24.05, you may alternatively create a ``slurm.jwks`` file with multiple keys defined,
+Beginning with version 24.05, you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys defined,
 see the Authentication_Plugins_ page.
 
-The slurm.jwks file aids with key rotation, as the cluster does not need to be restarted at once when a key is rotated.
+The ``slurm.jwks`` file aids with key rotation, as the cluster does not need to be restarted at once when a key is rotated.
 Instead, an ``scontrol reconfigure`` is sufficient.
-There are no slurm.conf parameters required to use the slurm.jwks file, instead, the presence of the slurm.jwks file enables this functionality.
+There are no slurm.conf_ parameters required to use the slurm.jwks file, instead, the presence of the slurm.jwks file enables this functionality.
 If the slurm.jwks is not present or cannot be read, the cluster defaults to the slurm.key file.
 
 The structure of ``/etc/slurm/slurm.jwks`` is documented as::
