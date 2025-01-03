@@ -80,7 +80,7 @@ and the file ``/etc/login.defs``.
 .. _User_identifier: https://en.wikipedia.org/wiki/User_identifier
 .. _sshd_config: https://linux.die.net/man/5/sshd_config
 
-Slurm authentication plugin
+Slurm authentication plugins
 ============================
 
 For an overview of authentication see the Authentication_Plugins_ page.
@@ -95,7 +95,7 @@ by the AuthType_ parameter.
 .. _AuthType: https://slurm.schedmd.com/slurm.conf.html#OPT_AuthType
 
 Munge authentication service
-============================
+---------------------------------
 
 The Munge_ authentication plugin identifies and authenticates the user originating a message within Slurm_.
 It is recommended to read the Munge_installation_ guide and the Munge_wiki_.
@@ -116,7 +116,7 @@ The issue is discussed in
 .. _install_the_latest_munge_version:
 
 Install the latest Munge version
-----------------------------------
+....................................
 
 We recommend to install the latest Munge_release_ RPMs (currently 0.5.16)
 due to new features and bug fixes.
@@ -145,7 +145,7 @@ It is a good idea to increase the number of threads from 2 to 10 by::
 .. _issue_94: https://github.com/dun/munge/issues/94
 
 Install in-distro version of Munge
-----------------------------------
+....................................
 
 The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13,
 but it is preferred to install the latest version as discussed above.
@@ -175,7 +175,7 @@ and restart the `munge` service::
 .. _Systemd: https://en.wikipedia.org/wiki/Systemd
 
 Munge configuration and testing
--------------------------------
+....................................
 
 By default Munge_ uses an AES_ AES-128 cipher and SHA-256 HMAC_ (*Hash-based Message Authentication Code*).
 Display these encryption options by::
@@ -238,7 +238,7 @@ Run some **tests** as described in the Munge_installation_ guide::
 You may check the Munge_ log file ``/var/log/munge/munged.log`` for any warnings or errors.
 
 Configure the auth/slurm authentication plugin
-==============================================
+--------------------------------------------------
 
 For an overview of authentication see the Authentication_Plugins_ page.
 Beginning with version 23.11, Slurm_ has its own ``auth/slurm`` authentication plugin 
@@ -253,7 +253,7 @@ but beginning with version 24.05 you may alternatively create a ``/etc/slurm/slu
 **Note:** The key file(s) must be distributed securely to all nodes in the cluster (for example using clush_).
 
 Single slurm.key setup
-----------------------
+.........................
 
 For the authentication to happen correctly you must have a shared key file ``/etc/slurm/slurm.key``
 on the servers running slurmctld_, slurmdbd_, as well as slurmd_ on the nodes.
@@ -279,7 +279,7 @@ and in slurmdbd.conf_:
 * AuthType = auth/slurm
 
 Multiple key setup
-------------------
+.........................
 
 Beginning with version 24.05, you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys defined,
 see the Authentication_Plugins_ page.
