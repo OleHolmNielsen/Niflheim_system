@@ -85,7 +85,10 @@ Slurm authentication plugins
 
 For an overview of authentication see the Authentication_Plugins_ page.
 The authentication method for communications between Slurm components is defined in slurm.conf_
-by the AuthType_ parameter.
+by the AuthType_ parameter which can take one of these **mutually exclusive values:**
+
+* ``auth/munge`` (Slurm's default plugin)
+* ``auth/slurm`` (A new plugin from 23.11)
 
 **WARNINGS**:
 * All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_!!
@@ -97,6 +100,7 @@ by the AuthType_ parameter.
 Munge authentication service
 ---------------------------------
 
+Munge_ is the default plugin used since the early days of Slurm_ (2003 and before).
 The Munge_ authentication plugin identifies and authenticates the user originating a message within Slurm_.
 It is recommended to read the Munge_installation_ guide and the Munge_wiki_.
 
@@ -237,7 +241,7 @@ Run some **tests** as described in the Munge_installation_ guide::
 
 You may check the Munge_ log file ``/var/log/munge/munged.log`` for any warnings or errors.
 
-Configure the auth/slurm authentication plugin
+The new auth/slurm authentication plugin
 --------------------------------------------------
 
 For an overview of authentication see the Authentication_Plugins_ page.
