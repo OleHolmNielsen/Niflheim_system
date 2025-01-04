@@ -90,7 +90,8 @@ by the AuthType_ parameter which can take one of these **mutually exclusive valu
 * ``auth/munge`` (Slurm's default plugin)
 * ``auth/slurm`` (A new plugin from 23.11)
 
-**WARNINGS**:
+**WARNINGS:**
+
 * All **Slurm daemons, jobs and commands must be terminated** in the entire cluster prior to changing the value of AuthType_!!
 * Changes to the AuthType_ value will interrupt outstanding job steps and prevent them from completing. 
 
