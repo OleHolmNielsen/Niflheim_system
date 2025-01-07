@@ -351,9 +351,9 @@ The python-hostlist_ tool is very convenient for expanding or compressing node l
 To install this tool (make sure to download the latest release)::
 
   dnf install python3-devel
-  wget https://www.nsc.liu.se/~kent/python-hostlist/python-hostlist-1.23.tar.gz
-  rpmbuild -ta python-hostlist-1.23.tar.gz
-  dnf install ~/rpmbuild/RPMS/noarch/python3-hostlist-1.23-1.el8.noarch.rpm
+  wget https://www.nsc.liu.se/~kent/python-hostlist/python-hostlist-2.2.1.tar.gz
+  rpmbuild -ta python-hostlist-2.2.1.tar.gz
+  dnf install ~/rpmbuild/RPMS/noarch/python-hostlist-2.2.1-1.el8.x86_64
   
 For usage see the python-hostlist_, but a useful example is::
 
