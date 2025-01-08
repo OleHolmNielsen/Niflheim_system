@@ -362,6 +362,15 @@ For usage see the python-hostlist_, but a useful example is::
 
 .. _python-hostlist: https://www.nsc.liu.se/~kent/python-hostlist/
 
+The snodelist command
+......................
+
+The snodelist_ command is a tool for working with Slurm hostlists.
+Rather than relying on ``scontrol show hostnames`` to expand a Slurm compact host list to a newline-delimited list.
+Installation instructions are in the snodelist_ page.
+
+.. _snodelist: https://github.com/University-of-Delaware-IT-RCI/snodelist
+
 SSH keys for password-less access to cluster nodes
 --------------------------------------------------
 
