@@ -181,7 +181,8 @@ It is possible to build Slurm packages which include the Nvidia NVML_ library fo
 NVML automatically detects GPUs, their type, cores, and NVLinks.
 Quoting the GRES_ page::
 
-  If AutoDetect=nvml is set in gres.conf, and the NVIDIA Management Library (NVML) is installed on the node and was found during Slurm configuration, configuration details will automatically be filled in for any system-detected NVIDIA GPU.
+  If AutoDetect=nvml is set in gres.conf, and the NVIDIA Management Library (NVML) is installed on the node and was found during Slurm configuration,
+  configuration details will automatically be filled in for any system-detected NVIDIA GPU.
   This removes the need to explicitly configure GPUs in gres.conf, though the Gres= line in slurm.conf is still required in order to tell slurmctld how many GRES to expect. 
 
 However, it is **not necessary** to include the NVML_ in your Slurm packages, 
@@ -197,11 +198,35 @@ Download Nvidia drivers from https://www.nvidia.com/Download/index.aspx and sele
 You can also download and install Nvidia `UNIX drivers <https://www.nvidia.com/en-us/drivers/unix/>`_,
 and the CUDA toolkit from https://developer.nvidia.com/cuda-downloads.
 
-To verify the availability of GPU_ accelerators in a node run the command::
+To verify the availability of GPU_ accelerators in a node run the nvidia-smi_ command::
 
   nvidia-smi -L
 
 which is installed with the *xorg-x11-drv-nvidia* RPM package.
+
+.. _nvidia-smi: https://docs.nvidia.com/deploy/nvidia-smi/
+
+GPU monitoring tools
+---------------------
+
+There is a useful page `Top 3 Linux GPU Monitoring Command Line Tools <https://www.gpu-mart.com/blog/top-3-linux-gpu-monitoring-command-line-tools>`_
+recommending the tools gpustat_, nvtop_, and nvitop_.
+The NVIDIA tool nvidia-smi_ can of course also be used.
+
+We recommend the gpustat_ tool which gives a 1-line status of each GPU in the system.
+The installation on EL8 systems is a bit tricky, so use these commands::
+
+  dnf install gcc python3-devel
+  python3 -m pip install setuptools-scm
+  python3 -m pip install gpustat 
+
+Our Slurm_ monitoring tools psjob_ and psnode_ use gpustat_ on nodes with GPU GRES to print a GPU usage summary.
+
+.. _gpustat: https://github.com/wookayin/gpustat
+.. _nvtop: https://github.com/Syllo/nvtop
+.. _nvitop: https://github.com/XuehaiPan/nvitop
+.. _psjob: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/psjob
+.. _psnode: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/nodes/psnode
 
 RPC rate limiting
 =====================
