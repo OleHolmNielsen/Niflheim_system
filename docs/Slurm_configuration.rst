@@ -415,6 +415,9 @@ The cgroup.conf_ page defines:
     The default value is "no".
     Note that when set to "yes" and ConstrainRAMSpace is set to "no", AllowedRAMSpace is automatically set to 100% in order to limit the RAM+Swap amount to 100% of job's requirement plus the percent of allowed swap space.
     This amount is thus set to both RAM and RAM+Swap limits. This means that in that particular case, ConstrainRAMSpace is automatically enabled with the same limit than the one used to constrain swap space. Also see AllowedSwapSpace. 
+* ConstrainDevices=<yes|no>
+    If configured to "yes" then constrain the job's allowed devices based on GRES allocated resources. It uses the devices subsystem for that.  The default value is "no".
+    Enable this for job access to GPUs.
 
 You may also consider defining **MemSpecLimit** in slurm.conf_:
 
