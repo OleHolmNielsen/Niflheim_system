@@ -401,6 +401,7 @@ Edit the file to change these lines::
   ConstrainCores=yes
   ConstrainRAMSpace=yes
   ConstrainSwapSpace=yes
+  ConstrainDevices=yes
 
 The cgroup.conf_ page defines:
 
