@@ -58,6 +58,7 @@ System information
 Useful sysadmin commands:
 
 * sinfo_ - view information about Slurm nodes and partitions.
+* showpartitions_ - Print a Slurm cluster partition status overview with 1 line per partition.
 * squeue_ - view information about jobs located in the Slurm scheduling queue
 * scancel_ Used to signal jobs or job steps
 * smap_ - graphically view information about Slurm jobs, partitions, and set configurations parameters
@@ -70,6 +71,7 @@ Useful sysadmin commands:
 .. _smap: https://slurm.schedmd.com/smap.html
 .. _sview: https://slurm.schedmd.com/sview.html
 .. _sview: https://slurm.schedmd.com/sview.html
+.. _showpartitions: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/partitions/
 
 Slurm test suite
 ----------------
