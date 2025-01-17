@@ -383,6 +383,10 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page,
    and the section on :ref:`ipmi_power_monitoring`.
 
+   To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
+
+      rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
+
 2. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
 
