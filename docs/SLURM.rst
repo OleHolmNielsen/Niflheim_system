@@ -49,7 +49,8 @@ Documentation from SchedMD_ about Slurm_:
 * Slurm_FAQ_.
 * Slurm configuration file slurm.conf_
 * Slurm NEWS_ (changes in this branch) and version RELEASE_NOTES_.
-  **Note:** Click on the relevant **Branch** in the upper left corner.
+
+  **Note:** Select the relevant **Branch** in the upper left corner.
 * Slurm_download_ with links to external tools under *Download Related Software*.
 * Slurm_git_repo_ and Slurm_git_commits_.
 * Subscribe to Slurm_mailing_lists_.
