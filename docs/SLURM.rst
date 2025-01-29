@@ -97,8 +97,8 @@ Documentation from other sources:
 .. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
-.. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 .. _Slurm_git_repo: https://github.com/SchedMD/slurm
 .. _Slurm_git_commits: https://github.com/SchedMD/slurm/commits/
-.. _RELEASE_NOTES: https://github.com/SchedMD/slurm/blob/master/RELEASE_NOTES
+.. _NEWS: https://github.com/SchedMD/slurm/blob/slurm-24.11/NEWS
+.. _RELEASE_NOTES: https://github.com/SchedMD/slurm/blob/slurm-24.11/RELEASE_NOTES
 
