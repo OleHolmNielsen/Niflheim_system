@@ -1016,7 +1016,6 @@ your cluster's login nodes must be upgraded, for example::
   dnf update slurm*$VER-*.rpm
 
 Login nodes should have the RPMs described in the Installing_RPMs_ section above.
-Again, consult the Slurm_ Upgrade_Guide_ before you start!
 
 Migrate the slurmctld service to another server
 =================================================
