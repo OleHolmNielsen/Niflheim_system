@@ -595,11 +595,11 @@ Upgrading Slurm
 ===============
 
 New Slurm_ updates are released about every 6 months (the interval was 9 months prior to Slurm_ 24.05).
-Follow the Upgrades_ instructions in the Slurm_Quick_Start_ page,
+Follow the Upgrade_Guide_ instructions in the Slurm_Quick_Start_ page,
 see also presentations by Tim Wickberg in the Slurm_publications_ page.
 Pay attention to these statements: 
 
-* You may upgrade at most by 2 major versions (3 versions starting from 24.11), see the Upgrades_ page.
+* You may upgrade at most by 2 major versions (3 versions starting from 24.11), see the Upgrade_Guide_ page.
 * When changing the version to a higher release number (e.g from 22.05.x to 23.02.x) **always** upgrade the slurmdbd_ daemon first.
 * Be mindful of your configured ``SlurmdTimeout`` and ``SlurmctldTimeout`` values:
   Increase/decrease them as needed.
@@ -631,7 +631,7 @@ Regarding the Slurm_ database, also make sure to:
 
   See further info below.
 
-.. _Upgrades: https://slurm.schedmd.com/upgrades.html
+.. _Upgrade_Guide: https://slurm.schedmd.com/upgrades.html
 .. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
@@ -917,7 +917,7 @@ Upgrade MPI applications
 ........................
 
 MPI applications such as **OpenMPI** may be linked against the ``/usr/lib64/libslurm.so`` library.
-In this context you must understand the remark in the Upgrades_ page::
+In this context you must understand the remark in the Upgrade_Guide_::
 
   The libslurm.so version is increased every major release.
   So things like MPI libraries with Slurm integration should be recompiled.
@@ -1016,7 +1016,7 @@ your cluster's login nodes must be upgraded, for example::
   dnf update slurm*$VER-*.rpm
 
 Login nodes should have the RPMs described in the Installing_RPMs_ section above.
-Again, consult the Upgrades_ page before you start!
+Again, consult the Slurm_ Upgrade_Guide_ before you start!
 
 Migrate the slurmctld service to another server
 =================================================
