@@ -485,6 +485,8 @@ You may build Slurm_ packages including optional features:
 
 .. _bug_17900: https://bugs.schedmd.com/show_bug.cgi?id=17900
 
+.. _Installing_RPMs:
+
 Installing RPMs
 ===============
 
@@ -1013,13 +1015,7 @@ your cluster's login nodes must be upgraded, for example::
   export VER=24.11.1
   dnf update slurm*$VER-*.rpm
 
-Login nodes probably have these RPMs installed::
-
-  slurm
-  slurm-contribs
-  slurm-devel
-  slurm-perlapi
-
+Login nodes should have the RPMs described in the Installing_RPMs_ section above.
 Again, consult the Upgrades_ page before you start!
 
 Migrate the slurmctld service to another server
