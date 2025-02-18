@@ -28,6 +28,8 @@ See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutoria
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
 .. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
+.. _slurmd: https://slurm.schedmd.com/slurmd.html
+.. _sackd: https://slurm.schedmd.com/sackd.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _pdsh: https://github.com/grondo/pdsh
@@ -1006,8 +1008,6 @@ Then reconfigure the running daemons::
      scontrol reconfigure
 
 Again, consult the Upgrades_ page before you start!
-
-.. _slurmd: https://slurm.schedmd.com/slurmd.html
 
 Migrate the slurmctld service to another server
 =================================================
