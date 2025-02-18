@@ -996,16 +996,23 @@ For the compute nodes running slurmd_ the **safe procedure** could be:
 
      scontrol update NodeName=<nodelist> State=resume 
 
-
-Finally, restore the timeout values in slurm.conf_ to their defaults, for example::
+Finally, double-check the timeout values in slurm.conf_, for example::
 
      SlurmctldTimeout=600
      SlurmdTimeout=300 
 
 and copy ``/etc/slurm/slurm.conf`` to all nodes (not needed in configless_ Slurm_ clusters).
-Then reconfigure the running daemons::
+Make a ``scontrol reconfigure`` if any changes were made.
 
-     scontrol reconfigure
+Upgrade the login nodes
+..........................
+
+As the final step, Slurm_ RPMs must also be upgraded on your cluster's login nodes, for example::
+
+  export VER=24.11.1
+  dnf update slurm*$VER-*.rpm
+
+Login nodes probably have these RPMs installed: ``slurm, slurm-contribs, slurm-devel, slurm-perlapi``.
 
 Again, consult the Upgrades_ page before you start!
 
