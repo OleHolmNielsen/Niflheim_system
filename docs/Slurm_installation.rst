@@ -1007,7 +1007,8 @@ Make a ``scontrol reconfigure`` if any changes were made.
 Upgrade the login nodes
 ..........................
 
-As the final step, Slurm_ RPMs must also be upgraded on your cluster's login nodes, for example::
+As the final step (or at least after the ``slurmctld`` has been upgraded),
+your cluster's login nodes must be upgraded, for example::
 
   export VER=24.11.1
   dnf update slurm*$VER-*.rpm
