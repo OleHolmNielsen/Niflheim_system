@@ -1013,7 +1013,12 @@ your cluster's login nodes must be upgraded, for example::
   export VER=24.11.1
   dnf update slurm*$VER-*.rpm
 
-Login nodes probably have these RPMs installed: ``slurm, slurm-contribs, slurm-devel, slurm-perlapi``.
+Login nodes probably have these RPMs installed::
+
+  slurm
+  slurm-contribs
+  slurm-devel
+  slurm-perlapi
 
 Again, consult the Upgrades_ page before you start!
 
