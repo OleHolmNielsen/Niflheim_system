@@ -398,6 +398,34 @@ Installation instructions are in the snodelist_ page.
 
 .. _snodelist: https://github.com/University-of-Delaware-IT-RCI/snodelist
 
+Hostlist expressions for left-hand and right-hand nodes or other node increments
+--------------------------------------------------------------------------------
+
+When managing separately the left-hand and right-hand nodes in a Lenovo compute tray,
+or any other subset of compute nodes,
+the ClusterShell_tool_ comes in handily for selecting subsets of nodes.
+Let us assume that nodes are named numerically so that left-hand nodes have odd numbers,
+whereas right-hand nodes have even numbers, for example the *left,right,left,right,...* nodes::
+
+  e001,e002,...,e023,e024
+
+The clush_ command can now perform commands separately::
+
+  clush -bw e[001-023/2] echo I am a left-hand node
+  clush -bw e[002-024/2] echo I am a right-hand node
+
+Unfortunately, Slurm_ doesn't recognize this syntax of node number increments.
+Here you can use the ClusterShell_tool_'s command nodeset_ to print Slurm_ compatible nodelists to be used as Slurm_ command arguments::
+
+  $ nodeset -f e[001-024/2]
+  e[001,003,005,007,009,011,013,015,017,019,021,023]
+  $ nodeset -f e[002-024/2]
+  e[002,004,006,008,010,012,014,016,018,020,022,024]
+
+An example may be::
+
+  $ sinfo -n `nodeset -f e[002-024/2]`
+
 SSH keys for password-less access to cluster nodes
 --------------------------------------------------
 
