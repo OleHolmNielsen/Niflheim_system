@@ -399,7 +399,7 @@ Installation instructions are in the snodelist_ page.
 .. _snodelist: https://github.com/University-of-Delaware-IT-RCI/snodelist
 
 Hostlist expressions for left-hand and right-hand nodes or other node increments
---------------------------------------------------------------------------------
+..................................................................................
 
 When managing separately the left-hand and right-hand nodes in a Lenovo compute tray,
 or any other subset of compute nodes,
