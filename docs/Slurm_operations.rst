@@ -424,6 +424,7 @@ Here you can use the ClusterShell_tool_'s command nodeset_ to print Slurm_ compa
 
 An example where we assign nodelists to variables::
 
+  $ export nodelist=e[001-024]
   $ export left=`nodeset -f e[001-024/2]`
   $ export right=`nodeset -f e[002-024/2]`
   $ sinfo -n $left
