@@ -422,9 +422,11 @@ Here you can use the ClusterShell_tool_'s command nodeset_ to print Slurm_ compa
   $ nodeset -f e[002-024/2]
   e[002,004,006,008,010,012,014,016,018,020,022,024]
 
-An example may be::
+An example where we assign nodelists to variables::
 
-  $ sinfo -n `nodeset -f e[002-024/2]`
+  $ export left=`nodeset -f e[001-024/2]`
+  $ export right=`nodeset -f e[002-024/2]`
+  $ sinfo -n $left
 
 SSH keys for password-less access to cluster nodes
 --------------------------------------------------
