@@ -1155,7 +1155,7 @@ Create the following script ``/etc/logrotate.d/slurm`` which will rotate and com
 
 **Warning:** Do **not** run ``scontrol reconfig`` or restart slurmctld_ to rotate the log files, since this will incur a huge overhead.
 
-See the NEWS_ file for changes related to SIGUSR2_::
+See the NEWS_ file for changes related to SIGUSR2_ in Slurm_ 17.11.0pre2::
 
   Modify all daemons to re-open log files on receipt of SIGUSR2 signal. This is much than using SIGHUP to re-read the configuration file and rebuild various tables.
 
