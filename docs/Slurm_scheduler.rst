@@ -214,9 +214,11 @@ see the slurm.conf_ and Resource_Limits_ documents.
 The ``AccountingStorageEnforce`` options include:
 
 * ``associations`` - This will prevent users from running jobs if their association is not in the database. This option will prevent users from accessing invalid accounts.
-* ``limits`` - This will enforce limits set to associations. By setting this option, the 'associations' option is also set.
-* ``qos`` - This will require all jobs to specify (either overtly or by default) a valid qos (Quality of Service). QOS values are defined for each association in the database.
-  By setting this option, the 'associations' option is also set. 
+* ``limits`` - This will enforce limits set to associations.
+  By setting this option, the ``associations`` option is also set.
+* ``qos`` - This will require all jobs to specify (either overtly or by default) a valid qos (*Quality of Service*).
+  QOS values are defined for each association in the database.
+  By setting this option, the ``associations`` option is also set. 
 * ``safe`` - limits and associations will automatically be set. 
 
 The *Quality of Service (QOS) Factor* is defined in the Multifactor_Priority_Plugin_ page as::
