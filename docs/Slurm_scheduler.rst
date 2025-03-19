@@ -201,9 +201,10 @@ Example QOS_ configurations are::
   sacctmgr add qos high
   sacctmgr modify qos high set priority=100
 
-Example::
+Examples::
 
   sacctmgr show qos format=name,priority
+  sacctmgr show qos format="name,priority,flags,usagefactor,maxtres,maxwall,maxtrespu%30"
 
 To enforce user jobs to have a QOS_ you must (at least) have::
 
