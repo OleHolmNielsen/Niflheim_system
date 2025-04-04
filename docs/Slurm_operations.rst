@@ -49,8 +49,11 @@ To submit a batch job script using sbatch_::
 
   sbatch -N1 <script-file>
 
+For troubleshotting there exists a testsuite_ for Slurm_.
+
 .. _sbatch: https://slurm.schedmd.com/sbatch.html
 .. _srun: https://slurm.schedmd.com/srun.html
+.. _testsuite: https://github.com/SchedMD/slurm/tree/master/testsuite
 
 System information
 ------------------
@@ -72,17 +75,6 @@ Useful sysadmin commands:
 .. _sview: https://slurm.schedmd.com/sview.html
 .. _sview: https://slurm.schedmd.com/sview.html
 .. _showpartitions: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/partitions/
-
-Slurm test suite
-----------------
-
-There is a large *test suite*, see the *Testing* section of the Slurm_Quick_Start_ Administrator Guide.
-The test suite is in the source ``.../testsuite/expect/`` directory, see the file *README*.
-
-The testsuite should be copied to the shared filesystem, for example, ``/home/$USER/testsuite/`` and run by a non-root user::
-
-  cd testsuite/expect
-  ./regression
 
 MPI setup
 =========
