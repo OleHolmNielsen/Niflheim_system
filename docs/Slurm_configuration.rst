@@ -537,7 +537,7 @@ RPC rate limiting
 ---------------------
 
 It is common to experience users who bombard the slurmctld_ server by executing commands such as 
-squeue_, sinfo_, sbatch_ or the like with many requests per second.
+squeue_, sbatch_ or the like with many requests per second.
 This can potentially make the slurmctld_ unresponsive and therefore affect the entire cluster.
 
 The ability to do ``RPC rate limiting`` on a per-user basis is a new feature with Slurm_ 23.02.
