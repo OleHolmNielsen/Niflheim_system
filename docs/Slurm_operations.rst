@@ -237,13 +237,13 @@ Here we list some useful third-party utilities that Slurm administrators or user
 * `SlurmCommander <https://github.com/CLIP-HPC/SlurmCommander>`_ is a simple, lightweight, no-dependencies text-based user interface (TUI) to your cluster.
   It ties together multiple slurm commands to provide you with a simple and efficient interaction point with slurm.
 
-* `STUBL - SLURM Tools and UBiLities <https://github.com/ubccr/stubl>`_.
+* `STUBL - Slurm Tools and UBiLities <https://github.com/ubccr/stubl>`_.
 
 * `birc-aeh/slurm-utils <https://github.com/birc-aeh/slurm-utils>`_:
   *gnodes* gives a visual representation of your cluster. 
   *jobinfo* tries to collect information for a full job.
 
-* `slurm_showq <https://github.com/fasrc/slurm_showq>`_ A *showq* style job summary utility for SLURM.
+* `slurm_showq <https://github.com/fasrc/slurm_showq>`_ A *showq* style job summary utility for Slurm.
 
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
@@ -543,7 +543,7 @@ It is convenient to add a Slurm binding for all running jobs belonging to a spec
 Append to ``/etc/clustershell/groups.conf.d/slurm.conf`` the lines::
 
   #
-  # SLURM user job bindings
+  # Slurm user job bindings
   #
   [slurmuser,su]
   map: squeue -h -u $GROUP -o "%N" -t running
@@ -884,8 +884,7 @@ Working with jobs
 
 Tutorial pages about Slurm job management:
 
-* `Slurm  101: Basic Slurm Usage for Linux Clusters <https://www.brightcomputing.com/blog/blog/bid/174099/slurm-101-basic-slurm-usage-for-linux-clusters>`_
-* `Convenient SLURM Commands <https://rc.fas.harvard.edu/resources/documentation/convenient-slurm-commands/>`_
+* `Convenient Slurm Commands <https://rc.fas.harvard.edu/resources/documentation/convenient-slurm-commands/>`_
 
 Interactive jobs
 ----------------
