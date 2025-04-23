@@ -4,8 +4,6 @@ https://wiki.fysik.dtu.dk/Niflheim_system/
 using Sphinx.
 The Wiki pages are also published at https://niflheim-system.readthedocs.io/en/latest/
 
-The page contents is available from the https://github.com/OleHolmNielsen/Moin2Sphinx repository.
-
 Archived pages
 ----------------
 
