@@ -2026,7 +2026,7 @@ When printing a string with a nil_ value an error such as *bad argument #2 to 'f
 Therefore arguments to a print function must be checked for nil_ values when using Lua_ 5.1.4.
 The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
 
-.. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L458
+.. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L518
 .. _bug_19564: https://bugs.schedmd.com/show_bug.cgi?id=19564
 
 Configure Slurm for Lua JobSubmitPlugins
