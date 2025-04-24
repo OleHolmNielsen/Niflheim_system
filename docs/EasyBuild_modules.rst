@@ -4,7 +4,7 @@
 EasyBuild software for environment modules 
 ==========================================
 
-On the Niflheim_ cluster (based on EL7 and EL8 Linux) we use the Lmod_ and EasyBuild_ environment modules for software packages.
+On the Niflheim_ cluster (based on EL8 Linux) we use the Lmod_ and EasyBuild_ environment modules for software packages.
 
 .. _Niflheim: https://wiki.fysik.dtu.dk/Niflheim_Getting_started/niflheim/
 

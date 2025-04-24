@@ -2021,9 +2021,7 @@ Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in 
     return slurm.ESLURM_INVALID_PARTITION_NAME
   end
 
-It is worth noting that the Lua_ version 5.1.4 from EL7 does not handle nil_ values well in all cases as discussed in bug_19564_:
-When printing a string with a nil_ value an error such as *bad argument #2 to 'format' (string expected, got nil)* may occur.
-Therefore arguments to a print function must be checked for nil_ values when using Lua_ 5.1.4.
+It is worth noting that the Lua_ version 5.1.4 does not handle nil_ values well in all cases as discussed in bug_19564_.
 The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
 
 .. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L518
