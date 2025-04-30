@@ -689,27 +689,6 @@ Use::
   sbatch --no-requeue or --requeue 
 
 to change the default behavior for individual jobs.
-
-Interactive job configuration
--------------------------------
-
-If a login node should be able to launch **interactive jobs** with Slurm_ some configuration is required:
-
-1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
-
-     LaunchParameters=use_interactive_step
-
-2. The login node must have a network interface on the same subnet as all the compute nodes.
-   The DNS must be set up so that the login node can resolve all compute node hostnames.
-   Test this by pinging a nodename.
-
-3. The login node firewall must be opened as described in login_node_firewall_.
-
-For example, to launch an interactive job and get a shell with srun_ on the compute node use the salloc_ command::
-
-  salloc -p <partition> -N <num_nodes> -n <num_cpus>
-
-.. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
  
 Power monitoring and management
 -------------------------------
@@ -1498,8 +1477,29 @@ Login node configuration
 The login nodes should have the Slurm_ packages installed as described in the :ref:`Slurm_installation` page.
 See also the :ref:`login_node_firewall` section.
 
+Interactive job configuration
+-------------------------------
+
+If a login node should be able to launch **interactive jobs** with Slurm_ some configuration is required:
+
+1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
+
+     LaunchParameters=use_interactive_step
+
+2. The login node must have a network interface on the same subnet as all the compute nodes.
+   The DNS must be set up so that the login node can resolve all compute node hostnames.
+   Test this by pinging a nodename.
+
+3. The login node firewall must be opened as described in login_node_firewall_.
+
+For example, to launch an interactive job and get a shell with srun_ on the compute node use the salloc_ command::
+
+  salloc -p <partition> -N <num_nodes> -n <num_cpus>
+
+.. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
+
 Bash command completion for Slurm
-----------------------------------
+==================================
 
 The Bash_ shell includes a TAB bash_command_completion_ feature (see also bash-completion_ on GitHub).
 On EL8/EL9 Linux enable this feature by::
