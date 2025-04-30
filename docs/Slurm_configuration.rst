@@ -689,6 +689,27 @@ Use::
   sbatch --no-requeue or --requeue 
 
 to change the default behavior for individual jobs.
+
+Interactive job configuration
+-------------------------------
+
+If a login node should be able to launch **interactive jobs** with Slurm_ some configuration is required:
+
+1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
+
+     LaunchParameters=use_interactive_step
+
+2. The login node must have a network interface on the same subnet as all the compute nodes.
+   The DNS must be set up so that the login node can resolve all compute node hostnames.
+   Test this by pinging a nodename.
+
+3. The login node firewall must be opened as described in login_node_firewall_.
+
+For example, to launch an interactive job and get a shell with srun_ on the compute node use the salloc_ command::
+
+  salloc -p <partition> -N <num_nodes> -n <num_cpus>
+
+.. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
  
 Power monitoring and management
 -------------------------------
@@ -1807,23 +1828,10 @@ Login node firewall
 -------------------
 
 To begin with a **login node** doesn't need any special firewall rules because no Slurm_ daemons should be running on login nodes.
+However, if a login node should be able to launch **interactive jobs** with Slurm_ further configuration is required.
 
-However, if a login node should be able to launch **interactive jobs** with Slurm_ further configuration is required:
-
-1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
-
-     LaunchParameters=use_interactive_step
-
-2. The login node must have a network interface on the same subnet as all the compute nodes.
-   The DNS must be set up so that the login node can resolve all compute node hostnames.
-   Test this by pinging a nodename.
-
-3. The login node's firewall must be open on **all ports** from the compute nodes' subnet.
-   As a test you may stop the firewalld_ service temporarily.
-
-For example, to launch an interactive job and get a shell with srun_ on the compute node use the salloc_ command::
-
-  salloc -p <partition> -N <num_nodes> -n <num_cpus>
+The login node's firewall must be open on **all ports** from the compute nodes' subnet.
+As a test you may stop the firewalld_ service temporarily.
 
 **Warning:** The srun_ command only works if the login node can:
 
@@ -1831,7 +1839,6 @@ For example, to launch an interactive job and get a shell with srun_ on the comp
 * Connect to the Compute nodes port 6818.
 * Resolve the DNS name of the compute nodes.
 
-.. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
 .. _srun: https://slurm.schedmd.com/srun.html
 
 .. _firewall-between-slurmctld-and-slurmdbd:
