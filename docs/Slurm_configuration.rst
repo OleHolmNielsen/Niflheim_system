@@ -1806,16 +1806,32 @@ However, you may run a firewall service, as long as you ensure that **all ports*
 Login node firewall
 -------------------
 
-A login node doesn't need any special firewall rules for Slurm_ because no such daemons should be running on login nodes.
+To begin with a **login node** doesn't need any special firewall rules because no Slurm_ daemons should be running on login nodes.
+
+However, if a login node should be able to launch **interactive jobs** with Slurm_ further configuration is required:
+
+1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
+
+     LaunchParameters=use_interactive_step
+
+2. The login node must have a network interface on the same subnet as all the compute nodes.
+   The DNS must be set up so that the login node can resolve all compute node hostnames.
+   Test this by pinging a nodename.
+
+3. The login node's firewall must be open on **all ports** from the compute nodes' subnet.
+   As a test you may stop the firewalld_ service temporarily.
+
+For example, to launch an interactive job and get a shell with srun_ on the compute node use the salloc_ command::
+
+  salloc -p <partition> -N <num_nodes> -n <num_cpus>
 
 **Warning:** The srun_ command only works if the login node can:
 
 * Connect to the Head node port 6817.
-* Resolve the DNS name of the compute nodes.
 * Connect to the Compute nodes port 6818.
+* Resolve the DNS name of the compute nodes.
 
-Therefore interactive batch jobs with srun_ seem to be impossible if your compute nodes are on an isolated private network relative to the Login node.
-
+.. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
 .. _srun: https://slurm.schedmd.com/srun.html
 
 .. _firewall-between-slurmctld-and-slurmdbd:
