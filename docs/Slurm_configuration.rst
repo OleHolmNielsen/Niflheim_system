@@ -1508,7 +1508,8 @@ Then you can use this salloc_ parameter::
   salloc --x11 <other_options>
 
 It may also be a good idea to configure X11Parameters_ in slurm.conf_
-so that xauth data on the compute node will be placed in `~/.Xauthority` rather than in a temporary file under TmpFS::
+so that xauth data on the compute node will be placed in `~/.Xauthority`
+rather than in a temporary file under TmpFS (see job_container_tmpfs_)::
 
   X11Parameters=home_xauthority
 
