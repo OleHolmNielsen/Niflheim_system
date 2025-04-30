@@ -1498,6 +1498,14 @@ For example, to launch an interactive job and get a shell with srun_ on the comp
 
 .. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
 
+Export an X11 display
+---------------------
+
+You can use the X11_ display feature.
+It is enabled by setting ``PrologFlags=x11`` in slurm.conf_.
+
+.. _X11: https://en.wikipedia.org/wiki/X_Window_System
+
 Bash command completion for Slurm
 ==================================
 
