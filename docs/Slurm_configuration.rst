@@ -1502,12 +1502,21 @@ Export an X11 display
 ---------------------
 
 You can use the X11_ display feature.
-It is enabled by setting ``PrologFlags=X11`` in slurm.conf_.
+It is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_.
 Then you can use this salloc_ parameter::
 
   salloc --x11 <other_options>
 
+It may also be a good idea to configure X11Parameters_ in slurm.conf_ so that xauth data on the compute node will be placed in ~/.Xauthority rather than in a temporary file under TmpFS::
+
+  X11Parameters=home_xauthority
+
+You may want to check bug_18492_ and bug_22034_ for an issue with X11 forwarding.
+
 .. _X11: https://en.wikipedia.org/wiki/X_Window_System
+.. _X11Parameters: https://slurm.schedmd.com/slurm.conf.html#OPT_X11Parameters
+.. _bug_22034: https://support.schedmd.com/show_bug.cgi?id=22034
+.. _bug_18492: https://support.schedmd.com/show_bug.cgi?id=18492
 
 Bash command completion for Slurm
 ==================================
