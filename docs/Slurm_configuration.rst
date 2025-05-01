@@ -297,9 +297,11 @@ From the scontrol_ man-page about the *reconfigure* option:
 * **New:** Starting in 23.11, this command operates by creating new processes for the daemons, then **passing control to the new processes**
   when or if they start up successfully.
   This allows it to gracefully catch configuration problems and keep running with the previous configuration if there is a problem.
-  This will not be able to change the daemons' listening TCP port settings or authentication mechanism.
+  This will not be able to change the daemons' listening TCP_ port settings or authentication mechanism.
 
 *  The slurmctld_ daemon and all slurmd_ daemons must be **restarted** if **nodes are added to or removed from the cluster**.
+
+.. _TCP: https://en.wikipedia.org/wiki/Transmission_Control_Protocol
 
 Adding nodes
 ............
@@ -1498,8 +1500,8 @@ For example, to launch an interactive job and get a shell with srun_ on the comp
 
 .. _use_interactive_step: https://slurm.schedmd.com/faq.html#prompt
 
-Export an X11 display
----------------------
+Export an X11_ display
+-----------------------
 
 You can use the X11_ display feature.
 It is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_,
@@ -1517,7 +1519,10 @@ rather than in a temporary file under TmpFS (see job_container_tmpfs_)::
 
   X11Parameters=home_xauthority
 
-You may want to check bug_18492_ and bug_22034_ for an issue with X11 forwarding.
+You may want to check bug_18492_ and bug_22034_ for an issue with X11_ forwarding.
+
+Note that X11_ uses TCP_ as its transport protocol.
+The well known TCP_ ports for X11_ are 6000-6063: typically the port number used is 6000 plus the server/display number. 
 
 .. _X11: https://en.wikipedia.org/wiki/X_Window_System
 .. _X11Parameters: https://slurm.schedmd.com/slurm.conf.html#OPT_X11Parameters
@@ -1862,7 +1867,7 @@ As a test you may stop the firewalld_ service temporarily.
 If the login node runs the firewalld_ service,
 the configuration must add the following IP-addresses to the trusted_ zone:
 
-* The slurmctld_ node IP-address (example: 1.2.3.4/32)
+* The slurmctld_ node IP-address with a /32 subnet (example: 1.2.3.4/32)
 * The compute nodes' subnet IP-addresses (example: 10.2.0.0/16)
 
 For example, the following commands may be used::
