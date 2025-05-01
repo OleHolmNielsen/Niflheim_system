@@ -1502,7 +1502,11 @@ Export an X11 display
 ---------------------
 
 You can use the X11_ display feature.
-It is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_.
+It is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_,
+for example::
+
+  PrologFlags = Contain,X11
+
 Then you can use this salloc_ parameter::
 
   salloc --x11 <other_options>
