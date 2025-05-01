@@ -1856,8 +1856,30 @@ Login node firewall
 To begin with a **login node** doesn't need any special firewall rules because no Slurm_ daemons should be running on login nodes.
 However, if a login node should be able to launch **interactive jobs** with Slurm_ further configuration is required.
 
-The login node's firewall must be open on **all ports** from the compute nodes' subnet.
+The login node's firewall must be open on **all ports** from the compute nodes' subnet as well as from the slurmctld_ node IP-address.
 As a test you may stop the firewalld_ service temporarily.
+
+If the login node runs the firewalld_ service,
+the configuration must add the following IP-addresses to the trusted_ zone:
+
+* The slurmctld_ node IP-address (example: 1.2.3.4/32)
+* The compute nodes' subnet IP-addresses (example: 10.2.0.0/16)
+
+For example, the following commands may be used::
+
+  firewall-cmd --permanent --zone=trusted --add-source=1.2.3.4/32
+  firewall-cmd --permanent --zone=trusted --add-source=10.2.0.0/16
+  firewall-cmd --reload 
+
+List the trusted_ zone by::
+
+  firewall-cmd --zone=trusted --list-all
+  trusted (active)
+    target: ACCEPT
+    icmp-block-inversion: no
+    interfaces:
+    sources: 1.2.3.4/32 10.2.0.0/16 
+    ....
 
 **Warning:** The srun_ command only works if the login node can:
 
@@ -1865,6 +1887,7 @@ As a test you may stop the firewalld_ service temporarily.
 * Connect to the Compute nodes port 6818.
 * Resolve the DNS name of the compute nodes.
 
+.. _trusted: https://firewalld.org/documentation/zone/predefined-zones.html
 .. _srun: https://slurm.schedmd.com/srun.html
 
 .. _firewall-between-slurmctld-and-slurmdbd:
