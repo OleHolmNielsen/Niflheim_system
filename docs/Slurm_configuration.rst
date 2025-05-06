@@ -1504,8 +1504,8 @@ For example, to launch an interactive job and get a shell with srun_ on the comp
 Export an X11_ display
 -----------------------
 
-You can use the X11_ display feature.
-It is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_,
+In an interactive job you may use the X11_ remote display feature for graphical tools.
+The X11_ display is enabled by setting `PrologFlags=X11 <https://slurm.schedmd.com/slurm.conf.html#OPT_X11>`_ in slurm.conf_,
 for example::
 
   PrologFlags = Contain,X11
