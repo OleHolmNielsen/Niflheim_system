@@ -1482,7 +1482,8 @@ See also the :ref:`login_node_firewall` section.
 Interactive job configuration
 -------------------------------
 
-If a login node should be able to launch **interactive jobs** with Slurm_ some configuration is required:
+If you **optionally** wish that a login node should be able to launch **interactive jobs** with Slurm_,
+some additional configuration is required:
 
 1. The slurm.conf_ launch parameter use_interactive_step_ must be configured::
 
@@ -1878,7 +1879,7 @@ For example, the following commands may be used::
 
 List the trusted_ zone by::
 
-  firewall-cmd --zone=trusted --list-all
+  firewall-cmd --permanent --zone=trusted --list-all
   trusted (active)
     target: ACCEPT
     icmp-block-inversion: no
