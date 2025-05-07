@@ -547,7 +547,7 @@ This can potentially make the slurmctld_ unresponsive and therefore affect the e
 
 The ability to do ``RPC rate limiting`` on a per-user basis is a new feature with Slurm_ 23.02.
 It acts as a virtual bucket of tokens that users consume with *Remote Procedure Calls* (RPC_).
-The ``RPC logging frequency`` (`rl_log_freq`) is a new feature with Slurm_ 23.11.
+The ``RPC logging frequency`` (rl_log_freq_) is a new feature with Slurm_ 23.11.
 
 Enable RPC rate limiting in slurm.conf_ by adding rl_enable_ and other parameters, for example::
 
@@ -563,7 +563,7 @@ You can define:
 * the rate at which new tokens are added with ``rl_refill_rate``,
 * the frequency with which tokens are refilled with ``rl_refill_period``
 * and the number of entities to track with ``rl_table_size``.
-* New in 23.11: ``rl_log_freq`` option to limit the number of *RPC limit exceeded...* messages that are logged. 
+* New in 23.11: rl_log_freq_ option to limit the number of *RPC limit exceeded...* messages that are logged. 
 
 When this is enabled you may find lines in ``slurmctld.log`` such as::
 
@@ -576,6 +576,7 @@ We have written a small script sratelimit_ for summarizing such log entries.
 .. _bug_17835: https://bugs.schedmd.com/show_bug.cgi?id=17835
 .. _bug_18067: https://bugs.schedmd.com/show_bug.cgi?id=18067
 .. _rl_enable: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_enable
+.. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq
 
 Reboot option
 -------------
