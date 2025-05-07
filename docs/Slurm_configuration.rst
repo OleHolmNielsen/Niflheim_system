@@ -576,7 +576,7 @@ We have written a small script sratelimit_ for summarizing such log entries.
 .. _bug_17835: https://bugs.schedmd.com/show_bug.cgi?id=17835
 .. _bug_18067: https://bugs.schedmd.com/show_bug.cgi?id=18067
 .. _rl_enable: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_enable
-.. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq
+.. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq=
 
 Reboot option
 -------------
