@@ -212,9 +212,10 @@ Additional switch configurations
     setSystemName
     showNodeDesc
 
-* To set the timezone::
+* To set the timezone offset in hours relative to GMT::
 
     timeZoneConf [<offset>]
+    timeZoneConf 1      # Example
 
   <offset> :time offset in relation to GMT.
 
@@ -234,7 +235,7 @@ Additional switch configurations
 
     time -S 192.38.82.136 # Example
 
-* Change the logged in user's password::
+* Change the logged in user's password (default password for admin is **adminpass**)::
 
     passwd
 
@@ -485,8 +486,8 @@ Assume that the firmware files are stored in the directory ``pub/OmniPath``.
 On a Managed switch's CLI interface you can configure download from the FTP server's IP-address (10.5.128.3 in this example)::
 
   fwversion   # Display fw versions
-  fwSetUpdateParams -c management -h 10.5.128.3 -d pub/OmniPath -f STL1.q7.10.8.3.0.4.spkg
-  fwSetUpdateParams -c management -f STL1.q7.10.8.3.0.4.spkg # Update only the file name
+  fwSetUpdateParams -c management -h 10.5.128.4 -d pub/OmniPath -f STL1.q7.10.8.5.0.3.spkg
+  fwSetUpdateParams -c management -f STL1.q7.10.8.5.0.3.spkg # Update only the file name
   fwShowUpdateParams
   fwUpdate
 
