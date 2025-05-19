@@ -69,6 +69,8 @@ Documentation from SchedMD_ about Slurm_:
 
 Documentation from other sources:
 
+* `High Performance Computing Modern: Systems and Practices. Second Edition (2025) <https://www.sciencedirect.com/book/9780128230350/high-performance-computing>`_,
+  `Chapter 7 - The Essential SLURM: Resource Management <https://www.sciencedirect.com/science/article/abs/pii/B9780128230350000079>`_.
 * `LLNL Slurm User Manual <https://hpc.llnl.gov/banks-jobs/running-jobs/slurm-user-manual>`_.
 * `CECI Slurm FAQ <https://www.ceci-hpc.be/slurm_faq.html>`_.
 * `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutorial.html>`_.
