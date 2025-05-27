@@ -1794,9 +1794,13 @@ Slurm can be configured to support topology-aware resource allocation to optimiz
 
 Check consistency of ``/etc/slurm/topology.conf`` with nodelist in ``/etc/slurm/slurm.conf`` using the checktopology_ tool.
 
+The exist tools that can output a ``topology.conf`` file by discovering the network, see the Configuration_generators_ section in the manual.
+
+
 .. _Topology_Guide: https://slurm.schedmd.com/topology.html
 .. _topology.conf: https://slurm.schedmd.com/topology.conf.html
 .. _checktopology: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
+.. _Configuration_generators: https://slurm.schedmd.com/topology.html#config_generators
 
 Configure firewall for Slurm daemons
 ====================================
