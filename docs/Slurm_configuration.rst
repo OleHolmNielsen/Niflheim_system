@@ -1813,6 +1813,9 @@ see the Configuration_generators_ section in the topology.conf_ manual page.
   The opa2slurm_ command must be executed by *root* to read the :ref:`OmniPath` information.
 
 * For Infiniband_ networks the slurmibtopology_ tool is recommended.
+  Install some required packages from the OS::
+
+    dnf install infiniband-diags
 
 .. _Topology_Guide: https://slurm.schedmd.com/topology.html
 .. _topology.conf: https://slurm.schedmd.com/topology.conf.html
