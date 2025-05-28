@@ -1796,11 +1796,24 @@ Check consistency of ``/etc/slurm/topology.conf`` with nodelist in ``/etc/slurm/
 
 The exist tools that can output a ``topology.conf`` file by discovering the network, see the Configuration_generators_ section in the manual.
 
+* The opa2slurm_ can auto-generate a Slurm ``topology.conf`` file given the OmniPath_ network topology retrieved from a specific HFI port.
+  Some required packages from the OS are::
+
+    dnf install opa-libopamgt opa-libopamgt-devel cmake
+
+  Build opa2slurm_ with::
+
+    cmake3 ..
+    make
+    make install
+
+  The opa2slurm_ command must be executed by *root* to read the OmniPath_ information.
 
 .. _Topology_Guide: https://slurm.schedmd.com/topology.html
 .. _topology.conf: https://slurm.schedmd.com/topology.conf.html
 .. _checktopology: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
 .. _Configuration_generators: https://slurm.schedmd.com/topology.html#config_generators
+.. _opa2slurm: https://gitlab.com/jtfrey/opa2slurm
 
 Configure firewall for Slurm daemons
 ====================================
