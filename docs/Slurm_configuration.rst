@@ -1794,14 +1794,15 @@ Slurm can be configured to support topology-aware resource allocation to optimiz
 
 Check consistency of ``/etc/slurm/topology.conf`` with nodelist in ``/etc/slurm/slurm.conf`` using the checktopology_ tool.
 
-The exist tools that can output a ``topology.conf`` file by discovering the network, see the Configuration_generators_ section in the manual.
+There exists tools that can create a ``topology.conf`` file by discovery of the network,
+see the Configuration_generators_ section in the topology.conf_ manual page.
 
-* For :ref:`OmniPath` the tool opa2slurm_ can auto-generate a Slurm ``topology.conf`` file.
-  Some required packages from the OS are::
+* For :ref:`OmniPath` the opa2slurm_ tool is recommended.
+  Install some required packages from the OS::
 
     dnf install opa-libopamgt opa-libopamgt-devel cmake
 
-  Build opa2slurm_ with::
+  Then build opa2slurm_ with::
 
     mkdir build
     cd build
@@ -1811,7 +1812,7 @@ The exist tools that can output a ``topology.conf`` file by discovering the netw
 
   The opa2slurm_ command must be executed by *root* to read the :ref:`OmniPath` information.
 
-* For Infiniband networks you can use the tool slurmibtopology_.
+* For Infiniband_ networks the slurmibtopology_ tool is recommended.
 
 .. _Topology_Guide: https://slurm.schedmd.com/topology.html
 .. _topology.conf: https://slurm.schedmd.com/topology.conf.html
