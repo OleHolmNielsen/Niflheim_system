@@ -1811,11 +1811,14 @@ The exist tools that can output a ``topology.conf`` file by discovering the netw
 
   The opa2slurm_ command must be executed by *root* to read the :ref:`OmniPath` information.
 
+* For Infiniband networks you can use the tool slurmibtopology_.
+
 .. _Topology_Guide: https://slurm.schedmd.com/topology.html
 .. _topology.conf: https://slurm.schedmd.com/topology.conf.html
 .. _checktopology: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/nodes
 .. _Configuration_generators: https://slurm.schedmd.com/topology.html#config_generators
 .. _opa2slurm: https://gitlab.com/jtfrey/opa2slurm
+.. _slurmibtopology: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/slurmibtopology
 
 Configure firewall for Slurm daemons
 ====================================
