@@ -1803,6 +1803,8 @@ The exist tools that can output a ``topology.conf`` file by discovering the netw
 
   Build opa2slurm_ with::
 
+    mkdir build
+    cd build
     cmake3 ..
     make
     make install
