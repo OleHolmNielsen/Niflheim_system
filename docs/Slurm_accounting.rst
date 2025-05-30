@@ -211,7 +211,7 @@ When either adding or modifying a user, the following sacctmgr_ options are avai
 Dump and load Slurm association data
 ......................................
 
-sacctmgr_ has the capability to load and dump Slurm association data to and from a file, see the sacctmgr_ manual section
+The sacctmgr_ command can be used to load and dump Slurm_ association data to and from a file, see the manual section
 `FLAT FILE DUMP AND LOAD <https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD>`_.
 This method can easily add a new cluster or copy an existing cluster's associations into a new cluster with similar accounts.
 
