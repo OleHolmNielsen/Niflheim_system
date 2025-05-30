@@ -76,7 +76,7 @@ Consider installing 2 disk drives and run them in a RAID-1 mirrored configuratio
 Install slurmdbd package
 ========================
 
-Install the slurm database RPM on the database-only (slurmdbd service) node::
+Install the slurm database RPM on the database-only (slurmdbd_ service) node::
 
   export VER=23.11.8-1  # Use the latest version
   dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm
@@ -196,7 +196,7 @@ You can check the current setting in MySQL like so::
 
 See also Bug_2457_:
 
-* The innodb_buffer_pool_size_ can have a huge impact - we'd recommend setting this as high as half the RAM available on the slurmdbd server.
+* The innodb_buffer_pool_size_ can have a huge impact - we'd recommend setting this as high as half the RAM available on the slurmdbd_ server.
 
 .. _Bug_2457: https://bugs.schedmd.com/show_bug.cgi?id=2457
 .. _innodb_buffer_pool_size: https://mariadb.com/kb/en/innodb-buffer-pool/
@@ -525,7 +525,7 @@ You must first create an empty backup file::
 
 The script is also available in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/database.
 
-Using ``mysqldump --single-transaction`` is recommended by SchedMD to avoid race conditions when slurmdbd is being run while taking the MySQL dump, see
+Using ``mysqldump --single-transaction`` is recommended by SchedMD to avoid race conditions when slurmdbd_ is being run while taking the MySQL dump, see
 https://bugs.schedmd.com/show_bug.cgi?id=10295#c18
 
 Testing the script::
