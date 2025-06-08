@@ -266,7 +266,9 @@ E-mail notification setup
 
 The slurm.conf_ variables ``MailProg`` and ``MailDomain`` determine the delivery of E-mail messages from Slurm_, see the manual page:
 
-* ``MailProg``: Fully qualified pathname to the program used to send email per user request.  The default value is "/bin/mail" (or "/usr/bin/mail" if "/bin/mail" does not exist but "/usr/bin/mail" does exist).  The program is  called  with  arguments suitable for the default mail command, however additional information about the job is passed in the form of environment variables.
+* ``MailProg``: Fully qualified pathname to the program used to send email per user request.
+  The default value is ``/bin/mail`` (or ``/usr/bin/mail`` if ``/bin/mail`` does not exist but ``/usr/bin/mail`` does exist).
+  The program is  called  with  arguments suitable for the default mail command, however additional information about the job is passed in the form of environment variables.
 
 You may alternatively want to use ``smail`` from the ``slurm-contribs`` RPM package by setting::
 
