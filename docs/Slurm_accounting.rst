@@ -456,9 +456,6 @@ This allows users to become aware if they are wasting resources.
 
 .. _bug_1611: https://bugs.schedmd.com/show_bug.cgi?id=1611
 
-Note: You may like to copy the updated ``smail`` from https://github.com/OleHolmNielsen/Slurm_tools/tree/master/smail to add the cluster name to mail headers.
-This is included in Slurm_ 17.11, but make sure to get the bugfix in 17.11.6.
-
 The ``smail`` utility is invoked automatically to process end-of-job notifications if you add the following to slurm.conf_::
 
   MailProg=/usr/bin/smail
