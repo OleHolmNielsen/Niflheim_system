@@ -413,6 +413,8 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
 
     sacctmgr show RunawayJobs
 
+  Note: The user **must** respond ``y`` or ``n`` for every job reported, and non-terminal input may cause an infinite loop! 
+
 * List of database transactions that have occurred during a given time period::
 
     sacctmgr show transaction

@@ -616,7 +616,9 @@ Pay attention to these statements:
   although it is recommended to upgrade as soon as possible.
 * The following command can report current jobs that have been orphaned on the local cluster and are now runaway::
 
-    sacctmgr show runawayjobs
+    sacctmgr show RunawayJobs
+
+  Note: The user **must** respond ``y`` or ``n`` for every job reported, and non-terminal input may cause an infinite loop! 
 
 Regarding the Slurm_ database, also make sure to:
 
