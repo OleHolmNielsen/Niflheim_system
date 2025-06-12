@@ -316,6 +316,10 @@ Configure some of the slurmdbd.conf_ variables::
   StoragePass=some_pass    # The above defined database password, change it for your site!
   StorageLoc=slurm_acct_db
 
+The slurmdbd_ configuration can be printed by the command::
+
+  sacctmgr show configuration
+
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 
 Setting database purge parameters
