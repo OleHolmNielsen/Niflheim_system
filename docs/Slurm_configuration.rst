@@ -224,7 +224,10 @@ If AccountingStorageType_ is omitted, or set to the obsolete value *accounting_s
 then account records are not maintained, meaning that anything related to user accounts will not work!
 See also a discussion in bug_21398_.
 
+There are a number of optional AccountingStoreFlags_ with fields that the slurmctld_ sends to the accounting database.
+
 .. _AccountingStorageType: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageType
+.. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
 .. _bug_21398: https://support.schedmd.com/show_bug.cgi?id=21398
 
 Starting slurm daemons at boot time
