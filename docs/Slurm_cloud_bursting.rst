@@ -836,7 +836,7 @@ there are some additional network configurations which you need to consider:
 5. Set up IP routing from on-premise servers and compute nodes to the cloud nodes as described in https://wiki.fysik.dtu.dk/it/Libreswan_IPsec_VPN#route-ip-traffic-via-the-vpn-tunnel.
 
 .. _DNS: https://en.wikipedia.org/wiki/Domain_Name_System
-.. _resolv.conf: https://en.wikipedia.org/wiki/Resolv.conf
+.. _resolv.conf: https://linux.die.net/man/5/resolv.conf
 .. _hostnamectl: https://www.redhat.com/sysadmin/set-hostname-linux
 .. _SMTP: https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
 .. _Sendmail: https://en.wikipedia.org/wiki/Sendmail
