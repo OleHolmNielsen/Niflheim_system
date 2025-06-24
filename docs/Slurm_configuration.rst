@@ -102,11 +102,18 @@ Lookup the SRV_record_ by either of these commands::
   dig +short -t SRV -n _slurmctld._tcp.`dnsdomainname`
   host -t SRV _slurmctld._tcp.`dnsdomainname`
 
+where the FQDN_ name given by the ``dnsdomainname`` command is appended for DNS resolution.
+You can use the short name without the need for the FQDN_ name if this option is added to the resolv.conf_ file (see the manual page)::
+
+  options ndots:2
+
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
 .. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
 .. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
+.. _FQDN: https://en.wikipedia.org/wiki/Fully_qualified_domain_name
+.. _resolv.conf: https://linux.die.net/man/5/resolv.conf
 
 Add login and submit nodes to slurm.conf
 ........................................
