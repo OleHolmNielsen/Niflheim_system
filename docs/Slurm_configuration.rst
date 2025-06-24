@@ -103,7 +103,8 @@ Lookup the SRV_record_ by either of these commands::
   host -t SRV _slurmctld._tcp.`dnsdomainname`
 
 where the FQDN_ name given by the ``dnsdomainname`` command is appended for DNS resolution.
-You can use the short name without the need for the FQDN_ name if this option is added to the resolv.conf_ file (see the manual page)::
+You can use the short name without the need for the FQDN_ name if this option
+is **added manually** to the resolv.conf_ file (see the manual page)::
 
   options ndots:2
 
