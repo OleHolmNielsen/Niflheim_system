@@ -414,7 +414,7 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
     sacctmgr show RunawayJobs
 
   Note: The user **must** respond ``y`` or ``n`` for every job reported,
-  and non-terminal input may cause an infinite loop for Slurm prior to 25.05.1 (see bug_22951_) ! 
+  and non-terminal input may cause an infinite loop for Slurm_ prior to 25.05.1 (see bug_22951_) ! 
 
 * List of database transactions that have occurred during a given time period::
 
@@ -428,7 +428,7 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
 
     sacctmgr show associations tree
 
-.. _bug_22951: https://support.schedmd.com/show_bug.cgi?id=22951
+.. _bug_22951: https://support.schedmd.com/show_bug.cgi?id=22951#c5
 
 Parseable output
 ................
