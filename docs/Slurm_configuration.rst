@@ -103,7 +103,7 @@ and lookup the SRV_record_ by the dig_ or host_ commands::
   host -N 2 -t SRV _slurmctld._tcp
 
 Here we use the ``ndots=2`` to request a relative (non-absolute) DNS lookup.
-It is also possible to specify explicitly the DNS domainname::
+It is also possible to append the dnsdomainname_ value to lookup the complete FQDN_ name::
 
   dig +short -t SRV -n _slurmctld._tcp.`dnsdomainname`
   host -t SRV _slurmctld._tcp.`dnsdomainname`
@@ -117,6 +117,7 @@ It is also possible to specify explicitly the DNS domainname::
 .. _resolv.conf: https://linux.die.net/man/5/resolv.conf
 .. _dig: https://linux.die.net/man/1/dig
 .. _host: https://linux.die.net/man/1/host
+.. _dnsdomainname: https://linux.die.net/man/1/hostname
 
 Add login and submit nodes to slurm.conf
 ........................................
