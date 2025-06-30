@@ -428,7 +428,7 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
 
     sacctmgr show associations tree
 
-.. _bug_22951: https://support.schedmd.com/show_bug.cgi?id=22951#c5
+.. _bug_22951: https://support.schedmd.com/show_bug.cgi?id=22951#c17
 
 Parseable output
 ................
