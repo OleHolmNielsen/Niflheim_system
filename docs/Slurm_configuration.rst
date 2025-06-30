@@ -97,16 +97,16 @@ To verify the DNS setup, install these packages with tools required below::
 
   dnf install bind-utils hostname
 
-Lookup the SRV_record_ by either of these commands::
+and lookup the SRV_record_ by the dig_ or host_ commands::
+
+  dig +short +search +ndots=2 -t SRV -n _slurmctld._tcp
+  host -N 2 -t SRV _slurmctld._tcp
+
+Here we use the ``ndots=2`` to request a relative (non-absolute) DNS lookup.
+It is also possible to specify explicitly the DNS domainname::
 
   dig +short -t SRV -n _slurmctld._tcp.`dnsdomainname`
   host -t SRV _slurmctld._tcp.`dnsdomainname`
-
-where the FQDN_ name given by the ``dnsdomainname`` command is appended for DNS resolution.
-You can use the short name without the need for the FQDN_ name if this option
-is **added manually** to the resolv.conf_ file (see the manual page)::
-
-  options ndots:2
 
 .. _configless: https://slurm.schedmd.com/configless_slurm.html
 .. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
@@ -115,6 +115,8 @@ is **added manually** to the resolv.conf_ file (see the manual page)::
 .. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 .. _FQDN: https://en.wikipedia.org/wiki/Fully_qualified_domain_name
 .. _resolv.conf: https://linux.die.net/man/5/resolv.conf
+.. _dig: https://linux.die.net/man/1/dig
+.. _host: https://linux.die.net/man/1/host
 
 Add login and submit nodes to slurm.conf
 ........................................
