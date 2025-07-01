@@ -102,7 +102,7 @@ and lookup the SRV_record_ by the dig_ or host_ commands::
   dig +short +search +ndots=2 -t SRV -n _slurmctld._tcp
   host -N 2 -t SRV _slurmctld._tcp
 
-Here we use the ``ndots=2`` to request a relative (non-absolute) DNS lookup.
+Here we use the ``ndots=2`` to request a relative (non-absolute) DNS lookup of ``_slurmctld._tcp``.
 It is also possible to append the dnsdomainname_ value to lookup the complete FQDN_ name::
 
   dig +short -t SRV -n _slurmctld._tcp.`dnsdomainname`
