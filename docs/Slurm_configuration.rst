@@ -85,12 +85,12 @@ Testing configless setup
 ........................
 
 The slurmctld_ server information can preferably be provided in a DNS SRV_record_ for your DNS_zone_,
-pointing to port 6817 on your slurmctld_ server(s) and with a suggested Time_to_live_ (TTL) of 3600 seconds::
+pointing to port 6817 on your slurmctld_ server(s)::
 
   _slurmctld._tcp 3600 IN SRV 10 0 6817 slurm-backup
   _slurmctld._tcp 3600 IN SRV 0 0 6817 slurm-master
  
-Note: The value TTL=3600 could be any value at all,
+Note: The DNS record value TTL=3600 could be anything at all,
 because slurmd_ will only read the DNS SRV_record_ at initial startup and *never* thereafter, see bug_20462_.
 
 To verify the DNS setup, install these packages with tools required below::
