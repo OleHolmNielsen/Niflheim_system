@@ -93,7 +93,7 @@ pointing to port 6817 on your slurmctld_ server(s)::
 Note: The DNS record value TTL=3600 could be anything at all,
 because slurmd_ will only read the DNS SRV_record_ at initial startup and *never* thereafter, see bug_20462_.
 
-To verify the DNS setup, install these packages with tools required below::
+To verify the DNS setup, install these packages::
 
   dnf install bind-utils hostname
 
