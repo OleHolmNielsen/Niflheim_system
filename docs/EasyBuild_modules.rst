@@ -447,7 +447,6 @@ Restart the autofs_ service::
 
 Now the ``/etc/auto.home`` file is independent of CPU architecture, since this is in stead defined in ``/etc/sysconfig/autofs``.
 
-
 .. _automount: https://linuxconfig.org/how-to-configure-the-autofs-daemon-on-centos-7-rhel-7
 .. _autofs: https://wiki.archlinux.org/title/autofs
 
