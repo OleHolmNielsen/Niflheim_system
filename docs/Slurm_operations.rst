@@ -665,12 +665,14 @@ like ``down`` or ``drained`` nodes (but **not** ``draining`` nodes)::
 
   sacctmgr show event where node=XXX
 
-Optional flags to ``sacctmgr show event`` can be used to modify the database search, see *SPECIFICATIONS FOR EVENTS* in the sacctmgr_ manual page.
+Optional flags to ``sacctmgr show event`` can be used to modify the database search, see SPECIFICATIONS_FOR_EVENTS_ in the sacctmgr_ manual page.
 For example::
 
   sacctmgr show event where node=XXX All_Time
   sacctmgr show event where node=XXX Start=now-4weeks
   sacctmgr show event where node=XXX State=boot
+
+.. _SPECIFICATIONS_FOR_EVENTS: https://slurm.schedmd.com/sacctmgr.html#SECTION_SPECIFICATIONS-FOR-EVENTS
 
 Resume an offline node
 ----------------------
