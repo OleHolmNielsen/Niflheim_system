@@ -673,6 +673,7 @@ For example::
   sacctmgr show event where nodes=XXX Start=now-4weeks
   sacctmgr show event where nodes=XXX States=boot
   sacctmgr show event where nodes=XXX Format=NodeName,TimeStart,Duration,State,Reason
+  sacctmgr show event where nodes=XXX Format=NodeName,TimeStart,Duration,State,Reason%-40
 
 .. _SPECIFICATIONS_FOR_EVENTS: https://slurm.schedmd.com/sacctmgr.html#SECTION_SPECIFICATIONS-FOR-EVENTS
 .. _SHOW-EVENT-FORMAT-OPTIONS: https://slurm.schedmd.com/sacctmgr.html#SECTION_LIST/SHOW-EVENT-FORMAT-OPTIONS
