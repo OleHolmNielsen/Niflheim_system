@@ -657,6 +657,20 @@ Note the *STATE* column:
 
   Note that the suffix "*" identifies nodes that are presently not responding. 
 
+Listing node events
+---------------------------
+
+Use sacctmgr_ to list node events (like downed or draining nodes) that are stored in the Slurm_ database::
+
+  sacctmgr show event where node=XXX
+
+Optional flags to ``sacctmgr show event`` can be used to modify the database search, see *SPECIFICATIONS FOR EVENTS* in the sacctmgr_ manual page.
+For example::
+
+  sacctmgr show event where node=XXX All_Time
+  sacctmgr show event where node=XXX Start=now-4weeks
+  sacctmgr show event where node=XXX State=boot
+
 Resume an offline node
 ----------------------
 
