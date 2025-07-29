@@ -660,7 +660,8 @@ Note the *STATE* column:
 Listing node events
 ---------------------------
 
-Use sacctmgr_ to list node events (like down or drained nodes) that are stored in the Slurm_ database::
+Use sacctmgr_ to list node events that are stored in the Slurm_ database,
+like down or drained nodes (but **not** ``draining`` nodes)::
 
   sacctmgr show event where node=XXX
 
