@@ -100,6 +100,14 @@ Then install Lmod_ and prerequisite Lua_ packages::
 
 The minimum Lmod_ version is 6.5.1 as of EasyBuild_ 3.7.
 
+You should create soft-links to the Lmod_ profile files installed by the RPM package::
+
+  lmoddir=/usr/share/lmod/lmod/init
+  ln -s $lmoddir/profile /etc/profile.d/z00_lmod.sh
+  ln -s $lmoddir/cshrc /etc/profile.d/z00_lmod.csh
+
+See `Installing Lmod <https://lmod.readthedocs.io/en/latest/030_installing.html#installing-lmod>`_ for details.
+
 Using Lmod
 ----------
 
