@@ -401,8 +401,8 @@ We have found the following solutions:
 
   GCC version 4.9 or newer should be used in order to reveal processor codenames, since older GCC versions will output less informative names such as *core2*.
   Intel's *Skylake* processor is only recognized by GCC version 6 or newer.
-  On EL8 systems with processors from ~2020 and later one should use newer compilers from the RHEL Developer_Toolsets_ *Appstream* repository.
-  For example::
+  On EL8 systems with processors from ~2020 and later, one should use newer compilers from the RHEL Developer_Toolsets_ *Appstream* repository.
+  For example using GCC version 14::
 
     dnf install gcc-toolset-14
     /opt/rh/gcc-toolset-14/root/bin/gcc -march=native -Q --help=target | awk '$1=="-march=" {print $2}'
