@@ -404,8 +404,8 @@ We have found the following solutions:
   On EL8 systems with processors from ~2020 and later, one should use newer compilers from the RHEL Developer_Toolsets_ *Appstream* repository.
   For example using GCC version 14::
 
-    dnf install gcc-toolset-14
-    /opt/rh/gcc-toolset-14/root/bin/gcc -march=native -Q --help=target | awk '$1=="-march=" {print $2}'
+    # dnf install gcc-toolset-14
+    # /opt/rh/gcc-toolset-14/root/bin/gcc -march=native -Q --help=target | awk '$1=="-march=" {print $2}'
     sapphirerapids
 
   The output may be the Intel CPU codenames such as *broadwell, haswell* etc. 
