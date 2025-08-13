@@ -27,12 +27,9 @@ Download of software and documentation is available from CornelisNetworks_:
 
 * Download of OmniPath_software_ (free of charge, but registration is needed).
 
-There is a *Omni-Path User Group* OPUG_ for public discussions about OmniPath.
-
 .. _OPUG: https://www.psc.edu/user-resources/computing/omni-path-user-group
 .. _CornelisNetworks: https://www.cornelisnetworks.com/
 .. _OmniPath_software: https://customercenter.cornelisnetworks.com/#/login?returnUrl=%2Fcustomer%2Fassets%2Fsoftware-and-documentation%2Frelease
-
 
 OmniPath switches
 -----------------
