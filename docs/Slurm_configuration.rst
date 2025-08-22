@@ -56,6 +56,8 @@ Copy the HTML files to your $HOME directory, for example:
   mkdir $HOME/slurm/
   cp -rp /usr/share/doc/slurm-*/html $HOME/slurm/
 
+--------------------------------------------------------------------------
+
 .. _configless-slurm-setup:
 
 Configless Slurm setup
@@ -157,6 +159,8 @@ The simplest way to achieve this is described in bug_9832_:
 
 .. _bug_9832: https://bugs.schedmd.com/show_bug.cgi?id=9832
 
+--------------------------------------------------------------------------
+
 Delay start of slurmd until InfiniBand/Omni-Path network is up
 -----------------------------------------------------------------
 
@@ -197,6 +201,8 @@ An example file ``/etc/systemd/system/slurmd.service.d/override.conf`` file coul
 In this example the slurmd_ option ``-M`` locks ``slurmd`` in memory, and the slurmctld server name is given.
 See configless_ and the slurmd_ manual page.
 
+--------------------------------------------------------------------------
+
 Configurator for slurm.conf
 ---------------------------
 
@@ -222,6 +228,8 @@ In slurm.conf_ it's essential that the important spool directories and the slurm
 
 **NOTE:** These spool directories must be created manually and owned by user *slurm* (see below), as they are **not** part of the RPM installation.
 
+--------------------------------------------------------------------------
+
 Configure AccountingStorageType in slurm.conf
 ---------------------------------------------
 
@@ -241,6 +249,8 @@ for example ``job_script`` which stores the job's batch script.
 .. _AccountingStorageType: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageType
 .. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
 .. _bug_21398: https://support.schedmd.com/show_bug.cgi?id=21398
+
+--------------------------------------------------------------------------
 
 Starting slurm daemons at boot time
 -----------------------------------
@@ -276,6 +286,8 @@ If the daemon looks sane, type Control-C_ and start the service in the normal wa
 
 .. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
+--------------------------------------------------------------------------
+
 E-mail notification setup
 -------------------------
 
@@ -294,6 +306,8 @@ This will include some job statistics in the message.
 Another possibility is Goslmailer_ (*GoSlurmMailer*).
 
 .. _Goslmailer: https://github.com/CLIP-HPC/goslmailer
+
+--------------------------------------------------------------------------
 
 Reconfiguration of slurm.conf
 -----------------------------
@@ -351,6 +365,8 @@ However, such **future** nodes must not be members of any Slurm_ partition.
 .. _bug_3973: https://bugs.schedmd.com/show_bug.cgi?id=3973
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
+
+--------------------------------------------------------------------------
 
 Cgroup configuration
 --------------------
@@ -455,6 +471,8 @@ After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfi
 
 .. _bug_3874: https://bugs.schedmd.com/show_bug.cgi?id=3874
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
+
+--------------------------------------------------------------------------
 
 Node Health Check
 -----------------
@@ -583,6 +601,8 @@ Also, NHC 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://git
 
 Both bugs should be fixed in NHC 1.4.3 (when it becomes available).
 
+--------------------------------------------------------------------------
+
 RPC rate limiting
 ---------------------
 
@@ -623,6 +643,8 @@ We have written a small script sratelimit_ for summarizing such log entries.
 .. _rl_enable: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_enable
 .. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq=
 
+--------------------------------------------------------------------------
+
 Reboot option
 -------------
 
@@ -648,6 +670,8 @@ seem to be ignored for Slurm_ 16.05 until 17.02.3, see bug_3612_.
 
 .. _bug_3612: https://bugs.schedmd.com/show_bug.cgi?id=3612
 
+--------------------------------------------------------------------------
+
 Timeout options
 ---------------
 
@@ -667,11 +691,15 @@ If this timeout is reached, the node will also be **drained** with reason *batch
 .. _UnkillableStepProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepProgram
 .. _bug_3941: https://bugs.schedmd.com/show_bug.cgi?id=3941
 
+--------------------------------------------------------------------------
+
 ReturnToService option
 ----------------------
 
 The *ReturnToService* option in slurm.conf_ controls when a DOWN node will be returned to service, see slurm.conf_ and the FAQ 
 `Why is a node shown in state DOWN when the node has registered for service? <https://slurm.schedmd.com/faq.html#return_to_service>`_.
+
+--------------------------------------------------------------------------
 
 MaxJobCount limit
 -----------------
@@ -706,6 +734,8 @@ In addition, it may be a good idea to implement **MaxSubmitJobs** and **MaxJobs*
 
 .. _resource_limits: https://slurm.schedmd.com/resource_limits.html
 
+--------------------------------------------------------------------------
+
 Job arrays
 ----------
 
@@ -718,6 +748,8 @@ A slurm.conf_ configuration parameter controls the maximum job array size:
 Be mindful about the value of MaxArraySize as job arrays offer an easy way for users to submit large numbers of jobs very quickly.
 
 .. _job_arrays: https://slurm.schedmd.com/job_array.html
+
+--------------------------------------------------------------------------
 
 Requeueing of jobs
 ------------------
@@ -738,6 +770,8 @@ Use::
   sbatch --no-requeue or --requeue 
 
 to change the default behavior for individual jobs.
+
+--------------------------------------------------------------------------
  
 Power monitoring and management
 -------------------------------
@@ -990,6 +1024,8 @@ for example::
 
 The turbostat_ reads the model-specific registers (MSRs) ``/dev/cpu/CPUNUM/msr``, see ``man 4 msr``.
 
+--------------------------------------------------------------------------
+
 Power saving configuration
 ---------------------------
 
@@ -1001,6 +1037,8 @@ We describe the power_save_ configuration in the Slurm_cloud_bursting_ page sect
 
 .. _power_save: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
+
+--------------------------------------------------------------------------
 
 Slurm head server configuration
 ================================
