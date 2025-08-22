@@ -462,7 +462,35 @@ Node Health Check
 To insure the health status of Head node and compute nodes, install the *LBNL Node Health Check* (NHC_) package from LBL_.
 The NHC_ releases are in https://github.com/mej/nhc/releases/.
 
+Since NHC_ releases may be far behind, you can also download the NHC_dev_ branch in stead of a release.
+First install the Git_ package::
+
+  # dnf install git-core
+
+Download the NHC_dev_ branch (currently version 1.5) and follow these steps to create a source tar-ball::
+
+  $ git clone https://github.com/mej/nhc.git
+  $ cd nhc
+  $ git switch dev              # Switch to the 'dev' branch
+  $ git status                  # Check the status
+  $ grep nhc_version configure.ac       # Verify the 'dev' version
+  m4_define([nhc_version], [1.5])
+  $ ./autogen.sh                # Undocumented build requirement
+  $ cd ..
+  $ mv nhc lbnl-nhc-1.5         # Rename the source folder
+  $ tar czf lbnl-nhc-1.5.tar.gz lbnl-nhc-1.5
+
+To build an NHC_ RPM package from the tar-ball::
+
+  $ rpmbuild -ta lbnl-nhc-1.5.tar.gz
+
+The resulting RPM package may be::
+
+  ~/rpmbuild/RPMS/noarch/lbnl-nhc-1.5-0.82.gf8dc.el8.noarch.rpm
+
 .. _NHC: https://github.com/mej/nhc
+.. _NHC_dev: https://github.com/mej/nhc/tree/dev#
+.. _Git: https://en.wikipedia.org/wiki/Git
 .. _LBL: https://www.lbl.gov/
 
 It's simple to configure NHC_ Slurm integration, see the NHC_ page.
