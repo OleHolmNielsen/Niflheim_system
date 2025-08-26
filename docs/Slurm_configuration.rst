@@ -494,15 +494,13 @@ Download the NHC_dev_ branch (currently version 1.5) and follow these steps to c
   $ grep nhc_version configure.ac       # Verify the 'dev' version
   m4_define([nhc_version], [1.5])
   $ ./autogen.sh                # Undocumented build requirement
-  $ cd ..
-  $ mv nhc lbnl-nhc-1.5         # Rename the source folder
-  $ tar czf lbnl-nhc-1.5.tar.gz lbnl-nhc-1.5
+  $ make dist                   # Produces a tar-ball lbnl-nhc-1.5.tar.gz
 
 To build an NHC_ RPM package from the tar-ball::
 
   $ rpmbuild -ta lbnl-nhc-1.5.tar.gz
 
-The resulting RPM package may be::
+The resulting RPM package may be this version::
 
   ~/rpmbuild/RPMS/noarch/lbnl-nhc-1.5-0.82.gf8dc.el8.noarch.rpm
 
