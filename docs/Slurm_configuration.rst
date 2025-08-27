@@ -524,10 +524,10 @@ At our site we add the following lines in the NHC_ configuration file ``/etc/nhc
 .. code-block:: bash
   :caption: Example nhc.conf configuration 
 
-  * || NHC_RM=slurm
+  * || export NHC_RM=slurm
   # Flag df to list only local filesystems (omit NFS mounts)
-  * || DF_FLAGS="-Tkl"
-  * || DFI_FLAGS="-Til"
+  * || export DF_FLAGS="-Tkl"
+  * || export DFI_FLAGS="-Til"
   # Setting short hostname for compute nodes (default in our Slurm setup)
   *.nifl.fysik.dtu.dk || HOSTNAME=$HOSTNAME_S
   # Busy batch nodes may take a long time to run nhc
@@ -589,7 +589,7 @@ It may be necessary to force the NHC_ configuration file ``/etc/nhc/nhc.conf`` t
 
 .. code-block:: bash
 
-  * || NHC_RM=slurm
+  * || export NHC_RM=slurm
 
 because NHC (version 1.4.2) may autodetect ``NHC_RM=pbs`` if the file ``/usr/bin/pbsnodes`` is present (see `issue 20 <https://github.com/mej/nhc/issues/20>`_).
 
@@ -597,7 +597,7 @@ Also, NHC 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://git
 
   # check_ps_unauth_users
 
-Both bugs should be fixed in NHC 1.4.3 (when it becomes available).
+Both bugs should be fixed in NHC 1.4.3.
 
 --------------------------------------------------------------------------
 
