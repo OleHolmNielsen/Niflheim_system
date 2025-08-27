@@ -539,6 +539,8 @@ At our site we add the following lines in the NHC_ configuration file ``/etc/nhc
   # Check OmniPath/Infiniband link
   x*.nifl.fysik.dtu.dk  || check_hw_ib 100
 
+The ``export NHC_RM=slurm`` is merely a workaround currently required (August 2025), see issue_165_ and pr_168_.
+
 If you want to receive E-mail alerts from NHC_, you can add a crontab_ entry to execute the ``nhc-wrapper`` script, see the NHC_ page section *Periodic Execution*.
 
 For example, to execute the NHC_ check once per hour with a specified E-mail interval of 1 day, add this to the system's crontab_::
@@ -603,12 +605,17 @@ It may be necessary to force the NHC_ configuration file ``/etc/nhc/nhc.conf`` t
 
   * || export NHC_RM=slurm
 
-because NHC (version 1.4.2) may autodetect ``NHC_RM=pbs`` if the file ``/usr/bin/pbsnodes`` is present (see `issue 20 <https://github.com/mej/nhc/issues/20>`_).
+This issue still exists in NHC_ 1.5 "dev" version (August 2025), see issue_165_ and pr_168_.
 
-Also, NHC 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://github.com/mej/nhc/issues/15>`_),
+The NHC_ (version 1.4.2) may autodetect ``NHC_RM=pbs`` if the file ``/usr/bin/pbsnodes`` is present (see `issue 20 <https://github.com/mej/nhc/issues/20>`_).
+
+Also, NHC_ 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://github.com/mej/nhc/issues/15>`_),
 so you have to comment out any lines in ``nhc.conf`` calling ``check_ps_unauth_users``.
 
-Both bugs should be fixed in NHC 1.4.3.
+These two bugs should be fixed in NHC_ 1.4.3.
+
+.. _issue_165: https://github.com/mej/nhc/issues/165
+.. _pr_168: https://github.com/mej/nhc/pull/168
 
 --------------------------------------------------------------------------
 
