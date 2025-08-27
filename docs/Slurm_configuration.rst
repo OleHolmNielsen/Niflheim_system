@@ -524,7 +524,6 @@ This will execute NHC_ every 60 minutes on nodes in *ANY* states, see the slurm.
 There are other criteria for when to execute NHC_ as defined by HealthCheckNodeState in slurm.conf_: ALLOC, ANY, CYCLE, IDLE, MIXED.
 
 At our site we add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` for nodes in the domain *nifl.fysik.dtu.dk*::
-
   :caption: Example nhc.conf configuration 
 
   * || export NHC_RM=slurm
