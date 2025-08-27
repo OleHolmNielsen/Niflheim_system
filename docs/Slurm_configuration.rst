@@ -488,6 +488,7 @@ First install the Git_ package::
 Download the NHC_dev_ branch (currently version 1.5) and follow these steps to create a source tar-ball:
 
 .. code-block:: bash
+
   $ git clone https://github.com/mej/nhc.git
   $ cd nhc
   $ git switch dev              # Switch to the 'dev' branch
@@ -500,6 +501,7 @@ Download the NHC_dev_ branch (currently version 1.5) and follow these steps to c
 To build an NHC_ RPM package from the tar-ball:
 
 .. code-block:: bash
+
   $ rpmbuild -ta lbnl-nhc-1.5.tar.gz
 
 The resulting RPM package may be this version::
@@ -524,6 +526,7 @@ There are other criteria for when to execute NHC_ as defined by HealthCheckNodeS
 At our site we add the following lines in the NHC_ configuration file ``/etc/nhc/nhc.conf`` for nodes in the domain *nifl.fysik.dtu.dk*:
 
 .. code-block:: bash
+
   :caption: Example nhc.conf configuration 
 
   * || export NHC_RM=slurm
@@ -557,11 +560,13 @@ Download of DCGM_ requires membership of the Data Center GPU Manager (DCGM_) Pro
 Install the RPM by:
 
 .. code-block:: bash
+
   dnf install datacenter-gpu-manager-1.7.1-1.x86_64.rpm
 
 Run the NVVS_ tool:
 
 .. code-block:: bash
+
   nvvs -g -l /tmp/nvvs.log
 
 The (undocumented?) log file (-l) seems to be required.
@@ -577,11 +582,13 @@ Perhaps it may be useful in stead to check for the presence of the GPU devices w
 It seems that these device files do not get created automatically at reboot, but only if you run this (for example, in ``/etc/rc.local``):
 
 .. code-block:: bash
+
   /usr/bin/nvidia-smi
  
 The physical presence of Nvidia devices can be tested by this command:
 
 .. code-block:: bash
+
   $ lspci | grep NVIDIA
 
 .. _nvidia-healthmon: https://docs.nvidia.com/deploy/healthmon-user-guide/
