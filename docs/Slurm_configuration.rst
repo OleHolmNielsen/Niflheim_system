@@ -485,8 +485,9 @@ First install the Git_ package::
 
   # dnf install git-core
 
-Download the NHC_dev_ branch (currently version 1.5) and follow these steps to create a source tar-ball::
+Download the NHC_dev_ branch (currently version 1.5) and follow these steps to create a source tar-ball:
 
+.. code-block:: bash
   $ git clone https://github.com/mej/nhc.git
   $ cd nhc
   $ git switch dev              # Switch to the 'dev' branch
@@ -496,8 +497,9 @@ Download the NHC_dev_ branch (currently version 1.5) and follow these steps to c
   $ ./autogen.sh                # Undocumented build requirement
   $ make dist                   # Produces a tar-ball lbnl-nhc-1.5.tar.gz
 
-To build an NHC_ RPM package from the tar-ball::
+To build an NHC_ RPM package from the tar-ball:
 
+.. code-block:: bash
   $ rpmbuild -ta lbnl-nhc-1.5.tar.gz
 
 The resulting RPM package may be this version::
@@ -552,12 +554,14 @@ Unfortunately, it seems that Nvidia no longer offers the tool nvidia-healthmon_ 
 
 Nvidia has a new *Data Center GPU Manager* (DCGM_) suite of tools which includes NVIDIA Validation Suite (NVVS_).
 Download of DCGM_ requires membership of the Data Center GPU Manager (DCGM_) Program.
-Install the RPM by::
+Install the RPM by:
 
+.. code-block:: bash
   dnf install datacenter-gpu-manager-1.7.1-1.x86_64.rpm
 
-Run the NVVS_ tool::
+Run the NVVS_ tool:
 
+.. code-block:: bash
   nvvs -g -l /tmp/nvvs.log
 
 The (undocumented?) log file (-l) seems to be required.
@@ -570,13 +574,15 @@ Perhaps it may be useful in stead to check for the presence of the GPU devices w
 
   gpu* || check_file_test -c -r /dev/nvidia0 /dev/nvidia1 /dev/nvidia2 /dev/nvidia3
 
-It seems that these device files do not get created automatically at reboot, but only if you run this (for example, in ``/etc/rc.local``)::
+It seems that these device files do not get created automatically at reboot, but only if you run this (for example, in ``/etc/rc.local``):
 
+.. code-block:: bash
   /usr/bin/nvidia-smi
  
-The physical presence of Nvidia devices can be tested by this command::
+The physical presence of Nvidia devices can be tested by this command:
 
-  # lspci | grep NVIDIA
+.. code-block:: bash
+  $ lspci | grep NVIDIA
 
 .. _nvidia-healthmon: https://docs.nvidia.com/deploy/healthmon-user-guide/
 .. _DCGM: https://developer.nvidia.com/dcgm
@@ -593,9 +599,8 @@ It may be necessary to force the NHC_ configuration file ``/etc/nhc/nhc.conf`` t
 
 because NHC (version 1.4.2) may autodetect ``NHC_RM=pbs`` if the file ``/usr/bin/pbsnodes`` is present (see `issue 20 <https://github.com/mej/nhc/issues/20>`_).
 
-Also, NHC 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://github.com/mej/nhc/issues/15>`_), so you have to comment out any lines in ``nhc.conf`` calling::
-
-  # check_ps_unauth_users
+Also, NHC 1.4.2 has a bug for Slurm_ multi-node jobs (see `issue 15 <https://github.com/mej/nhc/issues/15>`_),
+so you have to comment out any lines in ``nhc.conf`` calling ``check_ps_unauth_users``.
 
 Both bugs should be fixed in NHC 1.4.3.
 
