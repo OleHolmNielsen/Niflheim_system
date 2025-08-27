@@ -483,7 +483,7 @@ The NHC_ releases are in https://github.com/mej/nhc/releases/.
 Since NHC_ releases may be far behind, you can also download the NHC_dev_ branch in stead of a release.
 First install the Git_ package::
 
-  # dnf install git-core
+  dnf install git-core
 
 Download the NHC_dev_ branch (currently version 1.5) and follow these steps to create a source tar-ball:
 
