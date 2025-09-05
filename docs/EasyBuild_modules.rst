@@ -408,7 +408,8 @@ We have found the following solutions:
    cpuid -1 | grep \(synth\)  
    (synth) = Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E5/B3/S3) {Golden Cove}, Intel 7
   
-* Ask the GCC compiler for the native architecture, for example::
+* **Not recommended:**
+  Ask the GCC compiler for the native architecture, for example::
 
     # module load GCC
     # gcc -march=native -Q --help=target | grep march | awk '{print $2}'
@@ -430,7 +431,8 @@ We have found the following solutions:
   The output may be the Intel CPU codenames such as *broadwell, haswell* etc. 
   See the CPU-specific Safe_CFLAGS_.
 
-* Use the command ``lscpu`` to display the *Model name* (or look into ``/proc/cpuinfo``).
+* Use the command ``lscpu`` to display the *Model name* (or look into ``/proc/cpuinfo``)
+  and lookup the CPU model from the manufacturer's homepage.
 
 As a convenience to normal users, the sysadmin may provide in ``/etc/profile.d/`` the scripts ``cpu_arch.sh``::
 
