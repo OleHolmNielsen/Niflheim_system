@@ -398,6 +398,8 @@ We have found the following solutions:
 
     dnf install cpuid
 
+  You can also download the latest RPM packages from the cpuid_ homepage.
+
   This command determines the CPU microarchitecture, for example::
 
    cpuid -1 | grep \(synth\)  
