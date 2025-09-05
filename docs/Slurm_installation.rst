@@ -405,7 +405,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
    Install prerequisite packages::
 
-     dnf install libevent-devel
+     dnf install libevent-devel python3-devel
 
    At the time of writing (Sep 2025) the recommended OpenPMIx_ version is 5.0.7 (not 5.0.8 or 6.x.y).
    Download the tar-ball::
