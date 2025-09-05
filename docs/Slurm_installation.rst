@@ -416,6 +416,13 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
      rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
 
+   Note: The ``configure`` script describes ``disable-per-user-config-files`` as follows::
+
+     Disable per-user configuration files, to save disk accesses during job start-up.
+     This is likely desirable for large jobs.
+     Note that this can also be achieved by environment variables at run-time.
+     (default: enabled)
+
    Two RPM packages will be built which you can install::
 
      dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
@@ -444,7 +451,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _OpenPMIx: https://github.com/openpmix/openpmix
-.. _OpenPMIx_documentation: https://docs.openpmix.org/en/latest/
+.. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
