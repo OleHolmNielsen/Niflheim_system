@@ -403,7 +403,7 @@ We have found the following solutions:
 
     rpmbuild --rebuild cpuid-20250513-1.src.rpm
 
-  This command determines the CPU microarchitecture, for example::
+  The cpuid_ command determines the CPU microarchitecture, for example::
 
    cpuid -1 | grep \(synth\)  
    (synth) = Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E5/B3/S3) {Golden Cove}, Intel 7
