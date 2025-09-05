@@ -393,7 +393,17 @@ A useful list of CPU-architectures is in the Safe_CFLAGS_ page.
 
 We have found the following solutions:
 
-* **Recommended:** Ask the GCC compiler for the native architecture, for example::
+* **Recommended:** 
+  Install the EPEL_ package cpuid_::
+
+    dnf install cpuid
+
+  This command determines the CPU microarchitecture, for example::
+
+   cpuid -1 | grep \(synth\)  
+   (synth) = Intel Xeon Scalable (4th Gen) Bronze/Silver/Gold/Platinum (Sapphire Rapids E5/B3/S3) {Golden Cove}, Intel 7
+  
+* Ask the GCC compiler for the native architecture, for example::
 
     # module load GCC
     # gcc -march=native -Q --help=target | grep march | awk '{print $2}'
@@ -407,6 +417,10 @@ We have found the following solutions:
     # dnf install gcc-toolset-14
     # /opt/rh/gcc-toolset-14/root/bin/gcc -march=native -Q --help=target | awk '$1=="-march=" {print $2}'
     sapphirerapids
+
+  **WARNING:** The Developer_Toolsets_ package pulls in the environment_modules_ package as a prerequisite!
+  The environment_modules_ overwrites the soft-links ``/etc/alternatives/modules.*`` and may therefore break Lmod_,
+  so it is recommended to **uninstall** Developer_Toolsets_ after use!
 
   The output may be the Intel CPU codenames such as *broadwell, haswell* etc. 
   See the CPU-specific Safe_CFLAGS_.
@@ -432,6 +446,8 @@ For example, users may choose to select CPU-specific module trees::
 
 .. _Safe_CFLAGS: https://wiki.gentoo.org/wiki/Safe_CFLAGS
 .. _Developer_Toolsets: https://developers.redhat.com/articles/2025/04/16/gcc-and-gcc-toolset-versions-rhel-explainer
+.. _environment_modules: https://modules.readthedocs.io/en/latest/
+.. _cpuid: http://www.etallen.com/cpuid.html
 
 Automounting the CPU architecture dependent modules directory
 -------------------------------------------------------------
