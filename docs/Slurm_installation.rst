@@ -373,6 +373,8 @@ Install the following packages from EPEL_::
 .. _Rocky_Linux_Repositories: https://wiki.rockylinux.org/rocky/repo/
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 
+.. _Optional_prerequisites:
+
 Optional prerequisites
 ........................
 
@@ -389,7 +391,36 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
       rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
 
-2. If you want to build the **Slurm REST API** daemon named slurmrestd_,
+2. OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
+   You should consult the current OpenPMIx_documentation_ in stead.
+
+   The Slurm_ MPI_UsersGuide_ has some important notes:
+
+   * NOTE: Since Slurm and PMIx lower than 4.x both provide libpmi[2].so libraries, we recommend you install both pieces of software in different locations.
+     Otherwise, these same libraries might end up being installed under standard locations like /usr/lib64 and the package manager would error out, reporting the conflict.
+
+   * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm is using, otherwise there could be authentication issues.
+     E.g. one PMIx compiled --with-munge while another compiled --without-munge (the default since PMIx 4.2.4).
+     A workaround which might work is to specify the desired security method adding "--mca psec native" to the cli or exporting PMIX_MCA_psec=native environment variable.
+
+   Install prerequisite packages::
+
+     dnf install libevent-devel
+
+   At the time of writing (Sep 2025) the recommended OpenPMIx_ version is 5.0.7 (not 5.0.8 or 6.x.y).
+   Download the tar-ball::
+
+     wget https://github.com/openpmix/openpmix/releases/download/v5.0.7/pmix-5.0.7.tar.bz2
+
+   and build RPM packages with these special flags which configure the use of Munge_ as recommended in MPI_UsersGuide_::
+
+     rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
+
+   Two RPM packages will be built which you can install::
+
+     dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
+
+3. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
 
      dnf install http-parser-devel json-c-devel libjwt-devel 
@@ -405,13 +436,16 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    
      dnf install jq
 
-3. For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
+4. For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
 
    * **Important**: The `libyaml` **must** be version >= 0.2.5, see bug_17673_,
      and EL9 provides this version.
      The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
+.. _OpenPMIx: https://github.com/openpmix/openpmix
+.. _OpenPMIx_documentation: https://docs.openpmix.org/en/latest/
+.. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
@@ -464,13 +498,17 @@ The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and 
 Build Slurm with optional features
 .......................................
 
-You may build Slurm_ packages including optional features:
+You may build Slurm_ packages including optional features as documented above in Optional_prerequisites_:
 
 * If you want to implement power saving as described in the Power_Saving_Guide_ then you can ensure that FreeIPMI_ gets built in by adding::
 
     rpmbuild <...> --with freeipmi
 
   This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see bug_17900_.
+
+* Build with PMIx (OpenPMIx_) support::
+
+    rpmbuild <...> --with pmix
 
 * If you want to build the **Slurm REST API** daemon named slurmrestd_ you must add::
 
