@@ -398,7 +398,10 @@ We have found the following solutions:
 
     dnf install cpuid
 
-  You can also download the latest RPM packages from the cpuid_ homepage.
+  You can also download the latest RPM packages from the cpuid_ homepage,
+  although you have to rebuild from the source package due to *glibc* mismatches, for example::
+
+    rpmbuild --rebuild cpuid-20250513-1.src.rpm
 
   This command determines the CPU microarchitecture, for example::
 
