@@ -4,7 +4,7 @@
 Omni-Path network fabric by Cornelis Networks
 =============================================
 
-The Niflheim_ cluster has a 100 Gbit/s Intel OmniPath high speed network fabric.
+The Niflheim_ cluster has a 100 Gbit/s Intel Omni-Path_ high speed network fabric.
 
 This page assumes a RHEL 8 Linux or EL8 clones system.
 Older archived versions of these pages with information related to CentOS 7 Linux may be found in the archive_ or in the v24.06 release of these pages.
@@ -27,6 +27,7 @@ Download of software and documentation is available from CornelisNetworks_:
 
 * Download of OmniPath_software_ (free of charge, but registration is needed).
 
+.. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
 .. _OPUG: https://www.psc.edu/user-resources/computing/omni-path-user-group
 .. _CornelisNetworks: https://www.cornelisnetworks.com/
 .. _OmniPath_software: https://customercenter.cornelisnetworks.com/#/login?returnUrl=%2Fcustomer%2Fassets%2Fsoftware-and-documentation%2Frelease
@@ -66,7 +67,7 @@ Here the PCIe device ID is 04:00.0, you determine it by::
 Software installation
 =====================
 
-OmniPath HFI adapter hardware is supported with OPA software 10.11 on compute nodes with the following Intel and AMD processors:
+Omni-Path_ HFI adapter hardware is supported with OPA software 10.11 on compute nodes with the following Intel and AMD processors:
 
 * Haswell_ (HSW, Xeon v3)
 * Broadwell_ (BDW, Xeon v4)
@@ -76,10 +77,10 @@ OmniPath HFI adapter hardware is supported with OPA software 10.11 on compute no
 * 2nd and 3rd Gen AMD EPYC Processors (Rome, Milan)
 
 Please note that older processors are **not supported**.
-However, the OmniPath adapter may well work on older Xeon servers, even though it's not officially supported by Intel.
-For example, we have tested OmniPath on an old *Sandy Bridge* server successfully.
+However, the Omni-Path_ adapter may well work on older Xeon servers, even though it's not officially supported by Intel.
+For example, we have tested Omni-Path_ on an old *Sandy Bridge* server successfully.
 
-Also note that **OmniPath software versions must be identical** on all compute nodes, or at most differ by 1 minor version (such as 10.6 and 10.5).  Documentation???
+Also note that **Omni-Path_ software versions must be identical** on all compute nodes, or at most differ by 1 minor version (such as 10.6 and 10.5).  Documentation???
 
 The following software installation packages are available for an Intel ® Omni-Path Fabric:
 
@@ -370,7 +371,7 @@ After the command has completed, attach the tgz file to your troubleshooting cas
 Intel PSM2 Sample Program
 =========================
 
-To verify the basic functionality of the OmniPath network, copy the *Intel® PSM2 Sample Program* code from the PDF documentation file 
+To verify the basic functionality of the Omni-Path_ network, copy the *Intel® PSM2 Sample Program* code from the PDF documentation file 
 *Intel® Performance Scaled Messaging 2 (PSM2) Programmer’s Guide* in Intel's *End User Publications* web page.
 We attach the file psm2-demo.c__ for convenience.
 
@@ -503,7 +504,7 @@ Then go to the IPoIB_ network configuration below.
 
 However, if you have:
 
-* Multiple Infiniband and/or OmniPath adapters, 
+* Multiple Infiniband and/or Omni-Path_ adapters, 
 * Multiple ports per adapter,
 * You want to control the device names in stead of the default ib0, ib1 etc.,
 
@@ -544,7 +545,7 @@ then you must configure the Infiniband devices carefully:
     ACTION=="add", SUBSYSTEM=="net", DRIVERS=="?*", ATTR{type}=="32", ATTR{address}=="?*70:10:6f:ff:ff:a0:74:72", NAME="mlx4_0ib1"
     ACTION=="add", SUBSYSTEM=="net", DRIVERS=="?*", ATTR{type}=="32", ATTR{address}=="?*00:11:75:01:01:7a:ff:df", NAME="hfi1_0ib0"
 
-  It is perfectly possible for OmniPath adapters to coexist with Mellanox adapters in this way.
+  It is perfectly possible for Omni-Path_ adapters to coexist with Mellanox adapters in this way.
 
 * You can force the IPoIB_ interfaces to be renamed without performing a reboot by removing the ib_ipoib kernel module and then reloading it as follows::
 
@@ -609,7 +610,7 @@ and display all network interfaces::
 
   ifconfig -a
 
-where the OmniPath and/or Infiniband interfaces should now be shown.
+where the Omni-Path_ and/or Infiniband interfaces should now be shown.
 
 Monitoring IPoIB interfaces
 ---------------------------
