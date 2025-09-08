@@ -393,6 +393,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
 2. OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
    You should consult the current OpenPMIx_documentation_ in stead.
+   There is an OpenPMIx_GitHub_ development project.
 
    The Slurm_ MPI_UsersGuide_ has some important notes:
 
@@ -467,6 +468,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _OpenPMIx: https://pmix.org/
 .. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
+.. _OpenPMIx_GitHub: https://github.com/openpmix/openpmix
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
 .. _removed_OPA_support: https://github.com/open-mpi/ompi/issues/13397#issuecomment-3258354734
