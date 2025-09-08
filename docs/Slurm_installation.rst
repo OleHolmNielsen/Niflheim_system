@@ -396,12 +396,14 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
    The Slurm_ MPI_UsersGuide_ has some important notes:
 
-   * NOTE: Since Slurm and PMIx lower than 4.x both provide libpmi[2].so libraries, we recommend you install both pieces of software in different locations.
-     Otherwise, these same libraries might end up being installed under standard locations like /usr/lib64 and the package manager would error out, reporting the conflict.
+   * NOTE: Since Slurm and PMIx lower than 4.x both provide ``libpmi[2].so`` libraries, we recommend you install both pieces of software in different locations.
+     Otherwise, these same libraries might end up being installed under standard locations like ``/usr/lib64`` and the package manager would error out, reporting the conflict.
+
+     Author's suggestion: Do not install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries.
 
    * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm is using, otherwise there could be authentication issues.
-     E.g. one PMIx compiled --with-munge while another compiled --without-munge (the default since PMIx 4.2.4).
-     A workaround which might work is to specify the desired security method adding "--mca psec native" to the cli or exporting PMIX_MCA_psec=native environment variable.
+     E.g. one PMIx compiled ``--with-munge`` while another compiled ``--without-munge`` (the default since PMIx 4.2.4).
+     A workaround which might work is to specify the desired security method adding ``--mca psec native`` to the cli or exporting ``PMIX_MCA_psec=native`` environment variable.
 
    Install prerequisite packages::
 
@@ -431,7 +433,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
        dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
-   * Enable Munge_ authentification as recommended in MPI_UsersGuide_.
+   * Enable Munge_ authentification as recommended in the MPI_UsersGuide_.
   
    * The ``per-user-config-files`` is disabled as described in the ``configure`` script::
 
