@@ -79,50 +79,19 @@ Useful sysadmin commands:
 MPI setup
 =========
 
-MPI use under Slurm depends upon the type of MPI being used, see MPI_and_UPC_Users_Guide_.
+MPI use under Slurm depends upon the type of MPI being used, see MPI_Users_Guide_.
 The current versions of Slurm and OpenMPI_ support task launch using the srun_ command, see the MPI_Guide_OpenMPI_.
 
-For PMIx_ please see the PMIx_Slurm_support_ page.
+For OpenPMIx_ please see the :ref:`Optional_prerequisites` page.
 
-
-.. _MPI_and_UPC_Users_Guide: https://slurm.schedmd.com/mpi_guide.html
-.. _MPI_Guide_OpenMPI: https://slurm.schedmd.com/mpi_guide.html#open_mpi
-.. _OpenMPI: https://www.open-mpi.org/
-.. _PMIx: https://pmix.org/
-.. _PMIx_Slurm_support: https://pmix.org/support/how-to/slurm-support/
-
-You must add these flags when building OpenMPI_::
- 
-  --with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr
-
-The Slurm RPM installs header files in ``/usr/include/slurm`` and libraries in ``/usr/lib64``.
-Using the OpenMPI tools, verify the installation of *slurm* as well as *pmi* modules, for example::
-
-  # ompi_info | egrep -i 'slurm|pmi'
-                  MCA db: pmi (MCA v2.0.0, API v1.0.0, Component v1.10.3)
-                 MCA ess: pmi (MCA v2.0.0, API v3.0.0, Component v1.10.3)
-                 MCA ess: slurm (MCA v2.0.0, API v3.0.0, Component v1.10.3)
-             MCA grpcomm: pmi (MCA v2.0.0, API v2.0.0, Component v1.10.3)
-                 MCA plm: slurm (MCA v2.0.0, API v2.0.0, Component v1.10.3)
-                 MCA ras: slurm (MCA v2.0.0, API v2.0.0, Component v1.10.3)
-              MCA pubsub: pmi (MCA v2.0.0, API v2.0.0, Component v1.10.3)
-
-Since Slurm provides both the PMI and PMI-2 interfaces, this advice in MPI_Guide_OpenMPI_ is important::
-
-  If the pmi2 support is enabled then the command line options '--mpi=pmi2' has to be specified on the srun command line. 
-
-Hence you must invoke srun_ like::
-
-  srun --mpi=pmi2
-
-It may alternatively be convenient to add this line to slurm.conf_::
+It may be convenient to add this line to slurm.conf_::
 
   MpiDefault=pmi2
 
-See the `FAQ: Running jobs under Slurm <https://www.open-mpi.org/faq/?category=slurm>`_
-and the *Process Management Interface* (PMI_) page.
-
-.. _PMI: https://www.open-mpi.org/projects/pmix/
+.. _MPI_Users_Guide: https://slurm.schedmd.com/mpi_guide.html
+.. _MPI_Guide_OpenMPI: https://slurm.schedmd.com/mpi_guide.html#open_mpi
+.. _OpenMPI: https://www.open-mpi.org/
+.. _OpenPMIx: https://github.com/openpmix/openpmix
 
 MPI locked memory
 -----------------
