@@ -438,7 +438,8 @@ and build RPM packages with these special flags::
 
 Notes:
 
-* Unsetting ``build_all_in_one_rpm`` will build separate RPM packages which you should install on all Slurm_ nodes::
+* Setting ``build_all_in_one_rpm`` to 0 will build separate RPM packages.
+  You should install these on all Slurm_ nodes::
 
     dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
