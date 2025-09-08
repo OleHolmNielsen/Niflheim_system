@@ -443,6 +443,9 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
        Note that this can also be achieved by environment variables at run-time.
        (default: enabled)
 
+   * The documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
+     so you should not try to use it.
+
 3. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
 
@@ -469,6 +472,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 .. _OpenPMIx: https://pmix.org/
 .. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
 .. _OpenPMIx_GitHub: https://github.com/openpmix/openpmix
+.. _issue_3611: https://github.com/openpmix/openpmix/issues/3611
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
 .. _removed_OPA_support: https://github.com/open-mpi/ompi/issues/13397#issuecomment-3258354734
