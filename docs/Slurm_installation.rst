@@ -434,11 +434,11 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
    Notes:
 
-   * Two separate RPM packages will be built which you should install on all Slurm_ nodes::
+   * Unsetting ``build_all_in_one_rpm`` will build separate RPM packages which you should install on all Slurm_ nodes::
 
        dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
-   * Enable Munge_ authentification as recommended in the MPI_UsersGuide_.
+   * The ``--with-munge`` enables Munge_ authentification as recommended in the MPI_UsersGuide_.
   
    * The ``per-user-config-files`` is disabled as described in the ``configure`` script::
 
@@ -447,7 +447,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
        Note that this can also be achieved by environment variables at run-time.
        (default: enabled)
 
-   * The documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
+   * A documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
      so you should not try to use it.
 
 -----------------------------------------------------------------------------
