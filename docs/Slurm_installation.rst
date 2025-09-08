@@ -407,25 +407,38 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
      dnf install libevent-devel python3-devel hwloc-devel
 
-   At the time of writing (Sep 2025) the recommended OpenPMIx_ version is 5.0.7 (not 5.0.8 or 6.x.y).
-   Download the tar-ball::
+   **WARNINGS:**
+   
+   * If your cluster employs Omni-Path_ fabrics,
+     the recommended OpenPMIx_ version is 5.0.7 and **not** the later 5.0.8 or 6.0.y versions!
+     The reason is that OpenPMIx_ had removed_OPA_support_ starting with version 5.0.8 due to the issues mentioned in this ticket.
+
+   * When using OpenMPI_v5.0_ you should be running Slurm_24.11.1_ (or later) due to this fix::
+
+       Inject OMPI_MCA_orte_precondition_transports when using PMIx.
+
+   Download the OpenPMIx_ tar-ball::
 
      wget https://github.com/openpmix/openpmix/releases/download/v5.0.7/pmix-5.0.7.tar.bz2
 
-   and build RPM packages with these special flags which configure the use of Munge_ as recommended in MPI_UsersGuide_::
+   and build RPM packages with these special flags::
 
      rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
 
-   Note: The ``configure`` script describes ``disable-per-user-config-files`` as follows::
+   Notes:
 
-     Disable per-user configuration files, to save disk accesses during job start-up.
-     This is likely desirable for large jobs.
-     Note that this can also be achieved by environment variables at run-time.
-     (default: enabled)
+   * Two separate RPM packages will be built which you should install on all Slurm_ nodes::
 
-   Two RPM packages will be built which you can install::
+       dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
-     dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
+   * Enable Munge_ authentification as recommended in MPI_UsersGuide_.
+  
+   * The ``per-user-config-files`` is disabled as described in the ``configure`` script::
+
+       Disable per-user configuration files, to save disk accesses during job start-up.
+       This is likely desirable for large jobs.
+       Note that this can also be achieved by environment variables at run-time.
+       (default: enabled)
 
 3. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
@@ -453,6 +466,10 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 .. _OpenPMIx: https://github.com/openpmix/openpmix
 .. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
+.. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
+.. _removed_OPA_support: https://github.com/open-mpi/ompi/issues/13397#issuecomment-3258354734
+.. _Slurm_24.11.1: https://github.com/SchedMD/slurm/blob/master/CHANGELOG/slurm-24.11.md#changes-in-slurm-24111
+.. _OpenMPI_v5.0: https://www.open-mpi.org/software/ompi/v5.0/
 .. _slurmrestd: https://slurm.schedmd.com/rest.html
 .. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
 .. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
