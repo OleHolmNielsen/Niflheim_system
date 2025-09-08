@@ -689,6 +689,8 @@ You must make sure that these prerequisites are satisfied:
 
 * The Munge_ service is running correctly.
 * The user passwd database contains all Slurm_ users.
+  This point is discussed in the Accounting_infrastructure_ page:
+  *Whether you use any authentication module or not you will need to have a way for the SlurmDBD to get UIDs for users and/or admins....*
 
 Install **the same Slurm version** on the new server as on the old server! 
 This ensures that the database migration will be as fast as possible.
@@ -697,6 +699,8 @@ Any upgrading should be done at a later date according to the instructions in :r
 Make sure to open the firewall **completely** as described in :ref:`firewall-between-slurmctld-and-slurmdbd`.
 
 Configure the MariaDB_/MySQL and the slurmdbd_ services as described above.
+
+.. _Accounting_infrastructure: https://slurm.schedmd.com/accounting.html#infrastructure
 
 Testing the database restore
 ............................
