@@ -688,7 +688,7 @@ Install a new Slurm_ server as described in :ref:`Slurm_installation`.
 You must make sure that these prerequisites are satisfied:
 
 * The Munge_ service is running correctly.
-* The user passwd database contains all Slurm_ users.
+* The user ``passwd database`` contains all Slurm_ users.
   This point is discussed in the Accounting_infrastructure_ page:
   *Whether you use any authentication module or not you will need to have a way for the SlurmDBD to get UIDs for users and/or admins....*
 
