@@ -399,7 +399,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    * NOTE: Since Slurm and PMIx lower than 4.x both provide ``libpmi[2].so`` libraries, we recommend you install both pieces of software in different locations.
      Otherwise, these same libraries might end up being installed under standard locations like ``/usr/lib64`` and the package manager would error out, reporting the conflict.
 
-     Author's suggestion: Do not install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries.
+     Author's suggestion: Do **not** install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries which are probably not needed.
 
    * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm is using, otherwise there could be authentication issues.
      E.g. one PMIx compiled ``--with-munge`` while another compiled ``--without-munge`` (the default since PMIx 4.2.4).
