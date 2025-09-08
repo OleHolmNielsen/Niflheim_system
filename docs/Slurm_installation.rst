@@ -465,7 +465,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
      The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
-.. _OpenPMIx: https://github.com/openpmix/openpmix
+.. _OpenPMIx: https://github.com/openpmix/openpmix/wiki
 .. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
