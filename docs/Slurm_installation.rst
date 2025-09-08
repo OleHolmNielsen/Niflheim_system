@@ -373,6 +373,8 @@ Install the following packages from EPEL_::
 .. _Rocky_Linux_Repositories: https://wiki.rockylinux.org/rocky/repo/
 .. _EPEL: https://fedoraproject.org/wiki/EPEL
 
+-----------------------------------------------------------------------------
+
 .. _Optional_prerequisites:
 
 Optional prerequisites
@@ -390,6 +392,8 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
       rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
+
+-----------------------------------------------------------------------------
 
 2. OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
    You should consult the current OpenPMIx_documentation_ in stead.
@@ -446,6 +450,8 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    * The documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
      so you should not try to use it.
 
+-----------------------------------------------------------------------------
+
 3. If you want to build the **Slurm REST API** daemon named slurmrestd_,
    then you must install these prerequisites also::
 
@@ -461,6 +467,8 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
    You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
    
      dnf install jq
+
+-----------------------------------------------------------------------------
 
 4. For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
 
