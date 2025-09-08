@@ -378,103 +378,109 @@ Install the following packages from EPEL_::
 .. _Optional_prerequisites:
 
 Optional prerequisites
-........................
+------------------------
 
-Certain Slurm_ tools and plugins require additional prerequisites **before** building Slurm_ RPM packages:
+Certain Slurm_ tools and plugins require additional prerequisites **before** building Slurm_ RPM packages as shown in the next sections.
 
-1. IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
+IPMI library
+................
 
-     dnf install freeipmi-devel
+IPMI_ library: If you want to implement power saving as described in the Power_Saving_Guide_ then you must install the FreeIPMI_ development library prerequisite::
 
-   See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page,
-   and the section on :ref:`ipmi_power_monitoring`.
+  dnf install freeipmi-devel
 
-   To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
+See the presentation *Saving Power with Slurm by Ole Nielsen* in the Slurm_publications_ page,
+and the section on :ref:`ipmi_power_monitoring`.
 
-      rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
+To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
------------------------------------------------------------------------------
+  rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
 
-2. OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
-   You should consult the current OpenPMIx_documentation_ in stead.
-   There is an OpenPMIx_GitHub_ development project.
+OpenPMIx library
+............................
 
-   The Slurm_ MPI_UsersGuide_ has some important notes:
+OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
+You should consult the current OpenPMIx_documentation_ in stead.
+There is an OpenPMIx_GitHub_ development project.
 
-   * NOTE: Since Slurm and PMIx lower than 4.x both provide ``libpmi[2].so`` libraries, we recommend you install both pieces of software in different locations.
-     Otherwise, these same libraries might end up being installed under standard locations like ``/usr/lib64`` and the package manager would error out, reporting the conflict.
+The Slurm_ MPI_UsersGuide_ has some important notes:
 
-     Author's suggestion: Do **not** install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries which are probably not needed.
+* NOTE: Since Slurm and PMIx lower than 4.x both provide ``libpmi[2].so`` libraries, we recommend you install both pieces of software in different locations.
+  Otherwise, these same libraries might end up being installed under standard locations like ``/usr/lib64`` and the package manager would error out, reporting the conflict.
 
-   * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm_ is using, otherwise there could be authentication issues.
-     E.g. one PMIx compiled ``--with-munge`` while another compiled ``--without-munge`` (the default since PMIx 4.2.4).
-     A workaround which might work is to specify the desired security method adding ``--mca psec native`` to the cli or exporting ``PMIX_MCA_psec=native`` environment variable.
+  Author's suggestion: Do **not** install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries which are probably not needed.
 
-   Install prerequisite packages::
+* NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm_ is using, otherwise there could be authentication issues.
+  E.g. one PMIx compiled ``--with-munge`` while another compiled ``--without-munge`` (the default since PMIx 4.2.4).
+  A workaround which might work is to specify the desired security method adding ``--mca psec native`` to the cli or exporting ``PMIX_MCA_psec=native`` environment variable.
 
-     dnf install libevent-devel python3-devel hwloc-devel
+Install prerequisite packages::
 
-   **WARNINGS:**
+  dnf install libevent-devel python3-devel hwloc-devel
+
+**WARNINGS:**
    
-   * If your cluster employs Omni-Path_ fabrics,
-     the recommended OpenPMIx_ version is 5.0.7 and **not** the later 5.0.8 or 6.0.y versions!
-     The reason is that OpenPMIx_ had removed_OPA_support_ starting with version 5.0.8 due to the issues mentioned in this ticket.
+* If your cluster employs Omni-Path_ fabrics,
+  the recommended OpenPMIx_ version is 5.0.7 and **not** the later 5.0.8 or 6.0.y versions!
+  The reason is that OpenPMIx_ had removed_OPA_support_ starting with version 5.0.8 due to the issues mentioned in this ticket.
 
-   * When using OpenMPI_v5.0_ you should be running Slurm_24.11.1_ (or later) due to this fix::
+* When using OpenMPI_v5.0_ you should be running Slurm_24.11.1_ (or later) due to this fix::
 
-       Inject OMPI_MCA_orte_precondition_transports when using PMIx.
+    Inject OMPI_MCA_orte_precondition_transports when using PMIx.
 
-   Download the OpenPMIx_ tar-ball::
+Download the OpenPMIx_ tar-ball::
 
-     wget https://github.com/openpmix/openpmix/releases/download/v5.0.7/pmix-5.0.7.tar.bz2
+  wget https://github.com/openpmix/openpmix/releases/download/v5.0.7/pmix-5.0.7.tar.bz2
 
-   and build RPM packages with these special flags::
+and build RPM packages with these special flags::
 
-     rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
+  rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
 
-   Notes:
+Notes:
 
-   * Unsetting ``build_all_in_one_rpm`` will build separate RPM packages which you should install on all Slurm_ nodes::
+* Unsetting ``build_all_in_one_rpm`` will build separate RPM packages which you should install on all Slurm_ nodes::
 
-       dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
+    dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
-   * The ``--with-munge`` enables Munge_ authentification as recommended in the MPI_UsersGuide_.
+* The ``--with-munge`` enables Munge_ authentification as recommended in the MPI_UsersGuide_.
   
-   * The ``per-user-config-files`` is disabled as described in the ``configure`` script::
+* The ``per-user-config-files`` is disabled as described in the ``configure`` script::
 
-       Disable per-user configuration files, to save disk accesses during job start-up.
-       This is likely desirable for large jobs.
-       Note that this can also be achieved by environment variables at run-time.
-       (default: enabled)
+    Disable per-user configuration files, to save disk accesses during job start-up.
+    This is likely desirable for large jobs.
+    Note that this can also be achieved by environment variables at run-time.
+    (default: enabled)
 
-   * A documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
-     so you should not try to use it.
+* A documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
+  so you should not try to use it.
 
------------------------------------------------------------------------------
+Slurm REST API
+..........................
 
-3. If you want to build the **Slurm REST API** daemon named slurmrestd_,
-   then you must install these prerequisites also::
+If you want to build the **Slurm REST API** daemon named slurmrestd_,
+then you must install these prerequisites also::
 
-     dnf install http-parser-devel json-c-devel libjwt-devel 
+  dnf install http-parser-devel json-c-devel libjwt-devel 
 
-   **Notice:** The minimum version requirements are listed in the rest_quickstart_ guide:
+**Notice:** The minimum version requirements are listed in the rest_quickstart_ guide:
 
-   * HTTP Parser (>= v2.6.0),
-   * LibYAML (optional, >= v0.2.5),
-   * JSON-C (>= v1.12.0).
+* HTTP Parser (>= v2.6.0),
+* LibYAML (optional, >= v0.2.5),
+* JSON-C (>= v1.12.0).
 
-   See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
-   You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
+See the presentation *Slurm's REST API by Nathan Rini, SchedMD* in the Slurm_publications_ page.
+You may like to install the `jq - Command-line JSON processor <https://jqlang.github.io/jq/>`_ also::
    
-     dnf install jq
+  dnf install jq
 
------------------------------------------------------------------------------
+YAML output
+...................
 
-4. For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
+For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
 
-   * **Important**: The `libyaml` **must** be version >= 0.2.5, see bug_17673_,
-     and EL9 provides this version.
-     The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
+* **Important**: The `libyaml` **must** be version >= 0.2.5, see bug_17673_,
+  and EL9 provides this version.
+  The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _OpenPMIx: https://pmix.org/
