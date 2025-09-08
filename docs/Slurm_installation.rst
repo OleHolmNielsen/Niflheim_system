@@ -401,7 +401,7 @@ Certain Slurm_ tools and plugins require additional prerequisites **before** bui
 
      Author's suggestion: Do **not** install the ``slurm-libpmi`` package because it provides ``libpmi[2].so`` libraries which are probably not needed.
 
-   * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm is using, otherwise there could be authentication issues.
+   * NOTE: Any application compiled against PMIx should use the same PMIx or at least a PMIx with the same security domain than the one Slurm_ is using, otherwise there could be authentication issues.
      E.g. one PMIx compiled ``--with-munge`` while another compiled ``--without-munge`` (the default since PMIx 4.2.4).
      A workaround which might work is to specify the desired security method adding ``--mca psec native`` to the cli or exporting ``PMIX_MCA_psec=native`` environment variable.
 
@@ -598,10 +598,6 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
     touch /var/log/slurm/slurmd.log 
     chown slurm: /var/log/slurm/slurmd.log 
-
-  You may consider this RPM as well with special PMIx libraries::
-
-    dnf install slurm-libpmi-$VER*rpm
 
 * **Database** (slurmdbd_ service) node::
 
@@ -975,42 +971,15 @@ The upgrading steps for the slurmctld_ host are:
 
 Note: The compute nodes should be upgraded at your earliest convenience.
 
-Install slurm-libpmi
-....................
+Optional: Install slurm-libpmi
+........................................
 
+**Optional:**
+On the compute nodes, only, you may consider the Slurm_ implementation of the pmi libraries::
 
-On the compute nodes, only, you may consider this RPM as well with special PMIx libraries::
+  dnf install slurm-libpmi-$VER*rpm
 
-    dnf install slurm-libpmi-$VER*rpm
-
-Upgrade MPI applications
-........................
-
-MPI applications such as **OpenMPI** may be linked against the ``/usr/lib64/libslurm.so`` library.
-In this context you must understand the remark in the Upgrade_Guide_::
-
-  The libslurm.so version is increased every major release.
-  So things like MPI libraries with Slurm integration should be recompiled.
-  Sometimes it works to just symlink the old .so name(s) to the new one, but this has no guarantee of working.
-
-In the thread `Need for recompiling openmpi built with --with-pmi? <https://groups.google.com/forum/#!msg/slurm-devel/oDoHPoAbiPQ/q9pQL2Uw3y0J>`_
-it has been found that::
-
-  It looks like it is the presence of lib64/libpmi2.la and lib64/libpmi.la that is the "culprit". They are installed by the slurm-devel RPM.
-  Openmpi uses GNU libtool for linking, which finds these files, and follow their "dependency_libs" specification, thus linking directly to libslurm.so. 
-
-Slurm_ version 16.05 and later no longer installs the libpmi*.la files.
-This should mean that if your OpenMPI was built against Slurm_ 16.05 or later, there should be no problem (we think),
-but otherwise you probably must rebuild your MPI applications and install them again at the same time that you upgrade the slurmd_ on the compute nodes.
-
-To check for the presence of the "bad" files, go to your software build host and search::
-
-  locate libpmi2.la 
-  locate libpmi.la 
-
-TODO: Find a way to read relevant MPI libraries like this example::
-
-  readelf -d libmca_common_pmi.so 
+Alternatively, it is recommended to install the OpenPMIx_ libraries as described in Optional_prerequisites_.
 
 Upgrade slurmd on nodes
 .......................
