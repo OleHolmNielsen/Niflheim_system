@@ -527,6 +527,10 @@ Notes about the ``--with mysql`` option:
 * From Slurm_ 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
 
+In our setup we build packages with these options::
+
+  rpmbuild -ta slurm-25.05.3.tar.bz2 --with slurmrestd --with freeipmi --with pmix
+
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
 .. _LTO: https://johanengelen.github.io/ldc/2016/11/10/Link-Time-Optimization-LDC.html
@@ -549,6 +553,8 @@ You may build Slurm_ packages including optional features as documented above in
 * Build with PMIx (OpenPMIx_) support::
 
     rpmbuild <...> --with pmix
+
+  The ``slurm-slurmd`` package will now have ``pmix`` as a prerequisite.
 
 * If you want to build the **Slurm REST API** daemon named slurmrestd_ you must add::
 
