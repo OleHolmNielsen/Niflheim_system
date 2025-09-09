@@ -396,12 +396,17 @@ To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
   rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
 
+.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
+.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
+.. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
+
 OpenPMIx library
 ............................
 
 OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
 You should consult the current OpenPMIx_documentation_ in stead.
 There is an OpenPMIx_GitHub_ development project.
+A PMIx_features_ page describes the PMIx server and client model.
 
 The Slurm_ MPI_UsersGuide_ has some important notes:
 
@@ -455,6 +460,17 @@ Notes:
 * A documented OpenPMIx_ ``configure`` option ``--with-slurm`` was actually removed as explained in issue_3611_,
   so you should not try to use it.
 
+.. _OpenPMIx: https://pmix.org/
+.. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
+.. _OpenPMIx_GitHub: https://github.com/openpmix/openpmix
+.. _PMIx_features: https://pmix.org/features
+.. _issue_3611: https://github.com/openpmix/openpmix/issues/3611
+.. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
+.. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
+.. _removed_OPA_support: https://github.com/open-mpi/ompi/issues/13397#issuecomment-3258354734
+.. _Slurm_24.11.1: https://github.com/SchedMD/slurm/blob/master/CHANGELOG/slurm-24.11.md#changes-in-slurm-24111
+.. _OpenMPI_v5.0: https://www.open-mpi.org/software/ompi/v5.0/
+
 Slurm REST API
 ..........................
 
@@ -474,6 +490,9 @@ You may like to install the `jq - Command-line JSON processor <https://jqlang.gi
    
   dnf install jq
 
+.. _slurmrestd: https://slurm.schedmd.com/rest.html
+.. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
+
 YAML output
 ...................
 
@@ -483,20 +502,6 @@ For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by ins
   and EL9 provides this version.
   The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
-.. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
-.. _OpenPMIx: https://pmix.org/
-.. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
-.. _OpenPMIx_GitHub: https://github.com/openpmix/openpmix
-.. _issue_3611: https://github.com/openpmix/openpmix/issues/3611
-.. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
-.. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
-.. _removed_OPA_support: https://github.com/open-mpi/ompi/issues/13397#issuecomment-3258354734
-.. _Slurm_24.11.1: https://github.com/SchedMD/slurm/blob/master/CHANGELOG/slurm-24.11.md#changes-in-slurm-24111
-.. _OpenMPI_v5.0: https://www.open-mpi.org/software/ompi/v5.0/
-.. _slurmrestd: https://slurm.schedmd.com/rest.html
-.. _rest_quickstart: https://slurm.schedmd.com/rest_quickstart.html#prereq
-.. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
-.. _FreeIPMI: https://www.gnu.org/software/freeipmi/
 .. _YAML: https://en.wikipedia.org/wiki/YAML
 .. _bug_17673: https://bugs.schedmd.com/show_bug.cgi?id=17673
 
