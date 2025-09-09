@@ -712,7 +712,7 @@ Regarding the Slurm_ database, also make sure to:
 * Make a database dump (see :ref:`Slurm_database`) prior to the slurmdbd_ upgrade.
 * Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
   In stead of starting the slurmdbd_ Systemd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
-  If you use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed!
+  If you use the ``systemctl`` command, it is very likely to **exceed a Systemd_ time limit** and kill slurmdbd_ before the database conversion has been completed!
   
   The recommended way to perform the slurmdbd_ database upgrade is therefore::
 
@@ -998,16 +998,6 @@ The upgrading steps for the slurmctld_ host are:
 
 Note: The compute nodes should be upgraded at your earliest convenience.
 
-Optional: Install slurm-libpmi
-........................................
-
-**Optional:**
-On the compute nodes, only, you may consider the Slurm_ implementation of the pmi libraries::
-
-  dnf install slurm-libpmi-$VER*rpm
-
-Alternatively, it is recommended to install the OpenPMIx_ libraries as described in Optional_prerequisites_.
-
 Upgrade slurmd on nodes
 .......................
 
@@ -1071,6 +1061,13 @@ Finally, double-check the timeout values in slurm.conf_, for example::
 
 and copy ``/etc/slurm/slurm.conf`` to all nodes (not needed in configless_ Slurm_ clusters).
 Make a ``scontrol reconfigure`` if any changes were made.
+
+**Optional:**
+On the compute nodes, only, you may consider installing the Slurm_ implementation of the pmi libraries::
+
+  Optional: dnf install slurm-libpmi-$VER*rpm
+
+However, it is recommended to install in stead the OpenPMIx_ libraries as described in Optional_prerequisites_.
 
 Upgrade the login nodes
 ..........................
