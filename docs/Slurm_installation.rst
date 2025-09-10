@@ -403,6 +403,8 @@ To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 OpenPMIx library
 ............................
 
+The acronyms *Process Management Interface (PMI)* and *PMI Exascale (PMIx)* are described in the PMIx_history_ page.
+
 OpenPMIx_ library usage is documented in the Slurm_ MPI_UsersGuide_, however, the links provided there are outdated!
 You should consult the current OpenPMIx_documentation_ in stead.
 There is an OpenPMIx_GitHub_ development project.
@@ -464,6 +466,7 @@ Notes:
 .. _OpenPMIx_documentation: https://docs.openpmix.org/en/v5.0.8/
 .. _OpenPMIx_GitHub: https://github.com/openpmix/openpmix
 .. _PMIx_features: https://pmix.org/features
+.. _PMIx_history: https://docs.openpmix.org/en/latest/history.html
 .. _issue_3611: https://github.com/openpmix/openpmix/issues/3611
 .. _MPI_UsersGuide: https://slurm.schedmd.com/mpi_guide.html
 .. _Omni-Path: https://www.cornelisnetworks.com/products/omni-path-100
