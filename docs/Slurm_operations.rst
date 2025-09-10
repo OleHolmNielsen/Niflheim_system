@@ -244,6 +244,8 @@ There exist a number of Open Source tools for graphical monitoring of Slurm:
 Working with Compute nodes
 ==========================
 
+.. _Slurm_power_saving_scripts:
+
 Slurm power saving scripts
 --------------------------
 
@@ -508,27 +510,11 @@ You should define *slurm* as the default group in ``/etc/clustershell/groups.con
   # Default group source
   default: slurm
 
-It is convenient to add a Slurm_ binding for all running jobs belonging to a specific user.
-Append to ``/etc/clustershell/groups.conf.d/slurm.conf`` the lines::
-
-  #
-  # Slurm user job bindings
-  #
-  [slurmuser,su]
-  map: squeue -h -u $GROUP -o "%N" -t running
-  list: squeue -h -o "%i" -t R
-  reverse: squeue -h -w $NODE -o "%i"
-  cache_time: 60
-
-This feature was included in the version 1.8.1.
-
-You may encounter some surprising zero-padding_ behavior in node names, see also issue_293_.
-
 .. _zero-padding: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html#zero-padding
 .. _issue_293: https://github.com/cea-hpc/clustershell/issues/293
 
-ClusterShell usage
-..................
+Using ClusterShell
+....................
 
 You can list all node groups including hostnames and node counts using this ClusterShell_tool_ command::
 
@@ -550,11 +536,6 @@ To execute a command only on nodes with a specified Slurm_ state (here: ``draine
 
   clush -w@slurmstate:drained date
   clush -bw@slurmstate:down 'uname -r; dmidecode -s bios-version'
-
-A **very useful** Slurm_ state was introduced from 25.05, namely ``~POWERED_DOWN`` (*not powered down*), see the sinfo_ manual page and bug_21428_.
-This is the **only** way to execute commands on all nodes that are actually up and running, for example::
-
-  clush -w@slurmstate:~POWERED_DOWN uname -r
 
 To execute a command only on nodes running a particular Slurm_ JobID (here: 123456)::
 
@@ -578,10 +559,39 @@ For example::
   $ nodeset --expand node[13-15,17-19]
   node13 node14 node15 node17 node18 node19
 
-
 .. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
 .. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 .. _nodeset: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
+
+Skipping powered_down nodes
+.............................
+
+The clush_ command will obviously be unable to run commands on nodes that have been powered down by Slurm_power_saving_scripts_.
+It is therefore desirable to configure the ClusterShell_tool_ to skip powered_down nodes.
+
+A **very useful** new state filtering (*Add support for sinfo negated node state filtering*)
+was added to the sinfo_ command starting from Slurm_ 25.05::
+
+  The state can be prefixed with '~' which will invert the result of match.
+
+We can use this to specify the state ``~POWERED_DOWN`` (meaning *not powered down*),
+so that nodes that have been powered down by Slurm_power_saving_scripts_ will be skipped by clush_.
+See also bug_21428_.
+
+An example usage of this is::
+
+  clush -bw@slurmstate:~POWERED_DOWN uname -r
+
+You can even configure the ``clush -a`` command to include **only** the ``~POWERED_DOWN`` nodes by editing the file
+``/etc/clustershell/groups.conf.d/slurm.conf`` to change the ``all:`` line into::
+
+  [slurmpart,sp]
+  map: sinfo -h -o "%N" -p $GROUP
+  all: sinfo -h -o "%N" -t ~POWERED_DOWN
+  ...
+
+Note that nodes with state ``Down`` (for example, crashed nodes) will not be skipped!
+
 .. _bug_21428: https://support.schedmd.com/show_bug.cgi?id=21428
 
 Copying files with ClusterShell
