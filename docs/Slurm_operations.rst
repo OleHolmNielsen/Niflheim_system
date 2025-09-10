@@ -551,6 +551,11 @@ To execute a command only on nodes with a specified Slurm state (here: ``drained
   clush -w@slurmstate:drained date
   clush -bw@slurmstate:down 'uname -r; dmidecode -s bios-version'
 
+A **very useful** Slurm state was introduced from 25.05, namely ``~POWERED_DOWN`` (not powered down), see the sinfo_ manual page.
+This is the **only** way to execute commands on all nodes that are actually up and running, for example::
+
+  clush -w@slurmstate:~POWERED_DOWN uname -r
+
 To execute a command only on nodes running a particular Slurm JobID (here: 123456)::
 
   clush -w@sj:123456 <command>
