@@ -1668,7 +1668,7 @@ In the slurm.conf_ page this is described:
 * **Prolog** 
 
   Fully qualified pathname of a program for the slurmd_ to execute whenever it is asked to run a job step from a new job allocation (e.g. ``/usr/local/slurm/prolog``).
-  A glob pattern (See glob(7)) may also be used to specify more than one program to run (e.g. ``/etc/slurm/prolog.d/*``).
+  A glob_pattern_ may also be used to specify more than one program to run (e.g. ``/etc/slurm/prolog.d/*``).
   The slurmd_ executes the prolog before starting the first job step. The prolog script or scripts may be used to purge files, enable user login, etc.
 
   By default there is no prolog.
@@ -1693,6 +1693,8 @@ See also the items:
 * PrologEpilogTimeout
 * PrologFlags
 * SrunEpilog
+
+.. _glob_pattern: https://man7.org/linux/man-pages/man7/glob.7.html
 
 Prolog and epilog examples
 --------------------------
