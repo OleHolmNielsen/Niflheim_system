@@ -1666,32 +1666,35 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 
 * Prolog_ 
 
-  Pathname of a program for the slurmd to execute whenever it is asked to run a job step from a new job allocation.
-  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf file.
+  Pathname of a program for the slurmd_ to execute whenever it is asked to run a job step from a new job allocation.
+  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf_ file.
   A glob_pattern_ may also be used to specify more than one program to run (e.g. ``/etc/slurm/prolog.d/*``).
-  The slurmd_ executes the prolog before starting the first job step. The prolog script or scripts may be used to purge files, enable user login, etc.
+  When more than one prolog script is configured, they are executed in reverse alphabetical order (z-a -> Z-A -> 9-0).
+  The slurmd_ executes the prolog before starting the first job step.
+  The Prolog_ script or scripts may be used to purge files, enable user login, etc.
+  By default there is no Prolog_.
+  Any configured script is expected to complete execution quickly (in less time than MessageTimeout_).
+  If the Prolog_ fails (returns a non-zero exit code), this will result in the node being set to a DRAIN state and the job being requeued.
+  The job will be placed in a held state, unless nohold_on_prolog_fail_ is configured in SchedulerParameters_.
+  See Prolog_and_Epilog_Scripts_ for more information.
 
-  By default there is no prolog.
-  Any configured script is expected to complete execution quickly (in less time than **MessageTimeout**).
-
-  If the prolog fails (returns a non-zero exit code), this will result in the node being set to a DRAIN state and the job being requeued in a held state, unless nohold_on_prolog_fail is configured in SchedulerParameters.
-  See *Prolog and Epilog Scripts* for more information. 
+  NOTE: It is possible to configure multiple prolog scripts by including this option on multiple lines. 
 
 * Epilog_
 
-  Pathname of a script to execute as user root on every node when a user's job completes (e.g. "/usr/local/slurm/epilog").
-  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf file.
+  Pathname of a script to execute as user root on every node when a user's job completes (e.g. ``/usr/local/slurm/epilog``).
+  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf_ file.
 
 * TaskProlog_
 
   Fully qualified pathname of a program to be execute as the slurm job's owner prior to initiation of each task.
-  Besides the normal environment variables, this has SLURM_TASK_PID available to identify the process ID of the task being started.
+  Besides the normal environment variables, this has ``SLURM_TASK_PID`` available to identify the process ID of the task being started.
   Standard output from this program can be used to control the environment variables and output for the user program 
   (further details in the slurm.conf_ page).
 
 * TaskEpilog_
 
-  Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See *TaskProlog* for execution order details. 
+  Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See TaskProlog_ for execution order details. 
 
 See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunProlog_ SrunEpilog_.
 
@@ -1706,6 +1709,10 @@ See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ Prolo
 .. _glob_pattern: https://man7.org/linux/man-pages/man7/glob.7.html
 .. _SrunProlog: https://slurm.schedmd.com/slurm.conf.html#OPT_SrunProlog
 .. _SrunEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_SrunEpilog
+.. _MessageTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_MessageTimeout
+.. _Prolog_and_Epilog_Scripts: https://slurm.schedmd.com/slurm.conf.html#SECTION_PROLOG-AND-EPILOG-SCRIPTS
+.. _nohold_on_prolog_fail: https://slurm.schedmd.com/slurm.conf.html#OPT_nohold_on_prolog_fail
+.. _SchedulerParameters: https://slurm.schedmd.com/slurm.conf.html#OPT_SchedulerParameters
 
 Prolog and epilog examples
 --------------------------
