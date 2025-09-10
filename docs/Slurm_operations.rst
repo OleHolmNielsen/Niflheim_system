@@ -567,10 +567,9 @@ Skipping powered_down nodes
 .............................
 
 The clush_ command will obviously be unable to run commands on nodes that have been powered down by :ref:`Slurm_power_saving`.
-It is therefore desirable to configure the ClusterShell_tool_ to skip powered_down nodes.
+It is therefore desirable to configure the ClusterShell_tool_ to skip powered down nodes.
 
-A **very useful** new state filtering (*Add support for sinfo negated node state filtering*)
-was added to the sinfo_ command starting from Slurm_ 25.05::
+A **very useful** new state filtering was added to the sinfo_ command starting from Slurm_ 25.05::
 
   The state can be prefixed with '~' which will invert the result of match.
 
@@ -583,7 +582,7 @@ An example usage of this is::
   clush -bw@slurmstate:~POWERED_DOWN uname -r
 
 You can even configure the ``clush -a`` command to include **only** the ``~POWERED_DOWN`` nodes by editing the file
-``/etc/clustershell/groups.conf.d/slurm.conf`` to change the ``all:`` line into::
+``/etc/clustershell/groups.conf.d/slurm.conf`` to add to the ``all:`` line a specific state by ``-t``::
 
   [slurmpart,sp]
   map: sinfo -h -o "%N" -p $GROUP
