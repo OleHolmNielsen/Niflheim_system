@@ -551,7 +551,7 @@ To execute a command only on nodes with a specified Slurm_ state (here: ``draine
   clush -w@slurmstate:drained date
   clush -bw@slurmstate:down 'uname -r; dmidecode -s bios-version'
 
-A **very useful** Slurm_ state was introduced from 25.05, namely ``~POWERED_DOWN`` (not powered down), see the sinfo_ manual page.
+A **very useful** Slurm_ state was introduced from 25.05, namely ``~POWERED_DOWN`` (not powered down), see the sinfo_ manual page and bug_21428_.
 This is the **only** way to execute commands on all nodes that are actually up and running, for example::
 
   clush -w@slurmstate:~POWERED_DOWN uname -r
@@ -582,6 +582,7 @@ For example::
 .. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
 .. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 .. _nodeset: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
+.. _bug_21428: https://support.schedmd.com/show_bug.cgi?id=21428
 
 Copying files with ClusterShell
 ...............................
