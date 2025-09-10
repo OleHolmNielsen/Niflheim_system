@@ -1704,6 +1704,7 @@ See also the items PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlag
 .. _TaskProlog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskProlog
 .. _TaskEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskEpilog
 .. _glob_pattern: https://man7.org/linux/man-pages/man7/glob.7.html
+.. _SrunEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_SrunEpilog
 
 Prolog and epilog examples
 --------------------------
