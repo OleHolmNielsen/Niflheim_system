@@ -244,9 +244,9 @@ There exist a number of Open Source tools for graphical monitoring of Slurm:
 Working with Compute nodes
 ==========================
 
-.. _Slurm_power_saving_scripts:
+.. _Slurm_power_saving:
 
-Slurm power saving scripts
+Slurm power saving 
 --------------------------
 
 Slurm_ provides an integrated power saving mechanism for powering down idle nodes, 
@@ -566,7 +566,7 @@ For example::
 Skipping powered_down nodes
 .............................
 
-The clush_ command will obviously be unable to run commands on nodes that have been powered down by Slurm_power_saving_scripts_.
+The clush_ command will obviously be unable to run commands on nodes that have been powered down by :ref:`Slurm_power_saving`.
 It is therefore desirable to configure the ClusterShell_tool_ to skip powered_down nodes.
 
 A **very useful** new state filtering (*Add support for sinfo negated node state filtering*)
@@ -575,7 +575,7 @@ was added to the sinfo_ command starting from Slurm_ 25.05::
   The state can be prefixed with '~' which will invert the result of match.
 
 We can use this to specify the state ``~POWERED_DOWN`` (meaning *not powered down*),
-so that nodes that have been powered down by Slurm_power_saving_scripts_ will be skipped by clush_.
+so that nodes that have been powered down by :ref:`Slurm_power_saving` will be skipped by clush_.
 See also bug_21428_.
 
 An example usage of this is::
