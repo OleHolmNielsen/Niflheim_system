@@ -1660,14 +1660,14 @@ When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 Configure Prolog and Epilog scripts
 ===================================
 
-It may be necessary to execute Prolog and/or Epilog scripts on the compute nodes when slurmd_ executes a task step (by default none are executed).
-See also the `Prolog and Epilog Guide <https://slurm.schedmd.com/prolog_epilog.html>`_.
+It may be necessary to execute Prolog_ and/or Epilog_ scripts on the compute nodes when slurmd_ executes a task step (by default none are executed),
+see the `Prolog and Epilog Guide <https://slurm.schedmd.com/prolog_epilog.html>`_.
+In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are described, for example:
 
-In the slurm.conf_ page this is described:
+* Prolog_ 
 
-* **Prolog** 
-
-  Fully qualified pathname of a program for the slurmd_ to execute whenever it is asked to run a job step from a new job allocation (e.g. ``/usr/local/slurm/prolog``).
+  Pathname of a program for the slurmd to execute whenever it is asked to run a job step from a new job allocation.
+  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf file.
   A glob_pattern_ may also be used to specify more than one program to run (e.g. ``/etc/slurm/prolog.d/*``).
   The slurmd_ executes the prolog before starting the first job step. The prolog script or scripts may be used to purge files, enable user login, etc.
 
@@ -1677,23 +1677,32 @@ In the slurm.conf_ page this is described:
   If the prolog fails (returns a non-zero exit code), this will result in the node being set to a DRAIN state and the job being requeued in a held state, unless nohold_on_prolog_fail is configured in SchedulerParameters.
   See *Prolog and Epilog Scripts* for more information. 
 
-* **TaskProlog**
+* Epilog_
+
+  Pathname of a script to execute as user root on every node when a user's job completes (e.g. "/usr/local/slurm/epilog").
+  If it is not an absolute path name (i.e. it does not start with a slash), it will be searched for in the same directory as the slurm.conf file.
+
+* TaskProlog_
 
   Fully qualified pathname of a program to be execute as the slurm job's owner prior to initiation of each task.
   Besides the normal environment variables, this has SLURM_TASK_PID available to identify the process ID of the task being started.
-  Standard output from this program can be used to control the environment variables and output for the user program. 
+  Standard output from this program can be used to control the environment variables and output for the user program 
   (further details in the slurm.conf_ page).
 
-* **TaskEpilog** 
+* TaskEpilog_
 
   Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See *TaskProlog* for execution order details. 
 
-See also the items:
+See also the items PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunEpilog_.
 
-* PrologEpilogTimeout
-* PrologFlags
-* SrunEpilog
-
+.. _Prolog: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog
+.. _PrologEpilogTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologEpilogTimeout
+.. _PrologTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologTimeout
+.. _PrologFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologFlags
+.. _Epilog: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog
+.. _EpilogTimeout:  https://slurm.schedmd.com/slurm.conf.html#OPT_EpilogTimeout
+.. _TaskProlog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskProlog
+.. _TaskEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskEpilog
 .. _glob_pattern: https://man7.org/linux/man-pages/man7/glob.7.html
 
 Prolog and epilog examples
