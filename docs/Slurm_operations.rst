@@ -60,13 +60,13 @@ System information
 
 Useful sysadmin commands:
 
-* sinfo_ - view information about Slurm nodes and partitions.
-* showpartitions_ - Print a Slurm cluster partition status overview with 1 line per partition.
-* squeue_ - view information about jobs located in the Slurm scheduling queue
+* sinfo_ - view information about Slurm_ nodes and partitions.
+* showpartitions_ - Print a Slurm_ cluster partition status overview with 1 line per partition.
+* squeue_ - view information about jobs located in the Slurm_ scheduling queue
 * scancel_ Used to signal jobs or job steps
-* smap_ - graphically view information about Slurm jobs, partitions, and set configurations parameters
-* sview_ - graphical user interface to view and modify Slurm state (requires gtk2)
-* scontrol_ - view and modify Slurm configuration and state
+* smap_ - graphically view information about Slurm_ jobs, partitions, and set configurations parameters
+* sview_ - graphical user interface to view and modify Slurm_ state (requires gtk2)
+* scontrol_ - view and modify Slurm_ configuration and state
 
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
@@ -79,8 +79,8 @@ Useful sysadmin commands:
 MPI setup
 =========
 
-MPI use under Slurm depends upon the type of MPI being used, see MPI_Users_Guide_.
-The current versions of Slurm and OpenMPI_ support task launch using the srun_ command, see the MPI_Guide_OpenMPI_.
+MPI use under Slurm_ depends upon the type of MPI being used, see MPI_Users_Guide_.
+The current versions of Slurm_ and OpenMPI_ support task launch using the srun_ command, see the MPI_Guide_OpenMPI_.
 
 For OpenPMIx_ please see the :ref:`Optional_prerequisites` page.
 
@@ -97,7 +97,7 @@ MPI locked memory
 -----------------
 
 MPI stacks running over Infiniband or :ref:`OmniPath` require the ability to allocate more locked memory than the default limit.
-Unfortunately, user processes on login nodes may have a small memory limit (check it by ``ulimit -a``) which by default are propagated into Slurm jobs and hence cause fabric errors for MPI.
+Unfortunately, user processes on login nodes may have a small memory limit (check it by ``ulimit -a``) which by default are propagated into Slurm_ jobs and hence cause fabric errors for MPI.
 See the `memlock FAQ <https://slurm.schedmd.com/faq.html#memlock>`_.
 
 This is fixed by adding to slurm.conf_::
@@ -111,7 +111,7 @@ You can view the running slurmd_ process limits by::
 CPU management
 ==============
 
-It is important to understand how Slurm manages nodes, CPUs, tasks etc.
+It is important to understand how Slurm_ manages nodes, CPUs, tasks etc.
 This is documented in the cpu_management_ page.
 
 .. _cpu_management: https://slurm.schedmd.com/cpu_management.html
@@ -119,7 +119,7 @@ This is documented in the cpu_management_ page.
 GPU accelerators
 ================
 
-Configure Slurm for GPU_ accelerators as described in the :ref:`Slurm_configuration` page under the GRES_ section.
+Configure Slurm_ for GPU_ accelerators as described in the :ref:`Slurm_configuration` page under the GRES_ section.
 
 The *AutoDetect* configuration in gres.conf_ can be used to detect GPU hardware (currently Nvidia and AMD).
 
@@ -140,7 +140,7 @@ and restart slurmctld_ so that these new fields are added to the database.
 Nvidia GPUs
 -----------
 
-It is possible to build Slurm packages which include the Nvidia NVML_ library for easy handling of GPU hardware.
+It is possible to build Slurm_ packages which include the Nvidia NVML_ library for easy handling of GPU hardware.
 NVML automatically detects GPUs, their type, cores, and NVLinks.
 Quoting the GRES_ page::
 
@@ -148,7 +148,7 @@ Quoting the GRES_ page::
   configuration details will automatically be filled in for any system-detected NVIDIA GPU.
   This removes the need to explicitly configure GPUs in gres.conf, though the Gres= line in slurm.conf is still required in order to tell slurmctld how many GRES to expect. 
 
-However, it is **not necessary** to include the NVML_ in your Slurm packages, 
+However, it is **not necessary** to include the NVML_ in your Slurm_ packages, 
 since you can configure gres.conf_ manually for the GPU_ hardware in your nodes.
 See the mailing list thread `Building Slurm RPMs with NVIDIA GPU support? <https://lists.schedmd.com/pipermail/slurm-users/2021-January/006697.html>`_.
 
@@ -194,11 +194,11 @@ Our Slurm_ monitoring tools psjob_ and psnode_ use gpustat_ on nodes with GPU GR
 Utilities for Slurm
 ===================
 
-Here we list some useful third-party utilities that Slurm administrators or users may find useful:
+Here we list some useful third-party utilities that Slurm_ administrators or users may find useful:
 
 * A comprehensive list of tools on the Slurm_download_ page.
 
-* Slurm tools by Ole Holm Nielsen: https://github.com/OleHolmNielsen/Slurm_tools
+* Slurm_ tools by Ole Holm Nielsen: https://github.com/OleHolmNielsen/Slurm_tools
   including:
 
   - pestat_ prints a node status list (1 host per line) with information about jobids, users and CPU loads.
@@ -223,7 +223,7 @@ Graphical monitoring tools
 
 There exist a number of Open Source tools for graphical monitoring of Slurm:
 
-* Slurm-web_ provides a web interface on top of Slurm with intuitive graphical views, clear insights and advanced visualizations to track your jobs and monitor status of HPC supercomputers in your organization.
+* Slurm-web_ provides a web interface on top of Slurm_ with intuitive graphical views, clear insights and advanced visualizations to track your jobs and monitor status of HPC supercomputers in your organization.
 
 * Open XDMoD_ is an open source tool to facilitate the management of high performance computing resources. 
 
@@ -247,7 +247,7 @@ Working with Compute nodes
 Slurm power saving scripts
 --------------------------
 
-Slurm provides an integrated power saving mechanism for powering down idle nodes, 
+Slurm_ provides an integrated power saving mechanism for powering down idle nodes, 
 and starting them again when jobs need to be scheduled, 
 see the Slurm_Power_Saving_Guide_.
 
@@ -260,7 +260,7 @@ We provide some Slurm_power_saving_scripts_ which may be useful for power manage
 Expanding and collapsing host lists
 -----------------------------------
 
-Slurm lists node/host lists in the compact format, for example ``node[001-123]``.
+Slurm_ lists node/host lists in the compact format, for example ``node[001-123]``.
 Sometimes you want to expand the host list, for example in scripts, to list all nodes individually.
 
 You can use this command to output hostnames one line at a time::
@@ -315,8 +315,8 @@ For usage see the python-hostlist_, but a useful example is::
 The snodelist command
 ......................
 
-The snodelist_ command is a tool for working with Slurm hostlists.
-Rather than relying on ``scontrol show hostnames`` to expand a Slurm compact host list to a newline-delimited list.
+The snodelist_ command is a tool for working with Slurm_ hostlists.
+Rather than relying on ``scontrol show hostnames`` to expand a Slurm_ compact host list to a newline-delimited list.
 Installation instructions are in the snodelist_ page.
 
 .. _snodelist: https://github.com/University-of-Delaware-IT-RCI/snodelist
@@ -355,15 +355,15 @@ An example where we assign nodelists to variables::
 SSH keys for password-less access to cluster nodes
 --------------------------------------------------
 
-Users may have a need for SSH access to Slurm compute nodes, for example,
-if they have to use an MPI library which is using SSH in stead of Slurm to start MPI tasks.
+Users may have a need for SSH access to Slurm_ compute nodes, for example,
+if they have to use an MPI library which is using SSH in stead of Slurm_ to start MPI tasks.
 
 However, it is a good idea to configure the slurm-pam-adopt_ module on the nodes to control and restrict SSH access, 
 see `<Slurm_configuration#pam-module-restrictions>`_.
 
 The SSH_ (*Secure Shell*) configuration files including server private/public keys are in the ``/etc/ssh/`` folder.
 
-The file ``/etc/ssh/ssh_known_hosts`` containing the SSH *public keys* of all nodes should be created on the central server and distributed to all Slurm nodes.
+The file ``/etc/ssh/ssh_known_hosts`` containing the SSH *public keys* of all nodes should be created on the central server and distributed to all Slurm_ nodes.
 The ssh-keyscan_ tool is very convenient for gathering SSH *public keys* of the cluster nodes, some examples are::
 
   ssh-keyscan -t ssh-ed25519 node001 node002                   # Scan nodes node001+node002 for key type ssh-ed25519
@@ -374,7 +374,7 @@ Remember to set the SELinux context correctly for the files in ``/etc/ssh``::
 
   chcon system_u:object_r:etc_t:s0 /etc/ssh/ssh_known_hosts
 
-When all SSH *public keys* of the Slurm nodes are available in ``/etc/ssh/ssh_known_hosts``, each individual user can configure a password-less SSH login.
+When all SSH *public keys* of the Slurm_ nodes are available in ``/etc/ssh/ssh_known_hosts``, each individual user can configure a password-less SSH login.
 First the user must generate personal SSH keys (placed in the ``$HOME/.ssh/`` folder) using the ssh-keygen_ tool.
 
 Each user may use the convenient tool authorized_keys_ for generating SSH keys and adding them to the ``$HOME/.ssh/authorized_keys`` file.
@@ -400,7 +400,7 @@ Host-based authentication
 Another way to enable password-less SSH login is to configure login nodes and compute nodes in the cluster to allow Host-based_Authentication_.
 Please beware that:
 
-* For security reasons it is strongly recommended **not** to include the Slurm slurmctld_ and slurmdbd_ servers in the Host-based_Authentication_
+* For security reasons it is strongly recommended **not** to include the Slurm_ slurmctld_ and slurmdbd_ servers in the Host-based_Authentication_
   because normal users have no business on those servers!
 * For security reasons the **root** user is not allowed to use Host-based_Authentication_.
   You can add root's public key to the ``/root/.ssh/authorized_keys`` file on all compute nodes for easy SSH access.
@@ -508,7 +508,7 @@ You should define *slurm* as the default group in ``/etc/clustershell/groups.con
   # Default group source
   default: slurm
 
-It is convenient to add a Slurm binding for all running jobs belonging to a specific user.
+It is convenient to add a Slurm_ binding for all running jobs belonging to a specific user.
 Append to ``/etc/clustershell/groups.conf.d/slurm.conf`` the lines::
 
   #
@@ -538,7 +538,7 @@ Simple usage of clush_::
 
   clush -w node[001-003] date
 
-For a Slurm partition::
+For a Slurm_ partition::
 
   clush -g <partition-name> date
 
@@ -546,17 +546,17 @@ If option *-b* or *--dshbak* is specified, clush_ waits for command completion w
 
   clush -b -g <partition-name> date
 
-To execute a command only on nodes with a specified Slurm state (here: ``drained``)::
+To execute a command only on nodes with a specified Slurm_ state (here: ``drained``)::
 
   clush -w@slurmstate:drained date
   clush -bw@slurmstate:down 'uname -r; dmidecode -s bios-version'
 
-A **very useful** Slurm state was introduced from 25.05, namely ``~POWERED_DOWN`` (not powered down), see the sinfo_ manual page.
+A **very useful** Slurm_ state was introduced from 25.05, namely ``~POWERED_DOWN`` (not powered down), see the sinfo_ manual page.
 This is the **only** way to execute commands on all nodes that are actually up and running, for example::
 
   clush -w@slurmstate:~POWERED_DOWN uname -r
 
-To execute a command only on nodes running a particular Slurm JobID (here: 123456)::
+To execute a command only on nodes running a particular Slurm_ JobID (here: 123456)::
 
   clush -w@sj:123456 <command>
 
@@ -691,7 +691,7 @@ These events can cause actions such as the execution of an arbitrary script.
 Typical uses include notifying system administrators of node failures and gracefully terminating a job when it's time limit is approaching. 
 A hostlist expression for the nodelist or job ID is passed as an argument to the program. 
 
-* strigger_ - Used set, get or clear Slurm trigger information
+* strigger_ - Used set, get or clear Slurm_ trigger information
 
 An example script using this is notify_nodes_down_.
 To set up the trigger as the *slurm* user::
@@ -712,7 +712,7 @@ Nodes can be added or removed by modifying the slurm.conf_ file and distributing
 If you use the topology.conf_ configuration, that file must also be updated and distributed to all nodes.
 If you run a :ref:`configless-slurm-setup` setup then the configuration files are served automatically to nodes by the slurmctld_.
 
-Starting in Slurm 22.05, nodes can be dynamically added and removed from Slurm, see dynamic_nodes_.
+Starting in Slurm_ 22.05, nodes can be dynamically added and removed from Slurm, see dynamic_nodes_.
 
 .. _dynamic_nodes: https://slurm.schedmd.com/dynamic_nodes.html
 
@@ -764,7 +764,7 @@ See also https://thread.gmane.org/gmane.comp.distributed.slurm.devel/3039 (comme
 Rebooting nodes
 ---------------
 
-Slurm can reboot nodes by::
+Slurm_ can reboot nodes by::
 
   scontrol reboot [ASAP] [NodeList]
     Reboot  all nodes in the system when they become idle using the RebootProgram as configured in Slurm's slurm.conf file.
@@ -782,7 +782,7 @@ From Slurm_ 24.08 an error message will be printed by ``scontrol reboot`` when a
 Compute node OS and firmware updates
 ------------------------------------
 
-Regarding the question of methods for Slurm compute node OS and firmware updates, 
+Regarding the question of methods for Slurm_ compute node OS and firmware updates, 
 we have for a long time used rolling updates while the cluster is in full production, 
 so that we do not waste any resources.
 
@@ -842,7 +842,7 @@ Ignore currently running jobs when creating the reservation by adding this flag:
 
   flags=ignore_jobs
 
-**Magnetic reservations** were introduced in Slurm 20.02, see the scontrol_ man-page::
+**Magnetic reservations** were introduced in Slurm_ 20.02, see the scontrol_ man-page::
 
   Flags=MAGNETIC  # This flag allows jobs to be considered for this reservation even if they didn't request it.
 
@@ -877,7 +877,7 @@ One may also specify explicitly some nodes::
 Working with jobs
 =================
 
-Tutorial pages about Slurm job management:
+Tutorial pages about Slurm_ job management:
 
 * `Convenient Slurm Commands <https://rc.fas.harvard.edu/resources/documentation/convenient-slurm-commands/>`_
 
@@ -897,7 +897,7 @@ It is required to invoke srun_ with pmi2 or pmix support as shown above in the M
 Job arrays
 ----------
 
-Slurm job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily.
+Slurm_ job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily.
 
 It is important to understand that job arrays, only at the moment when an individual job starts running, become independent jobs (similar to non-array jobs) 
 and are assigned their own unique JobIDs. 
@@ -1020,7 +1020,7 @@ sbatch <options> --wrap="some-command"
 
     export SQUEUE_FORMAT2="JobID:8,Partition:11,QOS:7,Name:10 ,UserName:9,Account:9,State:8,PriorityLong:9,ReasonList:16 ,TimeUsed:12 ,SubmitTime:19 ,TimeLimit:10 ,tres-alloc: "
 
-* List of pending jobs in the same order considered for scheduling by Slurm (see squeue_ man-page under --priority)::
+* List of pending jobs in the same order considered for scheduling by Slurm_ (see squeue_ man-page under --priority)::
 
     squeue --priority  --sort=-p,i --states=PD
 
