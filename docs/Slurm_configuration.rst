@@ -1696,6 +1696,8 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 
   Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See TaskProlog_ for execution order details. 
 
+**WARNING:** The TaskProlog_ and TaskEpilog_ files are **not distributed** in configless_ mode with Slurm_ prior to version 25.11, see bug_23523_.
+
 See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunProlog_ SrunEpilog_.
 
 .. _Prolog: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog
@@ -1713,6 +1715,7 @@ See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ Prolo
 .. _Prolog_and_Epilog_Scripts: https://slurm.schedmd.com/slurm.conf.html#SECTION_PROLOG-AND-EPILOG-SCRIPTS
 .. _nohold_on_prolog_fail: https://slurm.schedmd.com/slurm.conf.html#OPT_nohold_on_prolog_fail
 .. _SchedulerParameters: https://slurm.schedmd.com/slurm.conf.html#OPT_SchedulerParameters
+.. _bug_23523: https://support.schedmd.com/show_bug.cgi?id=23523
 
 Prolog and epilog examples
 --------------------------
