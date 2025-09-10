@@ -1693,7 +1693,7 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 
   Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See *TaskProlog* for execution order details. 
 
-See also the items PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunEpilog_.
+See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunProlog_ SrunEpilog_.
 
 .. _Prolog: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog
 .. _PrologEpilogTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologEpilogTimeout
@@ -1704,6 +1704,7 @@ See also the items PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlag
 .. _TaskProlog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskProlog
 .. _TaskEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_TaskEpilog
 .. _glob_pattern: https://man7.org/linux/man-pages/man7/glob.7.html
+.. _SrunProlog: https://slurm.schedmd.com/slurm.conf.html#OPT_SrunProlog
 .. _SrunEpilog: https://slurm.schedmd.com/slurm.conf.html#OPT_SrunEpilog
 
 Prolog and epilog examples
