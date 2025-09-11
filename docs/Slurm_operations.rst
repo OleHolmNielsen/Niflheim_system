@@ -185,11 +185,20 @@ The installation on EL8 systems is a bit tricky, so use these commands::
 
 Our Slurm_ monitoring tools psjob_ and psnode_ use gpustat_ on nodes with GPU GRES to print a GPU usage summary.
 
+The *Slurm Profiling Service* sps_ is a lightweight job profiler which bridges the gap between numerical job stats and full-blown application profiling.
+The sps_ is a SPANK_ plugin.
+When built with GPU support it will also monitor any NVIDIA or AMD GPUs.
+After the job finishes, a job Epilog task (see Prolog_and_Epilog_Guide_) calls a series of linked clean up scripts which visualise the data into both ASCII and PNG plots,
+then writes the ASCII charts to the Slurm job log and compresses everything into a tarball.
+
 .. _gpustat: https://github.com/wookayin/gpustat
 .. _nvtop: https://github.com/Syllo/nvtop
 .. _nvitop: https://github.com/XuehaiPan/nvitop
 .. _psjob: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/psjob
 .. _psnode: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/nodes/psnode
+.. _sps: https://github.com/mhagdorn/sps
+.. _SPANK: https://slurm.schedmd.com/spank.html
+.. _Prolog_and_Epilog_Guide: https://slurm.schedmd.com/prolog_epilog.html
 
 Utilities for Slurm
 ===================
