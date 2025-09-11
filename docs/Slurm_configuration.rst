@@ -1661,7 +1661,7 @@ Configure Prolog and Epilog scripts
 ===================================
 
 It may be necessary to execute Prolog_ and/or Epilog_ scripts on the compute nodes when slurmd_ executes a task step (by default none are executed),
-see the `Prolog and Epilog Guide <https://slurm.schedmd.com/prolog_epilog.html>`_.
+see the Prolog_and_Epilog_Guide_.
 In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are described, for example:
 
 * Prolog_ 
@@ -1701,6 +1701,7 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ PrologFlags_ SrunProlog_ SrunEpilog_.
 
 .. _Prolog: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog
+.. _Prolog_and_Epilog_Guide: https://slurm.schedmd.com/prolog_epilog.html
 .. _PrologEpilogTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologEpilogTimeout
 .. _PrologTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologTimeout
 .. _PrologFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_PrologFlags
@@ -1720,6 +1721,12 @@ See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ Prolo
 Prolog and epilog examples
 --------------------------
 
+Note: All prolog and epilog script files must be **executable** (have the execute bit set).
+The Prolog_and_Epilog_Guide_ states::
+
+  Note that for security reasons, these programs do not have a search path set.
+  Either specify fully qualified path names in the program or set the PATH environment variable.
+
 An example script is shown in the FAQ https://slurm.schedmd.com/faq.html#task_prolog:
 
 .. code-block:: bash
@@ -1738,9 +1745,9 @@ An example script is shown in the FAQ https://slurm.schedmd.com/faq.html#task_pr
     echo "print =========================================="
   fi
 
-The script is supposed to output commands to be read by slurmd_:
+The script is supposed to output commands which will be read by slurmd_:
 
-* The task prolog is executed with the same environment as the user tasks to be initiated.
+* The TaskProlog_ is executed with the same environment as the user tasks to be initiated.
   The standard output of that program is read and processed as follows:
 
   - **export name=value** - sets an environment variable for the user task
