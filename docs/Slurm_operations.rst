@@ -589,7 +589,7 @@ You can even configure the ``clush -a`` command to include **only** the ``~POWER
   all: sinfo -h -o "%N" -t ~POWERED_DOWN
   ...
 
-Note that nodes with state ``Down`` (for example, crashed nodes) will not be skipped!
+Note that nodes with states such as ``Down`` (for example, crashed nodes) will not be skipped!
 
 .. _bug_21428: https://support.schedmd.com/show_bug.cgi?id=21428
 
