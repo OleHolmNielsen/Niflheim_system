@@ -181,7 +181,10 @@ List users by::
 
   sacctmgr show user
   sacctmgr show user -s
+  sacctmgr show user -s xxx
   sacctmgr show account -s xxx
+
+where sacctmgr_ ``-s`` means to list user and display associations.
 
 Modify user accounts
 --------------------------
