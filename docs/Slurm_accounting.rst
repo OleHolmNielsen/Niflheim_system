@@ -177,14 +177,14 @@ A non-default account name may be specified in the user's batch jobs, for exampl
 
   sbatch -A <account> or --account=<account>
 
-List users by::
+List users using sacctmgr_::
 
   sacctmgr show user
   sacctmgr show user -s
   sacctmgr show user -s xxx
   sacctmgr show account -s xxx
 
-where sacctmgr_ ``-s`` means to list user and display associations.
+where ``-s`` means to list user and display associations.
 
 Modify user accounts
 --------------------------
