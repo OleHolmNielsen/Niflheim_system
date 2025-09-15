@@ -720,34 +720,36 @@ The *ReturnToService* option in slurm.conf_ controls when a DOWN node will be re
 MaxJobCount limit
 -----------------
 
-In slurm.conf_ is defined::
+In slurm.conf_ the parameter MaxJobCount_ is defined::
 
-  MaxJobCount
-    The maximum number of jobs Slurm can have in its active database at one time.
-    Set the values of MaxJobCount and MinJobAge to insure the slurmctld daemon does not exhaust its memory or other resources.
-    Once  this  limit  is  reached, requests to submit additional jobs will fail.
-    The default value is 10000 jobs. 
+  The maximum number of jobs Slurm can have in its active database at one time.
+  Set the values of MaxJobCount and MinJobAge to insure the slurmctld daemon does not exhaust its memory or other resources.
+  Once  this  limit  is  reached, requests to submit additional jobs will fail.
+  The default value is 10000 jobs. 
 
 If you exceed 10000 jobs in the queue users will get an error when submitting jobs::
 
   sbatch: error: Slurm temporarily unable to accept job, sleeping and retrying.
   sbatch: error: Batch job submission failed: Resource temporarily unavailable 
 
-Add a higher value to slurm.conf_, for example::
+Add a higher value of MaxJobCount_ to slurm.conf_, for example::
 
   MaxJobCount=20000
 
-Another parameter in slurm.conf_ may perhaps need modification with higher ``MaxJobCount``::
+Another parameter MinJobAge_ in slurm.conf_ may perhaps need modification with a higher MaxJobCount_ value::
 
-  MinJobAge
     The minimum age of a completed job before its record is purged from Slurm's active database.
     Set the values of MaxJobCount and to insure the slurmctld daemon does not exhaust its memory or other resources.
     The default value is 300 seconds. 
 
-In addition, it may be a good idea to implement **MaxSubmitJobs** and **MaxJobs** resource_limits_ for user associations or QOSes, for example::
+In addition, it may be a good idea use sacctmgr_ to configure MaxSubmitJobs_ and MaxJobs_ resource_limits_ for user associations or QOSes, for example::
 
   sacctmgr modify user where name=<username> set MaxJobs=100 MaxSubmitJobs=500
 
+.. _MaxJobCount: https://slurm.schedmd.com/slurm.conf.html#OPT_MaxJobCount
+.. _MinJobAge: https://slurm.schedmd.com/slurm.conf.html#OPT_MinJobAge
+.. _MaxSubmitJobs: https://slurm.schedmd.com/sacctmgr.html#OPT_MaxSubmitJobs
+.. _MaxJobs: https://slurm.schedmd.com/sacctmgr.html#OPT_MaxJobs
 .. _resource_limits: https://slurm.schedmd.com/resource_limits.html
 
 --------------------------------------------------------------------------
@@ -755,15 +757,21 @@ In addition, it may be a good idea to implement **MaxSubmitJobs** and **MaxJobs*
 Job arrays
 ----------
 
-The job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily; job arrays with millions of tasks can be submitted in milliseconds (subject to configured size limits).
+The job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily;
+job_arrays_ with millions of tasks can be submitted in milliseconds (subject to configured size limits).
 
-A slurm.conf_ configuration parameter controls the maximum job array size: 
+A slurm.conf_ configuration parameter MaxArraySize_ controls the maximum job_array_ size. 
+Be mindful about the value of MaxArraySize_ as job_arrays_ offer an easy way for users to submit large numbers of jobs very quickly.
 
-* MaxArraySize. 
+However, note that the slurm.conf_ parameter MaxJobCount_ explains::
 
-Be mindful about the value of MaxArraySize as job arrays offer an easy way for users to submit large numbers of jobs very quickly.
+  NOTE: Each task of a job array counts as one job even though they will not occupy separate job records until modified or initiated.
+
+As explained above it is a good idea to configure MaxSubmitJobs_ and MaxJobs_ resource_limits_
+to prevent job_arrays_ from filling up the job queue.
 
 .. _job_arrays: https://slurm.schedmd.com/job_array.html
+.. _MaxArraySize: https://slurm.schedmd.com/slurm.conf.html#OPT_MaxArraySize
 
 --------------------------------------------------------------------------
 
@@ -1700,7 +1708,7 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 but this will be added in 25.11 (see bug_23523_).
 
 **WARNING:** The Prolog_ or TaskProlog_ programs could potentially fail if 1) the file isn't found,
-2) the file does not have the executable bit set, 3) the program has an error which causes it to exit with a non-zero exit code.
+2) the file doesn't have the executable bit set, 3) the program has an error which causes it to exit with a non-zero exit code.
 A Prolog_ error will cause the above mentioned DRAIN and requeueing.
 A TaskProlog_ error will cause the job to be cancelled.
 
