@@ -181,6 +181,10 @@ A non-default account name may be specified in the user's batch jobs, for exampl
 
   sbatch -A <account> or --account=<account>
 
+The default account of a user can be modified::
+
+  sacctmgr modify user xxx set defaultaccount=zzzz
+
 List users by::
 
   sacctmgr show user
