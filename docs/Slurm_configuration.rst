@@ -751,6 +751,7 @@ In addition, it may be a good idea use sacctmgr_ to configure MaxSubmitJobs_ and
 .. _MaxSubmitJobs: https://slurm.schedmd.com/sacctmgr.html#OPT_MaxSubmitJobs
 .. _MaxJobs: https://slurm.schedmd.com/sacctmgr.html#OPT_MaxJobs
 .. _resource_limits: https://slurm.schedmd.com/resource_limits.html
+.. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
 
 --------------------------------------------------------------------------
 
@@ -760,7 +761,7 @@ Job arrays
 The job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily;
 job_arrays_ with millions of tasks can be submitted in milliseconds (subject to configured size limits).
 
-A slurm.conf_ configuration parameter MaxArraySize_ controls the maximum job_array_ size. 
+A slurm.conf_ configuration parameter MaxArraySize_ controls the maximum job_arrays_ size. 
 Be mindful about the value of MaxArraySize_ as job_arrays_ offer an easy way for users to submit large numbers of jobs very quickly.
 
 However, note that the slurm.conf_ parameter MaxJobCount_ explains::
