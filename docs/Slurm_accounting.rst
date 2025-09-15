@@ -173,23 +173,26 @@ If desired users may also be **added to additional accounts** (see accounting_),
 
   sacctmgr add user xxx Account=zzzz
 
-The fairshare and other settings for the non-default account may be configured::
-
-  sacctmgr modify user where name=xxx account=zzzz set fairshare=0
-
 A non-default account name may be specified in the user's batch jobs, for example with sbatch_::
 
   sbatch -A <account> or --account=<account>
-
-The default account of a user can be modified::
-
-  sacctmgr modify user xxx set defaultaccount=zzzz
 
 List users by::
 
   sacctmgr show user
   sacctmgr show user -s
   sacctmgr show account -s xxx
+
+Modify user accounts
+--------------------------
+
+The fairshare and other settings for the non-default account may be configured::
+
+  sacctmgr modify user where name=xxx account=zzzz set fairshare=0
+
+The default account of a user can be modified::
+
+  sacctmgr modify user xxx set defaultaccount=zzzz
 
 When either adding or modifying a user, the following sacctmgr_ options are available:
 
@@ -213,7 +216,7 @@ When either adding or modifying a user, the following sacctmgr_ options are avai
 * **Partition=** Name of Slurm partition this association applies to.
 
 Dump and load Slurm association data
-......................................
+---------------------------------------------
 
 The sacctmgr_ command can be used to load and dump Slurm_ association data to and from a file, see the manual section
 `FLAT FILE DUMP AND LOAD <https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD>`_.
@@ -261,8 +264,8 @@ Use one of these commands to print the fairshare number of user xxx::
   sacctmgr -nP list associations user=xxx format=fairshare
   sshare -lU -u xxx
 
-Modifying and removing entities
--------------------------------
+Modifying and removing entities (users etc.)
+--------------------------------------------------
 
 For example, to permit user xxx to execute jobs on all clusters with a default account of *fysik* execute::
 
