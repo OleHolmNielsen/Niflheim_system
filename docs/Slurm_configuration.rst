@@ -851,7 +851,7 @@ FreeIPMI_ version 1.6.14 is available with RockyLinux_ and AlmaLinux_ (EL8) 8.10
 
 To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
-   rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
+   rpmbuild -ta --with systemd freeipmi-1.6.16.tar.gz
 
 Then build Slurm_ RPM packages **including** ``freeipmi`` libraries::
 

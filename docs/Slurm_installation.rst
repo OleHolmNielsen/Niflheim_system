@@ -394,7 +394,7 @@ and the section on :ref:`ipmi_power_monitoring`.
 
 To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
-  rpmbuild -ta --with systemd freeipmi-1.6.15.tar.gz
+  rpmbuild -ta --with systemd freeipmi-1.6.16.tar.gz
 
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
