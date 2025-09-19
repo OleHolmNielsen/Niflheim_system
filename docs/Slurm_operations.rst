@@ -918,6 +918,8 @@ Job arrays
 ----------
 
 Slurm_ job_arrays_ offer a mechanism for submitting and managing collections of similar jobs quickly and easily.
+Please note that job_arrays_ are subject to the **same limits**
+(such as MaxSubmitJobs_) as ordinary batch jobs.
 
 It is important to understand that job arrays, only at the moment when an individual job starts running, become independent jobs (similar to non-array jobs) 
 and are assigned their own unique JobIDs. 
@@ -931,6 +933,7 @@ To see the relationship between job arrays and JobIDs, this is a useful command 
   3394902             3394902_28          3394930             RUNNING            
 
 .. _job_arrays: https://slurm.schedmd.com/job_array.html
+.. _MaxSubmitJobs: https://slurm.schedmd.com/sacctmgr.html#OPT_MaxSubmitJobs
 
 Useful commands
 ---------------
