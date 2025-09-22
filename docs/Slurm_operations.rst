@@ -661,6 +661,7 @@ like ``boot``, ``down`` or ``drained`` nodes (but **not** ``draining`` nodes)::
 
 Optional flags can be used to modify the database search or the output fields,
 see SPECIFICATIONS_FOR_EVENTS_ and SHOW-EVENT-FORMAT-OPTIONS_.
+Default period of start of events is 00:00:00 of the previous day.
 For example::
 
   sacctmgr show event where nodes=XXX All_Time
