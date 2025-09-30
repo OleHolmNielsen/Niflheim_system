@@ -394,12 +394,12 @@ A useful list of CPU-architectures is in the Safe_CFLAGS_ page.
 We have found the following solutions:
 
 * **Recommended:** 
-  Install the EPEL_ package cpuid_::
+  Install the cpuid_ package from EPEL_::
 
     dnf install cpuid
 
   You can also download the latest RPM packages from the cpuid_ homepage,
-  although you have to rebuild from the source package due to *glibc* mismatches, for example::
+  although you have to rebuild from the source package due to *glibc* version mismatches, for example::
 
     rpmbuild --rebuild cpuid-20250513-1.src.rpm
 
