@@ -256,6 +256,8 @@ which stores all jobs batch scripts in the database for later retrival::
 
   AccountingStoreFlags=job_script
 
+You should also consider adjusting the max_script_size_ parameter in slurm.conf_ (default is 4 MB).
+
 The sacct_ command can print the batch script of jobs (only if the job used one)::
 
   sacct -j <JobIds> --batch-script
@@ -275,6 +277,7 @@ and ``describe`` the table.
 .. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
 .. _job_script: https://slurm.schedmd.com/slurm.conf.html#OPT_job_script
 .. _job_env: https://slurm.schedmd.com/slurm.conf.html#OPT_job_env
+.. _max_script_size: https://slurm.schedmd.com/slurm.conf.html#OPT_max_script_size
 .. _enabling_job_script_archival: https://groups.google.com/g/slurm-users/c/SF4jWY3lH9A?pli=1
 .. _SchedMD: https://www.schedmd.com/
 .. _MySQL: https://www.mysql.com/
