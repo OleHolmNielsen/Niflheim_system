@@ -269,7 +269,7 @@ See the mailing list thread enabling_job_script_archival_ containing some observ
   So the only way to get rid of them if they get large is to zero out the column in the database table.
   You can ask SchedMD_ for the MySQL_ command to do this as we had to do it here to our job_env_. 
 
-The :ref:`slurm-database-tables` shows how to show the cluster's ``*_job_script_table``
+The :ref:`slurm_database_tables` shows how to show the cluster's ``*_job_script_table``
 and ``describe`` the table.
 
 .. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
