@@ -217,37 +217,42 @@ To show tables in the database::
 
   MariaDB [slurm_acct_db]> show tables;
   +----------------------------------+
-  | Tables_in_slurm_acct_db |
+  | Tables_in_slurm_acct_db          |
   +----------------------------------+
-  | acct_coord_table |
-  | acct_table |
-  | clus_res_table |
-  | cluster_table |
-  | convert_version_table |
-  | federation_table |
-  | niflheim_assoc_table |
-  | niflheim_assoc_usage_day_table |
-  | niflheim_assoc_usage_hour_table |
+  | acct_coord_table                 |
+  | acct_table                       |
+  | clus_res_table                   |
+  | cluster_table                    |
+  | convert_version_table            |
+  | federation_table                 |
+  | niflheim_assoc_table             |
+  | niflheim_assoc_usage_day_table   |
+  | niflheim_assoc_usage_hour_table  |
   | niflheim_assoc_usage_month_table |
-  | niflheim_event_table |
-  | niflheim_job_table |
-  | niflheim_last_ran_table |
-  | niflheim_resv_table |
-  | niflheim_step_table |
-  | niflheim_suspend_table |
-  | niflheim_usage_day_table |
-  | niflheim_usage_hour_table |
-  | niflheim_usage_month_table |
-  | niflheim_wckey_table |
-  | niflheim_wckey_usage_day_table |
-  | niflheim_wckey_usage_hour_table |
+  | niflheim_event_table             |
+  | niflheim_job_env_table           |
+  | niflheim_job_script_table        |
+  | niflheim_job_table               |
+  | niflheim_last_ran_table          |
+  | niflheim_qos_usage_day_table     |
+  | niflheim_qos_usage_hour_table    |
+  | niflheim_qos_usage_month_table   |
+  | niflheim_resv_table              |
+  | niflheim_step_table              |
+  | niflheim_suspend_table           |
+  | niflheim_usage_day_table         |
+  | niflheim_usage_hour_table        |
+  | niflheim_usage_month_table       |
+  | niflheim_wckey_table             |
+  | niflheim_wckey_usage_day_table   |
+  | niflheim_wckey_usage_hour_table  |
   | niflheim_wckey_usage_month_table |
-  | qos_table |
-  | res_table |
-  | table_defs_table |
-  | tres_table |
-  | txn_table |
-  | user_table |
+  | qos_table                        |
+  | res_table                        |
+  | table_defs_table                 |
+  | tres_table                       |
+  | txn_table                        |
+  | user_table                       |
   +----------------------------------+
 
 where *niflheim* refers to the name of our cluster.
