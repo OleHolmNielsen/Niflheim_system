@@ -201,6 +201,8 @@ See also Bug_2457_:
 .. _Bug_2457: https://bugs.schedmd.com/show_bug.cgi?id=2457
 .. _innodb_buffer_pool_size: https://mariadb.com/kb/en/innodb-buffer-pool/
 
+.. _slurm-database-tables:
+
 Slurm database tables
 =====================
 
