@@ -651,6 +651,35 @@ The following steps should be made:
 .. _bug_13562: https://bugs.schedmd.com/show_bug.cgi?id=13562#c21
 .. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
 
+Backup and restore of Slurm associations
+------------------------------------------
+
+It is a good idea to keep a backup of the cluster's Slurm_ user and QOS associations 
+in the event that the database might become corrupted.
+The basic sacctmgr_dump_ and corresponding load commands are::
+
+  sacctmgr dump <clustername> file=<clustername>.cfg
+  sacctmgr load file=<clustername>.cfg
+
+The best way to make such dumps regularly is using a logrotate_ script
+``/etc/logrotate.d/slurm_assoc_backup`` (replace the *clustername*)::
+
+  /var/log/slurm/clustername.cfg {
+      daily
+      dateext
+      dateyesterday
+      rotate 8
+      nocompress
+      missingok
+      create 640 root adm
+      postrotate
+      # Dump Slurm association data for cluster "clustername"
+      /usr/bin/sacctmgr dump clustername file=clustername.cfg 2>/dev/null
+      endscript
+  }
+
+.. _sacctmgr_dump: https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD
+
 Configure database accounting in slurm.conf
 ===========================================
 
