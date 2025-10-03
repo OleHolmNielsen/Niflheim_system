@@ -256,7 +256,7 @@ which stores all jobs batch scripts in the database for later retrival::
 
   AccountingStoreFlags=job_script
 
-You should also consider adjusting the max_script_size_ parameter in slurm.conf_ (default is 4 MB).
+You should also consider adjusting the SchedulerParameters_ parameter max_script_size_ in slurm.conf_ (default is 4 MB).
 
 The sacct_ command can print the batch script of jobs (only if the job used one)::
 
