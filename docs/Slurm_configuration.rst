@@ -243,12 +243,36 @@ If AccountingStorageType_ is omitted, or set to the obsolete value *accounting_s
 then account records are not maintained, meaning that anything related to user accounts will not work!
 See also a discussion in bug_21398_.
 
-There are a number of optional AccountingStoreFlags_ with fields that the slurmctld_ sends to the accounting database,
-for example ``job_script`` which stores the job's batch script.
-
 .. _AccountingStorageType: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageType
-.. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
 .. _bug_21398: https://support.schedmd.com/show_bug.cgi?id=21398
+
+Optional: Configure AccountingStoreFlags
+.........................................
+
+There are a number of **optional** AccountingStoreFlags_ n slurm.conf_
+with fields that the slurmctld_ sends to the accounting database.
+For example, job_script_ which stores all jobs batch scripts in the database for later retrival::
+
+  AccountingStoreFlags=job_script
+
+The sacct_ command can print the batch script of a job (only if the job used one)::
+
+  sacct -j <JobId> --batch-script
+
+**Warning**: The amount of data sent to the database can easily become very large and possibly exhaust your database space,
+as well as causing long times for database dump and restore operations!
+See the mailing list thread enabling_job_script_archival_ containing some observations:
+
+* Thus job_env_ ended up being too massive to keep around and so we had to drop them.
+* There is no way to prune out job_script_ or job_env_ right now.
+  So the only way to get rid of them if they get large is to 0 out the column in the table.
+  You can ask SchedMD_ for the mysql command to do this as we had to do it here to our job_env_. 
+
+.. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
+.. _job_script: https://slurm.schedmd.com/slurm.conf.html#OPT_job_script
+.. _job_env: https://slurm.schedmd.com/slurm.conf.html#OPT_job_env
+.. _enabling_job_script_archival: https://groups.google.com/g/slurm-users/c/SF4jWY3lH9A?pli=1
+.. _SchedMD: https://www.schedmd.com/
 
 --------------------------------------------------------------------------
 
