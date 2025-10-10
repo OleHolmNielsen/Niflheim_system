@@ -6,17 +6,11 @@ Slurm cloud bursting
 
 .. Contents::
 
-Slurm_ has the ability to support a cluster that grows and shrinks on demand, typically relying upon a service such as Amazon Elastic Computing Cloud (Amazon_EC2_), Google Cloud Platform (GCP_), Microsoft Azure_, or Oracle Cloud Infrastructure (OCI_).
+Slurm and the Cloud
+=======================
 
-.. _Slurm: https://www.schedmd.com/
-.. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
-.. _publications: https://slurm.schedmd.com/publications.html
-.. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
-.. _sinfo: https://slurm.schedmd.com/sinfo.html
-.. _Amazon_EC2: https://aws.amazon.com/ec2/
-.. _GCP: https://cloud.google.com/
-.. _Azure: https://azure.microsoft.com/en-us/
-.. _OCI: https://www.oracle.com/cloud/
+Slurm_ has the ability to support a cluster that grows and shrinks on demand, typically relying upon a Cloud_computing_ service,
+for example, Amazon Elastic Computing Cloud (Amazon_EC2_), Google Cloud Platform (GCP_), Microsoft Azure_, or Oracle Cloud Infrastructure (OCI_).
 
 Some Slurm_ cloud bursting resources:
 
@@ -30,8 +24,29 @@ Some Slurm_ cloud bursting resources:
 
 Jump to our top-level Slurm page: :ref:`SLURM`
 
+.. _Slurm: https://www.schedmd.com/
+.. _Cloud_computing: https://en.wikipedia.org/wiki/Cloud_computing
+.. _Power_Saving_Guide: https://slurm.schedmd.com/power_save.html
+.. _publications: https://slurm.schedmd.com/publications.html
+.. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
+.. _sinfo: https://slurm.schedmd.com/sinfo.html
+.. _Amazon_EC2: https://aws.amazon.com/ec2/
+.. _GCP: https://cloud.google.com/
+.. _Azure: https://azure.microsoft.com/en-us/
+.. _OCI: https://www.oracle.com/cloud/
 .. _Rclone: https://rclone.org/
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
+
+Cloud pricing information
+----------------------------
+
+It is relevant to consider the cost of Cloud_computing_ resources,
+and some examples of pricing information pages are:
+
+* Azure_: `Linux Virtual Machines Pricing <https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/>`_.
+* Amazon_EC2_: `Amazon EC2 On-Demand Pricing <https://aws.amazon.com/ec2/pricing/on-demand/>`_.
+* Oracle OCI_: `Compute Pricing <https://www.oracle.com/cloud/compute/pricing/>`_.
+* Google GCP_: `Google Cloud pricing <https://cloud.google.com/pricing>`_.
 
 .. _Slurm_configuration_for_cloud_nodes:
 
