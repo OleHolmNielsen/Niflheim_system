@@ -678,7 +678,7 @@ The best way to make such dumps regularly is using a logrotate_ script
       rotate 8
       nocompress
       missingok
-      create 640 root adm
+      create 640 slurm slurm
       postrotate
       # Dump Slurm association data for cluster "clustername"
       yes | /usr/bin/sacctmgr dump clustername file=clustername.cfg 2>/dev/null
