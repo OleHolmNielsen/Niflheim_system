@@ -1512,6 +1512,9 @@ The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
   JobContainerType=job_container/tmpfs
   PrologFlags=Contain
 
+**Note:** From `25.11 <https://github.com/SchedMD/slurm/blob/slurm-25.11/RELEASE_NOTES.md#configuration-changes>`_
+the ``JobContainerType`` is renamed as ``NamespaceType``.
+
 The auto_tmpdir_ plugin 
 .................................
 
