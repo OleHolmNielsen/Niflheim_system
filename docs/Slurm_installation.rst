@@ -709,11 +709,12 @@ Pay attention to these statements:
   The slurmd_ on compute nodes can be upgraded over a period of time,
   and older slurmd_ versions will continue to work with an upgraded slurmctld_,
   although it is recommended to upgrade as soon as possible.
-* The following command can report current jobs that have been orphaned on the local cluster and are now runaway::
+* The following command can report current jobs that have been orphaned on the local cluster and are now Runaway_jobs_::
 
     sacctmgr show RunawayJobs
 
   Note: The user **must** respond ``y`` or ``n`` for every job reported, and non-terminal input may cause an infinite loop! 
+  For correct accounting it is important to clean up such jobs.
 
 Regarding the Slurm_ database, also make sure to:
 
@@ -733,6 +734,7 @@ Regarding the Slurm_ database, also make sure to:
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
+.. _Runaway_jobs: https://slurm.schedmd.com/sacctmgr.html#OPT_RunawayJobs
 
 Upgrade of MySQL/MariaDB
 ------------------------
