@@ -735,6 +735,7 @@ Regarding the Slurm_ database, also make sure to:
 .. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
+.. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 .. _Runaway_jobs: https://slurm.schedmd.com/sacctmgr.html#OPT_RunawayJobs
 .. _cron: https://en.wikipedia.org/wiki/Cron
