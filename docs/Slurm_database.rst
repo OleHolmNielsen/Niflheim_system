@@ -681,11 +681,14 @@ The best way to make such dumps regularly is using a logrotate_ script
       create 640 root adm
       postrotate
       # Dump Slurm association data for cluster "clustername"
-      /usr/bin/sacctmgr dump clustername file=clustername.cfg 2>/dev/null
+      yes | /usr/bin/sacctmgr dump clustername file=clustername.cfg 2>/dev/null
       endscript
   }
 
+Note: The sacctmgr_ **requires** an stdin which we provide with the yes_ command.
+
 .. _sacctmgr_dump: https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD
+.. _yes: https://en.wikipedia.org/wiki/Yes_(Unix)
 
 Configure database accounting in slurm.conf
 ===========================================
