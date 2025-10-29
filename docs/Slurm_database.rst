@@ -681,7 +681,7 @@ The best way to make such dumps regularly is using a logrotate_ script
       create 640 slurm slurm
       postrotate
       # Dump Slurm association data for cluster "clustername"
-      yes | /usr/bin/sacctmgr dump clustername file=clustername.cfg 2>/dev/null
+      yes | /usr/bin/sacctmgr dump clustername file=/var/log/slurm/clustername.cfg 2>/dev/null
       endscript
   }
 
