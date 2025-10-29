@@ -711,7 +711,7 @@ Pay attention to these statements:
   although it is recommended to upgrade as soon as possible.
 * The following command can report current jobs that have been orphaned on the local cluster,
   and for correct accounting it is important to clean up such jobs.
-  Display and fix any Runaway_jobs_.
+  Display and fix any Runaway_jobs_::
 
     sacctmgr show RunawayJobs
 
