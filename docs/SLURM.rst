@@ -60,7 +60,8 @@ Documentation from SchedMD_ about Slurm_:
 * Youtube `videos about Slurm <https://www.youtube.com/c/SchedMDSlurm/videos>`_.
 * Slurm_tutorials_.
 * Slurm_man_pages_ overview of man-pages, configuration files, and daemons.
-* Slurm_bugs_ tracking system.
+* Slurm_support_ tracking system.
+* Slurm_contributions_ of code and patches.
 * `Large Cluster Administration Guide <https://slurm.schedmd.com/big_sys.html>`_ (clusters containing 1024 nodes or more).
 * `Slurm Troubleshooting Guide <https://slurm.schedmd.com/troubleshoot.html>`_.
 * `Slurm Elastic Computing (Cloud Bursting) <https://slurm.schedmd.com/elastic_computing.html>`_ (Google Cloud, Amazon EC2 etc.)
@@ -90,7 +91,8 @@ Documentation from other sources:
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://www.schedmd.com/publications/
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_support: https://support.schedmd.com
+.. _Slurm_contributions: https://github.com/SchedMD/slurm/blob/master/CONTRIBUTING.md
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
