@@ -230,9 +230,9 @@ Modifying user UIDs or group GIDs
 
 If a user's UID is modified in ``/etc/passwd``, 
 or the user's GID is modified in ``/etc/passwd``, 
-the Slurm_ design requires you to restart slurmctld_, see bug_3575_.
+the Slurm_ design requires you to restart slurmctld_, see ticket_3575_.
 
-.. _bug_3575: https://support.schedmd.com/show_bug.cgi?id=3575
+.. _ticket_3575: https://support.schedmd.com/show_bug.cgi?id=3575
 
 User fairshare
 --------------
@@ -317,10 +317,10 @@ Now you can impose user limits, for example::
 
   sacctmgr modify user xxx set GrpTRES=cpu=1000 GrpTRESRunMin=cpu=2000000
 
-Notice: The keyword ``cpu`` **must** be in lower-case, see bug_4226_ (resolved in Slurm_ 17.02.8).
+Notice: The keyword ``cpu`` **must** be in lower-case, see ticket_4226_ (resolved in Slurm_ 17.02.8).
 
 .. _Resource_Limits: https://slurm.schedmd.com/resource_limits.html
-.. _bug_4226: https://support.schedmd.com/show_bug.cgi?id=4226
+.. _ticket_4226: https://support.schedmd.com/show_bug.cgi?id=4226
 
 Trackable RESources (TRES)
 --------------------------
@@ -424,7 +424,7 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
     sacctmgr show RunawayJobs
 
   Note: The user **must** respond ``y`` or ``n`` for every job reported,
-  and non-terminal input may cause an infinite loop for Slurm_ prior to 25.05.1 (see bug_22951_) ! 
+  and non-terminal input may cause an infinite loop for Slurm_ prior to 25.05.1 (see ticket_22951_) ! 
 
 * List of database transactions that have occurred during a given time period::
 
@@ -438,7 +438,7 @@ See the sacctmgr_ man page `ENTITIES <https://slurm.schedmd.com/sacctmgr.html#lb
 
     sacctmgr show associations tree
 
-.. _bug_22951: https://support.schedmd.com/show_bug.cgi?id=22951#c17
+.. _ticket_22951: https://support.schedmd.com/show_bug.cgi?id=22951#c17
 
 Parseable output
 ................
@@ -466,10 +466,10 @@ Slurm job efficiency report (seff)
 ----------------------------------
 
 The ``/usr/bin/seff`` command takes a jobid and reports on the efficiency of that job's cpu and memory utilization (requires Slurm_ 15.08 or later).
-The ``slurm-contribs`` RPM (Slurm_ 17.02 and later, previously ``slurm-seff``) also comes with an ``/usr/bin/smail`` utility that allows for Slurm end-of-job emails to include a ``seff`` report, see bug_1611_.
+The ``slurm-contribs`` RPM (Slurm_ 17.02 and later, previously ``slurm-seff``) also comes with an ``/usr/bin/smail`` utility that allows for Slurm end-of-job emails to include a ``seff`` report, see ticket_1611_.
 This allows users to become aware if they are wasting resources.
 
-.. _bug_1611: https://support.schedmd.com/show_bug.cgi?id=1611
+.. _ticket_1611: https://support.schedmd.com/show_bug.cgi?id=1611
 
 The ``smail`` utility is invoked automatically to process end-of-job notifications if you add the following to slurm.conf_::
 
@@ -489,13 +489,13 @@ For accounting of GPU usage you must add to the **AccountingStorageTRES** in slu
 
 and restart slurmctld_ so that these new fields are added to the database.
 After editing slurm.conf_ you must distribute this file to all nodes (possibly using Configless Slurm), and do a ``scontrol reconfig``.
-See also the discussion in bug_12031_.
+See also the discussion in ticket_12031_.
 
 Then you can inquire GPU resource usage with the sacct_ **AllocTRES** output, for example for a specific jobid 12345::
 
   sacct -j 12345 -p -X --format=jobid,user,alloctres
 
-.. _bug_12031: https://support.schedmd.com/show_bug.cgi?id=12031
+.. _ticket_12031: https://support.schedmd.com/show_bug.cgi?id=12031
 
 Nvidia accounting
 .................

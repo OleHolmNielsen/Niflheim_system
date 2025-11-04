@@ -194,11 +194,11 @@ You can check the current setting in MySQL like so::
   SHOW VARIABLES LIKE 'innodb_lock_wait_timeout';
   quit;
 
-See also bug_2457_:
+See also ticket_2457_:
 
 * The innodb_buffer_pool_size_ can have a huge impact - we'd recommend setting this as high as half the RAM available on the slurmdbd_ server.
 
-.. _bug_2457: https://support.schedmd.com/show_bug.cgi?id=2457
+.. _ticket_2457: https://support.schedmd.com/show_bug.cgi?id=2457
 .. _innodb_buffer_pool_size: https://mariadb.com/kb/en/innodb-buffer-pool/
 
 .. _slurm_database_tables:
@@ -363,7 +363,7 @@ The high_throughput_ page has this advise:
     PurgeTXNAfter=12months
     PurgeUsageAfter=12months
 
-The purge operation is done at the start of each time interval (see bug_4295_), which means on the 1st day of the month in this example.
+The purge operation is done at the start of each time interval (see ticket_4295_), which means on the 1st day of the month in this example.
 Monthly, daily or even hourly purge operations would occur when using different time units for the same interval::
 
   PurgeStepAfter=2months
@@ -388,7 +388,7 @@ Logging of purge events can be configured in slurmdbd.conf_ using::
   DebugFlags=DB_ARCHIVE
 
 .. _high_throughput: https://slurm.schedmd.com/high_throughput.html
-.. _bug_4295: https://support.schedmd.com/show_bug.cgi?id=4295
+.. _ticket_4295: https://support.schedmd.com/show_bug.cgi?id=4295
 .. _MUNGE: https://dun.github.io/munge/
 
 slurmdbd hostname configuration
@@ -455,7 +455,7 @@ In order to backup the entire database to a different location (for disaster rec
 
 You may want to read the page `Mysqldump with Modern MySQL <https://serversforhackers.com/c/mysqldump-with-modern-mysql>`_.
 
-See also the discussion in bug_10295_ about dumping **only** the *slurm_acct_db* database, and using ``--single-transaction`` for InnoDB_ tables.
+See also the discussion in ticket_10295_ about dumping **only** the *slurm_acct_db* database, and using ``--single-transaction`` for InnoDB_ tables.
 You can show the tables by::
 
   # mysqlshow -p --status slurm_acct_db
@@ -465,7 +465,7 @@ For compressing the (large) database dumps, install the *gzip*, *bzip2*, and per
   dnf install gzip bzip2
   dnf install lbzip2    # From EPEL
 
-.. _bug_10295: https://support.schedmd.com/show_bug.cgi?id=10295
+.. _ticket_10295: https://support.schedmd.com/show_bug.cgi?id=10295
 .. _mysqldump: https://mariadb.com/kb/en/mysqldump/
 
 Backup of MariaDB 10.1 and later
@@ -605,13 +605,13 @@ since there are some incompatible changes between 5.5 and 10.
 Slurm database modifications required for MariaDB 10.2.1 and above
 ..................................................................
 
-In MariaDB_ 10.2.1 and above there are some **important changes** which have been discussed in bug_13562_.
+In MariaDB_ 10.2.1 and above there are some **important changes** which have been discussed in ticket_13562_.
 Several Slurm database tables must be altered while the slurmdbd_ is stopped.
 Please note that EL7 contains MariaDB_ version 5.5, and EL8 contains MariaDB_ version 10.3,
 so this point is **important**, for example, when upgrading from EL7 to EL8!
 This has been resolved from Slurm_ 22.05.7.
 
-We have discussed the procedure for MariaDB_ 10.2.1 and above in details in bug_15168_.
+We have discussed the procedure for MariaDB_ 10.2.1 and above in details in ticket_15168_.
 A future version of Slurm may perform these changes automatically.
 
 The procedure for Slurm database modifications must be followed
@@ -655,8 +655,8 @@ The following steps should be made:
 
      systemctl start slurmdbd
 
-.. _bug_13562: https://support.schedmd.com/show_bug.cgi?id=13562#c21
-.. _bug_15168: https://support.schedmd.com/show_bug.cgi?id=15168
+.. _ticket_13562: https://support.schedmd.com/show_bug.cgi?id=13562#c21
+.. _ticket_15168: https://support.schedmd.com/show_bug.cgi?id=15168
 
 Backup and restore of Slurm associations
 ------------------------------------------

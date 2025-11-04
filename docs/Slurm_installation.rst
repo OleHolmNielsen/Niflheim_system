@@ -259,9 +259,9 @@ For the ``auth/slurm`` authentication you must have a shared key file ``/etc/slu
 but beginning with version 24.05 you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys as shown below.
 **Note:** The key file(s) must be distributed securely to all nodes in the cluster (for example using clush_).
 
-The ticket bug_21683_ discusses ``How to get started with auth/slurm?``
+The ticket ticket_21683_ discusses ``How to get started with auth/slurm?``
 
-.. _bug_21683: https://support.schedmd.com/show_bug.cgi?id=21683
+.. _ticket_21683: https://support.schedmd.com/show_bug.cgi?id=21683
 
 Single slurm.key setup
 .........................
@@ -501,12 +501,12 @@ YAML output
 
 For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by installing the ``libyaml-devel`` library:
 
-* **Important**: The `libyaml` **must** be version >= 0.2.5, see bug_17673_,
+* **Important**: The `libyaml` **must** be version >= 0.2.5, see ticket_17673_,
   and EL9 provides this version.
   The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
 .. _YAML: https://en.wikipedia.org/wiki/YAML
-.. _bug_17673: https://support.schedmd.com/show_bug.cgi?id=17673
+.. _ticket_17673: https://support.schedmd.com/show_bug.cgi?id=17673
 
 Install MariaDB database
 ------------------------
@@ -537,7 +537,7 @@ Set the version (for example, 24.11.6 and build Slurm_ RPM packages by::
 Notes about the ``--with mysql`` option:
 
 * The ``--with mysql`` option is not strictly necessary because the ``slurm-slurmdbd`` package will be built by default, 
-  but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also bug_8882_
+  but using this option will catch the scenario where your forgot to install the ``mariadb-devel`` packages as described above, see also ticket_8882_
   and this `mailing list posting <https://lists.schedmd.com/pipermail/slurm-users/2020-April/005245.html>`_.
 * From Slurm_ 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
@@ -549,10 +549,10 @@ In our setup we build packages with these options::
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
 .. _LTO: https://johanengelen.github.io/ldc/2016/11/10/Link-Time-Optimization-LDC.html
-.. _bug_14565: https://support.schedmd.com/show_bug.cgi?id=14565
+.. _ticket_14565: https://support.schedmd.com/show_bug.cgi?id=14565
 .. _MariaDB: https://mariadb.org/
 .. _MySQL: https://www.mysql.com/
-.. _bug_8882: https://support.schedmd.com/show_bug.cgi?id=8882
+.. _ticket_8882: https://support.schedmd.com/show_bug.cgi?id=8882
 
 Build Slurm with optional features
 .......................................
@@ -563,7 +563,7 @@ You may build Slurm_ packages including optional features as documented above in
 
     rpmbuild <...> --with freeipmi
 
-  This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see bug_17900_.
+  This will be available from Slurm_ 23.11 where the presense of the ``freeipmi-devel`` package gets verified, see ticket_17900_.
 
 * Build with PMIx (OpenPMIx_) support::
 
@@ -582,7 +582,7 @@ You may build Slurm_ packages including optional features as documented above in
   **Notice** that `libyaml` version 0.2.5 or later is required (see above), and this is only available starting with EL9,
   so the ``--with yaml`` option should **not** be used on EL8 and older releases!
 
-.. _bug_17900: https://support.schedmd.com/show_bug.cgi?id=17900
+.. _ticket_17900: https://support.schedmd.com/show_bug.cgi?id=17900
 
 .. _Installing_RPMs:
 
@@ -679,10 +679,10 @@ Configure Slurm logging
     mkdir /var/log/slurm
     chown slurm.slurm /var/log/slurm
 
-  See the more general description in bug_8272_.
+  See the more general description in ticket_8272_.
 
 .. _Administrator_Guide: https://slurm.schedmd.com/quickstart_admin.html
-.. _bug_8272: https://support.schedmd.com/show_bug.cgi?id=8272
+.. _ticket_8272: https://support.schedmd.com/show_bug.cgi?id=8272
 
 .. _upgrading-slurm:
 
@@ -704,7 +704,7 @@ Pay attention to these statements:
 
   Actually, the term "commands" here primarily refers to the **login nodes**,
   because all Slurm_ commands (sinfo_ , squeue_ etc.) are **not interoperable** with an older slurmctld_ version,
-  as explained in bug_17418_, due to RPC_ changes!
+  as explained in ticket_17418_, due to RPC_ changes!
   It is OK to upgrade Slurm_ on login nodes **after** slurmctld_ has been upgraded.
   The slurmd_ on compute nodes can be upgraded over a period of time,
   and older slurmd_ versions will continue to work with an upgraded slurmctld_,
@@ -721,7 +721,7 @@ Pay attention to these statements:
 Regarding the Slurm_ database, also make sure to:
 
 * Make a database dump (see :ref:`Slurm_database`) prior to the slurmdbd_ upgrade.
-* Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see bug_4450_).
+* Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see ticket_4450_).
   In stead of starting the slurmdbd_ Systemd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
   If you use the ``systemctl`` command, it is very likely to **exceed a Systemd_ time limit** and kill slurmdbd_ before the database conversion has been completed!
   
@@ -732,7 +732,7 @@ Regarding the Slurm_ database, also make sure to:
   See further info below.
 
 .. _Upgrade_Guide: https://slurm.schedmd.com/upgrades.html
-.. _bug_4450: https://support.schedmd.com/show_bug.cgi?id=4450
+.. _ticket_4450: https://support.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
@@ -925,7 +925,7 @@ The upgrading steps for the slurmdbd_ host are:
      export VER=24.11.6
      dnf update slurm*$VER*.rpm
 
-4. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see bug_4450_).
+4. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see ticket_4450_).
    In stead of starting the slurmdbd_ service with ``systemctl``, it is most likely necessary to **start the daemon manually**.
    If you were to use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
 
@@ -950,9 +950,9 @@ The upgrading steps for the slurmdbd_ host are:
      sacctmgr show user -s
 
 **WARNING:** Newer versions of user commands like ``sinfo``, ``squeue`` etc. are **not interoperable** with an older 
-slurmctld_ version, as explained in bug_17418_, due to RPC_ changes!
+slurmctld_ version, as explained in ticket_17418_, due to RPC_ changes!
 
-.. _bug_17418: https://support.schedmd.com/show_bug.cgi?id=17418
+.. _ticket_17418: https://support.schedmd.com/show_bug.cgi?id=17418
 .. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
 Upgrade slurmctld
@@ -1111,12 +1111,12 @@ This change allows slurmstepd_ to receive an updated ``SlurmctldHost`` setting s
 See the Slurm_publications_ presentation ``Slurm 23.02, 23.11, and Beyond`` by Tim Wickberg, SchedMD.
 Notice, however, that slurmd_ ignores any changes in slurm.conf_ or the DNS SRV_record_ (i.e., when running a :ref:`configless-slurm-setup`):
 
-* When slurmd_ is started, it caches its configuration files as is discussed in bug_20462_.
+* When slurmd_ is started, it caches its configuration files as is discussed in ticket_20462_.
 
 * Therefore it is required to restart slurmd_ on all compute notes after modifying slurm.conf_ and the DNS SRV_record_ (if applicable).
 
 The slurmctld_ migration process for Slurm_ 23.11 and later does **not** require to stop all running jobs,
-and the details are discussed in bug_20070_ .
+and the details are discussed in ticket_20070_ .
 
 We have successfully performed a slurmctld_ migration following this procedure:
 
@@ -1157,7 +1157,7 @@ We have successfully performed a slurmctld_ migration following this procedure:
      systemctl start slurmctld
      systemctl enable slurmctld
 
-8. As discussed in bug_20462_ it is necessary to restart slurmd_ on **all compute nodes**
+8. As discussed in ticket_20462_ it is necessary to restart slurmd_ on **all compute nodes**
    so they can pick up the new ``SlurmctldHost`` value in slurm.conf_.
    For example, use the clush_ command (see the :ref:`SLURM` page about ClusterShell_)::
 
@@ -1174,8 +1174,8 @@ If **not** using :ref:`configless-slurm-setup` you must distribute slurm.conf_ m
 
 .. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 .. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
-.. _bug_20070: https://support.schedmd.com/show_bug.cgi?id=20070
-.. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
+.. _ticket_20070: https://support.schedmd.com/show_bug.cgi?id=20070
+.. _ticket_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 .. _rsync: https://en.wikipedia.org/wiki/Rsync
 
 Migrate slurmctld version <= 23.02
@@ -1201,7 +1201,7 @@ Especially the ``slurmctld.log`` file on the controller machine may grow very la
 Therefore you probably want to configure logrotate_ to administer your log files.
 On RHEL Linux and clones the logrotate_ configuration files are in the ``/etc/logrotate.d/`` directory.
 
-Manual configuration of logging is required because the SchedMD_ RPM files do not contain the logrotate setup, see bug_3904_, bug_2215_, and bug_4393_.
+Manual configuration of logging is required because the SchedMD_ RPM files do not contain the logrotate setup, see ticket_3904_, ticket_2215_, and ticket_4393_.
 See also the section *LOGGING* at the end of the slurm.conf_ page with an example logrotate script.
 
 First install the relevant RPM::
@@ -1237,10 +1237,10 @@ See the NEWS_ file for changes related to SIGUSR2_ in Slurm_ 17.11.0pre2::
   Modify all daemons to re-open log files on receipt of SIGUSR2 signal. This is much than using SIGHUP to re-read the configuration file and rebuild various tables.
 
 .. _logrotate: https://github.com/logrotate/logrotate
-.. _bug_3402: https://support.schedmd.com/show_bug.cgi?id=3402
-.. _bug_3904: https://support.schedmd.com/show_bug.cgi?id=3904
-.. _bug_2215: https://support.schedmd.com/show_bug.cgi?id=2215
-.. _bug_4393: https://support.schedmd.com/show_bug.cgi?id=4393
-.. _bug_9264: https://support.schedmd.com/show_bug.cgi?id=9264
+.. _ticket_3402: https://support.schedmd.com/show_bug.cgi?id=3402
+.. _ticket_3904: https://support.schedmd.com/show_bug.cgi?id=3904
+.. _ticket_2215: https://support.schedmd.com/show_bug.cgi?id=2215
+.. _ticket_4393: https://support.schedmd.com/show_bug.cgi?id=4393
+.. _ticket_9264: https://support.schedmd.com/show_bug.cgi?id=9264
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 .. _SIGUSR2: https://www.gnu.org/software/libc/manual/html_node/Miscellaneous-Signals.html

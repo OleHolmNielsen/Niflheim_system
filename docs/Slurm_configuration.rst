@@ -93,7 +93,7 @@ pointing to port 6817 on your slurmctld_ server(s)::
   _slurmctld._tcp 3600 IN SRV 0 0 6817 slurm-master
  
 Note: The DNS record value TTL=3600 could be anything at all,
-because slurmd_ will only read the DNS SRV_record_ at initial startup and *never* thereafter, see bug_20462_.
+because slurmd_ will only read the DNS SRV_record_ at initial startup and *never* thereafter, see ticket_20462_.
 
 To verify the DNS setup, install these packages::
 
@@ -114,7 +114,7 @@ It is also possible to append the dnsdomainname_ value to lookup the complete FQ
 .. _DNS_zone: https://en.wikipedia.org/wiki/Zone_file
 .. _SRV_record: https://en.wikipedia.org/wiki/SRV_record
 .. _Time_to_live: https://en.wikipedia.org/wiki/Time_to_live
-.. _bug_20462: https://support.schedmd.com/show_bug.cgi?id=20462
+.. _ticket_20462: https://support.schedmd.com/show_bug.cgi?id=20462
 .. _FQDN: https://en.wikipedia.org/wiki/Fully_qualified_domain_name
 .. _resolv.conf: https://linux.die.net/man/5/resolv.conf
 .. _dig: https://linux.die.net/man/1/dig
@@ -129,7 +129,7 @@ recommends on slide 31 to run slurmd on all login nodes in configless_ Slurm mod
 
   We generally suggest that you run a slurmd to manage the configs on those nodes that run client commands, including submit or login nodes
 
-The simplest way to achieve this is described in bug_9832_:
+The simplest way to achieve this is described in ticket_9832_:
 
 1. Add the login and submit nodes to slurm.conf_ as default-configured nodes, for example::
 
@@ -157,7 +157,7 @@ The simplest way to achieve this is described in bug_9832_:
 
      ls -l /run/slurm/conf
 
-.. _bug_9832: https://support.schedmd.com/show_bug.cgi?id=9832
+.. _ticket_9832: https://support.schedmd.com/show_bug.cgi?id=9832
 
 --------------------------------------------------------------------------
 
@@ -241,10 +241,10 @@ This basically means that the use of a :ref:`Slurm_database` with a slurmdbd_ se
 
 If AccountingStorageType_ is omitted, or set to the obsolete value *accounting_storage/none* (removed from Slurm_ 23.11),
 then account records are not maintained, meaning that anything related to user accounts will not work!
-See also a discussion in bug_21398_.
+See also a discussion in ticket_21398_.
 
 .. _AccountingStorageType: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageType
-.. _bug_21398: https://support.schedmd.com/show_bug.cgi?id=21398
+.. _ticket_21398: https://support.schedmd.com/show_bug.cgi?id=21398
 
 Optional: Configure AccountingStoreFlags
 .........................................
@@ -370,7 +370,7 @@ Adding nodes
 ............
 
 According to the scontrol_ man-page, when adding or removing nodes to slurm.conf_, it is necessary to **restart** slurmctld_.
-However, it is also necessary to restart the slurmd_ daemon on all nodes, see bug_3973_:
+However, it is also necessary to restart the slurmd_ daemon on all nodes, see ticket_3973_:
 
 1. Stop slurmctld_
 2. Add/remove nodes in slurm.conf_
@@ -394,7 +394,7 @@ It is also possible to add nodes to slurm.conf_ with a state of **future**::
 
 However, such **future** nodes must not be members of any Slurm_ partition.
 
-.. _bug_3973: https://support.schedmd.com/show_bug.cgi?id=3973
+.. _ticket_3973: https://support.schedmd.com/show_bug.cgi?id=3973
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 
@@ -501,7 +501,7 @@ See an interesting discussion in `bug 2713 <https://support.schedmd.com/show_bug
 
 After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfigure``.
 
-.. _bug_3874: https://support.schedmd.com/show_bug.cgi?id=3874
+.. _ticket_3874: https://support.schedmd.com/show_bug.cgi?id=3874
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 
 --------------------------------------------------------------------------
@@ -667,7 +667,7 @@ Enable RPC rate limiting in slurm.conf_ by adding rl_enable_ and other parameter
   SlurmctldParameters=rl_enable,rl_refill_rate=10,rl_bucket_size=50,rl_log_freq=10
 
 **NOTE:** After changing ``SlurmctldParameters`` make an ``scontrol reconfig`` to restart slurmctld_.
-See also bug_18067_.
+See also ticket_18067_.
 
 This allows users to submit a large number of requests in a short period of time, but not a sustained high rate of requests that would add stress to the slurmctld_.
 You can define:
@@ -686,8 +686,8 @@ We have written a small script sratelimit_ for summarizing such log entries.
 
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 .. _sratelimit: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/sratelimit
-.. _bug_17835: https://support.schedmd.com/show_bug.cgi?id=17835
-.. _bug_18067: https://support.schedmd.com/show_bug.cgi?id=18067
+.. _ticket_17835: https://support.schedmd.com/show_bug.cgi?id=17835
+.. _ticket_18067: https://support.schedmd.com/show_bug.cgi?id=18067
 .. _rl_enable: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_enable
 .. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq=
 
@@ -714,9 +714,9 @@ Notice: Command arguments to ``RebootProgram`` like::
 
   RebootProgram="/sbin/shutdown -r now"
 
-seem to be ignored for Slurm_ 16.05 until 17.02.3, see bug_3612_.
+seem to be ignored for Slurm_ 16.05 until 17.02.3, see ticket_3612_.
 
-.. _bug_3612: https://support.schedmd.com/show_bug.cgi?id=3612
+.. _ticket_3612: https://support.schedmd.com/show_bug.cgi?id=3612
 
 --------------------------------------------------------------------------
 
@@ -725,7 +725,7 @@ Timeout options
 
 A number of **Timeout** options may be configured in slurm.conf_.
 
-In bug_3941_ is discussed the problem of nodes being drained due to the killing of jobs taking too long to complete.
+In ticket_3941_ is discussed the problem of nodes being drained due to the killing of jobs taking too long to complete.
 To extend this timeout you can configure the UnkillableStepTimeout_ parameter in slurm.conf_, for example::
 
   UnkillableStepTimeout=180
@@ -737,7 +737,7 @@ If this timeout is reached, the node will also be **drained** with reason *batch
 .. _MessageTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_MessageTimeout
 .. _UnkillableStepTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepTimeout
 .. _UnkillableStepProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepProgram
-.. _bug_3941: https://support.schedmd.com/show_bug.cgi?id=3941
+.. _ticket_3941: https://support.schedmd.com/show_bug.cgi?id=3941
 
 --------------------------------------------------------------------------
 
@@ -874,7 +874,7 @@ Building IPMI power monitoring into Slurm
 .........................................
 
 Many types of *Baseboard Management Controllers* (BMC_) permit the reading of power consumption values using the IPMI_ DCMI_ extensions.
-Note that Slurm_ ``version 23.02.7 (or later)`` should be used for correct functionality, see bug_17639_.
+Note that Slurm_ ``version 23.02.7 (or later)`` should be used for correct functionality, see ticket_17639_.
 
 Install the FreeIPMI_ prerequisite packages **version 1.6.12 or later** on the Slurm_ RPM-building server.
 FreeIPMI_ version 1.6.14 is available with RockyLinux_ and AlmaLinux_ (EL8) 8.10::
@@ -894,7 +894,7 @@ Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstar
 
   IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
 
-See also the discussion about IPMI_ *Data Center Manageability Interface* (DCMI_) in bug bug_17704_.
+See also the discussion about IPMI_ *Data Center Manageability Interface* (DCMI_) in bug ticket_17704_.
 
 You can check if Slurm_ has been built with the **acct_gather_energy/ipmi** accounting plugin,
 and verify that the ``libfreeipmi.so.*`` library file is also available on the system::
@@ -907,8 +907,8 @@ and verify that the ``libfreeipmi.so.*`` library file is also available on the s
   -rwxr-xr-x 1 root root 5469832 Apr  6 17:05 /usr/lib64/libfreeipmi.so.17.2.12
 
 
-.. _bug_17639: https://support.schedmd.com/show_bug.cgi?id=17639
-.. _bug_17704: https://support.schedmd.com/show_bug.cgi?id=17704
+.. _ticket_17639: https://support.schedmd.com/show_bug.cgi?id=17639
+.. _ticket_17704: https://support.schedmd.com/show_bug.cgi?id=17704
 .. _RockyLinux: https://www.rockylinux.org
 .. _AlmaLinux: https://www.almalinux.org
 .. _BMC: https://www.techopedia.com/definition/15941/baseboard-management-controller-bmc
@@ -921,7 +921,7 @@ Using IPMI power monitoring (from Slurm 23.02.7)
 
 * The *acct_gather_energy/ipmi* plugin should **not be used** with Slurm_ prior to 23.02.7!
   The reason is that this plugin has a bug where file descriptors in slurmd_ are not closed when making IPMI_ DCMI_ library calls.
-  This issue was fixed in bug_17639_ starting with Slurm_ 23.02.7.
+  This issue was fixed in ticket_17639_ starting with Slurm_ 23.02.7.
 
 On each type of compute node to be monitored, test whether the power values can be read by the commands::
 
@@ -938,7 +938,7 @@ At the same time you must configure the acct_gather.conf_ file in ``/etc/slurm/`
   EnergyIPMIPowerSensors=Node=DCMI
   EnergyIPMIFrequency=30
 
-However, **avoid** the ``EnergyIPMICalcAdjustment`` parameter in acct_gather.conf_, see bug_20207_ Comment 26.
+However, **avoid** the ``EnergyIPMICalcAdjustment`` parameter in acct_gather.conf_, see ticket_20207_ Comment 26.
 
 Set also this slurm.conf_ parameter, where example values may be::
 
@@ -950,7 +950,7 @@ as described in the manual page::
   The default  value  for  all other intervals is 0.
   Smaller (non-zero) values have a greater impact upon job performance, but a value of 30 seconds is not likely to be noticeable for applications having less than 10,000 tasks.
 
-The ``JobAcctGatherFrequency`` should be >= ``EnergyIPMIFrequency``, see bug_20207_.
+The ``JobAcctGatherFrequency`` should be >= ``EnergyIPMIFrequency``, see ticket_20207_.
 
 * **IMPORTANT**:
 
@@ -968,7 +968,7 @@ As a test you can monitor some power values as shown in the section below.
 
 .. _DCMI: https://www.gnu.org/software/freeipmi/manpages/man8/ipmi-dcmi.8.html
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
-.. _bug_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
+.. _ticket_20207: https://support.schedmd.com/show_bug.cgi?id=20207#c26
 
 Energy accounting of individual jobs
 ........................................
@@ -979,7 +979,7 @@ The accounting command sacct_ command has an output field ``ConsumedEnergyRaw`` 
 
   ConsumedEnergyRaw: Total energy consumed by all tasks in a job, in joules.  Note: Only in the case of an exclusive job allocation does this value reflect the job's real energy consumption.
 
-However, job energy accounting is not fully reliable as of Slurm_ 23.11.8 (July 2024) due to a number of issues in slurmd_ that are tracked in bug_20207_, 
+However, job energy accounting is not fully reliable as of Slurm_ 23.11.8 (July 2024) due to a number of issues in slurmd_ that are tracked in ticket_20207_, 
 see the list of issues in Comment 31.
 
 Note: Joule_ is the unit of energy equal to the power in Watt_ multiplied by time.
@@ -1026,12 +1026,12 @@ Note the definition of Watt_ .
 
 Notice some potentially incorrect power and CPU load values:
 
-* bug_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in Slurm_ 23.11).
+* ticket_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in Slurm_ 23.11).
 
-* Beware that the Slurm bug_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
+* Beware that the Slurm ticket_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
 
-.. _bug_17759: https://support.schedmd.com/show_bug.cgi?id=17759
-.. _bug_9956: https://support.schedmd.com/show_bug.cgi?id=9956
+.. _ticket_17759: https://support.schedmd.com/show_bug.cgi?id=17759
+.. _ticket_9956: https://support.schedmd.com/show_bug.cgi?id=9956
 
 A convenient script showpower_ is available for printing node power values as well as the total/average for sets of nodes with 1 line per node::
 
@@ -1337,13 +1337,13 @@ Features include:
   Access is granted to root, any user with an Slurm-launched job currently running on the node, or any user who has allocated resources on the node according to the Slurm.
 
 Usage of pam_slurm_adopt_ is described in the source files pam_slurm_adopt_.
-There is also a nice description in bug_4098_.
-Documentation of pam_slurm_adopt_ is discussed in bug_3567_.
+There is also a nice description in ticket_4098_.
+Documentation of pam_slurm_adopt_ is discussed in ticket_3567_.
 
 The PAM usage of, for example, ``/etc/pam.d/system-auth`` on RHEL and clones is configured through the authconfig_ command.
 
-.. _bug_4098: https://support.schedmd.com/show_bug.cgi?id=4098
-.. _bug_3567: https://support.schedmd.com/show_bug.cgi?id=3567
+.. _ticket_4098: https://support.schedmd.com/show_bug.cgi?id=4098
+.. _ticket_3567: https://support.schedmd.com/show_bug.cgi?id=3567
 .. _pam_slurm_adopt: https://slurm.schedmd.com/pam_slurm_adopt.html
 .. _pam: https://github.com/SchedMD/slurm/tree/master/contribs/pam
 .. _pam_slurm: https://slurm.schedmd.com/faq.html#pam
@@ -1354,7 +1354,7 @@ Configure PrologFlags
 .....................
 
 **Warning: Do NOT** configure ``UsePAM=1`` in slurm.conf_ (this advice can be found on the net).
-Please see bug_4098_ (comment 3).
+Please see ticket_4098_ (comment 3).
 
 You need to configure slurm.conf_ with::
 
@@ -1365,7 +1365,7 @@ Reconfigure the slurmctld_ service::
 
   scontrol reconfigure
 
-This can be done while the cluster is in production, see bug_4098_ (comment 3).
+This can be done while the cluster is in production, see ticket_4098_ (comment 3).
 
 PAM configuration
 .................
@@ -1492,13 +1492,13 @@ There are several possible solutions discussed below.
 The job_container_tmpfs_ plugin
 ..................................
 
-You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as bug_11183_ and bug_11135_ for further details.
+You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as ticket_11183_ and ticket_11135_ for further details.
 The job_container_tmpfs_ plugin uses Linux_namespaces_.
 
 **WARNING:** 
 NFS automount and ``job_container/tmpfs`` do not play well together prior to Slurm_ 23.02:
-If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see bug_14344_ and bug_12567_.
-The issue has been resolved in Slurm_ 23.02 according to bug_12567_.
+If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see ticket_14344_ and ticket_12567_.
+The issue has been resolved in Slurm_ 23.02 according to ticket_12567_.
 
 The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
 
@@ -1579,7 +1579,7 @@ You can build a customized RPM package for the auto_tmpdir_ plugin:
 
   * If the ``plugstack.conf`` file is installed on a submit/login or compute node, it is **mandatory** that all plugins listed in the file are actually installed as well,
     otherwise user commands or slurmd_ will fail with errors.
-    See a discussion in bug_14483_.
+    See a discussion in ticket_14483_.
 
 * **Quickly restart** the slurmd_ service on **all compute nodes** to actually activate the ``/etc/slurm/plugstack.conf`` feature::
 
@@ -1598,11 +1598,11 @@ You can build a customized RPM package for the auto_tmpdir_ plugin:
 .. _autofs: https://wiki.archlinux.org/title/autofs
 .. _job_container_tmpfs: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
 .. _job_container.conf: https://slurm.schedmd.com/job_container.conf.html
-.. _bug_11183: https://support.schedmd.com/show_bug.cgi?id=11183
-.. _bug_11135: https://support.schedmd.com/show_bug.cgi?id=11135
-.. _bug_14344: https://support.schedmd.com/show_bug.cgi?id=14344
-.. _bug_12567: https://support.schedmd.com/show_bug.cgi?id=12567
-.. _bug_14483: https://support.schedmd.com/show_bug.cgi?id=14483
+.. _ticket_11183: https://support.schedmd.com/show_bug.cgi?id=11183
+.. _ticket_11135: https://support.schedmd.com/show_bug.cgi?id=11135
+.. _ticket_14344: https://support.schedmd.com/show_bug.cgi?id=14344
+.. _ticket_12567: https://support.schedmd.com/show_bug.cgi?id=12567
+.. _ticket_14483: https://support.schedmd.com/show_bug.cgi?id=14483
 .. _Linux_namespaces: https://en.wikipedia.org/wiki/Linux_namespaces
 .. _SPANK: https://slurm.schedmd.com/spank.html
 .. _CMake: https://cmake.org/
@@ -1665,15 +1665,15 @@ rather than in a temporary file under TmpFS (see job_container_tmpfs_)::
 
   X11Parameters=home_xauthority
 
-You may want to check bug_18492_ and bug_22034_ for an issue with X11_ forwarding.
+You may want to check ticket_18492_ and ticket_22034_ for an issue with X11_ forwarding.
 
 Note that X11_ uses TCP_ as its transport protocol.
 The well known TCP_ ports for X11_ are 6000-6063: typically the port number used is 6000 plus the server/display number. 
 
 .. _X11: https://en.wikipedia.org/wiki/X_Window_System
 .. _X11Parameters: https://slurm.schedmd.com/slurm.conf.html#OPT_X11Parameters
-.. _bug_22034: https://support.schedmd.com/show_bug.cgi?id=22034
-.. _bug_18492: https://support.schedmd.com/show_bug.cgi?id=18492
+.. _ticket_22034: https://support.schedmd.com/show_bug.cgi?id=22034
+.. _ticket_18492: https://support.schedmd.com/show_bug.cgi?id=18492
 
 Bash command completion for Slurm
 ==================================
@@ -1684,7 +1684,7 @@ On EL8/EL9 Linux enable this feature by::
   dnf install bash-completion
 
 Slurm_ includes a slurm_completion_help_ script which offers completion for user commands like squeue_, sbatch_ etc.,
-which is installed by the ``slurm-contribs`` package starting from Slurm_ 24.11 (see bug_20932_).
+which is installed by the ``slurm-contribs`` package starting from Slurm_ 24.11 (see ticket_20932_).
 The installed file is ``/usr/share/bash-completion/completions/slurm_completion.sh``.
 
 To enable the slurm_completion_help_ script on Slurm_ 24.05 or older,
@@ -1699,7 +1699,7 @@ When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 .. _bash-completion: https://github.com/scop/bash-completion
 .. _slurm_completion_help: https://github.com/SchedMD/slurm/tree/master/contribs/slurm_completion_help
 .. _slurm_completion.sh: https://github.com/SchedMD/slurm/blob/master/contribs/slurm_completion_help/slurm_completion.sh
-.. _bug_20932: https://support.schedmd.com/show_bug.cgi?id=20932
+.. _ticket_20932: https://support.schedmd.com/show_bug.cgi?id=20932
 
 Configure Prolog and Epilog scripts
 ===================================
@@ -1741,7 +1741,7 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
   Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See TaskProlog_ for execution order details. 
 
 **NOTE:** The TaskProlog_ and TaskEpilog_ files are **not distributed** in configless_ mode with Slurm_ prior to version 25.11,
-but this will be added in 25.11 (see bug_23523_).
+but this will be added in 25.11 (see ticket_23523_).
 
 **WARNING:** The Prolog_ or TaskProlog_ programs could potentially fail if 1) the file isn't found,
 2) the file doesn't have the executable bit set, 3) the program has an error which causes it to exit with a non-zero exit code.
@@ -1766,7 +1766,7 @@ See also the parameters PrologEpilogTimeout_ PrologTimeout_ EpilogTimeout_ Prolo
 .. _Prolog_and_Epilog_Scripts: https://slurm.schedmd.com/slurm.conf.html#SECTION_PROLOG-AND-EPILOG-SCRIPTS
 .. _nohold_on_prolog_fail: https://slurm.schedmd.com/slurm.conf.html#OPT_nohold_on_prolog_fail
 .. _SchedulerParameters: https://slurm.schedmd.com/slurm.conf.html#OPT_SchedulerParameters
-.. _bug_23523: https://support.schedmd.com/show_bug.cgi?id=23523
+.. _ticket_23523: https://support.schedmd.com/show_bug.cgi?id=23523
 
 Prolog and epilog examples
 --------------------------
@@ -1852,7 +1852,7 @@ Upgrade cons_res to cons_tres
 ---------------------------------
 
 The newer cons_tres_ plugin should be used in stead of cons_res_.
-Upgrading from cons_res_ to cons_tres_ on a running system must be done very carefully, however, as discussed in bug_15470_.
+Upgrading from cons_res_ to cons_tres_ on a running system must be done very carefully, however, as discussed in ticket_15470_.
 The procedure is:
 
 1. In slurm.conf_ change into ``SelectType=select/cons_tres``.
@@ -1866,7 +1866,7 @@ The procedure is:
 Here we have used :ref:`ClusterShell` to run the command on all nodes.
 One **must not** make a ``scontrol reconfigure`` during this process!
 
-.. _bug_15470: https://support.schedmd.com/show_bug.cgi?id=15470
+.. _ticket_15470: https://support.schedmd.com/show_bug.cgi?id=15470
 
 Configure multiple nodes and their features
 ===========================================
@@ -2200,7 +2200,7 @@ Job submit plugins
 ------------------
 
 The Job_Submit_Plugin_ (a Lua_ plugin) will execute a Lua_ script named ``/etc/slurm/job_submit.lua`` on the slurmctld_ host.
-Some clarification of the documentation is needed, however, see bug_14472_ and bug_14500_.
+Some clarification of the documentation is needed, however, see ticket_14472_ and ticket_14500_.
 
 Sample Lua_ scripts can be copied from the Slurm_ source distribution in the directories ``contribs/lua/`` and ``etc/``:
 
@@ -2214,9 +2214,9 @@ We also provide a job submit plugin in https://github.com/OleHolmNielsen/Slurm_t
 .. _job_submit.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.lua
 .. _job_submit.license.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.license.lua
 
-Please note that job_submit.lua.example_ has an issue with use of ``log.user()`` in ``job_modify()`` prior to Slurm 23.02, see bug_14539_.
+Please note that job_submit.lua.example_ has an issue with use of ``log.user()`` in ``job_modify()`` prior to Slurm 23.02, see ticket_14539_.
 
-.. _bug_14539: https://support.schedmd.com/show_bug.cgi?id=14539
+.. _ticket_14539: https://support.schedmd.com/show_bug.cgi?id=14539
 
 On the slurmctld_ server you may start with this example::
 
@@ -2244,8 +2244,8 @@ Other Lua_ syntax checker tools can be found on the net, for example:
 
 * https://code.google.com/archive/p/lua-checker/
 
-.. _bug_14472: https://support.schedmd.com/show_bug.cgi?id=14472
-.. _bug_14500: https://support.schedmd.com/show_bug.cgi?id=14500
+.. _ticket_14472: https://support.schedmd.com/show_bug.cgi?id=14472
+.. _ticket_14500: https://support.schedmd.com/show_bug.cgi?id=14500
 .. _Lua: https://en.wikipedia.org/wiki/Lua_(programming_language)
 .. _Lua_manual: https://www.lua.org/manual/
 .. _luac: https://www.lua.org/manual/4.0/luac.html
@@ -2278,7 +2278,7 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
   job_desc.tres_per_task
   job_desc.user_name
 
-**NOTE:** If some field is **undefined** in the user's job script, for example ``max_nodes``, slurmctld_ sets an "invalid" value (see bug_15012_) which can be tested for in ``/etc/slurm/job_submit.lua``:
+**NOTE:** If some field is **undefined** in the user's job script, for example ``max_nodes``, slurmctld_ sets an "invalid" value (see ticket_15012_) which can be tested for in ``/etc/slurm/job_submit.lua``:
 
 * Numeric values (a Lua_ double) if absent will be set to ``slurm.NO_VAL`` (32-bit, as defined in ``/usr/include/slurm/slurm.h``).
 
@@ -2286,10 +2286,10 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
 
 * String values (if absent) will be set to the nil_ Lua_ type.
 
-.. _bug_15012:  https://support.schedmd.com/show_bug.cgi?id=15012.
+.. _ticket_15012:  https://support.schedmd.com/show_bug.cgi?id=15012.
 .. _nil: https://www.lua.org/pil/2.1.html
 
-Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also bug_14500_.
+Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also ticket_14500_.
 Note that only a few selected symbols ``ESLURM*`` are exposed to the Lua_ script, but from Slurm_ 23.02 all the error codes in ``/usr/include/slurm/slurm_errno.h`` are exposed.
 
 Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in this example:
@@ -2306,11 +2306,11 @@ Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in 
     return slurm.ESLURM_INVALID_PARTITION_NAME
   end
 
-It is worth noting that the Lua_ version 5.1.4 does not handle nil_ values well in all cases as discussed in bug_19564_.
+It is worth noting that the Lua_ version 5.1.4 does not handle nil_ values well in all cases as discussed in ticket_19564_.
 The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
 
 .. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L518
-.. _bug_19564: https://support.schedmd.com/show_bug.cgi?id=19564
+.. _ticket_19564: https://support.schedmd.com/show_bug.cgi?id=19564
 
 Configure Slurm for Lua JobSubmitPlugins
 ........................................
@@ -2329,7 +2329,7 @@ Then reconfigure ``slurmctld``::
   scontrol reconfigure
 
 If ``slurmctld`` gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
-(see `comment 15 <https://support.schedmd.com/show_bug.cgi?id=14472#c15>`_ in bug_14472_).
+(see `comment 15 <https://support.schedmd.com/show_bug.cgi?id=14472#c15>`_ in ticket_14472_).
 
 **WARNING:**
 If ``slurmctld`` does not have a cached script (because it was just restarted, for example) it may crash!
