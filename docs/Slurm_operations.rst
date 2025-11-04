@@ -226,7 +226,7 @@ Here we list some useful third-party utilities that Slurm_ administrators or use
 
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
-.. _bug_1868: https://support.schedmd.com/show_bug.cgi?id=1868
+.. _ticket_1868: https://support.schedmd.com/show_bug.cgi?id=1868
 
 Graphical monitoring tools
 --------------------------
@@ -585,7 +585,7 @@ A **very useful** new state filtering was added to the sinfo_ command starting f
 
 We can use this to specify the state ``~POWERED_DOWN`` (meaning *not powered down*),
 so that nodes that have been powered down by :ref:`Slurm_power_saving` will be skipped by clush_.
-See also bug_21428_.
+See also ticket_21428_.
 
 An example usage of this is::
 
@@ -601,7 +601,7 @@ You can even configure the ``clush -a`` command to include **only** the ``~POWER
 
 Note that nodes with states such as ``Down`` (for example, crashed nodes) will not be skipped!
 
-.. _bug_21428: https://support.schedmd.com/show_bug.cgi?id=21428
+.. _ticket_21428: https://support.schedmd.com/show_bug.cgi?id=21428
 
 Copying files with ClusterShell
 ...............................
@@ -794,11 +794,11 @@ Slurm_ can reboot nodes by::
     By default all nodes are rebooted. 
 
 **NOTE**: The reboot request will be ignored for hosts in the following states: ``FUTURE, POWER_DOWN, POWERED_DOWN, POWERING_DOWN, REBOOT_ISSUED, REBOOT_REQUESTED``,
-see bug_18505_.
+see ticket_18505_.
 Currently, no warning is issued in such cases.
 From Slurm_ 24.08 an error message will be printed by ``scontrol reboot`` when a node reboot request is ignored due to the current node state.
 
-.. _bug_18505: https://support.schedmd.com/show_bug.cgi?id=18505
+.. _ticket_18505: https://support.schedmd.com/show_bug.cgi?id=18505
 
 Compute node OS and firmware updates
 ------------------------------------
@@ -833,7 +833,7 @@ Error messages such as this one may occur::
   getshmem_C in getshmem.c: cannot create shared segment 8
   No space left on device 
 
-See also bug_7232_.
+See also ticket_7232_.
 
 Information on the inter-process communication facilities::
 
@@ -843,7 +843,7 @@ Users and root can clean up unused data by::
 
   ipcrm -a
 
-.. _bug_7232: https://support.schedmd.com/show_bug.cgi?id=7232
+.. _ticket_7232: https://support.schedmd.com/show_bug.cgi?id=7232
 
 .. _resource_reservation:
 
