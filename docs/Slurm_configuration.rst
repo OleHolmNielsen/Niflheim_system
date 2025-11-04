@@ -16,7 +16,7 @@ Slurm configuration
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 
 Jump to our top-level Slurm page: :ref:`SLURM` 
@@ -157,7 +157,7 @@ The simplest way to achieve this is described in bug_9832_:
 
      ls -l /run/slurm/conf
 
-.. _bug_9832: https://bugs.schedmd.com/show_bug.cgi?id=9832
+.. _bug_9832: https://support.schedmd.com/show_bug.cgi?id=9832
 
 --------------------------------------------------------------------------
 
@@ -394,7 +394,7 @@ It is also possible to add nodes to slurm.conf_ with a state of **future**::
 
 However, such **future** nodes must not be members of any Slurm_ partition.
 
-.. _bug_3973: https://bugs.schedmd.com/show_bug.cgi?id=3973
+.. _bug_3973: https://support.schedmd.com/show_bug.cgi?id=3973
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
 
@@ -454,7 +454,7 @@ Configure slurm.conf_ to use cgroups_ as well as the *affinity* plugin::
 
   TaskPlugin=affinity,cgroup
 
-For a discussion see `bug 3853 <https://bugs.schedmd.com/show_bug.cgi?id=3853>`_.
+For a discussion see `bug 3853 <https://support.schedmd.com/show_bug.cgi?id=3853>`_.
 
 You should probably also configure this (unless you have lots of short running jobs)::
 
@@ -497,11 +497,11 @@ You may also consider defining **MemSpecLimit** in slurm.conf_:
   The daemons will not be killed if they exhaust the memory allocation (ie. the Out-Of-Memory Killer is disabled for the daemon's memory cgroup).
   If the task/cgroup plugin is not configured, the specified memory will only be unavailable for user allocations. 
 
-See an interesting discussion in `bug 2713 <https://bugs.schedmd.com/show_bug.cgi?id=2713>`_.
+See an interesting discussion in `bug 2713 <https://support.schedmd.com/show_bug.cgi?id=2713>`_.
 
 After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfigure``.
 
-.. _bug_3874: https://bugs.schedmd.com/show_bug.cgi?id=3874
+.. _bug_3874: https://support.schedmd.com/show_bug.cgi?id=3874
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 
 --------------------------------------------------------------------------
@@ -686,8 +686,8 @@ We have written a small script sratelimit_ for summarizing such log entries.
 
 .. _RPC: https://en.wikipedia.org/wiki/Remote_procedure_call
 .. _sratelimit: https://github.com/OleHolmNielsen/Slurm_tools/blob/master/jobs/sratelimit
-.. _bug_17835: https://bugs.schedmd.com/show_bug.cgi?id=17835
-.. _bug_18067: https://bugs.schedmd.com/show_bug.cgi?id=18067
+.. _bug_17835: https://support.schedmd.com/show_bug.cgi?id=17835
+.. _bug_18067: https://support.schedmd.com/show_bug.cgi?id=18067
 .. _rl_enable: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_enable
 .. _rl_log_freq: https://slurm.schedmd.com/slurm.conf.html#OPT_rl_log_freq=
 
@@ -716,7 +716,7 @@ Notice: Command arguments to ``RebootProgram`` like::
 
 seem to be ignored for Slurm_ 16.05 until 17.02.3, see bug_3612_.
 
-.. _bug_3612: https://bugs.schedmd.com/show_bug.cgi?id=3612
+.. _bug_3612: https://support.schedmd.com/show_bug.cgi?id=3612
 
 --------------------------------------------------------------------------
 
@@ -737,7 +737,7 @@ If this timeout is reached, the node will also be **drained** with reason *batch
 .. _MessageTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_MessageTimeout
 .. _UnkillableStepTimeout: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepTimeout
 .. _UnkillableStepProgram: https://slurm.schedmd.com/slurm.conf.html#OPT_UnkillableStepProgram
-.. _bug_3941: https://bugs.schedmd.com/show_bug.cgi?id=3941
+.. _bug_3941: https://support.schedmd.com/show_bug.cgi?id=3941
 
 --------------------------------------------------------------------------
 
@@ -907,8 +907,8 @@ and verify that the ``libfreeipmi.so.*`` library file is also available on the s
   -rwxr-xr-x 1 root root 5469832 Apr  6 17:05 /usr/lib64/libfreeipmi.so.17.2.12
 
 
-.. _bug_17639: https://bugs.schedmd.com/show_bug.cgi?id=17639
-.. _bug_17704: https://bugs.schedmd.com/show_bug.cgi?id=17704
+.. _bug_17639: https://support.schedmd.com/show_bug.cgi?id=17639
+.. _bug_17704: https://support.schedmd.com/show_bug.cgi?id=17704
 .. _RockyLinux: https://www.rockylinux.org
 .. _AlmaLinux: https://www.almalinux.org
 .. _BMC: https://www.techopedia.com/definition/15941/baseboard-management-controller-bmc
@@ -1030,8 +1030,8 @@ Notice some potentially incorrect power and CPU load values:
 
 * Beware that the Slurm bug_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
 
-.. _bug_17759: https://bugs.schedmd.com/show_bug.cgi?id=17759
-.. _bug_9956: https://bugs.schedmd.com/show_bug.cgi?id=9956
+.. _bug_17759: https://support.schedmd.com/show_bug.cgi?id=17759
+.. _bug_9956: https://support.schedmd.com/show_bug.cgi?id=9956
 
 A convenient script showpower_ is available for printing node power values as well as the total/average for sets of nodes with 1 line per node::
 
@@ -1303,7 +1303,7 @@ It is important to configure slurm.conf_ so that the *locked memory* limit isn't
   PropagateResourceLimitsExcept=MEMLOCK
 
 as explained in https://slurm.schedmd.com/faq.html#memlock.
-A possible memory limit error with :ref:`OmniPath` was discussed in `Slurm bug 3363 <https://bugs.schedmd.com/show_bug.cgi?id=3363>`_.
+A possible memory limit error with :ref:`OmniPath` was discussed in `Slurm bug 3363 <https://support.schedmd.com/show_bug.cgi?id=3363>`_.
 
 In fact, if you have imposed any non-default limits in ``/etc/security/limits.conf`` or ``/etc/security/limits.d/\*.conf`` in the login nodes,
 you probably want to prohibit these from the batch jobs by configuring::
@@ -1342,8 +1342,8 @@ Documentation of pam_slurm_adopt_ is discussed in bug_3567_.
 
 The PAM usage of, for example, ``/etc/pam.d/system-auth`` on RHEL and clones is configured through the authconfig_ command.
 
-.. _bug_4098: https://bugs.schedmd.com/show_bug.cgi?id=4098
-.. _bug_3567: https://bugs.schedmd.com/show_bug.cgi?id=3567
+.. _bug_4098: https://support.schedmd.com/show_bug.cgi?id=4098
+.. _bug_3567: https://support.schedmd.com/show_bug.cgi?id=3567
 .. _pam_slurm_adopt: https://slurm.schedmd.com/pam_slurm_adopt.html
 .. _pam: https://github.com/SchedMD/slurm/tree/master/contribs/pam
 .. _pam_slurm: https://slurm.schedmd.com/faq.html#pam
@@ -1598,11 +1598,11 @@ You can build a customized RPM package for the auto_tmpdir_ plugin:
 .. _autofs: https://wiki.archlinux.org/title/autofs
 .. _job_container_tmpfs: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
 .. _job_container.conf: https://slurm.schedmd.com/job_container.conf.html
-.. _bug_11183: https://bugs.schedmd.com/show_bug.cgi?id=11183
-.. _bug_11135: https://bugs.schedmd.com/show_bug.cgi?id=11135
-.. _bug_14344: https://bugs.schedmd.com/show_bug.cgi?id=14344
-.. _bug_12567: https://bugs.schedmd.com/show_bug.cgi?id=12567
-.. _bug_14483: https://bugs.schedmd.com/show_bug.cgi?id=14483
+.. _bug_11183: https://support.schedmd.com/show_bug.cgi?id=11183
+.. _bug_11135: https://support.schedmd.com/show_bug.cgi?id=11135
+.. _bug_14344: https://support.schedmd.com/show_bug.cgi?id=14344
+.. _bug_12567: https://support.schedmd.com/show_bug.cgi?id=12567
+.. _bug_14483: https://support.schedmd.com/show_bug.cgi?id=14483
 .. _Linux_namespaces: https://en.wikipedia.org/wiki/Linux_namespaces
 .. _SPANK: https://slurm.schedmd.com/spank.html
 .. _CMake: https://cmake.org/
@@ -1866,7 +1866,7 @@ The procedure is:
 Here we have used :ref:`ClusterShell` to run the command on all nodes.
 One **must not** make a ``scontrol reconfigure`` during this process!
 
-.. _bug_15470: https://bugs.schedmd.com/show_bug.cgi?id=15470
+.. _bug_15470: https://support.schedmd.com/show_bug.cgi?id=15470
 
 Configure multiple nodes and their features
 ===========================================
@@ -2216,7 +2216,7 @@ We also provide a job submit plugin in https://github.com/OleHolmNielsen/Slurm_t
 
 Please note that job_submit.lua.example_ has an issue with use of ``log.user()`` in ``job_modify()`` prior to Slurm 23.02, see bug_14539_.
 
-.. _bug_14539: https://bugs.schedmd.com/show_bug.cgi?id=14539
+.. _bug_14539: https://support.schedmd.com/show_bug.cgi?id=14539
 
 On the slurmctld_ server you may start with this example::
 
@@ -2244,8 +2244,8 @@ Other Lua_ syntax checker tools can be found on the net, for example:
 
 * https://code.google.com/archive/p/lua-checker/
 
-.. _bug_14472: https://bugs.schedmd.com/show_bug.cgi?id=14472
-.. _bug_14500: https://bugs.schedmd.com/show_bug.cgi?id=14500
+.. _bug_14472: https://support.schedmd.com/show_bug.cgi?id=14472
+.. _bug_14500: https://support.schedmd.com/show_bug.cgi?id=14500
 .. _Lua: https://en.wikipedia.org/wiki/Lua_(programming_language)
 .. _Lua_manual: https://www.lua.org/manual/
 .. _luac: https://www.lua.org/manual/4.0/luac.html
@@ -2286,7 +2286,7 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
 
 * String values (if absent) will be set to the nil_ Lua_ type.
 
-.. _bug_15012:  https://bugs.schedmd.com/show_bug.cgi?id=15012.
+.. _bug_15012:  https://support.schedmd.com/show_bug.cgi?id=15012.
 .. _nil: https://www.lua.org/pil/2.1.html
 
 Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also bug_14500_.
@@ -2310,7 +2310,7 @@ It is worth noting that the Lua_ version 5.1.4 does not handle nil_ values well 
 The only known solution is to upgrade Lua_ to version 5.3.4 (available in EL8).
 
 .. _job_submit_lua.c: https://github.com/SchedMD/slurm/blob/master/src/plugins/job_submit/lua/job_submit_lua.c#L518
-.. _bug_19564: https://bugs.schedmd.com/show_bug.cgi?id=19564
+.. _bug_19564: https://support.schedmd.com/show_bug.cgi?id=19564
 
 Configure Slurm for Lua JobSubmitPlugins
 ........................................
@@ -2329,7 +2329,7 @@ Then reconfigure ``slurmctld``::
   scontrol reconfigure
 
 If ``slurmctld`` gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
-(see `comment 15 <https://bugs.schedmd.com/show_bug.cgi?id=14472#c15>`_ in bug_14472_).
+(see `comment 15 <https://support.schedmd.com/show_bug.cgi?id=14472#c15>`_ in bug_14472_).
 
 **WARNING:**
 If ``slurmctld`` does not have a cached script (because it was just restarted, for example) it may crash!

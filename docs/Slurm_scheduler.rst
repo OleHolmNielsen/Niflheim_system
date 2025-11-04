@@ -17,7 +17,7 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html

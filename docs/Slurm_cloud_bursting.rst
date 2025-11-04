@@ -69,7 +69,7 @@ Check that slurmctld_ has JSON_ support::
 
 .. _JSON: https://www.json.org/json-en.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
-.. _bug_14925: https://bugs.schedmd.com/show_bug.cgi?id=14925
+.. _bug_14925: https://support.schedmd.com/show_bug.cgi?id=14925
 
 .. _configuring-slurm-conf-for-power-saving:
 
@@ -113,8 +113,8 @@ According to the Slurm_ Power_Saving_Guide_  the following parameters in slurm.c
 
   **Beware:** If any nodes in the cluster are running Slurm_ versions lower than 23.02, the slurmd_ will fail if the new ``SuspendExcStates`` parameter is specified!
 
-.. _bug_14270: https://bugs.schedmd.com/show_bug.cgi?id=14270
-.. _bug_15184: https://bugs.schedmd.com/show_bug.cgi?id=15184
+.. _bug_14270: https://support.schedmd.com/show_bug.cgi?id=14270
+.. _bug_15184: https://support.schedmd.com/show_bug.cgi?id=15184
 .. _slurmd: https://slurm.schedmd.com/slurmd.html
 
 Resume and Suspend scripts

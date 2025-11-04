@@ -450,7 +450,7 @@ Also, the ``slurm.conf`` file must have this configuration::
 
 as explained in https://slurm.schedmd.com/faq.html#memlock.
 
-The memory limit error with :ref:`OmniPath` was discussed in `Slurm bug 3363 <https://bugs.schedmd.com/show_bug.cgi?id=3363>`_.
+The memory limit error with :ref:`OmniPath` was discussed in `Slurm bug 3363 <https://support.schedmd.com/show_bug.cgi?id=3363>`_.
 
 IPoIB configuration
 ===================

@@ -22,7 +22,7 @@ See also `CECI Slurm Quick Start Tutorial <https://www.ceci-hpc.be/slurm_tutoria
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
@@ -506,7 +506,7 @@ For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``) by ins
   The `libyaml` provided by EL8 is version 0.1.X and **should not be used**!
    
 .. _YAML: https://en.wikipedia.org/wiki/YAML
-.. _bug_17673: https://bugs.schedmd.com/show_bug.cgi?id=17673
+.. _bug_17673: https://support.schedmd.com/show_bug.cgi?id=17673
 
 Install MariaDB database
 ------------------------
@@ -549,10 +549,10 @@ In our setup we build packages with these options::
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
 .. _LTO: https://johanengelen.github.io/ldc/2016/11/10/Link-Time-Optimization-LDC.html
-.. _bug_14565: https://bugs.schedmd.com/show_bug.cgi?id=14565
+.. _bug_14565: https://support.schedmd.com/show_bug.cgi?id=14565
 .. _MariaDB: https://mariadb.org/
 .. _MySQL: https://www.mysql.com/
-.. _bug_8882: https://bugs.schedmd.com/show_bug.cgi?id=8882
+.. _bug_8882: https://support.schedmd.com/show_bug.cgi?id=8882
 
 Build Slurm with optional features
 .......................................
@@ -582,7 +582,7 @@ You may build Slurm_ packages including optional features as documented above in
   **Notice** that `libyaml` version 0.2.5 or later is required (see above), and this is only available starting with EL9,
   so the ``--with yaml`` option should **not** be used on EL8 and older releases!
 
-.. _bug_17900: https://bugs.schedmd.com/show_bug.cgi?id=17900
+.. _bug_17900: https://support.schedmd.com/show_bug.cgi?id=17900
 
 .. _Installing_RPMs:
 
@@ -679,10 +679,10 @@ Configure Slurm logging
     mkdir /var/log/slurm
     chown slurm.slurm /var/log/slurm
 
-  See the more general description in Bug_8272_.
+  See the more general description in bug_8272_.
 
 .. _Administrator_Guide: https://slurm.schedmd.com/quickstart_admin.html
-.. _Bug_8272: https://bugs.schedmd.com/show_bug.cgi?id=8272
+.. _bug_8272: https://support.schedmd.com/show_bug.cgi?id=8272
 
 .. _upgrading-slurm:
 
@@ -732,7 +732,7 @@ Regarding the Slurm_ database, also make sure to:
   See further info below.
 
 .. _Upgrade_Guide: https://slurm.schedmd.com/upgrades.html
-.. _bug_4450: https://bugs.schedmd.com/show_bug.cgi?id=4450
+.. _bug_4450: https://support.schedmd.com/show_bug.cgi?id=4450
 .. _sinfo: https://slurm.schedmd.com/sinfo.html
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _sacctmgr: https://slurm.schedmd.com/sacctmgr.html
@@ -952,7 +952,7 @@ The upgrading steps for the slurmdbd_ host are:
 **WARNING:** Newer versions of user commands like ``sinfo``, ``squeue`` etc. are **not interoperable** with an older 
 slurmctld_ version, as explained in bug_17418_, due to RPC_ changes!
 
-.. _bug_17418: https://bugs.schedmd.com/show_bug.cgi?id=17418
+.. _bug_17418: https://support.schedmd.com/show_bug.cgi?id=17418
 .. _Control-C: https://en.wikipedia.org/wiki/Control-C
 
 Upgrade slurmctld
@@ -1237,10 +1237,10 @@ See the NEWS_ file for changes related to SIGUSR2_ in Slurm_ 17.11.0pre2::
   Modify all daemons to re-open log files on receipt of SIGUSR2 signal. This is much than using SIGHUP to re-read the configuration file and rebuild various tables.
 
 .. _logrotate: https://github.com/logrotate/logrotate
-.. _bug_3402: https://bugs.schedmd.com/show_bug.cgi?id=3402
-.. _bug_3904: https://bugs.schedmd.com/show_bug.cgi?id=3904
-.. _bug_2215: https://bugs.schedmd.com/show_bug.cgi?id=2215
-.. _bug_4393: https://bugs.schedmd.com/show_bug.cgi?id=4393
-.. _bug_9264: https://bugs.schedmd.com/show_bug.cgi?id=9264
+.. _bug_3402: https://support.schedmd.com/show_bug.cgi?id=3402
+.. _bug_3904: https://support.schedmd.com/show_bug.cgi?id=3904
+.. _bug_2215: https://support.schedmd.com/show_bug.cgi?id=2215
+.. _bug_4393: https://support.schedmd.com/show_bug.cgi?id=4393
+.. _bug_9264: https://support.schedmd.com/show_bug.cgi?id=9264
 .. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
 .. _SIGUSR2: https://www.gnu.org/software/libc/manual/html_node/Miscellaneous-Signals.html

@@ -19,7 +19,7 @@ The following configuration is relevant for the Slurm_ Head node only.
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _slurmdbd.conf: https://slurm.schedmd.com/slurmdbd.conf.html
@@ -97,7 +97,7 @@ See the *Database Configuration* section of the accounting_ page::
   sacctmgr add cluster niflheim
   sacctmgr create cluster niflheim  # The add and create commands are identical
 
-See also https://bugs.schedmd.com/show_bug.cgi?id=1050
+See also https://support.schedmd.com/show_bug.cgi?id=1050
 
 To display the clusters defined in the Slurm database::
 
@@ -232,7 +232,7 @@ If a user's UID is modified in ``/etc/passwd``,
 or the user's GID is modified in ``/etc/passwd``, 
 the Slurm_ design requires you to restart slurmctld_, see bug_3575_.
 
-.. _bug_3575: https://bugs.schedmd.com/show_bug.cgi?id=3575
+.. _bug_3575: https://support.schedmd.com/show_bug.cgi?id=3575
 
 User fairshare
 --------------
@@ -320,7 +320,7 @@ Now you can impose user limits, for example::
 Notice: The keyword ``cpu`` **must** be in lower-case, see bug_4226_ (resolved in Slurm_ 17.02.8).
 
 .. _Resource_Limits: https://slurm.schedmd.com/resource_limits.html
-.. _bug_4226: https://bugs.schedmd.com/show_bug.cgi?id=4226
+.. _bug_4226: https://support.schedmd.com/show_bug.cgi?id=4226
 
 Trackable RESources (TRES)
 --------------------------
@@ -469,7 +469,7 @@ The ``/usr/bin/seff`` command takes a jobid and reports on the efficiency of tha
 The ``slurm-contribs`` RPM (Slurm_ 17.02 and later, previously ``slurm-seff``) also comes with an ``/usr/bin/smail`` utility that allows for Slurm end-of-job emails to include a ``seff`` report, see bug_1611_.
 This allows users to become aware if they are wasting resources.
 
-.. _bug_1611: https://bugs.schedmd.com/show_bug.cgi?id=1611
+.. _bug_1611: https://support.schedmd.com/show_bug.cgi?id=1611
 
 The ``smail`` utility is invoked automatically to process end-of-job notifications if you add the following to slurm.conf_::
 
@@ -495,7 +495,7 @@ Then you can inquire GPU resource usage with the sacct_ **AllocTRES** output, fo
 
   sacct -j 12345 -p -X --format=jobid,user,alloctres
 
-.. _bug_12031: https://bugs.schedmd.com/show_bug.cgi?id=12031
+.. _bug_12031: https://support.schedmd.com/show_bug.cgi?id=12031
 
 Nvidia accounting
 .................

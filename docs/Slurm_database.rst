@@ -20,7 +20,7 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurmdbd: https://slurm.schedmd.com/slurmdbd.html
 .. _slurmctld: https://slurm.schedmd.com/slurmctld.html
@@ -194,11 +194,11 @@ You can check the current setting in MySQL like so::
   SHOW VARIABLES LIKE 'innodb_lock_wait_timeout';
   quit;
 
-See also Bug_2457_:
+See also bug_2457_:
 
 * The innodb_buffer_pool_size_ can have a huge impact - we'd recommend setting this as high as half the RAM available on the slurmdbd_ server.
 
-.. _Bug_2457: https://bugs.schedmd.com/show_bug.cgi?id=2457
+.. _bug_2457: https://support.schedmd.com/show_bug.cgi?id=2457
 .. _innodb_buffer_pool_size: https://mariadb.com/kb/en/innodb-buffer-pool/
 
 .. _slurm_database_tables:
@@ -388,7 +388,7 @@ Logging of purge events can be configured in slurmdbd.conf_ using::
   DebugFlags=DB_ARCHIVE
 
 .. _high_throughput: https://slurm.schedmd.com/high_throughput.html
-.. _bug_4295: https://bugs.schedmd.com/show_bug.cgi?id=4295
+.. _bug_4295: https://support.schedmd.com/show_bug.cgi?id=4295
 .. _MUNGE: https://dun.github.io/munge/
 
 slurmdbd hostname configuration
@@ -455,7 +455,7 @@ In order to backup the entire database to a different location (for disaster rec
 
 You may want to read the page `Mysqldump with Modern MySQL <https://serversforhackers.com/c/mysqldump-with-modern-mysql>`_.
 
-See also the discussion in Bug_10295_ about dumping **only** the *slurm_acct_db* database, and using ``--single-transaction`` for InnoDB_ tables.
+See also the discussion in bug_10295_ about dumping **only** the *slurm_acct_db* database, and using ``--single-transaction`` for InnoDB_ tables.
 You can show the tables by::
 
   # mysqlshow -p --status slurm_acct_db
@@ -465,7 +465,7 @@ For compressing the (large) database dumps, install the *gzip*, *bzip2*, and per
   dnf install gzip bzip2
   dnf install lbzip2    # From EPEL
 
-.. _Bug_10295: https://bugs.schedmd.com/show_bug.cgi?id=10295
+.. _bug_10295: https://support.schedmd.com/show_bug.cgi?id=10295
 .. _mysqldump: https://mariadb.com/kb/en/mysqldump/
 
 Backup of MariaDB 10.1 and later
@@ -537,7 +537,7 @@ You must first create an empty backup file::
 The script is also available in https://github.com/OleHolmNielsen/Slurm_tools/tree/master/database.
 
 Using ``mysqldump --single-transaction`` is recommended by SchedMD to avoid race conditions when slurmdbd_ is being run while taking the MySQL dump, see
-https://bugs.schedmd.com/show_bug.cgi?id=10295#c18
+https://support.schedmd.com/show_bug.cgi?id=10295#c18
 
 Testing the script::
 
@@ -655,8 +655,8 @@ The following steps should be made:
 
      systemctl start slurmdbd
 
-.. _bug_13562: https://bugs.schedmd.com/show_bug.cgi?id=13562#c21
-.. _bug_15168: https://bugs.schedmd.com/show_bug.cgi?id=15168
+.. _bug_13562: https://support.schedmd.com/show_bug.cgi?id=13562#c21
+.. _bug_15168: https://support.schedmd.com/show_bug.cgi?id=15168
 
 Backup and restore of Slurm associations
 ------------------------------------------

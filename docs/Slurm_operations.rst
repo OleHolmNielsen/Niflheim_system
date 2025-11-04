@@ -19,7 +19,7 @@ Jump to our top-level Slurm page: :ref:`SLURM`
 .. _slurm_devel_archive: https://groups.google.com/forum/#!forum/slurm-devel
 .. _Slurm_publications: https://slurm.schedmd.com/publications.html
 .. _Slurm_tutorials: https://slurm.schedmd.com/tutorials.html
-.. _Slurm_bugs: https://bugs.schedmd.com
+.. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 .. _slurm.conf: https://slurm.schedmd.com/slurm.conf.html
 .. _scontrol: https://slurm.schedmd.com/scontrol.html
@@ -226,7 +226,7 @@ Here we list some useful third-party utilities that Slurm_ administrators or use
 
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
-.. _bug_1868: https://bugs.schedmd.com/show_bug.cgi?id=1868
+.. _bug_1868: https://support.schedmd.com/show_bug.cgi?id=1868
 
 Graphical monitoring tools
 --------------------------
@@ -798,7 +798,7 @@ see bug_18505_.
 Currently, no warning is issued in such cases.
 From Slurm_ 24.08 an error message will be printed by ``scontrol reboot`` when a node reboot request is ignored due to the current node state.
 
-.. _bug_18505: https://bugs.schedmd.com/show_bug.cgi?id=18505
+.. _bug_18505: https://support.schedmd.com/show_bug.cgi?id=18505
 
 Compute node OS and firmware updates
 ------------------------------------
@@ -833,7 +833,7 @@ Error messages such as this one may occur::
   getshmem_C in getshmem.c: cannot create shared segment 8
   No space left on device 
 
-See also Bug_7232_.
+See also bug_7232_.
 
 Information on the inter-process communication facilities::
 
@@ -843,7 +843,7 @@ Users and root can clean up unused data by::
 
   ipcrm -a
 
-.. _Bug_7232: https://bugs.schedmd.com/show_bug.cgi?id=7232
+.. _bug_7232: https://support.schedmd.com/show_bug.cgi?id=7232
 
 .. _resource_reservation:
 
