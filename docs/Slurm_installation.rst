@@ -259,7 +259,7 @@ For the ``auth/slurm`` authentication you must have a shared key file ``/etc/slu
 but beginning with version 24.05 you may alternatively create a ``/etc/slurm/slurm.jwks`` file with multiple keys as shown below.
 **Note:** The key file(s) must be distributed securely to all nodes in the cluster (for example using clush_).
 
-The ticket ticket_21683_ discusses ``How to get started with auth/slurm?``
+The ticket_21683_ discusses ``How to get started with auth/slurm?``
 
 .. _ticket_21683: https://support.schedmd.com/show_bug.cgi?id=21683
 
