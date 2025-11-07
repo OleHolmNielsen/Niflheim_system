@@ -506,6 +506,8 @@ Make regular database dumps, for example by a crontab_ job::
 
 .. _crontab: https://linux.die.net/man/5/crontab
 
+.. _logrotate_backup_script:
+
 Backup script with logrotate
 ----------------------------
 
@@ -668,8 +670,12 @@ The basic sacctmgr_dump_ and corresponding load commands are::
   sacctmgr dump <clustername> file=<clustername>.cfg
   sacctmgr load file=<clustername>.cfg
 
-The best way to make such dumps regularly is using a logrotate_ script
-``/etc/logrotate.d/slurm_assoc_backup`` (replace the *clustername*)::
+You can execute such commands in a crontab_ job, for example for a cluster named `clustername`::
+
+  15 23 * * * /usr/bin/sacctmgr --quiet dump clustername file=/var/log/slurm/clustername.cfg 2>/dev/null
+
+You can keep multiple copies of the dump file using a logrotate_ script.
+As an example create the ``/etc/logrotate.d/slurm_assoc_backup`` script (replace the `clustername`)::
 
   /var/log/slurm/clustername.cfg {
       daily
@@ -679,16 +685,15 @@ The best way to make such dumps regularly is using a logrotate_ script
       nocompress
       missingok
       create 640 slurm slurm
-      postrotate
-      # Dump Slurm association data for cluster "clustername"
-      yes | /usr/bin/sacctmgr dump clustername file=/var/log/slurm/clustername.cfg 2>/dev/null
-      endscript
   }
 
-Note: The sacctmgr_ **requires** an stdin which we provide with the yes_ command.
+Note: You cannot use a ``postrotate`` in this script to make the dumps because of the SELinux_ issue noted 
+in the section :ref:`logrotate_backup_script`.
+See also the ticket_24049_.
 
 .. _sacctmgr_dump: https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD
 .. _yes: https://en.wikipedia.org/wiki/Yes_(Unix)
+.. _ticket_24049: https://support.schedmd.com/show_bug.cgi?id=24049
 
 Configure database accounting in slurm.conf
 ===========================================
