@@ -674,6 +674,8 @@ You can execute such commands in a crontab_ job, for example for a cluster named
 
   15 23 * * * /usr/bin/sacctmgr --quiet dump clustername file=/var/log/slurm/clustername.cfg 2>/dev/null
 
+Note: Here we pipe the stderr_ output to ``/dev/null`` due to the issue noted in ticket_24010_.
+
 You can keep multiple copies of the dump file using a logrotate_ script.
 As an example create the ``/etc/logrotate.d/slurm_assoc_backup`` script (replace the `clustername`)::
 
@@ -687,13 +689,15 @@ As an example create the ``/etc/logrotate.d/slurm_assoc_backup`` script (replace
       create 640 slurm slurm
   }
 
-Note: You cannot use a ``postrotate`` in this script to make the dumps because of the SELinux_ issue noted 
+Note: You cannot use a ``postrotate`` in this script to make the dumps due to the SELinux_ issue noted 
 in the section :ref:`logrotate_backup_script`.
 See also the ticket_24049_.
 
 .. _sacctmgr_dump: https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD
 .. _yes: https://en.wikipedia.org/wiki/Yes_(Unix)
 .. _ticket_24049: https://support.schedmd.com/show_bug.cgi?id=24049
+.. _ticket_24010: https://support.schedmd.com/show_bug.cgi?id=24010
+.. _stderr: https://linux.die.net/man/3/stderr
 
 Configure database accounting in slurm.conf
 ===========================================
