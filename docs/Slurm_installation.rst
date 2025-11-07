@@ -777,7 +777,7 @@ Here is a suggested procedure:
 3. Configure the MySQL_/MariaDB_ database as described in the :ref:`Slurm_database` page:
 
    * :ref:`Setup_mariadb`
-   * :ref:`_InnoDB_configuration`
+   * :ref:`InnoDB_configuration`
 
 4. Copy the latest database dump file (``/root/mysql_dump``, see :ref:`Slurm_database`) from the main server to the compute node.
    Load the dump file into the testing database::
