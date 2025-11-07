@@ -85,6 +85,8 @@ Explicitly enable the service::
 
   systemctl enable slurmdbd
 
+.. _Setup_mariadb:
+
 Set up MariaDB database
 =======================
 
@@ -159,8 +161,10 @@ You can verify that slurmdbd_ is running by typing ``ps aux | grep slurmdbd``.
 If the slurmdbd_ is not running you can use the -v option when you start slurmdbd_ to get more detailed information. 
 Starting the slurmdbd_ in daemon mode with the ``-D -vvv`` option can also help in debugging so you don't have to go to the log to find the problem.
 
-MySQL configuration
--------------------
+.. _InnoDB_configuration:
+
+Configuration of InnoDB
+--------------------------------
 
 In the accounting_ page section *Slurm Accounting Configuration Before Build* some advice about MySQL_ configuration is given:
 
@@ -170,7 +174,7 @@ In the accounting_ page section *Slurm Accounting Configuration Before Build* so
   Setting ``innodb_lock_wait_timeout`` and ``innodb_log_file_size`` to larger values than the default is also recommended.
 
 The following is recommended for ``/etc/my.cnf``,
-but on EL7/EL8 you should create a new file ``/etc/my.cnf.d/innodb.cnf`` containing::
+but on EL8 you should create a new file ``/etc/my.cnf.d/innodb.cnf`` containing::
 
   [mysqld]
   innodb_buffer_pool_size=32768M
