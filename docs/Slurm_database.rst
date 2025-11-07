@@ -689,7 +689,7 @@ As an example create the ``/etc/logrotate.d/slurm_assoc_backup`` script (replace
       create 640 slurm slurm
   }
 
-Note: You cannot use a ``postrotate`` in this script to make the dumps due to the SELinux_ issue noted 
+Note: You cannot use a logrotate_ ``postrotate`` script to make the dumps due to the SELinux_ issue noted 
 in the section :ref:`logrotate_backup_script`.
 See also the ticket_24049_.
 
