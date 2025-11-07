@@ -549,7 +549,8 @@ Testing the script::
 
   logrotate -dv /etc/logrotate.d/slurm_acct_db_backup
 
-**Note:** SELinux_ enforces that logrotate_ only create files in the ``/var/log/`` folder and below.
+**Note:** If SELinux_ is configured as **Enforcing** (see getenforce_),
+it enforces that logrotate_ only create files in the ``/var/log/`` folder and below.
 If logrotate_ tries to create files in other locations it will get *permission denied* errors,
 and errors will be present in ``/var/log/audit/audit.log``.
 See the logrotate_selinux_ manual page and this Red Hat solution: https://access.redhat.com/solutions/39006
@@ -557,6 +558,7 @@ See the logrotate_selinux_ manual page and this Red Hat solution: https://access
 .. _logrotate: https://linux.die.net/man/8/logrotate
 .. _SELinux: https://en.wikipedia.org/wiki/Security-Enhanced_Linux
 .. _logrotate_selinux: https://linux.die.net/man/8/logrotate_selinux
+.. _getenforce: https://man7.org/linux/man-pages/man8/getenforce.8.html
 
 Restore of a database backup
 ----------------------------
@@ -693,8 +695,9 @@ As an example create the ``/etc/logrotate.d/slurm_assoc_backup`` script (replace
       create 640 slurm slurm
   }
 
-Note: You cannot use a logrotate_ ``postrotate`` script to make the dumps due to the SELinux_ issue noted 
-in the section :ref:`logrotate_backup_script`.
+Note: You cannot use a logrotate_ ``postrotate`` script to make the dumps due to the SELinux_ issue
+(if SELinux_ is **Enforcing**, see getenforce_)
+noted in the section :ref:`logrotate_backup_script`.
 See also the ticket_24049_.
 
 .. _sacctmgr_dump: https://slurm.schedmd.com/sacctmgr.html#SECTION_FLAT-FILE-DUMP-AND-LOAD
