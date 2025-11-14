@@ -206,7 +206,7 @@ Examples::
   sacctmgr show qos format=name,priority
   sacctmgr show qos format="name%20,priority,flags,usagefactor,maxtres,maxwall,maxtrespu%30"
 
-Display jobs with a specified QOS::
+Display jobs with a specified QOS_ name::
 
   squeue --qos <qos-name>
 
