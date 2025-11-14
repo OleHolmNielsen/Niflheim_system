@@ -204,7 +204,11 @@ Example QOS_ configurations are::
 Examples::
 
   sacctmgr show qos format=name,priority
-  sacctmgr show qos format="name,priority,flags,usagefactor,maxtres,maxwall,maxtrespu%30"
+  sacctmgr show qos format="name%20,priority,flags,usagefactor,maxtres,maxwall,maxtrespu%30"
+
+Display jobs with a specified QOS::
+
+  squeue --qos <qos-name>
 
 To enforce user jobs to have a QOS_ you must (at least) have::
 
