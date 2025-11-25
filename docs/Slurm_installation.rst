@@ -143,7 +143,7 @@ Build Munge_ RPM packages by:
 
 and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
-With Munge_ 0.5.17 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
+From Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
 It is a good idea to increase the number of threads from 2 to 10 by::
 
   OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
