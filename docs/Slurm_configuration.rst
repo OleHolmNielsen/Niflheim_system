@@ -1678,7 +1678,12 @@ The well known TCP_ ports for X11_ are 6000-6063: typically the port number used
 Bash command completion for Slurm
 ==================================
 
-The Bash_ shell includes a TAB bash_command_completion_ feature (see also bash-completion_ on GitHub).
+The Bash_ shell includes a Command_line_completion_ feature, see:
+
+* bash_command_completion_ tutorial.
+* Programmable_Completion_Builtins_ manual page.
+* bash-completion_ source on GitHub.
+
 On EL8/EL9 Linux enable this feature by::
 
   dnf install bash-completion
@@ -1695,8 +1700,10 @@ When upgrading to Slurm_ 24.11 (or later), remember to remove the file again::
 
 .. _squeue: https://slurm.schedmd.com/squeue.html
 .. _Bash: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+.. _Command_line_completion: https://en.wikipedia.org/wiki/Command-line_completion
 .. _bash_command_completion: https://www.gnu.org/software/gnuastro/manual/html_node/Bash-TAB-completion-tutorial.html
 .. _bash-completion: https://github.com/scop/bash-completion
+.. _Programmable_Completion_Builtins: https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion-Builtins.html
 .. _slurm_completion_help: https://github.com/SchedMD/slurm/tree/master/contribs/slurm_completion_help
 .. _slurm_completion.sh: https://github.com/SchedMD/slurm/blob/master/contribs/slurm_completion_help/slurm_completion.sh
 .. _ticket_20932: https://support.schedmd.com/show_bug.cgi?id=20932
