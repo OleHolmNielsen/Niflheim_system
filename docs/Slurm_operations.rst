@@ -499,11 +499,15 @@ and the verbose output should inform you::
 ClusterShell
 ------------
 
-ClusterShell_ provides a light and unified command execution Python framework to help administer GNU/Linux or BSD clusters.
-There is a ClusterShell_manual_ and a ClusterShell_configuration_ guide.
+The ClusterShell_tool_ is an event-driven open source Python library, designed to run local or distant commands in parallel on server farms or on large Linux clusters.
+It provides a light and unified command execution Python framework to help administer GNU/Linux or BSD clusters.
+There is a ClusterShell_manual_ and a ClusterShell_configuration_ guide,
+and you can view the ClusterShell_source_.
 
 .. _ClusterShell_manual: https://clustershell.readthedocs.io/en/latest/
 .. _ClusterShell_configuration: https://clustershell.readthedocs.io/en/latest/config.html
+.. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
+.. _ClusterShell_source: https://github.com/cea-hpc/clustershell
 
 Install the ClusterShell_tool_ from the EPEL_ repository::
 
@@ -534,13 +538,20 @@ Simple usage of clush_::
 
   clush -w node[001-003] date
 
+For convenience you can use bash_command_completion_ for the clush_ command::
+
+  clush -w node[TAB][TAB] [further_arguments]
+  clush -g group[TAB][TAB] [further_arguments]
+
+(note that additional arguments such as ``-b`` or ``-B`` must come last).
+
 For a Slurm_ partition::
 
   clush -g <partition-name> date
 
 If option *-b* or *--dshbak* is specified, clush_ waits for command completion while displaying a progress indicator and then displays gathered output results::
 
-  clush -b -g <partition-name> date
+  clush -g <partition-name> -b date
 
 To execute a command only on nodes with a specified Slurm_ state (here: ``drained``)::
 
@@ -569,9 +580,10 @@ For example::
   $ nodeset --expand node[13-15,17-19]
   node13 node14 node15 node17 node18 node19
 
-.. _ClusterShell_tool: https://clustershell.readthedocs.io/en/latest/intro.html
 .. _clush: https://clustershell.readthedocs.io/en/latest/tools/clush.html
 .. _nodeset: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
+.. _bash-completion: https://github.com/scop/bash-completion
+.. _bash_command_completion: https://www.gnu.org/software/gnuastro/manual/html_node/Bash-TAB-completion-tutorial.html
 
 Skipping powered_down nodes
 .............................
