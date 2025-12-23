@@ -540,10 +540,10 @@ Simple usage of clush_::
 
 For convenience you can use bash_command_completion_ for the clush_ command::
 
-  clush -w node[TAB][TAB] [further_arguments]
-  clush -g group[TAB][TAB] [further_arguments]
+  clush -w node[TAB][TAB] [-b|-B]
+  clush -g group[TAB][TAB] [-b|-B]
 
-(note that additional arguments such as ``-b`` or ``-B`` must come last).
+(note that additional arguments ``-b`` or ``-B`` must come last, they are missing in clush_PR_563_).
 
 For a Slurm_ partition::
 
@@ -584,6 +584,7 @@ For example::
 .. _nodeset: https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
 .. _bash-completion: https://github.com/scop/bash-completion
 .. _bash_command_completion: https://www.gnu.org/software/gnuastro/manual/html_node/Bash-TAB-completion-tutorial.html
+.. _clush_PR_563: https://github.com/cea-hpc/clustershell/pull/563
 
 Skipping powered_down nodes
 .............................
