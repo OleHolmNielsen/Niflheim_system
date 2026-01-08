@@ -224,9 +224,11 @@ Here we list some useful third-party utilities that Slurm_ administrators or use
 
 * `slurm_showq <https://github.com/fasrc/slurm_showq>`_ A *showq* style job summary utility for Slurm.
 
+* `slurm-quota <https://github.com/rackslab/slurm-quota>`_ assigns CPU and GPU minute quotas to users and accounts on Slurm clusters,
+  and to block Slurm_ job submissions and modifications when these quotas are reached.
+
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
-.. _ticket_1868: https://support.schedmd.com/show_bug.cgi?id=1868
 
 Graphical monitoring tools
 --------------------------
