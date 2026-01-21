@@ -2331,12 +2331,12 @@ Then configure slurm.conf_ with this parameter::
 which will make Slurm_ use the ``/etc/slurm/job_submit.lua`` script.
 Make sure to distribute slurm.conf_ to all nodes (or use a configless_ setup).
 
-Then reconfigure ``slurmctld``::
+Then reconfigure slurmctld_::
 
   scontrol reconfigure
 
-If ``slurmctld`` gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
+If slurmctld_ gets an error when executing ``/etc/slurm/job_submit.lua``, it will use any previously cached script and ignore the file on disk henceforth
 (see `comment 15 <https://support.schedmd.com/show_bug.cgi?id=14472#c15>`_ in ticket_14472_).
 
 **WARNING:**
-If ``slurmctld`` does not have a cached script (because it was just restarted, for example) it may crash!
+If slurmctld_ does not have a cached script (because it was just restarted, for example) it may crash!
