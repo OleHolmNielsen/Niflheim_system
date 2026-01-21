@@ -720,7 +720,7 @@ Pay attention to these statements:
 
 Regarding the Slurm_ database, also make sure to:
 
-* Make a database dump (see :ref:`Slurm_database`) prior to the slurmdbd_ upgrade.
+* Make a database dump (see :ref:`backup-and-restore-of-database`) prior to the slurmdbd_ upgrade.
 * Start the slurmdbd_ service manually after the upgrade in order to avoid timeouts (see ticket_4450_).
   In stead of starting the slurmdbd_ Systemd_ service, it **strongly recommended to start the slurmdbd daemon manually**.
   If you use the ``systemctl`` command, it is very likely to **exceed a Systemd_ time limit** and kill slurmdbd_ before the database conversion has been completed!
@@ -743,7 +743,8 @@ Regarding the Slurm_ database, also make sure to:
 Upgrade of MySQL/MariaDB
 ------------------------
 
-If you restore a database dump (see :ref:`Slurm_database`) onto a different server running a **newer MySQL/MariaDB version**, 
+If you restore a database dump (see :ref:`backup-and-restore-of-database`)
+onto a different server running a **newer MySQL/MariaDB version**, 
 there are some extra steps.
 
 See `Upgrading from MySQL to MariaDB <https://mariadb.com/kb/en/library/upgrading-from-mysql-to-mariadb/>`_ 
@@ -921,7 +922,7 @@ The upgrading steps for the slurmdbd_ host are:
 
      systemctl stop slurmdbd
 
-2. Make a dump of the MySQL_/Mariadb_ database (see :ref:`Slurm_database`).
+2. Make a dump of the MySQL_/Mariadb_ database (see :ref:`backup-and-restore-of-database`).
 
 3. Update all RPMs::
 
