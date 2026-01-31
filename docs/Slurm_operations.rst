@@ -729,7 +729,9 @@ A hostlist expression for the nodelist or job ID is passed as an argument to the
 
 * strigger_ - Used set, get or clear Slurm_ trigger information
 
-An example script using this is notify_nodes_down_.
+An example script using this is ``notify_nodes_down`` in the
+`Slurm trigger scripts <https://github.com/OleHolmNielsen/Slurm_tools/tree/master/triggers>`_ page.
+
 To set up the trigger as the *slurm* user::
 
    slurm# strigger --set --node --down --program=/usr/local/bin/notify_nodes_down
