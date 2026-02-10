@@ -161,7 +161,9 @@ Install in-distro version of Munge
 ....................................
 
 The EL8 and EL9 distributions contain Munge_ RPM packages version 0.5.13,
-but it is preferred to install the latest version as discussed above.
+but it is strongly recommended to install the latest version (0.5.18 or greater) as discussed above.
+
+**Not recommended:**
 The in-distro packages may be installed by::
 
   dnf install munge munge-libs munge-devel
