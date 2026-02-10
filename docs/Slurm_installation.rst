@@ -125,12 +125,16 @@ The issue is discussed in
 Install the latest Munge version
 ....................................
 
-We recommend to install the latest Munge_release_ RPMs (currently 0.5.17)
+It is strongly recommended to install the latest Munge_release_ RPMs (currently 0.5.18)
 due to new features and bug fixes.
-Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
+In particular, Munge_ 0.5.x prior to 0.5.18 has a security vulnerability 
+`Buffer overflow in message unpacking allows key leakage and credential forgery <https://github.com/dun/munge/security/advisories/GHSA-r9cr-jf4v-75gh>`_!
+
+
+Also, Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
 which might cause the `munged.log` file to **fill up the system disk**.
 
-See also the page :ref:`configure_maximum_number_of_open_files`
+You should read the page :ref:`configure_maximum_number_of_open_files`
 where it is **highly recommended** to increase the ``fs.file-max``
 limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
@@ -138,12 +142,12 @@ Build Munge_ RPM packages by:
 
 .. code-block:: bash
 
-  wget https://github.com/dun/munge/releases/download/munge-0.5.17/munge-0.5.17.tar.xz
-  rpmbuild -ta munge-0.5.17.tar.xz
+  wget https://github.com/dun/munge/releases/download/munge-0.5.18/munge-0.5.18.tar.xz
+  rpmbuild -ta munge-0.5.18.tar.xz
 
 and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
-From Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
+Starting with Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
 It is a good idea to increase the number of threads from 2 to 10 by::
 
   OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
@@ -362,7 +366,7 @@ Install required Slurm_ prerequisite packages, as well as several optional packa
   dnf install mariadb-server mariadb-devel
   dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf bash-completion
 
-We recommend to install_the_latest_munge_version_ (currently 0.5.17) because of bug fixes improving the EL8/EL9 version::
+We recommend to install_the_latest_munge_version_ (currently 0.5.18) because of bug fixes improving the EL8/EL9 version::
 
   dnf install munge munge-libs munge-devel
 
