@@ -130,10 +130,6 @@ due to new features and bug fixes.
 In particular, Munge_ 0.5.x prior to 0.5.18 has a security vulnerability 
 `Buffer overflow in message unpacking allows key leakage and credential forgery <https://github.com/dun/munge/security/advisories/GHSA-r9cr-jf4v-75gh>`_!
 
-You should read the page :ref:`configure_maximum_number_of_open_files`
-where it is **highly recommended** to increase the ``fs.file-max``
-limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
-
 Build Munge_ RPM packages by:
 
 .. code-block:: bash
@@ -143,14 +139,20 @@ Build Munge_ RPM packages by:
 
 and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
-Starting with Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
-It is a good idea to increase the number of threads from 2 to 10 by::
+Notes:
 
-  OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
+* You should read the page :ref:`configure_maximum_number_of_open_files`
+  where it is **highly recommended** to increase the ``fs.file-max``
+  limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
-Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
-which might cause the `munged.log` file to **fill up the system disk**,
-so upgrading to 0.5.18 or greater is recommended.
+* Starting with Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
+  It is a good idea to increase the number of threads from 2 to 10 by::
+
+    OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
+
+* Munge_ prior to version 0.5.15 has an issue_94_ *excessive logging of: "Suspended new connections while processing backlog"*
+  which might cause the `munged.log` file to **fill up the system disk**,
+  so upgrading to 0.5.18 or greater is recommended.
 
 .. _Munge_release: https://github.com/dun/munge/releases
 .. _issue_94: https://github.com/dun/munge/issues/94
