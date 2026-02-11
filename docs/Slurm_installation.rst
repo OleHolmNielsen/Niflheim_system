@@ -139,7 +139,7 @@ Build Munge_ RPM packages by:
 
 and install them from the directory ``~/rpmbuild/RPMS/x86_64/``.
 
-Notes:
+Notes on Munge_ configuration:
 
 * You should read the page :ref:`configure_maximum_number_of_open_files`
   where it is **highly recommended** to increase the ``fs.file-max``
