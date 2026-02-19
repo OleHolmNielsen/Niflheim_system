@@ -401,6 +401,8 @@ We have found the following solutions:
   You can also download the latest RPM packages from the cpuid_ homepage,
   although you have to rebuild from the source package due to *glibc* version mismatches, for example::
 
+    dnf install wget gcc
+    wget https://www.etallen.com/cpuid/cpuid-20250513-1.src.rpm
     rpmbuild --rebuild cpuid-20250513-1.src.rpm
 
   The cpuid_ command determines the CPU microarchitecture, for example::
