@@ -811,10 +811,11 @@ Here is a suggested procedure:
    Then follow the :ref:`Slurm_accounting` page instructions (using -p to enter the database password)::
 
      # mysql -p
-     grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'XXXXXXXX' with grant option;  ### WARNING: change the XXXXXXXX
+     grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'XXXXXXXX' with grant option;
      SHOW GRANTS;
-     SHOW VARIABLES LIKE 'have_innodb';
-     create database slurm_acct_db;
+     SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
+     SHOW VARIABLES LIKE 'innodb_log_file_size';
+     SHOW VARIABLES LIKE 'innodb_lock_wait_timeout';
      quit;
 
    **WARNING:** Use the *slurm* database user's password **in stead of** ``XXXXXXXX``.
