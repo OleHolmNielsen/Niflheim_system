@@ -793,14 +793,17 @@ Here is a suggested procedure:
 
      time mysql -u root -p < /root/mysql_dump
 
-   If the dump file is in some compressed format::
+   The MariaDB_/MySQL_ *password* will be asked for.
+
+   **IMPORTANT:**
+   Reading in the database dump may take **many minutes** or even **several hours**
+   depending on the size of the dump file, the storage system speed, and the CPU performance.
+   The ``time`` command will report the actual time usage.
+
+   If the dump file is in some compressed format use these commands in stead::
 
      time zcat mysql_dump.gz | mysql -u root -p
      time bzcat mysql_dump.bz2 | mysql -u root -p
-
-   The MariaDB_/MySQL_ *password* will be asked for.
-   Reading in the database dump may take **many minutes** depending on the size of the dump file, the storage system speed, and the CPU performance.
-   The ``time`` command will report the time usage.
 
    Verify the database contents on the compute node by making a new database dump and compare it to the original dump.
 
