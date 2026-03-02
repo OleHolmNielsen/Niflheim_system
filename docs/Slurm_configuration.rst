@@ -1500,11 +1500,11 @@ The namespace_plugins_ uses Linux_namespaces_.
 
 The slurm.conf_ must be configured for the namespace_plugins_::
 
-  JobContainerType=namespace/tmpfs
+  NamespaceType=namespace/tmpfs
   PrologFlags=Contain
 
 Note on upgrading to Slurm_ 25.11: In slurm.conf_ change the line ``JobContainerType=job_container/tmpfs`` 
-into using ``namespace``,
+into using ``NamespaceType=namespace/tmpfs``,
 and do an ``scontrol reconfigure`` command.
 
 The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
