@@ -243,6 +243,7 @@ There exist a number of Open Source tools for graphical monitoring of Slurm:
   See also `slurm-diamond-collector <https://github.com/fasrc/slurm-diamond-collector>`_.
 
 * `Prometheus Slurm Exporter <https://github.com/vpenso/prometheus-slurm-exporter>`_ with a Grafana_ Slurm_dashboard_.
+  These tools may be used with the Slurm_metrics_ system (from Slurm_ 25.11).
 
 * `Slurmbrowser <https://source.uit.no/roy.dragseth/slurmbrowser/blob/master/README.md>`_ A really thin web layer above Slurm.
   This tool requires *Ganglia*.  Install first the RPMs ``python-virtualenv python2-bottle``.
@@ -252,6 +253,7 @@ There exist a number of Open Source tools for graphical monitoring of Slurm:
 .. _Graphite: https://graphite.readthedocs.org/en/latest/
 .. _Grafana: https://grafana.com/
 .. _Slurm_dashboard: https://grafana.com/dashboards/4323
+.. _Slurm_metrics: https://slurm.schedmd.com/metrics.html
 
 Working with Compute nodes
 ==========================
