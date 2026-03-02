@@ -21,7 +21,6 @@ Slurm configuration
 
 Jump to our top-level Slurm page: :ref:`SLURM` 
 
-
 Network configuration for Slurm
 =====================================
 
@@ -1094,6 +1093,18 @@ We describe the power_save_ configuration in the Slurm_cloud_bursting_ page sect
 
 .. _power_save: https://slurm.schedmd.com/power_save.html
 .. _Slurm_cloud_bursting: https://wiki.fysik.dtu.dk/Niflheim_system/Slurm_cloud_bursting
+
+--------------------------------------------------------------------------
+
+PrivateData hiding of information
+--------------------------------------
+
+The PrivateData_ option controls what type of information is hidden from regular users. 
+By default, all information is visible to all users. 
+User ``SlurmUser`` and ``root`` can always view all information. 
+The values are listed in the PrivateData_ page.
+
+.. _PrivateData: https://slurm.schedmd.com/slurm.conf.html#OPT_PrivateData
 
 --------------------------------------------------------------------------
 
