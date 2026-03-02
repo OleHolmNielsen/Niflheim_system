@@ -1489,31 +1489,38 @@ Jobs may be storing temporary files in ``/tmp``, ``/scratch``, and ``/dev/shm/``
 These directories may be filled up, and no clean-up is done after the job exits.
 There are several possible solutions discussed below.
 
-The job_container_tmpfs_ plugin
-..................................
+The namespace/tmpfs (renamed from job_container/tmpfs) plugin
+......................................................................
 
-You should read `the tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as ticket_11183_ and ticket_11135_ for further details.
-The job_container_tmpfs_ plugin uses Linux_namespaces_.
+**Note:** From Slurm_ `25.11 <https://github.com/SchedMD/slurm/blob/slurm-25.11/RELEASE_NOTES.md#configuration-changes>`_
+the ``JobContainerType`` has been renamed as ``NamespaceType``.
 
-**WARNING:** 
-NFS automount and ``job_container/tmpfs`` do not play well together prior to Slurm_ 23.02:
-If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see ticket_14344_ and ticket_12567_.
-The issue has been resolved in Slurm_ 23.02 according to ticket_12567_.
+There is a `tmpfs_jobcontainer FAQ <https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer>`_ as well as ticket_11183_ and ticket_11135_ for further details.
+The namespace_plugins_ uses Linux_namespaces_.
+
+The slurm.conf_ must be configured for the namespace_plugins_::
+
+  JobContainerType=namespace/tmpfs
+  PrologFlags=Contain
+
+Note on upgrading to Slurm_ 25.11: In slurm.conf_ change the line ``JobContainerType=job_container/tmpfs`` 
+into using ``namespace``,
+and do an ``scontrol reconfigure`` command.
 
 The job_container.conf_ configuration file ``/etc/slurm/job_container.conf`` must be created, and an example is::
 
   AutoBasePath=true
   BasePath=/scratch Dirs=/tmp,/var/tmp,/dev/shm Shared=true
 
+**NOTE:** 
+NFS automount and ``job_container/tmpfs`` did not play well together prior to Slurm_ 23.02:
+If a directory does not exist *when the tmpfs is created*, then that directory cannot be accessed by the job, see ticket_14344_ and ticket_12567_.
+The issue has been resolved in Slurm_ 23.02 according to ticket_12567_.
 It is **important** to use the new 23.02 option ``Shared=true`` since it enables using autofs_ on the node. 
 
-The slurm.conf_ must be configured for the job_container_tmpfs_ plugin::
-
-  JobContainerType=job_container/tmpfs
-  PrologFlags=Contain
-
-**Note:** From `25.11 <https://github.com/SchedMD/slurm/blob/slurm-25.11/RELEASE_NOTES.md#configuration-changes>`_
-the ``JobContainerType`` is renamed as ``NamespaceType``.
+.. _namespace_plugins: https://slurm.schedmd.com/namespace.html
+.. _job_container_tmpfs: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
+.. _job_container.conf: https://slurm.schedmd.com/job_container.conf.html
 
 The auto_tmpdir_ plugin 
 .................................
@@ -1596,8 +1603,6 @@ You can build a customized RPM package for the auto_tmpdir_ plugin:
 
 .. _auto_tmpdir: https://github.com/University-of-Delaware-IT-RCI/auto_tmpdir 
 .. _autofs: https://wiki.archlinux.org/title/autofs
-.. _job_container_tmpfs: https://slurm.schedmd.com/faq.html#tmpfs_jobcontainer
-.. _job_container.conf: https://slurm.schedmd.com/job_container.conf.html
 .. _ticket_11183: https://support.schedmd.com/show_bug.cgi?id=11183
 .. _ticket_11135: https://support.schedmd.com/show_bug.cgi?id=11135
 .. _ticket_14344: https://support.schedmd.com/show_bug.cgi?id=14344
@@ -1661,7 +1666,7 @@ Then you can use this salloc_ parameter::
 
 It may also be a good idea to configure X11Parameters_ in slurm.conf_
 so that xauth data on the compute node will be placed in `~/.Xauthority`
-rather than in a temporary file under TmpFS (see job_container_tmpfs_)::
+rather than in a temporary file under TmpFS (see namespace_plugins_)::
 
   X11Parameters=home_xauthority
 
