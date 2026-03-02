@@ -1752,8 +1752,8 @@ In the slurm.conf_ manual page a number of Prolog_ and Epilog_ parameters are de
 
   Fully qualified pathname of a program to be execute as the slurm job's owner after termination of each task. See TaskProlog_ for execution order details. 
 
-**NOTE:** The TaskProlog_ and TaskEpilog_ files are **not distributed** in configless_ mode with Slurm_ prior to version 25.11,
-but this will be added in 25.11 (see ticket_23523_).
+**NOTE:** Prior to Slurm_ 25.11 the TaskProlog_ and TaskEpilog_ files in ``/etc/slurm/`` are **not distributed** in configless_ mode.
+This has now been implemented in 25.11 (see ticket_23523_).
 
 **WARNING:** The Prolog_ or TaskProlog_ programs could potentially fail if 1) the file isn't found,
 2) the file doesn't have the executable bit set, 3) the program has an error which causes it to exit with a non-zero exit code.
