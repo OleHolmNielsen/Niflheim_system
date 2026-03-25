@@ -402,8 +402,8 @@ We have found the following solutions:
   although you have to rebuild from the source package due to *glibc* version mismatches, for example::
 
     dnf install wget gcc
-    wget https://www.etallen.com/cpuid/cpuid-20250513-1.src.rpm
-    rpmbuild --rebuild cpuid-20250513-1.src.rpm
+    wget https://www.etallen.com/cpuid/cpuid-20260220-1.src.rpm
+    rpmbuild --rebuild cpuid-20260220-1.src.rpm
 
   The cpuid_ command determines the CPU microarchitecture, for example::
 
@@ -414,7 +414,7 @@ We have found the following solutions:
   from the file ``cpuid.proto.spec`` and make a new tarball,
   after which you can build the RPM in the usual way::
 
-    rpmbuild -ta cpuid-20250513.src.tar.gz
+    rpmbuild -ta cpuid-20260220.src.tar.gz
 
 * **Not recommended:**
   Ask the GCC compiler for the native architecture, for example::
@@ -463,7 +463,7 @@ For example, users may choose to select CPU-specific module trees::
 .. _Developer_Toolsets: https://developers.redhat.com/articles/2025/04/16/gcc-and-gcc-toolset-versions-rhel-explainer
 .. _environment_modules: https://modules.readthedocs.io/en/latest/
 .. _cpuid: http://www.etallen.com/cpuid.html
-.. _cpuid_tarball: https://www.etallen.com/cpuid/cpuid-20250513.src.tar.gz
+.. _cpuid_tarball: https://www.etallen.com/cpuid/cpuid-20260220.src.tar.gz
 
 Automounting the CPU architecture dependent modules directory
 -------------------------------------------------------------
