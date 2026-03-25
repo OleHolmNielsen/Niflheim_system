@@ -1102,7 +1102,7 @@ PrivateData hiding of information
 The PrivateData_ option controls what type of information is hidden from regular users. 
 By default, all information is visible to all users. 
 User ``SlurmUser`` and ``root`` can always view all information. 
-The values are listed in the PrivateData_ page.
+The values for this option are listed in the PrivateData_ page.
 
 .. _PrivateData: https://slurm.schedmd.com/slurm.conf.html#OPT_PrivateData
 
