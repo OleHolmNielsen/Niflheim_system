@@ -553,9 +553,11 @@ Notes about the ``--with mysql`` option:
 * From Slurm_ 23.11 the ``--with mysql`` option has been removed, see the NEWS_ file.
   The default behavior now is to always require one of the sql development libraries.
 
+**Recommendation:**
 In our setup we build packages with these options::
 
-  rpmbuild -ta slurm-25.11.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix
+  rpmbuild -ta slurm-25.11.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix      # EL8
+  rpmbuild -ta slurm-25.11.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix --with yaml  # EL9
 
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
