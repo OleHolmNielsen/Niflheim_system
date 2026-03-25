@@ -540,9 +540,9 @@ Build Slurm packages
 
 Get the Slurm_ source code from the Slurm_download_ page.
 
-Set the version (for example, 25.11.3 and build Slurm_ RPM packages by::
+Set the version (for example, 25.11.4 and build Slurm_ RPM packages by::
 
-  export VER=25.11.3
+  export VER=25.11.4
   rpmbuild -ta slurm-$VER.tar.bz2 --with mysql
 
 Notes about the ``--with mysql`` option:
@@ -555,7 +555,7 @@ Notes about the ``--with mysql`` option:
 
 In our setup we build packages with these options::
 
-  rpmbuild -ta slurm-25.11.3.tar.bz2 --with slurmrestd --with freeipmi --with pmix
+  rpmbuild -ta slurm-25.11.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix
 
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
@@ -605,7 +605,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Head** node where the slurmctld_ daemon runs::
 
-    export VER=25.11.3
+    export VER=25.11.4
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-perlapi-$VER*rpm slurm-torque-$VER*rpm slurm-example-configs-$VER*rpm
     systemctl enable slurmctld
 
@@ -629,7 +629,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * On **Compute nodes** install slurmd_ and possibly also the *slurm-pam_slurm* RPM package to prevent rogue users from logging in::
 
-    export VER=25.11.3
+    export VER=25.11.4
     dnf install slurm-slurmd-$VER*rpm slurm-pam_slurm-$VER*rpm
     systemctl enable slurmd
 
@@ -647,7 +647,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * **Database** (slurmdbd_ service) node::
 
-    export VER=25.11.3
+    export VER=25.11.4
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-slurmdbd-$VER*rpm 
 
   Create the slurmdbd_ log directory and log file, and make the correct ownership and permissions::
@@ -664,7 +664,7 @@ The RPMs to be installed on the head node, compute nodes, and slurmdbd_ node can
 
 * On **Login nodes** install these packages::
 
-    export VER=25.11.3
+    export VER=25.11.4
     dnf install slurm-$VER*rpm slurm-devel-$VER*rpm slurm-contribs-$VER*rpm slurm-perlapi-$VER*rpm 
 
 .. _configure-slurm-logging:
@@ -885,9 +885,9 @@ Here is a suggested procedure:
 9. At this point you have a Slurm_ database server running an exact copy of your main Slurm_ database!
 
    Now it is time to do some testing.
-   Update all Slurm_ RPMs to the new version (say, 25.11.3 built as shown above)::
+   Update all Slurm_ RPMs to the new version (say, 25.11.4 built as shown above)::
 
-     export VER=25.11.3
+     export VER=25.11.4
      dnf update slurm*$VER*.rpm
 
    Optional:
@@ -941,7 +941,7 @@ The upgrading steps for the slurmdbd_ host are:
 
 3. Update all RPMs::
 
-     export VER=25.11.3
+     export VER=25.11.4
      dnf update slurm*$VER*.rpm
 
 4. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see ticket_4450_).
@@ -1012,7 +1012,7 @@ The upgrading steps for the slurmctld_ host are:
 
 4. Upgrade the RPMs, for example::
 
-     export VER=25.11.3
+     export VER=25.11.4
      dnf update slurm*$VER-*.rpm
 
 5. Enable and restart the slurmctld_ service::
@@ -1039,9 +1039,9 @@ for example, using the clush_ command (see the :ref:`SLURM` page about ClusterSh
 
   clush -bg <partition> slurmd -V
 
-The **quick and usually OK procedure** would be to simply update the RPMs (here: version 25.11.3 on all nodes::
+The **quick and usually OK procedure** would be to simply update the RPMs (here: version 25.11.4 on all nodes::
 
-  clush -bw <nodelist> 'dnf -y update /some/path/slurm*25.11.3*.rpm'
+  clush -bw <nodelist> 'dnf -y update /some/path/slurm*25.11.4*.rpm'
 
 This would automatically restart and enable slurmd_ on the nodes without any loss of running batch jobs.
 
@@ -1060,9 +1060,9 @@ For the compute nodes running slurmd_ the **safe procedure** could be:
 
      clush -bw <nodelist> systemctl stop slurmd
 
-3. Update the RPMs (here: version 25.11.3 on nodes::
+3. Update the RPMs (here: version 25.11.4 on nodes::
 
-     clush -bw <nodelist> 'dnf -y update /some/path/slurm*25.11.3*.rpm'
+     clush -bw <nodelist> 'dnf -y update /some/path/slurm*25.11.4*.rpm'
 
    and make sure to install also the new ``slurm-slurmd`` and ``slurm-contribs`` packages.
 
@@ -1108,7 +1108,7 @@ Upgrade the login nodes
 As the final step (or at least after the ``slurmctld`` has been upgraded),
 your cluster's login nodes must be upgraded, for example::
 
-  export VER=25.11.3
+  export VER=25.11.4
   dnf update slurm*$VER-*.rpm
 
 Login nodes should have the RPMs described in the Installing_RPMs_ section above.
