@@ -165,9 +165,9 @@ Prerequisite modules are listed in Dependencies_.
 
 .. _Dependencies: https://docs.easybuild.io/installation/#dependencies
 
-For EL8 these packages seem to suffice::
+For EL8/EL9 these packages seem to suffice::
 
-  dnf install tar gzip bzip2 unzip xz make patch python3 python3-setuptools gcc-c++ Lmod 
+  dnf install python3-pip tar gzip bzip2 unzip xz make patch python3 python3-setuptools gcc-c++ Lmod 
 
 Modules such as UCX require some OS dependencies::
 
