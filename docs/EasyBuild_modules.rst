@@ -292,7 +292,7 @@ Of particular interest is:
 
 * Searching_for_easyconfigs_, for example::
 
-    eb -S ^GCC-4.6
+    eb -S ^GCC-14.3
 
 .. _command_line: https://docs.easybuild.io/using-easybuild/
 .. _toolchains: https://docs.easybuild.io/version-specific/toolchains/
