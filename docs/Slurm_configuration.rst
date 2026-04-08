@@ -257,7 +257,7 @@ which stores all jobs batch scripts in the database for later retrival::
 
 You should also consider adjusting the SchedulerParameters_ parameter max_script_size_ in slurm.conf_ (default is 4 MB).
 
-The sacct_ command can print the batch script of jobs (only if the job used one)::
+The sacct_ command can print the batch script of jobs (only if the job used a script)::
 
   sacct -j <JobIds> --batch-script
 
@@ -267,10 +267,12 @@ See the mailing list thread enabling_job_script_archival_ containing some observ
 
 * Thus job_env_ ended up being too massive to keep around and so we had to drop them.
 * There is no way to prune out job_script_ or job_env_ right now.
-  So the only way to get rid of them if they get large is to zero out the column in the database table.
-  You can ask SchedMD_ for the MySQL_ command to do this as we had to do it here to our job_env_. 
 
-The :ref:`slurm_database_tables` shows how to print the cluster's ``*_job_script_table``
+Notice: From Slurm_ 26.05 there will be some new slurmdbd.conf_ options which can be used to 
+purge job_script_ or job_env_ entries in the database.
+This is described in more detail in :ref:`Purge_job_script`.
+
+Info: The :ref:`slurm_database_tables` shows how to print the cluster's ``*_job_script_table``
 and ``describe`` the database tables.
 
 .. _AccountingStoreFlags: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStoreFlags
@@ -280,6 +282,7 @@ and ``describe`` the database tables.
 .. _enabling_job_script_archival: https://groups.google.com/g/slurm-users/c/SF4jWY3lH9A?pli=1
 .. _SchedMD: https://www.schedmd.com/
 .. _MySQL: https://www.mysql.com/
+.. _ticket_23818: https://support.schedmd.com/show_bug.cgi?id=23818
 
 --------------------------------------------------------------------------
 

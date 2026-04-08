@@ -395,6 +395,26 @@ Logging of purge events can be configured in slurmdbd.conf_ using::
 .. _ticket_4295: https://support.schedmd.com/show_bug.cgi?id=4295
 .. _MUNGE: https://dun.github.io/munge/
 
+.. _Purge_job_script:
+
+Purging of job_script and job_env from the database
+..........................................................
+
+From Slurm_ 26.05 there will be some new slurmdbd.conf_ options which can be used to
+purge job_script_ or job_env_ entries in the database, see ticket_23818_.
+
+The safe way to enable the new purge parameters is to introduce them *very* gradually as discussed above,
+for example::
+
+  PurgeJobScriptAfter=2000days
+  PurgeJobEnvAfter=2000days
+
+and lower the values little by little over time.
+
+.. _job_script: https://slurm.schedmd.com/slurm.conf.html#OPT_job_script
+.. _job_env: https://slurm.schedmd.com/slurm.conf.html#OPT_job_env
+.. _ticket_23818: https://support.schedmd.com/show_bug.cgi?id=23818
+
 slurmdbd hostname configuration
 -------------------------------
 
