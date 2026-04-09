@@ -19,7 +19,7 @@ Slurm configuration
 .. _Slurm_bugs: https://support.schedmd.com
 .. _Slurm_man_pages: https://slurm.schedmd.com/man_index.html
 
-Jump to our top-level Slurm page: :ref:`SLURM` 
+Jump to our top-level Slurm_ page: :ref:`SLURM` 
 
 Network configuration for Slurm
 =====================================
@@ -124,7 +124,7 @@ Add login and submit nodes to slurm.conf
 ........................................
 
 The SLUG 2020 talk (see Slurm_Publications_) *Field Notes 4: From The Frontlines of Slurm Support* by Jason Booth 
-recommends on slide 31 to run slurmd on all login nodes in configless_ Slurm mode::
+recommends on slide 31 to run slurmd on all login nodes in configless_ Slurm_ mode::
 
   We generally suggest that you run a slurmd to manage the configs on those nodes that run client commands, including submit or login nodes
 
@@ -152,7 +152,7 @@ The simplest way to achieve this is described in ticket_9832_:
      systemctl enable slurmd
      systemctl start slurmd
 
-3. Verify that the Slurm config files have been downloaded::
+3. Verify that the Slurm_ config files have been downloaded::
 
      ls -l /run/slurm/conf
 
@@ -495,7 +495,8 @@ The cgroup.conf_ page defines:
 You may also consider defining **MemSpecLimit** in slurm.conf_:
 
 * **MemSpecLimit** Amount of memory, in megabytes, reserved for system use and not available for user allocations.
-  If the task/cgroup plugin is configured and that plugin constrains memory allocations (i.e. TaskPlugin=task/cgroup in slurm.conf, plus ConstrainRAMSpace=yes in cgroup.conf), then Slurm compute node daemons (slurmd plus slurmstepd) will be allocated the specified memory limit.
+  If the task/cgroup plugin is configured and that plugin constrains memory allocations (i.e. TaskPlugin=task/cgroup in slurm.conf, plus ConstrainRAMSpace=yes in cgroup.conf),
+  then Slurm_ compute node daemons (slurmd plus slurmstepd) will be allocated the specified memory limit.
   The daemons will not be killed if they exhaust the memory allocation (ie. the Out-Of-Memory Killer is disabled for the daemon's memory cgroup).
   If the task/cgroup plugin is not configured, the specified memory will only be unavailable for user allocations. 
 
@@ -547,7 +548,7 @@ The resulting RPM package may be this version::
 .. _Git: https://en.wikipedia.org/wiki/Git
 .. _LBL: https://www.lbl.gov/
 
-It's simple to configure NHC_ Slurm integration, see the NHC_ page.
+It's simple to configure NHC_ Slurm_ integration, see the NHC_ page.
 Add the following to slurm.conf_ on your *Head* node **and** your compute nodes::
 
   HealthCheckProgram=/usr/sbin/nhc
@@ -835,12 +836,12 @@ to change the default behavior for individual jobs.
 Power monitoring and management
 -------------------------------
 
-Slurm can be configured to monitor the power and energy usage of compute nodes,
+Slurm_ can be configured to monitor the power and energy usage of compute nodes,
 see the SLUG'18 presentation `Workload Scheduling and Power Management <https://slurm.schedmd.com/SLUG18/power_management.pdf>`_.
 This paper also describes Slurm_ power management.
 See also the `Slurm Power Management Guide <https://slurm.schedmd.com/power_mgmt.html>`_.
 
-The Slurm configuration file for the **acct_gather plugins** such as *acct_gather_energy*, *acct_gather_profile* and *acct_gather_interconnect*
+The Slurm_ configuration file for the **acct_gather plugins** such as *acct_gather_energy*, *acct_gather_profile* and *acct_gather_interconnect*
 is described in acct_gather.conf_.
 
 .. _acct_gather.conf: https://slurm.schedmd.com/acct_gather.conf.html
@@ -892,7 +893,7 @@ Then build Slurm_ RPM packages **including** ``freeipmi`` libraries::
   rpmbuild -ta slurm-<version>.tar.bz2 --with mysql --with freeipmi
 
 When installing ``slurm`` RPM packages the ``freeipmi`` packages are now going to be required as prerequisites.
-Note that the Slurm `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
+Note that the Slurm_ `quickstart admin guide <https://slurm.schedmd.com/quickstart_admin.html>`_ states::
 
   IPMI Energy Consumption: The acct_gather_energy/ipmi accounting plugin will be built if the freeipmi development library is present.
 
@@ -1030,7 +1031,7 @@ Notice some potentially incorrect power and CPU load values:
 
 * ticket_17759_: ``scontrol show node`` shows *CurrentWatts* and *CPULoad* greater than zero for nodes that are powered off (fixed in Slurm_ 23.11).
 
-* Beware that the Slurm ticket_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
+* Beware that the Slurm_ ticket_9956_ states: *RAPL plugin: incorrect \*Watts and ConsumedEnergy values*.
 
 .. _ticket_17759: https://support.schedmd.com/show_bug.cgi?id=17759
 .. _ticket_9956: https://support.schedmd.com/show_bug.cgi?id=9956
@@ -1333,7 +1334,7 @@ PAM module restrictions
 
 On Compute nodes you may optionally install the ``slurm-pam_slurm`` RPM package which can prevent rogue users from logging in.
 A more important function is the *containment* of SSH tasks, for example, by some MPI libraries **not** using Slurm_ for spawning tasks.
-The pam_slurm_adopt_ module makes sure that child SSH tasks are controlled by Slurm on the job's master node.
+The pam_slurm_adopt_ module makes sure that child SSH tasks are controlled by Slurm_ on the job's master node.
 
 SELinux_ may conflict with pam_slurm_adopt_, so it might need to be disabled by this command::
 
@@ -1347,7 +1348,7 @@ For further details, the pam_slurm_adopt_ module is described by its author in
 `Caller ID: Handling ssh-launched processes in Slurm  <https://tech.ryancox.net/2015/04/caller-id-handling-ssh-launched-processes-in-slurm.html>`_.
 Features include:
 
-* This module restricts access to compute nodes in a cluster where Slurm is in use.
+* This module restricts access to compute nodes in a cluster where Slurm_ is in use.
   Access is granted to root, any user with an Slurm-launched job currently running on the node, or any user who has allocated resources on the node according to the Slurm.
 
 Usage of pam_slurm_adopt_ is described in the source files pam_slurm_adopt_.
@@ -1853,7 +1854,7 @@ Sharing nodes and cons_tres
 By default nodes are allocated exclusively to jobs, but it is possible to permit multiple jobs and/or multiple users per node.
 This is configured using **Consumable Resource Allocation Plugin** or cons_tres_ in slurm.conf_.
 The cons_tres_ plugin has improved support for GPU nodes as compared to the older cons_res_,
-and is described in the *Presentations from Slurm User Group Meeting, September 2019*,
+and is described in the *Presentations from Slurm_ User Group Meeting, September 2019*,
 see Slurm_publications_.
 
 The required slurm.conf_ configuration is::
@@ -1995,7 +1996,7 @@ See also the examples in the gres.conf_ page.
 Configure network topology
 ==========================
 
-Slurm can be configured to support topology-aware resource allocation to optimize job performance, see the Topology_Guide_ and the topology.conf_ manual page.
+Slurm_ can be configured to support topology-aware resource allocation to optimize job performance, see the Topology_Guide_ and the topology.conf_ manual page.
 
 Check consistency of ``/etc/slurm/topology.conf`` with nodelist in ``/etc/slurm/slurm.conf`` using the checktopology_ tool.
 
@@ -2195,7 +2196,7 @@ You can use one window to execute *slurmctld -D -vvvvvv*, a second window to exe
 Slurm plugins
 =============
 
-A Slurm_ plugin_ is a dynamically linked code object which is loaded explicitly at run time by the Slurm libraries. 
+A Slurm_ plugin_ is a dynamically linked code object which is loaded explicitly at run time by the Slurm_ libraries. 
 A plugin_ provides a customized implementation of a well-defined API connected to tasks such as authentication, interconnect fabric, and task scheduling. 
 
 For plugin_ documentation see items in the section ``Slurm Developers`` in the Slurm_documentation_ page.
@@ -2204,7 +2205,7 @@ Plugins include:
 
 * Job_Submit_Plugin_.
 
-* Slurm scheduler plugins (schedplugins_) are Slurm plugins that implement the Slurm scheduler API.
+* Slurm_ scheduler plugins (schedplugins_) are Slurm_ plugins that implement the Slurm_ scheduler API.
 
 * SPANK_ - *Slurm Plug-in Architecture for Node and job (K)control*.
 
@@ -2240,7 +2241,7 @@ We also provide a job submit plugin in https://github.com/OleHolmNielsen/Slurm_t
 .. _job_submit.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.lua
 .. _job_submit.license.lua: https://github.com/SchedMD/slurm/blob/master/contribs/lua/job_submit.license.lua
 
-Please note that job_submit.lua.example_ has an issue with use of ``log.user()`` in ``job_modify()`` prior to Slurm 23.02, see ticket_14539_.
+Please note that job_submit.lua.example_ has an issue with use of ``log.user()`` in ``job_modify()`` prior to Slurm_ 23.02, see ticket_14539_.
 
 .. _ticket_14539: https://support.schedmd.com/show_bug.cgi?id=14539
 
