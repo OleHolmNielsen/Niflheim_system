@@ -4,7 +4,7 @@
 EasyBuild software for environment modules 
 ==========================================
 
-On the Niflheim_ cluster (based on EL8 Linux) we use the Lmod_ and EasyBuild_ environment modules for software packages.
+On the Niflheim_ cluster (based on RockyLinux 8/9) we use the Lmod_ and EasyBuild_ environment modules for software packages.
 
 .. _Niflheim: https://wiki.fysik.dtu.dk/Niflheim_Getting_started/niflheim/
 
@@ -87,26 +87,30 @@ On EL8 systems install EPEL_ and enable the Powertools::
   dnf config-manager --set-enabled powertools
   dnf install epel-release
 
-.. _EPEL: https://fedoraproject.org/wiki/EPEL
-
-To download the Lmod_ and prerequisite Lua_ packages directly (for compute nodes) get them from https://dl.fedoraproject.org/pub/epel/7/x86_64/l/.
-The Lua_ packages required are::
-
-  dnf install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
-
-Then install Lmod_ and prerequisite Lua_ packages::
+Then install Lmod_ and prerequisite Lua_ packages by::
 
   dnf install Lmod
 
-The minimum Lmod_ version is 6.5.1 as of EasyBuild_ 3.7.
+You can also download the Lmod_ and prerequisite Lua_ packages directly (for compute nodes) get them from https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/l/ .
+The Lua_ prerequisite packages are::
 
-You should create soft-links to the Lmod_ profile files installed by the RPM package::
+  dnf install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
+
+As of April 2026 EPEL_ has an Lmod_ version 8.7.65 RPM.
+If you want the latest version (currently 9.2.1) you can download the source RPM for 
+`Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_ and rebuild the package for your own OS::
+
+  rpmbuild --rebuild Lmod-9.2-1.fc45.src.rpm
+
+Finally, you should create soft-links to the Lmod_ profile files installed by the RPM package::
 
   lmoddir=/usr/share/lmod/lmod/init
   ln -s $lmoddir/profile /etc/profile.d/z00_lmod.sh
   ln -s $lmoddir/cshrc /etc/profile.d/z00_lmod.csh
 
 See `Installing Lmod <https://lmod.readthedocs.io/en/latest/030_installing.html#installing-lmod>`_ for details.
+
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 Using Lmod
 ----------
