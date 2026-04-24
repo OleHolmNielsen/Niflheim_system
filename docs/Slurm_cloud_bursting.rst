@@ -155,12 +155,15 @@ For a *Site-to-site* VPN_ tunnel from a cloud service to the local on-premise ne
 
 * Libreswan_IPsec_VPN_.
 
+An alternative may be to use the WireGuard_ VPN software.
+
 Network router devices can also be used, see the cloud service's list of supported devices:
 
 * Azure: `Validated VPN devices and device configuration guides <https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices>`_.
 
 .. _Libreswan_IPsec_VPN: https://wiki.fysik.dtu.dk/it/Libreswan_IPsec_VPN
 .. _VPN: https://en.wikipedia.org/wiki/Virtual_private_network
+.. _WireGuard: https://www.wireguard.com/
 
 Resources for Slurm on Google Cloud Platform (GCP)
 ==================================================
