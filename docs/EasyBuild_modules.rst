@@ -100,6 +100,7 @@ As of April 2026 EPEL_ has an Lmod_ version 8.7.65 RPM.
 If you want the latest version (currently 9.2.1) you can download the source RPM for 
 `Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_ and rebuild the package for your own OS::
 
+  dnf install tcl-devel zsh
   rpmbuild --rebuild Lmod-9.2-1.fc45.src.rpm
 
 Finally, you should create soft-links to the Lmod_ profile files installed by the RPM package::
