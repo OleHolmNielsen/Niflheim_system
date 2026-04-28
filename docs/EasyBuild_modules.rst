@@ -152,6 +152,13 @@ If you work on different CPU architectures, it may be convenient to turm off Lmo
 
 .. _Spider_cache: https://lmod.readthedocs.io/en/latest/130_spider_cache.html
 
+Tracking module usage
+-----------------------
+
+Once you have a module system, it can be important to know what modules your users are using or not.
+You can use syslog to track module usage and collect this data into a database,
+see `Tracking module usage <https://lmod.readthedocs.io/en/latest/300_tracking_module_usage.html>`_.
+
 Installing EasyBuild
 ====================
 
