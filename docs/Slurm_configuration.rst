@@ -268,8 +268,8 @@ See the mailing list thread enabling_job_script_archival_ containing some observ
 * Thus job_env_ ended up being too massive to keep around and so we had to drop them.
 * There is no way to prune out job_script_ or job_env_ right now.
 
-Notice: From Slurm_ 26.05 there will be some new slurmdbd.conf_ options which can be used to 
-purge job_script_ or job_env_ entries in the database.
+Notice: From Slurm_ 26.05 there are some new slurmdbd.conf_ options which
+can be used to purge job_script_ or job_env_ entries in the database.
 This is described in more detail in :ref:`Purge_job_script`.
 
 Info: The :ref:`slurm_database_tables` shows how to print the cluster's ``*_job_script_table``

@@ -400,7 +400,7 @@ Logging of purge events can be configured in slurmdbd.conf_ using::
 Purging of job_script and job_env from the database
 ..........................................................
 
-From Slurm_ 26.05 there will be some new slurmdbd.conf_ options which can be used to
+From Slurm_ 26.05 there are some new slurmdbd.conf_ options which can be used to
 purge job_script_ or job_env_ entries in the database, see ticket_23818_.
 
 The safe way to enable the new purge parameters is to introduce them *very* gradually as discussed above,
