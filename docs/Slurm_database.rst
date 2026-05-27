@@ -411,7 +411,10 @@ for example::
 
 and lower the values little by little over time.
 
-The MaxPurgeLimit_ parameter may alternatively be used to limit the amount of database work by setting a smaller value than the default.
+The MaxPurgeLimit_ parameter may alternatively be used to limit the amount of database work
+by setting a smaller value than the default, for example::
+
+  MaxPurgeLimit=10000
 
 .. _job_script: https://slurm.schedmd.com/slurm.conf.html#OPT_job_script
 .. _job_env: https://slurm.schedmd.com/slurm.conf.html#OPT_job_env
