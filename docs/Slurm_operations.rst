@@ -213,6 +213,8 @@ Here we list some useful third-party utilities that Slurm_ administrators or use
 
   - pestat_ prints a node status list (1 host per line) with information about jobids, users and CPU loads.
 
+* jobstats_ is a free and open-source job monitoring platform designed for CPU and GPU clusters that use the Slurm workload manager.
+
 * `SlurmCommander <https://github.com/CLIP-HPC/SlurmCommander>`_ is a simple, lightweight, no-dependencies text-based user interface (TUI) to your cluster.
   It ties together multiple slurm commands to provide you with a simple and efficient interaction point with slurm.
 
@@ -229,6 +231,7 @@ Here we list some useful third-party utilities that Slurm_ administrators or use
 
 .. _schedtop: https://svn.princeton.edu/schedtop/
 .. _pestat: https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat
+.. _jobstats: https://github.com/PrincetonUniversity/jobstats
 
 Graphical monitoring tools
 --------------------------
