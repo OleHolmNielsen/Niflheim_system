@@ -2316,8 +2316,8 @@ The function ``_get_job_req_field`` in job_submit_lua.c_ lists all available *jo
 .. _ticket_15012:  https://support.schedmd.com/show_bug.cgi?id=15012.
 .. _nil: https://www.lua.org/pil/2.1.html
 
-Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h``, see also ticket_14500_.
-Note that only a few selected symbols ``ESLURM*`` are exposed to the Lua_ script, but from Slurm_ 23.02 all the error codes in ``/usr/include/slurm/slurm_errno.h`` are exposed.
+Slurm_ error symbols ``ESLURM*`` and corresponding numeric values are defined in the file ``/usr/include/slurm/slurm_errno.h`` (from Slurm_ 23.02),
+see also ticket_14500_.
 
 Your ``/etc/slurm/job_submit.lua`` script can test for undefined values like in this example:
 
