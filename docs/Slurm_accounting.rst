@@ -369,7 +369,7 @@ Users must submit jobs to non-default QOS_ with sbatch_ like::
 Workload Characterization Key (WCKey)
 -------------------------------------
 
-A WCKey_ is a way to do accounting against possibly unrelated accounts: 
+A WCKey_ is a way to do "tag" jobs and make accounting against (possibly unrelated) accounts: 
 
 * This can be useful where users from different accounts are all working on the same project. 
 
