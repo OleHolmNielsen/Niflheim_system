@@ -369,9 +369,11 @@ Users must submit jobs to non-default QOS_ with sbatch_ like::
 Workload Characterization Key (WCKey)
 -------------------------------------
 
-A WCKey_ is an orthogonal way to do accounting against possibly unrelated accounts. 
-This can be useful where users from different accounts are all working on the same project. 
-It can also be useful when a user is working on multiple independent projects and wants to track project usage.
+A WCKey_ is a way to do accounting against possibly unrelated accounts: 
+
+* This can be useful where users from different accounts are all working on the same project. 
+
+* It can also be useful when a user is working on multiple independent projects and wants to track project usage.
 
 Users can submit jobs with any self-chosen string::
 
@@ -382,8 +384,8 @@ and can then extract their own records using sacct_::
   sacct -u <user> ... --format=JobID,WCKey,Elapsed,...
   sacct -u <user> --wckeys=projA,projB --format=JobID,WCKey,Elapsed,...
 
-Enforcement of WCKey_ usage is **optional** and **not required** (setting ``AccountingStorageEnforce=wckeys`` in slurm.conf_),
-see ticket_25422_.
+Enforcement of WCKey_ usage is **optional** and **not required**
+(setting ``AccountingStorageEnforce=wckeys`` in slurm.conf_), see ticket_25422_.
 
 .. _WCKey: https://slurm.schedmd.com/wckey.html
 .. _ticket_25422: https://support.schedmd.com/show_bug.cgi?id=25422
