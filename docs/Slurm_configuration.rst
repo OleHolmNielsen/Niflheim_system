@@ -424,7 +424,7 @@ Documentation about the usage of *Control Groups*:
 To check the cgroups_ version used on your system use the stat_ command:: 
 
   $ stat -fc %T /sys/fs/cgroup/
-  cgroup2fs         # V2 on EL9https://man7.org/linux/man-pages/man1/stat.1.html
+  cgroup2fs         # V2 on EL9
   tmpfs             # V1 on EL8
 
 You can install the cgroups_ tools::
