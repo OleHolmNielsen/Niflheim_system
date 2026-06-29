@@ -507,8 +507,10 @@ Edit the file to change these lines::
   ConstrainSwapSpace=yes
   ConstrainDevices=yes
 
-The cgroup.conf_ page defines:
+The cgroup.conf_ page defines :
 
+* CgroupPlugin_: The plugin to be used when interacting with the cgroups_ subsystem.
+  Do **not** specify CgroupPlugin_ since you should probably use the default value of ``autodetect`` on linux.
 * ConstrainCores_ =<yes|no>
     If configured to "yes" then constrain allowed cores to the subset of allocated resources. It uses the cpuset subsystem.
 * ConstrainRAMSpace_ =<yes|no>
@@ -537,6 +539,7 @@ See an interesting discussion in `bug 2713 <https://support.schedmd.com/show_bug
 
 After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfigure``.
 
+.. _CgroupPlugin: https://slurm.schedmd.com/cgroup.conf.html#OPT_CgroupPlugin
 .. _ConstrainCores: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainCores
 .. _ConstrainRAMSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainRAMSpace
 .. _ConstrainSwapSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainSwapSpace
