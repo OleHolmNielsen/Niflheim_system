@@ -555,6 +555,7 @@ After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfi
 .. _AllowedSwapSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_AllowedSwapSpace
 .. _MemSpecLimit: https://slurm.schedmd.com/slurm.conf.html#OPT_MemSpecLimit
 .. _Out_of_memory: https://en.wikipedia.org/wiki/Out_of_memory
+.. _slurmstepd: https://slurm.schedmd.com/slurmstepd.html
 
 --------------------------------------------------------------------------
 
