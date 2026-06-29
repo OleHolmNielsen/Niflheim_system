@@ -511,17 +511,23 @@ The cgroup.conf_ page defines :
 
 * CgroupPlugin_: The plugin to be used when interacting with the cgroups_ subsystem.
   Do **not** specify CgroupPlugin_ since you should probably use the default value of ``autodetect`` on linux.
+
 * ConstrainCores_ =<yes|no>
     If configured to "yes" then constrain allowed cores to the subset of allocated resources. It uses the cpuset subsystem.
+
 * ConstrainRAMSpace_ =<yes|no>
     If configured to "yes" then constrain the job's RAM usage.
     The default value is "no", in which case the job's RAM limit will be set to its  swap  space  limit.
     Also see AllowedSwapSpace, AllowedRAMSpace and ConstrainSwapSpace.
+
 * ConstrainSwapSpace_ =<yes|no>
     If configured to "yes" then constrain the job's swap space usage.
     The default value is "no".
-    Note that when set to "yes" and ConstrainRAMSpace is set to "no", AllowedRAMSpace is automatically set to 100% in order to limit the RAM+Swap amount to 100% of job's requirement plus the percent of allowed swap space.
-    This amount is thus set to both RAM and RAM+Swap limits. This means that in that particular case, ConstrainRAMSpace is automatically enabled with the same limit than the one used to constrain swap space. Also see AllowedSwapSpace. 
+    Note that when set to "yes" and ConstrainRAMSpace_ is set to "no", AllowedRAMSpace is automatically set to 100% in order to limit the RAM+Swap amount to 100% of job's requirement plus the percent of allowed swap space.
+    This amount is thus set to both RAM and RAM+Swap limits.
+    This means that in that particular case, ConstrainRAMSpace_ is automatically enabled with the same limit than the one used to constrain swap space.
+    Also see AllowedSwapSpace_. 
+
 * ConstrainDevices_ =<yes|no>
     If configured to "yes" then constrain the job's allowed devices based on GRES allocated resources. It uses the devices subsystem for that.  The default value is "no".
     Enable this for job access to GPUs.
@@ -544,6 +550,7 @@ After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfi
 .. _ConstrainRAMSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainRAMSpace
 .. _ConstrainSwapSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainSwapSpace
 .. _ConstrainDevices: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainDevices
+.. _AllowedSwapSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_AllowedSwapSpace
 .. _MemSpecLimit: https://slurm.schedmd.com/slurm.conf.html#OPT_MemSpecLimit
 .. _Out_of_memory: https://en.wikipedia.org/wiki/Out_of_memory
 
