@@ -511,7 +511,8 @@ Edit the file to change these lines::
 
 The cgroup.conf_ page defines :
 
-* CgroupPlugin_: The plugin to be used when interacting with the cgroups_ subsystem.
+* CgroupPlugin_ is the plugin to be used when interacting with the cgroups_ subsystem.
+
   Do **not** specify CgroupPlugin_ since you should probably use the default value of ``autodetect`` on linux.
 
 * ConstrainCores_ =<yes|no>
