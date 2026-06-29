@@ -405,17 +405,40 @@ However, such **future** nodes must not be members of any Slurm_ partition.
 Cgroup configuration
 --------------------
 
-*Control Groups* (cgroups_ v1) provide a Linux kernel mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
+*Control Groups* (cgroups_) is a mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
 
-Documentation about the usage of cgroups_:
+Documentation about the usage of *Control Groups*:
 
-* `RHEL8 Understanding control groups <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/setting-limits-for-applications_managing-monitoring-and-updating-the-kernel>`_.
+* `RHEL9 Understanding control groups
+  <https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/setting-limits-for-applications_monitoring-and-managing-system-status-and-performance>`_.
 
-Install cgroups_ tools::
+* Usage of cgroups_ within Slurm_ is described in the Control_Group_ Guide.
+
+* See the cgroup-v2_ documentation.
+
+**NOTES:**
+
+* The cgroup/v1 plugin is deprecated and will not be supported in future Slurm_ versions.
+  Newer GNU/Linux distributions are dropping, or have dropped, support for cgroup v1 and may even not provide kernel support for the required cgroup v1 interfaces.
+  Systemd_ also deprecated cgroup v1.
+  Starting with Slurm_ version 25.05, no new features will be added to cgroup v1.
+
+* RHEL 9, by default, mounts and uses cgroup-v2_. 
+
+* RHEL 8 mounts cgroups_ v1 by default, and does not fully support cgroup-v2_,
+  see https://slurm.schedmd.com/cgroup_v2.html#limitations
+
+To check the cgroups_ version used on your system use the stat_ command:: 
+
+  $ stat -fc %T /sys/fs/cgroup/
+  cgroup2fs         # V2 on EL9https://man7.org/linux/man-pages/man1/stat.1.html
+  tmpfs             # V1 on EL8
+
+You can install the cgroups_ tools::
 
   dnf install libcgroup-tools
 
-To list current cgroups_ use the command::
+To list current *Control Groups* use the command::
 
   lscgroup
   lscgroup -g cpu:/
@@ -424,7 +447,9 @@ To list processes that are not properly constrained by Slurm_ cgroups_::
 
   ps --no-headers -eo pid,user,comm,cgroup | egrep -vw 'root|freezer:/slurm.*devices:/slurm.*cpuacct,cpu:/slurm.*memory:/slurm|cpuset:/slurm.*|dbus-daemon|munged|ntpd|gmond|polkitd|chrony|smmsp|rpcuser|rpc' 
 
-Usage of cgroups_ within Slurm_ is described in the Cgroups_Guide_.
+Slurm cgroup configuration
+..................................
+
 Slurm_ provides cgroups_ versions of a number of plugins:
 
 * proctrack (process tracking)
@@ -433,7 +458,7 @@ Slurm_ provides cgroups_ versions of a number of plugins:
 
 See also the cgroup.conf_ configuration file for the cgroups_ support.
 
-If you use *jobacct_gather*, change the default *ProctrackType* in slurm.conf_::
+If you use *jobacct_gather*, change the default *ProctrackType* in slurm.conf_ into::
 
   ProctrackType=proctrack/linux
 
@@ -441,11 +466,21 @@ otherwise you'll get this warning in the slurmctld_ log::
 
   WARNING: We will use a much slower algorithm with proctrack/pgid, use Proctracktype=proctrack/linuxproc or some other proctrack when using jobacct_gather/linux
 
-Notice: Linux kernel 2.6.38 or greater is strongly recommended, see the Cgroups_Guide_ *General Usage Notes*.
+On RHEL 9 / Rocky 9 and newer, you may want to configure OOMKillStep_ in slurm.conf_::
 
-.. _cgroups: https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt
-.. _Cgroups_Guide: https://slurm.schedmd.com/cgroups.html
+  TaskPluginParam=OOMKillStep
+
+Set this parameter to kill the whole step in all the nodes in case an OOM event is triggered in any task of the step.
+This applies to entire allocations but does not apply to the external step. It can be overwritten by the user.
+**NOTE:** This parameter requires the ``task/cgroup`` plugin, cgroup-v2_, and a kernel newer than 4.19. 
+
+.. _cgroups: https://docs.kernel.org/admin-guide/cgroup-v1/cgroups.html
+.. _cgroup-v2: https://docs.kernel.org/admin-guide/cgroup-v2.html
+.. _Control_Group: https://slurm.schedmd.com/cgroups.html
+.. _Control_Group_v2: https://slurm.schedmd.com/cgroup_v2.html
+.. _stat: https://man7.org/linux/man-pages/man1/stat.1.html
 .. _cgroup.conf: https://slurm.schedmd.com/cgroup.conf.html
+.. _OOMKillStep: https://slurm.schedmd.com/slurm.conf.html#OPT_OOMKillStep
 
 Getting started with cgroups
 ............................
