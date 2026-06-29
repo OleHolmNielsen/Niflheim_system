@@ -382,7 +382,7 @@ and can then extract their own records using sacct_::
   sacct -u <user> ... --format=JobID,WCKey,Elapsed,...
   sacct -u <user> --wckeys=projA,projB --format=JobID,WCKey,Elapsed,...
 
-Enforcement of WCKey_ usage is *optional** and **not required** (setting ``AccountingStorageEnforce=wckeys`` in slurm.conf_),
+Enforcement of WCKey_ usage is **optional** and **not required** (setting ``AccountingStorageEnforce=wckeys`` in slurm.conf_),
 see ticket_25422_.
 
 .. _WCKey: https://slurm.schedmd.com/wckey.html
