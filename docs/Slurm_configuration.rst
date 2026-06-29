@@ -464,6 +464,19 @@ otherwise you'll get this warning in the slurmctld_ log::
 
   WARNING: We will use a much slower algorithm with proctrack/pgid, use Proctracktype=proctrack/linuxproc or some other proctrack when using jobacct_gather/linux
 
+In this example we want to constrain jobs to the number of CPU cores as well as RAM memory requested by the job.
+Configure slurm.conf_ to use cgroups_ as well as the *affinity* plugin::
+
+  TaskPlugin=affinity,cgroup
+
+For a discussion see `bug 3853 <https://support.schedmd.com/show_bug.cgi?id=3853>`_.
+
+You should probably also configure this (unless you have lots of short running jobs)::
+
+  ProctrackType=proctrack/cgroup
+
+see the section *ProctrackType* of slurm.conf_.
+
 On RHEL 9 / Rocky 9 and newer, you may want to configure OOMKillStep_ in slurm.conf_::
 
   TaskPluginParam=OOMKillStep
@@ -480,24 +493,10 @@ This applies to entire allocations but does not apply to the external step. It c
 .. _cgroup.conf: https://slurm.schedmd.com/cgroup.conf.html
 .. _OOMKillStep: https://slurm.schedmd.com/slurm.conf.html#OPT_OOMKillStep
 
-Getting started with cgroups
-............................
+Configure task/cgroup plugin 
+....................................
 
-In this example we want to constrain jobs to the number of CPU cores as well as RAM memory requested by the job.
-
-Configure slurm.conf_ to use cgroups_ as well as the *affinity* plugin::
-
-  TaskPlugin=affinity,cgroup
-
-For a discussion see `bug 3853 <https://support.schedmd.com/show_bug.cgi?id=3853>`_.
-
-You should probably also configure this (unless you have lots of short running jobs)::
-
-  ProctrackType=proctrack/cgroup
-
-see the section *ProctrackType* of slurm.conf_.
-
-Create cgroup.conf_ file::
+Create the cgroup.conf_ file from an example::
 
   cp /etc/slurm/cgroup.conf.example /etc/slurm/cgroup.conf
 
@@ -510,35 +509,40 @@ Edit the file to change these lines::
 
 The cgroup.conf_ page defines:
 
-* ConstrainCores=<yes|no>
+* ConstrainCores_ =<yes|no>
     If configured to "yes" then constrain allowed cores to the subset of allocated resources. It uses the cpuset subsystem.
-* ConstrainRAMSpace=<yes|no>
+* ConstrainRAMSpace_ =<yes|no>
     If configured to "yes" then constrain the job's RAM usage.
     The default value is "no", in which case the job's RAM limit will be set to its  swap  space  limit.
     Also see AllowedSwapSpace, AllowedRAMSpace and ConstrainSwapSpace.
-* ConstrainSwapSpace=<yes|no>
+* ConstrainSwapSpace_ =<yes|no>
     If configured to "yes" then constrain the job's swap space usage.
     The default value is "no".
     Note that when set to "yes" and ConstrainRAMSpace is set to "no", AllowedRAMSpace is automatically set to 100% in order to limit the RAM+Swap amount to 100% of job's requirement plus the percent of allowed swap space.
     This amount is thus set to both RAM and RAM+Swap limits. This means that in that particular case, ConstrainRAMSpace is automatically enabled with the same limit than the one used to constrain swap space. Also see AllowedSwapSpace. 
-* ConstrainDevices=<yes|no>
+* ConstrainDevices_ =<yes|no>
     If configured to "yes" then constrain the job's allowed devices based on GRES allocated resources. It uses the devices subsystem for that.  The default value is "no".
     Enable this for job access to GPUs.
 
-You may also consider defining **MemSpecLimit** in slurm.conf_:
+You may also consider defining MemSpecLimit_ in slurm.conf_:
 
-* **MemSpecLimit** Amount of memory, in megabytes, reserved for system use and not available for user allocations.
-  If the task/cgroup plugin is configured and that plugin constrains memory allocations (i.e. TaskPlugin=task/cgroup in slurm.conf, plus ConstrainRAMSpace=yes in cgroup.conf),
-  then Slurm_ compute node daemons (slurmd plus slurmstepd) will be allocated the specified memory limit.
-  The daemons will not be killed if they exhaust the memory allocation (ie. the Out-Of-Memory Killer is disabled for the daemon's memory cgroup).
-  If the task/cgroup plugin is not configured, the specified memory will only be unavailable for user allocations. 
+* MemSpecLimit_ Amount of memory, in megabytes, reserved for system use and not available for user allocations.
+  If the ``task/cgroup`` plugin is configured and that plugin constrains memory allocations
+  (i.e. ``TaskPlugin=task/cgroup`` in slurm.conf_, plus ``ConstrainRAMSpace=yes`` in cgroup.conf_),
+  then Slurm_ compute node daemons (slurmd_ plus slurmstepd_) will be allocated the specified memory limit.
+  The daemons will not be killed if they exhaust the memory allocation (ie. the Out_of_memory_ (OOM) Killer is disabled for the daemon's memory cgroup).
+  If the ``task/cgroup`` plugin is not configured, the specified memory will only be unavailable for user allocations. 
 
 See an interesting discussion in `bug 2713 <https://support.schedmd.com/show_bug.cgi?id=2713>`_.
 
 After distributing the cgroup.conf_ file to all nodes, make a ``scontrol reconfigure``.
 
-.. _ticket_3874: https://support.schedmd.com/show_bug.cgi?id=3874
-.. _NEWS: https://github.com/SchedMD/slurm/blob/master/NEWS
+.. _ConstrainCores: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainCores
+.. _ConstrainRAMSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainRAMSpace
+.. _ConstrainSwapSpace: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainSwapSpace
+.. _ConstrainDevices: https://slurm.schedmd.com/cgroup.conf.html#OPT_ConstrainDevices
+.. _MemSpecLimit: https://slurm.schedmd.com/slurm.conf.html#OPT_MemSpecLimit
+.. _Out_of_memory: https://en.wikipedia.org/wiki/Out_of_memory
 
 --------------------------------------------------------------------------
 
