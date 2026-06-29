@@ -407,6 +407,11 @@ Cgroup configuration
 
 *Control Groups* (cgroups_) is a mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
 
+* RHEL 9, by default, mounts and uses cgroup-v2_. 
+
+* RHEL 8 mounts cgroups_ v1 by default, and does not fully support cgroup-v2_,
+  see https://slurm.schedmd.com/cgroup_v2.html#limitations
+
 Documentation about the usage of *Control Groups*:
 
 * `RHEL9 Understanding control groups
@@ -415,18 +420,6 @@ Documentation about the usage of *Control Groups*:
 * Usage of cgroups_ within Slurm_ is described in the Control_Group_ Guide.
 
 * See the cgroup-v2_ documentation.
-
-**NOTES:**
-
-* The cgroup/v1 plugin is deprecated and will not be supported in future Slurm_ versions.
-  Newer GNU/Linux distributions are dropping, or have dropped, support for cgroup v1 and may even not provide kernel support for the required cgroup v1 interfaces.
-  Systemd_ also deprecated cgroup v1.
-  Starting with Slurm_ version 25.05, no new features will be added to cgroup v1.
-
-* RHEL 9, by default, mounts and uses cgroup-v2_. 
-
-* RHEL 8 mounts cgroups_ v1 by default, and does not fully support cgroup-v2_,
-  see https://slurm.schedmd.com/cgroup_v2.html#limitations
 
 To check the cgroups_ version used on your system use the stat_ command:: 
 
@@ -449,6 +442,11 @@ To list processes that are not properly constrained by Slurm_ cgroups_::
 
 Slurm cgroup configuration
 ..................................
+
+* The cgroup/v1 plugin is deprecated and will not be supported in future Slurm_ versions.
+  Newer GNU/Linux distributions are dropping, or have dropped, support for cgroup v1 and may even not provide kernel support for the required cgroup v1 interfaces.
+  Systemd_ also deprecated cgroup v1.
+  Starting with Slurm_ version 25.05, no new features will be added to cgroup v1.
 
 Slurm_ provides cgroups_ versions of a number of plugins:
 
