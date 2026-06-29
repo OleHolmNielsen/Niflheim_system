@@ -303,6 +303,19 @@ To remove a user from an account::
 
 Note: In most cases, removed entities are preserved, but flagged as deleted. If an entity has existed for less than 1 day, the entity will be removed completely. This is meant to clean up after typographic errors.
 
+Enforce accounting
+---------------------
+
+The account and user associations created above only take effect after you enable in slurm.conf_::
+
+  AccountingStorageEnforce=...
+
+Options for AccountingStorageEnforce_ and the explanation for each are found in slurm.conf_ and the Resource_Limits_ document.
+
+When AccountingStorageEnforce_ is changed, a restart of the slurmctld_ daemon is required (not just a ``scontrol reconfig``). 
+
+.. _AccountingStorageEnforce: https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce
+
 Resource Limits
 ---------------
 
@@ -311,7 +324,6 @@ To enable any limit enforcement you must at least have::
   AccountingStorageEnforce=limits
 
 in your slurm.conf_, otherwise, even if you have limits set, they will not be enforced. 
-Other options for *AccountingStorageEnforce* and the explanation for each are found on the Resource_Limits_ document.
 
 Now you can impose user limits, for example::
 
@@ -394,18 +406,6 @@ Enforcement of WCKey_ usage is **optional** and **not required**
 .. _WCKey: https://slurm.schedmd.com/wckey.html
 .. _ticket_25422: https://support.schedmd.com/show_bug.cgi?id=25422
 .. _list_wckeys: https://slurm.schedmd.com/sacctmgr.html#SECTION_LIST/SHOW-WCKey
-
-Enforce accounting
-==================
-
-The account and user associations created above only take effect after you enable::
-
-  AccountingStorageEnforce
-
-in your slurm.conf_. 
-Options for *AccountingStorageEnforce* and the explanation for each are found in slurm.conf_ and the Resource_Limits_ document.
-
-When *AccountingStorageEnforce* is changed, a restart of the slurmctld_ daemon is required (not just a ``scontrol reconfig``). 
 
 Accounting information
 ======================
