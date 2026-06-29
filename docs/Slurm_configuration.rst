@@ -456,7 +456,7 @@ Slurm_ provides cgroups_ versions of a number of plugins:
 
 See also the cgroup.conf_ configuration file for the cgroups_ support.
 
-If you use *jobacct_gather*, change the default *ProctrackType* in slurm.conf_ into::
+If you use JobAcctGather_ plugin, change the default ProctrackType_ in slurm.conf_ into::
 
   ProctrackType=proctrack/linux
 
@@ -475,7 +475,7 @@ You should probably also configure this (unless you have lots of short running j
 
   ProctrackType=proctrack/cgroup
 
-see the section *ProctrackType* of slurm.conf_.
+see the section ProctrackType_ of slurm.conf_.
 
 On RHEL 9 / Rocky 9 and newer, you may want to configure OOMKillStep_ in slurm.conf_::
 
@@ -485,6 +485,8 @@ Set this parameter to kill the whole step in all the nodes in case an OOM event 
 This applies to entire allocations but does not apply to the external step. It can be overwritten by the user.
 **NOTE:** This parameter requires the ``task/cgroup`` plugin, cgroup-v2_, and a kernel newer than 4.19. 
 
+.. _JobAcctGather: https://slurm.schedmd.com/slurm.conf.html#OPT_JobAcctGatherType
+.. _ProctrackType: https://slurm.schedmd.com/slurm.conf.html#OPT_ProctrackType
 .. _cgroups: https://docs.kernel.org/admin-guide/cgroup-v1/cgroups.html
 .. _cgroup-v2: https://docs.kernel.org/admin-guide/cgroup-v2.html
 .. _Control_Group: https://slurm.schedmd.com/cgroups.html
