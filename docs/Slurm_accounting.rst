@@ -399,6 +399,7 @@ and can then extract their own records using sacct_::
 The system manager can list_wckeys_ using::
 
   sacctmgr list wckey
+  sacctmgr list wckey cluster=x format=x id=x name=x user=x withdeleted
 
 Enforcement of WCKey_ usage is **optional** and **not required**
 (setting ``AccountingStorageEnforce=wckeys`` in slurm.conf_), see ticket_25422_.
