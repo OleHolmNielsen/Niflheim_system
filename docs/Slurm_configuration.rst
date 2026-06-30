@@ -477,13 +477,14 @@ You should probably also configure this (unless you have lots of short running j
 
 see the section ProctrackType_ of slurm.conf_.
 
-On RHEL 9 / Rocky 9 and newer, you may want to configure OOMKillStep_ in slurm.conf_::
+You may want to configure OOMKillStep_ in slurm.conf_::
 
   TaskPluginParam=OOMKillStep
 
 Set this parameter to kill the whole step in all the nodes in case an OOM event is triggered in any task of the step.
 This applies to entire allocations but does not apply to the external step. It can be overwritten by the user.
 **NOTE:** This parameter requires the ``task/cgroup`` plugin, cgroup-v2_, and a kernel newer than 4.19. 
+See the discussion in ticket_25478_.
 
 .. _JobAcctGather: https://slurm.schedmd.com/slurm.conf.html#OPT_JobAcctGatherType
 .. _ProctrackType: https://slurm.schedmd.com/slurm.conf.html#OPT_ProctrackType
@@ -494,6 +495,7 @@ This applies to entire allocations but does not apply to the external step. It c
 .. _stat: https://man7.org/linux/man-pages/man1/stat.1.html
 .. _cgroup.conf: https://slurm.schedmd.com/cgroup.conf.html
 .. _OOMKillStep: https://slurm.schedmd.com/slurm.conf.html#OPT_OOMKillStep
+.. _ticket_25478: https://support.schedmd.com/show_bug.cgi?id=25478
 
 Configure task/cgroup plugin 
 ....................................
