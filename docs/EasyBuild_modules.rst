@@ -217,11 +217,11 @@ The steps required for a normal (**non-root**) user are:
 
 * Define the top-level directory for your modules, for example::
 
-    export EASYBUILD_PREFIX=/home/opt/modules
+    export EASYBUILD_PREFIX=/home/modules
 
   If your environment is inhomogeneous with different OS versions and/or CPU architectures, you could create separate subdirectories for each, for example::
 
-    export EASYBUILD_PREFIX=/home/opt/modules/<os-type>/x86_64
+    export EASYBUILD_PREFIX=/home/modules/<os-type>/x86_64
 
   Obviously, you would need to select somehow the appropriate top-level directory for each computer.
 
@@ -277,7 +277,7 @@ Add the following to the normal user's ``.bashrc`` file::
 
   # EasyBuild setup
   export EASYBUILD_MODULES_TOOL=Lmod
-  export EASYBUILD_PREFIX=/home/opt/modules   # Example directory
+  export EASYBUILD_PREFIX=/home/modules   # Example directory
   module use $EASYBUILD_PREFIX/modules/all
   module load EasyBuild
 
