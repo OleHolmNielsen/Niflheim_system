@@ -177,12 +177,13 @@ The following is recommended for ``/etc/my.cnf``,
 but on EL8 you should create a new file ``/etc/my.cnf.d/innodb.cnf`` containing::
 
   [mysqld]
-  innodb_buffer_pool_size=32768M
+  innodb_buffer_pool_size=131072M
   innodb_log_file_size=64M
   innodb_lock_wait_timeout=900
 
-The innodb_buffer_pool_size_ could be even larger,
-like 50%-80% of the server's RAM size.
+This 128 MB innodb_buffer_pool_size_ could be even larger,
+like 50%-80% of the server's RAM size,
+depending on the database size.
 
 To implement this change you have to shut down the database and move/remove logfiles::
 
