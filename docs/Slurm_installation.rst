@@ -454,12 +454,14 @@ and build RPM packages with these special flags::
 
   rpmbuild --define 'build_all_in_one_rpm 0' --define 'configure_options --with-munge --disable-per-user-config-files' -tb pmix-5.0.7.tar.bz2
 
+You should install the OpenPMIx_ packages on **all** Slurm_ nodes::
+
+  cd ~/rpmbuild/RPMS/x86_64
+  dnf install pmix-5.0.7-1.el*.x86_64.rpm pmix-devel-5.0.7-1.el*.x86_64.rpm
+
 Notes:
 
 * Setting ``build_all_in_one_rpm`` to 0 will build separate RPM packages.
-  You should install these on all Slurm_ nodes::
-
-    dnf install pmix-5.0.7-1.el8.x86_64.rpm pmix-devel-5.0.7-1.el8.x86_64.rpm
 
 * The ``--with-munge`` enables Munge_ authentification as recommended in the MPI_UsersGuide_.
   
