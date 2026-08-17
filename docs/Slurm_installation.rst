@@ -815,7 +815,7 @@ Here is a suggested procedure:
    Verify the database contents on the compute node by making a new database dump and compare it to the original dump.
 
 5. Select a suitable *slurm* user's **database password**, say ``XXXXXXXX``.
-   Then follow the :ref:`Slurm_accounting` page instructions (using -p to enter the database password)::
+   Then follow the :ref:`Slurm_database` page instructions (using -p to enter the database password)::
 
      # mysql -p
      grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'XXXXXXXX' with grant option;
