@@ -866,6 +866,7 @@ Here is a suggested procedure:
 
    and configure this in ``slurm.conf``::
 
+     SlurmctldHost=localhost
      AccountingStorageHost=localhost
 
    Set up files and permissions::
