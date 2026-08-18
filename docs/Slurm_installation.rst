@@ -807,6 +807,9 @@ Here is a suggested procedure:
    **IMPORTANT:**
    Make sure the MariaDB_/MySQL_ database disk space (typically ``/var/lib/mysql``)
    is **at least twice** as big as the normal usage in this folder, see :ref:`database_disk_space`.
+   If this is not the case, you must expand the filesystem's disk space sufficiently
+   before beginning the upgrade!
+   Verify that the disk space usage is well below 50% with ``df -Ph``.
 
    **IMPORTANT:**
    Reading in the database dump may take **many minutes** or even **several hours**
@@ -963,8 +966,10 @@ The upgrading steps for the slurmdbd_ host are:
      dnf update slurm*$VER*.rpm
 
 5. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see ticket_4450_).
-   In stead of starting the slurmdbd_ service with ``systemctl``, it is most likely necessary to **start the daemon manually**.
-   If you were to use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
+   In stead of starting the slurmdbd_ service with ``systemctl``, it is necessary to **start the daemon manually**.
+   If you were to use the ``systemctl`` command, it is very likely to 
+   **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed,
+   leading to a corrupted database.
 
    Perform and time the actual database upgrade::
 
@@ -975,8 +980,11 @@ The upgrading steps for the slurmdbd_ host are:
      slurmdbd: debug2: accounting_storage/as_mysql: as_mysql_roll_usage: Everything rolled up
 
    Then stop slurmdbd_ with a Control-C_.
-   Please note that the database table conversions may take **a number of minutes** or longer,
-   depending on the size of the database tables.
+
+   **IMPORTANT:**
+   Reading in the database dump may take **many minutes** or even **several hours**
+   depending on the size of the dump file, the storage system speed, and the CPU performance.
+   The ``time`` command will report the actual time usage.
 
 6. Now start the slurmdbd_ service normally::
 
