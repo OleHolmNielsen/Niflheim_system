@@ -47,6 +47,35 @@ Please note this statement::
 
 The following configuration is relevant only for the **Database node** (which may be the Head/Master node), but **not** the compute nodes.
 
+.. _database_disk_space:
+
+Database disk space allocation
+==================================
+
+**IMPORTANT**: 
+The slurmdbd_ database server **must have ample disk space** for storing the
+MariaDB_ (MySQL_) database directory, typically ``/var/lib/mysql``.
+Check the disk space size and current usage with these commands::
+
+  $ df -Ph /var/lib/mysql/
+  Filesystem                      Size  Used Avail Use% Mounted on
+  /dev/mapper/VolGroup00-lv_root  100G   24G   77G  24% /
+  $ du -h /var/lib/mysql/
+  2.6M	/var/lib/mysql/mysql
+  4.0K	/var/lib/mysql/performance_schema
+  17G	/var/lib/mysql/slurm_acct_db
+  17G	/var/lib/mysql/
+
+**IMPORTANT**: 
+When performing a Slurm_ **major version** upgrade, the slurmdbd_ upgrade process
+will temporarily create database table copies which **require twice the amount of database disk space**!
+This will make the folder ``/var/lib/mysql/slurm_acct_db`` grow to 2 times the normal size,
+and therefore it is mandatory for the file system to have more than enough space for this!
+When the slurmdbd_ upgrade has completed, the temporary tables will be deleted again.
+See ticket_25716_.
+
+.. _ticket_25716: https://support.schedmd.com/show_bug.cgi?id=25716
+
 Hardware optimization
 =====================
 
