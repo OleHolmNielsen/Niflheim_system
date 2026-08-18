@@ -68,7 +68,9 @@ Check the disk space size and current usage with these commands::
 
 **IMPORTANT**: 
 When performing a Slurm_ **major version** upgrade, the slurmdbd_ upgrade process
-will temporarily create database table copies which **require twice the amount of database disk space**!
+will temporarily create database table copies which
+**require twice the amount of normal database disk space**!
+
 This will make the folder ``/var/lib/mysql/slurm_acct_db`` grow to 2 times the normal size,
 and therefore it is mandatory for the file system to have more than enough space for this!
 When the slurmdbd_ upgrade has completed, the temporary tables will be deleted again.
