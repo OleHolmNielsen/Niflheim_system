@@ -809,7 +809,9 @@ Here is a suggested procedure:
    is **at least twice** as big as the normal usage in this folder, see :ref:`database_disk_space`.
    If this is not the case, you must expand the filesystem's disk space sufficiently
    before beginning the upgrade!
-   Verify that the disk space usage is well below 50% with ``df -Ph``.
+   Verify that the disk space usage is well below 50%::
+
+     df -Ph /var/lib/mysql/
 
    **IMPORTANT:**
    Reading in the database dump may take **many minutes** or even **several hours**
@@ -952,7 +954,9 @@ The upgrading steps for the slurmdbd_ host are:
    is **at least twice as big** as the normal usage in this folder, see :ref:`database_disk_space`.
    If this is not the case, you must expand the filesystem's disk space sufficiently
    before beginning the upgrade!
-   Verify that the disk space usage is well below 50%.
+   Verify that the disk space usage is well below 50%::
+
+     df -Ph /var/lib/mysql/
 
 2. First stop the slurmdbd_ service::
 
