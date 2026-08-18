@@ -805,6 +805,10 @@ Here is a suggested procedure:
    The MariaDB_/MySQL_ *password* will be asked for.
 
    **IMPORTANT:**
+   Make sure the MariaDB_/MySQL_ database disk space (typically ``/var/lib/mysql``)
+   is **at least twice** as big as the normal usage in this folder, see :ref:`database_disk_space`.
+
+   **IMPORTANT:**
    Reading in the database dump may take **many minutes** or even **several hours**
    depending on the size of the dump file, the storage system speed, and the CPU performance.
    The ``time`` command will report the actual time usage.
@@ -940,18 +944,25 @@ Upgrade slurmdbd
 
 The upgrading steps for the slurmdbd_ host are:
 
-1. Stop the slurmdbd_ service::
+1. **IMPORTANT:**
+   Make sure the MariaDB_/MySQL_ database disk space (typically ``/var/lib/mysql``)
+   is **at least twice as big** as the normal usage in this folder, see :ref:`database_disk_space`.
+   If this is not the case, you must expand the filesystem's disk space sufficiently
+   before beginning the upgrade!
+   Verify that the disk space usage is well below 50%.
+
+2. First stop the slurmdbd_ service::
 
      systemctl stop slurmdbd
 
-2. Make a dump of the MySQL_/Mariadb_ database (see :ref:`backup-and-restore-of-database`).
+3. Make a dump of the MySQL_/Mariadb_ database (see :ref:`backup-and-restore-of-database`).
 
-3. Update all RPMs::
+4. Update all RPMs::
 
      export VER=26.05.3
      dnf update slurm*$VER*.rpm
 
-4. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see ticket_4450_).
+5. Start the slurmdbd_ service **manually** after the upgrade in order to avoid Systemd_ timeouts (see ticket_4450_).
    In stead of starting the slurmdbd_ service with ``systemctl``, it is most likely necessary to **start the daemon manually**.
    If you were to use the ``systemctl`` command, it is very likely to **exceed a system time limit** and kill slurmdbd_ before the database conversion has been completed.
 
@@ -967,11 +978,11 @@ The upgrading steps for the slurmdbd_ host are:
    Please note that the database table conversions may take **a number of minutes** or longer,
    depending on the size of the database tables.
 
-5. Now start the slurmdbd_ service normally::
+6. Now start the slurmdbd_ service normally::
 
      systemctl start slurmdbd
 
-6. Make some database query to test slurmdbd_::
+7. Make some database query to test slurmdbd_::
 
      sacctmgr show user -s
 
