@@ -404,8 +404,8 @@ and the section on :ref:`ipmi_power_monitoring`.
 To build your own EL8/EL9 RPMs with Systemd support from the source tar-ball::
 
   dnf install libgcrypt-devel texinfo
-  wget https://ftp.gnu.org/gnu/freeipmi/freeipmi-1.6.17.tar.gz
-  rpmbuild -ta --with systemd freeipmi-1.6.17.tar.gz
+  wget https://ftp.gnu.org/gnu/freeipmi/freeipmi-1.6.19.tar.gz
+  rpmbuild -ta --with systemd freeipmi-1.6.19.tar.gz
 
 .. _IPMI: https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface
 .. _FreeIPMI: https://www.gnu.org/software/freeipmi/
