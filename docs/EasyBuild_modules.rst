@@ -152,6 +152,18 @@ If you work on different CPU architectures, it may be convenient to turm off Lmo
 
 .. _Spider_cache: https://lmod.readthedocs.io/en/latest/130_spider_cache.html
 
+Forbid a module
+---------------
+
+If you want to make sure that a specific module cannot be loaded, e.g. if a bugfix release has been made. Put a ``.modulerc.lua`` file in the ``modules/all`` folder containing e.g.::
+
+  forbid{
+      name = {"VASP/6.6.0-intel-2025b", "VASP/6.6.0-foss-2025b-OMP", "VASP/6.6.0-foss-2025b"},
+      after = "2026-08-10",
+      message = "VASP/6.6.0 has been disabled because it contains a known bug, see ...
+      nearly_message = "VASP/6.6.0 contains a known bug (see ...) and will be disabled on 10 August 2026. Please switch to VASP/6.6.1",
+  }
+
 Tracking module usage
 -----------------------
 
