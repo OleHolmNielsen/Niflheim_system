@@ -152,6 +152,28 @@ If you work on different CPU architectures, it may be convenient to turm off Lmo
 
 .. _Spider_cache: https://lmod.readthedocs.io/en/latest/130_spider_cache.html
 
+Forbid a module
+---------------
+
+If you want to make sure that a specific module cannot be loaded, e.g. if a bugfix release has been made. Put a ``.modulerc.lua`` file in the ``modules/all`` folder containing e.g.::
+
+  forbid{
+      name = {"VASP/6.6.0-intel-2025b", "VASP/6.6.0-foss-2025b-OMP", "VASP/6.6.0-foss-2025b"},
+      after = "2026-08-10",
+      message = "VASP/6.6.0 has been disabled because it contains a known bug, see ...",
+      nearly_message = "VASP/6.6.0 contains a known bug (see ...) and will be disabled on 10 August 2026. Please switch to VASP/6.6.1",
+  }
+
+See the Lmod_ documentation for `hide and forbid in modulerc files <https://lmod.readthedocs.io/en/latest/093_modulerc.html#forbid-a-way-to-mark-modules-as-visible-but-unloadable>`_.
+
+The most useful ``forbid{}`` parameters are:
+
+* ``name``: The module name to forbid. This can be a short name, a full module name including version, a full path to a modulefile, or a Lua list of names as in the example above. This is the only required parameter.
+* ``after``: Start forbidding the module after this local date/time. Use ``YYYY-MM-DD`` or ``YYYY-MM-DDTHH:MM``; if the time is omitted, Lmod assumes ``00:00``.
+* ``before``: Forbid the module until this local date/time, using the same date format as ``after``.
+* ``message``: Extra text shown when a user tries to load the forbidden module. Use this to explain why it was disabled and what to load instead.
+* ``nearly_message``: Warning shown while the module is still loadable but close to the ``after`` date. By default Lmod starts showing this warning 14 days before the module becomes forbidden.
+
 Tracking module usage
 -----------------------
 
