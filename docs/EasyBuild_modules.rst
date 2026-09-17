@@ -91,17 +91,42 @@ Then install Lmod_ and prerequisite Lua_ packages by::
 
   dnf install Lmod
 
-You can also download the Lmod_ and prerequisite Lua_ packages directly (for compute nodes) get them from https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/l/ .
-The Lua_ prerequisite packages are::
+You can also download the Lmod_ and prerequisite Lua_ packages directly (for compute nodes) from https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/l/ .
+The prerequisite packages are::
 
   dnf install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
 
-As of April 2026 EPEL_ has an Lmod_ version 8.7.65 RPM.
-If you want the latest version (currently 9.2.1) you can download the source RPM for 
-`Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_ and rebuild the package for your own OS::
+As of April 2026 EPEL_ offers an old Lmod_ version 8.7.65.
+You can however install an updated Lmod_ from
+`Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_ by rebuilding the package for your own OS::
 
   dnf install bc tcl-devel zsh
-  rpmbuild --rebuild Lmod-9.2-1.fc45.src.rpm
+  rpmbuild --rebuild Lmod-9.3.1-1.fc46.src.rpm
+
+**NOTICE:** 
+A security update Lmod_ version 9.4 was `released <https://sourceforge.net/p/lmod/mailman/message/59385994/>`_
+against CVE-2026-85013_.
+This also affects the `environment-modules <https://access.redhat.com/security/cve/cve-2026-85013>`_ software.
+
+Since repositories may be slow in providing new versions,
+the following procedure can be used to build the latest Lmod_ version (which we assume to be 9.4.2 here)
+based upon the FC46 RPM::
+
+  wget https://kojipkgs.fedoraproject.org//packages/Lmod/9.3.1/1.fc46/src/Lmod-9.3.1-1.fc46.src.rpm
+  rpm -ivh Lmod-9.3.1-1.fc46.src.rpm
+  wget https://github.com/TACC/Lmod/archive/refs/tags/9.4.2.tar.gz
+  mv 9.4.2.tar.gz ~/rpmbuild/SOURCES/Lmod-9.4.2.tar.gz
+
+Go to the folder ``~/rpmbuild/SPECS`` and edit the file ``Lmod.spec`` to replace the string ``Version: 9.4.2``.
+Now build the package::
+
+  rpmbuild -ba Lmod.spec
+
+.. _EPEL: https://fedoraproject.org/wiki/EPEL
+.. _CVE-2026-85013: https://www.cve.org/CVERecord?id=CVE-2026-85013
+
+Configuring Lmod
+------------------
 
 Finally, you should create soft-links to the Lmod_ profile files installed by the RPM package::
 
@@ -110,8 +135,6 @@ Finally, you should create soft-links to the Lmod_ profile files installed by th
   ln -s $lmoddir/cshrc /etc/profile.d/z00_lmod.csh
 
 See `Installing Lmod <https://lmod.readthedocs.io/en/latest/030_installing.html#installing-lmod>`_ for details.
-
-.. _EPEL: https://fedoraproject.org/wiki/EPEL
 
 Using Lmod
 ----------
