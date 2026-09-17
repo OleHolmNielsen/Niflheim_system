@@ -97,8 +97,10 @@ The prerequisite packages are::
   dnf install lua-bitop lua-filesystem lua-json lua-lpeg lua-posix lua-term
 
 As of April 2026 EPEL_ offers an old Lmod_ version 8.7.65.
-You can however install an updated Lmod_ from
-`Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_ by rebuilding the package for your own OS::
+You can however install a newer Lmod_ from
+`Fedora Rawhide <https://packages.fedoraproject.org/pkgs/Lmod/Lmod/>`_
+which currently offers version 9.3.1 for FC46.
+You must rebuild the package for your own OS::
 
   dnf install bc tcl-devel zsh
   rpmbuild --rebuild Lmod-9.3.1-1.fc46.src.rpm
