@@ -120,7 +120,7 @@ based upon the FC46 RPM::
   mv 9.4.2.tar.gz ~/rpmbuild/SOURCES/Lmod-9.4.2.tar.gz
 
 Go to the folder ``~/rpmbuild/SPECS`` and edit the file ``Lmod.spec`` to replace the string ``Version: 9.4.2``.
-Now build the package::
+Now build the version 9.4.2 package::
 
   rpmbuild -ba Lmod.spec
 
