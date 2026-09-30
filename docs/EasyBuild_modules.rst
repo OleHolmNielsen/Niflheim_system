@@ -388,6 +388,15 @@ Maybe a larger stack size is needed also::
 
   ulimit -s 2000240 
 
+Installing a module stack
+-------------------------
+
+When deploying a new partition, you typically need to install a collection of software modules. You can use the `ebstack <https://github.com/steenlysgaard/ebstack>`_ helper with an up-to-date YAML list of required modules to install them.
+
+Install ``ebstack`` in a Python 3.11 or later virtual environment. When activating the virtual environment, set the configuration file location::
+
+  export EBSTACK_CONFIG=/path/to/easybuild-stack.yaml
+  
 Global setup of modules for all users
 =====================================
 
