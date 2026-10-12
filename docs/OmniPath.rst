@@ -67,7 +67,7 @@ Here the PCIe device ID is 04:00.0, you determine it by::
 Software installation
 =====================
 
-Omni-Path_ HFI adapter hardware is supported with OPA software 10.11 on compute nodes with the following Intel and AMD processors:
+Omni-Path_ HFI OPA-100 adapter hardware is supported on compute nodes with the following Intel and AMD processors:
 
 * Haswell_ (HSW, Xeon v3)
 * Broadwell_ (BDW, Xeon v4)
@@ -109,15 +109,14 @@ Download the latest version *Intel® Omni-Path Fabric Software (Including Intel�
 
 Read the *Intel® Omni-Path Fabric Software Installation Guide* from the *Publications* page.
 
-Cornelis Omni-Path software 10.11
+Cornelis Omni-Path software 10.14
 =================================
 
-The current Omni-Path software release from CornelisNetworks_ as of February 2022 is **release 10.11.1.3.1** with support for RHEL 8.5 and 7.8.
-
+The current Omni-Path software release from CornelisNetworks_ as of 2026 is **release 10.14** with support for RHEL 8 and 9.
 
 **NOTICE:** 
 
-* The RHEL 8.5 (and clones thereof such as AlmaLinux_ and RockyLinux_) fortunately include all required kernel modules as well as some (almost) up-to-date OPA software!
+* The RHEL 8 and 9 (and clones thereof such as AlmaLinux_ and RockyLinux_) include all required kernel modules as well as some (almost) up-to-date OPA software!
 
 The `RHEL 8.4 Release Notes <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.4_release_notes/index>`_
 introduced Omni-Path support:
@@ -129,74 +128,115 @@ introduced Omni-Path support:
   For instructions on installing Omni-Path Architecture, see: `Cornelis Omni-Path Fabric Software Release Notes <https://customercenter.cornelisnetworks.com/#/customer/assets/download/213>`_ file.
   (`BZ#1960412 <https://bugzilla.redhat.com/show_bug.cgi?id=1960412>`_) 
 
-Cornelis OPA DNF repo
----------------------
-
-Download the latest (RHEL 8.5) Cornelis Omni-Path Fabric OPXS (Formerly IFS) tar-ball file from the `Release Library <https://customercenter.cornelisnetworks.com/#/customer/assets/software-and-documentation/release>`_ page,
-for example ``CornelisOPX-OPXS.RHEL85-x86_64.10.11.1.3.1.tgz``.
-
-Create a DNF repository in some selected directory by unpacking the tar-ball, for example::
-
-  cd /home/opt
-  tar xzf CornelisOPX-OPXS.RHEL85-x86_64.10.11.1.3.1.tgz
-
-Create a repo file ``/etc/yum.repos.d/CornelisOPX.repo`` pointing to the above directory::
-
-  [CornelisOPX-Common]
-  name=CornelisOPX Common pkgs
-  gpgcheck=0
-  baseurl=file:///home/opt/CornelisOPX-OPXS.RHEL85-x86_64.10.11.1.3.1/repos/OPA_PKGS
-  enabled=1
-
-The *baseurl* may alternatively point to an https/http server in your network.
-
-On all nodes using this repo, make sure to clean the DNF cache::
-
-  dnf clean all
-
-OPA software installation on EL8.5
-----------------------------------
-
-For RHEL and EL8 clones see the *Release Notes* Table 8 with a list of *RHEL 8 Distribution RPMs*.
-
-Install the following sets of packages:
-
-* IB/OPA Centric::
-
-    dnf install ibacm libibumad libibverbs libnl3 librdmacm opensm-libs perftest qperf rdma-core rdma-core-devel
-
-* System Centric::
-
-    dnf install atlas bc coreutils expat expect gcc-gfortran glibc json-c libgfortran libgomp libquadmath libstdc++ libstdc++-devel ncurses-compat-libs
-
-* Other/Generally Installed::
-
-    dnf install bash irqbalance kmod libgcc perl perl-Getopt-Long perl-PathTools perl-Socket pkgconfig systemd systemd-libs kernel-modules-extra
-
-* Build Requirements::
-
-    dnf install autoconf automake bison elfutils-libelf-devel expat-devel flex gcc-c++.x86_64 kernel-abi-whitelists kernel-rpm-macros libnl3-devel libpfm libtool libuuid-devel ncurses-devel numactl-devel opensm-libs openssl-devel tcl-devel
-
-Also install these EL8 RPMs::
-
-  dnf install libibverbs-utils 
-
-Finally install the *CornelisOPX* packages from the repo configured above::
-
-  dnf install hfi1-diagtools-sw hfi1-firmware hfi1-firmware_debug ifs-kernel-updates-devel libfabric libfabric-devel libfabric-psm2 libfabric-verbs libpsm2 libpsm2-compat libpsm2-devel opa-address-resolution opa-basic-tools opaconfig opa-libopamgt opa-libopamgt-devel opa-scripts opa-fastfabric opa-fm
-
-**NOTE:** The *hfidiags* package contains a script requiring ``/usr/bin/python2``.
-On EL8 it is recommended to **not install hfidiags** and thereby avoid pulling in the obsolete and insecure *python2* packages.
-
-There is no need to install the *CornelisOPX* kernel module because EL8 from EL8.4 and onwards contains OPA support in the kernel.
-However, if you wish to install the very latest kernel module, build the package from the source RPM (version numbers may differ)::
-
-  rpm -ivh CornelisOPX-OFA_DELTA.RHEL*/SRPMS/ifs-kernel-updates*.src.rpm
-  rpmbuild -bb $HOME/rpmbuild/SPECS/ifs-kernel-updates.spec
-  dnf install $HOME/rpmbuild/RPMS/x86_64/kmod-ifs-kernel-updates-XXXX.x86_64.rpm
-
 .. _AlmaLinux: https://almalinux.org/
 .. _RockyLinux: https://rockylinux.org/
+
+Cornelis OPX Software
+-----------------------------
+
+Download the relevant version of Cornelis CN5000 OPXS software from the
+`Release Library <https://customercenter.cornelisnetworks.com/#/customer/assets/software-and-documentation/release>`_ page,
+for example ``CN5000_OPXSoftware-RHEL9.8-12.4.0.0.16.tgz``.
+
+Download the installation guide ``Fabric_Installation_CN5000_v5_0.pdf``
+and read Chapter 4 *Host Software Installation*.
+
+In this page we refer only to the instructions for RHEL 9.8 systems **without GPUs** (CPUs only).
+
+IOMMU: Passthrough Mode
+...........................
+
+On **every node** in the OPA network you must install the prerequisite described in 
+section *4.1.2. IOMMU: Passthrough Mode*:
+
+1. In the node's ``/etc/default/grub`` append to the line ``GRUB_CMDLINE_LINUX``
+   the text ``iommu=pt`` before the end::
+
+     GRUB_CMDLINE_LINUX="... iommu=pt"
+
+2. Update GRUB on RHEL::
+
+     grub2-mkconfig --update-bls-cmdline -o /etc/grub2.cfg
+
+3. **Reboot the node**.
+
+4. Confirm the setting::
+
+     grep iommu /proc/cmdline
+     dmesg | grep -i passthrough
+
+Install the OPX Software
+............................
+
+Read chapter 4.2 in the guide.
+
+Create a DNF repository in some selected directory by unpacking the tar-ball into the folder ``/home/opt``, for example::
+
+  cd /home/opt
+  tar xzf CN5000_OPXSoftware-RHEL9.8-12.4.0.0.16.tgz
+
+Then follow the items in the guide:
+
+2. Create a repo file ``/etc/yum.repos.d/cornelis-repository.repo``
+   pointing to the extracted files in a **shared network folder**::
+
+     [Cornelis-Package]
+     name=Cornelis Repository
+     baseurl=file:///home/opt/CN5000_OPXSoftware-RHEL9.8-12.4.0.0.16
+     enabled=1
+     gpgcheck=1 
+
+   The ``baseurl`` may alternatively point to an https/http server in your network.
+
+   On all nodes using this repo, make sure to clean the DNF cache::
+
+     dnf clean all
+     dnf makecache
+
+3. Import the GPG Key::
+
+     rpm --import /home/opt/CN5000_OPXSoftware-RHEL9.8-12.4.0.0.16/CN5000-Packages-Public-GPG-Key.asc 
+
+5. Determine the **meta package** you need to use for installation:
+
+   * ``cn5000_pkgs_non_gpu_meta`` - CPU-based installation 
+
+6. Install the package using one of the following commands for RHEL CPU (non-GPU) drivers::
+
+     dnf install cn5000_pkgs_non_gpu_meta 
+
+8. Copy the relevant RPM source file to a local directory, for example::
+
+     cp /home/opt/CN5000_OPXSoftware-RHEL9.8-12.4.0.0.16/opxs-kernel-updates-5.14.0_687.5.3.el9_8.x86_64-638.src.rpm /tmp/
+
+   To rebuild the ``opxs-kernel-updates`` source RPM, you must install these packages first::
+
+     dnf install kernel-rpm-macros kernel-abi-stablelists
+
+9. Build the kernel module RPMs in the ``/root/rpmbuild`` folder::
+
+     rpmbuild --rebuild --define "_topdir /root/rpmbuild" --define 'dist %{nil}' --target x86_64 --define 'kver $(uname -r)' /tmp/opxs-kernel-updates-5.14.0_687.5.3.el9_8.x86_64-638.src.rpm
+
+10. Verify the RPMs are built by changing directories to the ``/root/rpmbuild/RPMS/x86_64`` directory
+    and list the files corresponding to your running kernel version::
+
+      $ cd /root/rpmbuild/RPMS/x86_64
+      $ ls -1
+      kmod-opxs-kernel-updates-<build_version>.x86_64.rpm
+      opxs-kernel-updates-devel-<build_version>.x86_64.rpm
+
+    Copy these two files to a shared network folder.
+
+11. Install the new RPMs from the shared network folder::
+
+      dnf install kmod-opxs-kernel-updates-<build_version>.x86_64.rpm opxs-kernel-updates-devel-<build_version>.x86_64.rpm
+
+12. Reboot the node to apply changes.
+
+On **all remaining OPA nodes**:
+
+* Repeat the *IOMMU: Passthrough Mode* configuration above.
+* Repeat the above steps 2, 3, 6, 11, and 12 (omitting the build of kernel modules).
 
 Managing the OPA fabric
 =======================
