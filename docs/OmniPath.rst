@@ -116,7 +116,9 @@ The current Omni-Path software release from CornelisNetworks_ as of 2026 is **re
 
 **NOTICE:** 
 
-* The RHEL 8 and 9 (and clones thereof such as AlmaLinux_ and RockyLinux_) include all required kernel modules as well as some (almost) up-to-date OPA software!
+* The RHEL 8 and 9 (and clones thereof such as AlmaLinux_ and RockyLinux_) distributions
+  include all required kernel modules as well as some (almost) up-to-date OPA software
+  without the need for Cornelis OPX Software!
 
 The `RHEL 8.4 Release Notes <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/8.4_release_notes/index>`_
 introduced Omni-Path support:
@@ -133,6 +135,9 @@ introduced Omni-Path support:
 
 Cornelis OPX Software
 -----------------------------
+
+Note:
+Installing Cornelis OPX Software is only needed in case you would like to use the latest drivers.
 
 Download the relevant version of Cornelis CN5000 OPXS software from the
 `Release Library <https://customercenter.cornelisnetworks.com/#/customer/assets/software-and-documentation/release>`_ page,
