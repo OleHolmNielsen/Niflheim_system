@@ -243,6 +243,39 @@ On **all remaining OPA nodes**:
 * Repeat the *IOMMU: Passthrough Mode* configuration above.
 * Repeat the above steps 2, 3, 6, 11, and 12 (omitting the build of kernel modules).
 
+Workarounds for software updates
+......................................
+
+Unfortunately, the OPXS software 12.4.0.0.16 breaks software updates with errors like::
+
+ $ dnf update
+ Last metadata expiration check: 1:32:09 ago on 2026-10-12T13:06:31 CEST.
+  Error: 
+   Problem 1: cannot install the best update candidate for package libfabric-psm2-2.0.0-2174.x86_64
+    - nothing provides libcuda.so.1()(64bit) needed by libfabric-psm2-2.0.0-2174cuda.x86_64 from Cornelis-Package
+  (many lines deleted)
+
+In Service Request # 60008253 we received the following workaround:
+
+1. Try to lock every installed package that came from the Cornelis repository::
+  
+     dnf repoquery --installed --qf '%{name} %{from_repo}' | awk '$2 == "Cornelis-Package" {print $1}' > /tmp/opxs-pkgs.txt
+
+2. Review the file ``/tmp/opxs-pkgs.txt``.
+
+3. Lock the versions::
+  
+     dnf install python3-dnf-plugin-versionlock
+     dnf versionlock add $(cat /tmp/opxs-pkgs.txt)
+
+4. Now you can perform the updates::
+
+     dnf update
+
+   and reboot the node.
+
+Resolution of this bug: TBD
+
 Managing the OPA fabric
 =======================
 
