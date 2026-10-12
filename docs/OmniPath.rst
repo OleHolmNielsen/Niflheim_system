@@ -109,6 +109,8 @@ Download the latest version *Intel® Omni-Path Fabric Software (Including Intel�
 
 Read the *Intel® Omni-Path Fabric Software Installation Guide* from the *Publications* page.
 
+---------------------------------------------------------
+
 Cornelis Omni-Path software 10.14
 =================================
 
@@ -275,6 +277,8 @@ In Service Request # 60008253 we received the following workaround:
    and reboot the node.
 
 Resolution of this bug: TBD
+
+---------------------------------------------------------
 
 Managing the OPA fabric
 =======================
