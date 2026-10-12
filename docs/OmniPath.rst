@@ -111,10 +111,10 @@ Read the *Intel® Omni-Path Fabric Software Installation Guide* from the *Public
 
 ---------------------------------------------------------
 
-Cornelis Omni-Path software 10.14
+Cornelis Omni-Path software 12.4
 =================================
 
-The current Omni-Path software release from CornelisNetworks_ as of 2026 is **release 10.14** with support for RHEL 8 and 9.
+The current Omni-Path software release from CornelisNetworks_ as of October 2026 is **release 12.4** with support for RHEL 8 and 9.
 
 **NOTICE:** 
 
