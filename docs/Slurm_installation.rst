@@ -523,6 +523,46 @@ For **EL9 only**: Enable YAML_ command output (for example, ``sinfo --yaml``) by
 .. _YAML: https://en.wikipedia.org/wiki/YAML
 .. _ticket_17673: https://support.schedmd.com/show_bug.cgi?id=17673
 
+NVIDIA NVML library and GPU GRES
+.....................................
+
+Slurm_ supports the ability to define and schedule arbitrary Generic RESources (GRES_).
+Additional built-in features are enabled for specific GRES_ types, including Graphics Processing Units (GPUs),
+CUDA Multi-Process Service (MPS) devices, and Sharding through an extensible plugin mechanism.
+
+If the GRES_ information in the slurm.conf_ file does not fully describe those resources,
+then a gres.conf_ file should be included.
+See also :ref:`Generic-resources-(GRES)-and-GPUs`.
+
+Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs.
+`AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
+but doesn't detect MIGs or NVLink_.
+
+NVML_ support can be configured when building Slurm_ packages,
+but prerequisites are development libraries and headers.
+It is possible to install a complete set of NVIDIA drivers,
+but this is unwarranted on nodes that do not have GPUs,
+for example, the slurmctld_ server.
+
+One alternative method for providing NVML_ libraries is to download packages from
+the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
+(this link points to the *rhel9* repo).
+For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local` by::
+
+  wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
+  dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
+  ln -s /usr/local/cuda-13.2 /usr/local/cuda
+
+The Slurm_ RPM building will look for files in `/usr/local`.
+
+.. _GRES: https://slurm.schedmd.com/gres.html
+.. _AutoDetect: https://slurm.schedmd.com/gres.html#AutoDetect
+.. _NVML: https://developer.nvidia.com/management-library-nvml
+.. _NVLink: https://en.wikipedia.org/wiki/NVLink
+.. _gres.conf: https://slurm.schedmd.com/gres.conf.html
+
+-----------------------------------------------------------------------------
+
 Install MariaDB database
 ------------------------
 
@@ -591,6 +631,10 @@ You may build Slurm_ packages including optional features as documented above in
 * If you want to build the **Slurm REST API** daemon named slurmrestd_ you must add::
 
     rpmbuild <...> --with slurmrestd
+
+* Build with NVML_ support (see :ref:`NVIDIA-NVML-library-and-GPU-GRES`)::
+
+    rpmbuild <...> --with nvml
 
 * For EL9 only: Enable YAML_ command output (for example, ``sinfo --yaml``)::
 
