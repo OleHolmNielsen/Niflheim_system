@@ -540,11 +540,11 @@ Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs when configure
 Here `AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
 but doesn't detect MIG_ or NVLink_ which require `AutoDetect=nvml`.
 
-NVML_ support must be configured when building the Slurm_ packages,
-but prerequisites are development libraries and headers.
-All NVIDIA GPU nodes should have a complete set of NVIDIA drivers installed.
-but this is unwarranted on nodes that do not have GPUs,
-for example, the slurmctld_ server.
+To enable NVML_ support, it must be configured before building the Slurm_ packages,
+since development libraries and headers are required.
+All NVIDIA GPU nodes should have the full set of NVIDIA drivers installed which include the NVML_ libraries.
+However, the NVML_ libraries do not need to be installed on nodes that do not have GPUs,
+including for example the slurmctld_ server.
 
 For **build hosts** and other non-GPU nodes such as the slurmctld_ server,
 an alternative method for providing NVML_ libraries can be used:
