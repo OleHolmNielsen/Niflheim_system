@@ -552,13 +552,13 @@ an alternative method for providing NVML_ libraries can be used:
 * Download a small (~200 kB) package from
   the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
   (this link points to the *rhel9* repo, change as needed).
-  For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local/cuda` by::
+  For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local` by::
 
     wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     ln -s /usr/local/cuda-13.2 /usr/local/cuda
 
-The Slurm_ RPM building is going to look for and find the NVML_ files in `/usr/local`.
+The Slurm_ RPM building is going to look for and find the NVML_ files in `/usr/local/cuda`.
 
 .. _GRES: https://slurm.schedmd.com/gres.html
 .. _AutoDetect: https://slurm.schedmd.com/gres.html#AutoDetect
