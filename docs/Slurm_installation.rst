@@ -561,7 +561,7 @@ an alternative method for providing NVML_ libraries can be used:
 The Slurm_ RPM building is going to look for and find the NVML_ files `libnvidia-ml.so` and `nvml.h` in `/usr/local/cuda`.
 
 **IMPORTANT:** 
-This `CUDA-NVML` library must be installed on all **build hosts** 
+A `CUDA-NVML` library must be installed on all **build hosts** 
 as well as on all **NVIDIA GPU nodes** which are defined in
 gres.conf_ file and use the `AutoDetect=nvml` option.
 Please note that this library is **not required** on CPU-only nodes
