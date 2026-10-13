@@ -532,7 +532,7 @@ CUDA Multi-Process Service (MPS) devices, and Sharding through an extensible plu
 
 If the GRES_ information in the slurm.conf_ file does not fully describe those resources,
 then a gres.conf_ file should be included.
-See also :ref:`Generic-resources-(GRES)-and-GPUs`.
+See also :ref:`generic-resources-(gres)-and-gpus`.
 
 Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs.
 `AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
@@ -632,7 +632,7 @@ You may build Slurm_ packages including optional features as documented above in
 
     rpmbuild <...> --with slurmrestd
 
-* Build with NVML_ support (see :ref:`NVIDIA-NVML-library-and-GPU-GRES`)::
+* Build with NVML_ support (see :ref:`nvidia-nvml-LIBRARY-AND-gpu-gres`)::
 
     rpmbuild <...> --with nvml
 
