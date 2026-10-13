@@ -523,6 +523,8 @@ For **EL9 only**: Enable YAML_ command output (for example, ``sinfo --yaml``) by
 .. _YAML: https://en.wikipedia.org/wiki/YAML
 .. _ticket_17673: https://support.schedmd.com/show_bug.cgi?id=17673
 
+.. _nvidia-nvml-LIBRARY-AND-gpu-gres:
+
 NVIDIA NVML library and GPU GRES
 .....................................
 
