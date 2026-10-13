@@ -552,7 +552,7 @@ an alternative method for providing NVML_ libraries can be used:
 * Download a small (~200 kB) package from
   the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
   (this link points to the *rhel9* repo, change as needed).
-  For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local` by::
+  For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local/cuda` by::
 
     wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
