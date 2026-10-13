@@ -540,22 +540,25 @@ Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs.
 `AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
 but doesn't detect MIGs or NVLink_.
 
-NVML_ support can be configured when building Slurm_ packages,
+NVML_ support must be configured when building the Slurm_ packages,
 but prerequisites are development libraries and headers.
-It is possible to install a complete set of NVIDIA drivers,
+All NVIDIA GPU nodes should have a complete set of NVIDIA drivers installed.
 but this is unwarranted on nodes that do not have GPUs,
 for example, the slurmctld_ server.
 
-One alternative method for providing NVML_ libraries is to download packages from
-the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
-(this link points to the *rhel9* repo).
-For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local` by::
+For **build hosts** and other non-GPU nodes such as the slurmctld_ server,
+an alternative method for providing NVML_ libraries can be used:
 
-  wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
-  dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
-  ln -s /usr/local/cuda-13.2 /usr/local/cuda
+* Download a small (~200 kB) package from
+  the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
+  (this link points to the *rhel9* repo, change as needed).
+  For example, download and install the `CUDA-NVML` version 13.2 library to `/usr/local` by::
 
-The Slurm_ RPM building will look for files in `/usr/local`.
+    wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
+    dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
+    ln -s /usr/local/cuda-13.2 /usr/local/cuda
+
+The Slurm_ RPM building is going to look for and find the NVML_ files in `/usr/local`.
 
 .. _GRES: https://slurm.schedmd.com/gres.html
 .. _AutoDetect: https://slurm.schedmd.com/gres.html#AutoDetect
@@ -602,8 +605,8 @@ Notes about the ``--with mysql`` option:
 **Recommendation:**
 In our setup we build packages with these options::
 
-  rpmbuild -ta slurm-26.05.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix      # EL8
-  rpmbuild -ta slurm-26.05.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix --with yaml  # EL9
+  rpmbuild -ta slurm-26.05.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix --with nvml      # EL8
+  rpmbuild -ta slurm-26.05.4.tar.bz2 --with slurmrestd --with freeipmi --with pmix --with nvml --with yaml  # EL9
 
 The RPM packages will typically be found in ``$HOME/rpmbuild/RPMS/x86_64/`` and should be installed on all relevant nodes.
 
