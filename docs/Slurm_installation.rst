@@ -369,7 +369,7 @@ The Slurm_Quick_Start_ guide lists these in the section `Building and Installing
 Install required Slurm_ prerequisite packages, as well as several optional packages that enable the desired Slurm_ plugins::
 
   dnf install mariadb-server mariadb-devel
-  dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf bash-completion
+  dnf install rpm-build gcc python3 openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel gtk2-devel libibmad libibumad perl-Switch perl-ExtUtils-MakeMaker xorg-x11-xauth dbus-devel libbpf bash-completion lz4
 
 We recommend to install_the_latest_munge_version_ (currently 0.5.18) because of bug fixes improving the EL8/EL9 version::
 
