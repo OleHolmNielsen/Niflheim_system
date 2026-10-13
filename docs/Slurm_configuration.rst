@@ -2021,6 +2021,8 @@ but a fixed number is the result of the mask calculation for each type of node.
 
 .. _SRCC: https://srcc.stanford.edu/
 
+.. _generic-resources-(gres)-and-gpus:
+
 Generic resources (GRES) and GPUs
 ---------------------------------
 
