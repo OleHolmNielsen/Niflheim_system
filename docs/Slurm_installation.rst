@@ -558,7 +558,7 @@ an alternative method for providing NVML_ libraries can be used:
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     ln -s /usr/local/cuda-13.2 /usr/local/cuda
 
-The Slurm_ RPM building is going to look for and find the NVML_ files in `/usr/local/cuda`.
+The Slurm_ RPM building is going to look for and find the NVML_ files `libnvidia-ml.so` and `nvml.h` in `/usr/local/cuda`.
 
 **IMPORTANT:** 
 This `CUDA-NVML` library must be installed on all **build hosts** 
