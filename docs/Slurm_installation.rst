@@ -538,7 +538,9 @@ See also :ref:`generic-resources-(gres)-and-gpus`.
 
 Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs when configured in gres.conf_.
 Here `AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
-but doesn't detect MIG_ or NVLink_ which require `AutoDetect=nvml`.
+but doesn't detect MIG_ or NVLink_.
+The most complete hardware detection mechanisms are configured with the AutoDetect_ option,
+for example, `AutoDetect=nvml`.
 
 To enable NVML_ support, it must be configured before building the Slurm_ packages,
 since development libraries and headers are required.
