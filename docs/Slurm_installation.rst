@@ -548,8 +548,7 @@ All NVIDIA GPU nodes should have the full set of NVIDIA drivers installed which 
 However, the NVML_ libraries do not need to be installed on nodes that do not have GPUs,
 including for example the slurmctld_ server.
 
-For **build hosts** and other non-GPU nodes such as the slurmctld_ server,
-an alternative method for providing NVML_ libraries can be used:
+For **build hosts** an alternative method for providing NVML_ libraries can be used:
 
 * Download a small (~200 kB) package from
   the `NVIDIA developer repository <https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/>`_
@@ -564,10 +563,8 @@ The Slurm_ RPM building is going to look for and find the NVML_ files `libnvidia
 
 **IMPORTANT:** 
 A `CUDA-NVML` library must be installed on all **build hosts** 
-as well as on all **NVIDIA GPU nodes** which are defined in
-gres.conf_ file and use the `AutoDetect=nvml` option.
-Please note that this library is **not required** on CPU-only nodes
-which are absent from the gres.conf_ file.
+as well as on all **NVIDIA GPU nodes** which are defined in gres.conf_ file with the `AutoDetect=nvml` option.
+Please note that this library is **not required** on CPU-only nodes which are not listed in the gres.conf_ file.
 
 .. _GRES: https://slurm.schedmd.com/gres.html
 .. _AutoDetect: https://slurm.schedmd.com/gres.html#AutoDetect
