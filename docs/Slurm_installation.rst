@@ -562,7 +562,7 @@ For **build hosts** an alternative method for providing NVML_ libraries can be u
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     ln -s /usr/local/cuda-13.2 /usr/local/cuda
 
-Build Slurm_ packages (see :ref:`Build Slurm packages`) including NVML_ support::
+Build Slurm_ packages (see :ref:`build-slurm-packages`) including NVML_ support::
 
   rpmbuild <...> --with nvml
 
@@ -597,6 +597,8 @@ If you plan to use Ansible_ to manage the database, it will require this Python 
   dnf install python3-PyMySQL (EL9)
 
 .. _Ansible: https://www.ansible.com/
+
+.. _build-slurm-packages:
 
 Build Slurm packages
 --------------------
