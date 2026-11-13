@@ -536,11 +536,11 @@ If the GRES_ information in the slurm.conf_ file does not fully describe those r
 then a gres.conf_ file should be included.
 See also :ref:`generic-resources-(gres)-and-gpus`.
 
-Both `AutoDetect=nvml` and `AutoDetect=nvidia` detect NVIDIA GPUs when configured in gres.conf_.
-Here `AutoDetect=nvidia` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
+Both ``AutoDetect=nvml`` and ``AutoDetect=nvidia`` detect NVIDIA GPUs when configured in gres.conf_.
+Here ``AutoDetect=nvidia`` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
 but doesn't detect MIG_ or NVLink_.
 The most complete hardware detection mechanisms are configured with the AutoDetect_ option,
-for example, `AutoDetect=nvml`.
+for example, ``AutoDetect=nvml``.
 
 Configuring Slurm with NVML
 ................................
@@ -566,11 +566,11 @@ Now :ref:`build-slurm-packages` including NVML_ support::
 
   rpmbuild <...> --with nvml
 
-The Slurm_ RPM building is going to look for and find the NVML_ files `libnvidia-ml.so` and `nvml.h` in `/usr/local/cuda`.
+The Slurm_ RPM building is going to look for and find the NVML_ files ``libnvidia-ml.so`` and ``nvml.h`` in ``/usr/local/cuda``.
 
 **IMPORTANT:** 
-A `CUDA-NVML` library must be installed on all **build hosts** 
-as well as on all **NVIDIA GPU nodes** which are defined in gres.conf_ file with the `AutoDetect=nvml` option.
+A `CUDA NVML` library must be installed on all **build hosts** 
+as well as on all **NVIDIA GPU nodes** which are defined in gres.conf_ file with the ``AutoDetect=nvml`` option.
 Please note that this library is **not required** on CPU-only nodes which are not listed in the gres.conf_ file.
 
 .. _GRES: https://slurm.schedmd.com/gres.html
