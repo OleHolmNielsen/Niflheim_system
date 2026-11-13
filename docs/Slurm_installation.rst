@@ -562,7 +562,7 @@ For **build hosts** an alternative method for providing NVML_ libraries can be u
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     ln -s /usr/local/cuda-13.2 /usr/local/cuda
 
-Build Slurm_ packages with NVML_ support (see :ref:`nvidia-nvml-LIBRARY-AND-gpu-gres`)::
+Build Slurm_ packages (see above) including NVML_ support::
 
   rpmbuild <...> --with nvml
 
