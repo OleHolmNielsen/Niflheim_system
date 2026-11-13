@@ -146,7 +146,7 @@ Notes on Munge_ configuration:
   where it is **highly recommended** to increase the ``fs.file-max``
   limit in ``/etc/sysctl.conf`` significantly on **all Slurm compute nodes**.
 
-* Starting with Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
+* From Munge_ 0.5.16 a new configuration file ``/etc/sysconfig/munge`` is used by the munged_ service.
   It is a good idea to increase the number of threads from 2 to 10 by::
 
     OPTIONS="--key-file=/etc/munge/munge.key --num-threads=10"
@@ -542,6 +542,9 @@ but doesn't detect MIG_ or NVLink_.
 The most complete hardware detection mechanisms are configured with the AutoDetect_ option,
 for example, `AutoDetect=nvml`.
 
+Configuring Slurm with NVML
+................................
+
 To enable NVML_ support, it must be configured before building the Slurm_ packages,
 since development libraries and headers are required.
 All NVIDIA GPU nodes should have the full set of NVIDIA drivers installed which include the NVML_ libraries.
@@ -558,6 +561,10 @@ For **build hosts** an alternative method for providing NVML_ libraries can be u
     wget https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     dnf install cuda-nvml-devel-13-2-13.2.86-1.x86_64.rpm
     ln -s /usr/local/cuda-13.2 /usr/local/cuda
+
+Build Slurm_ packages with NVML_ support (see :ref:`nvidia-nvml-LIBRARY-AND-gpu-gres`)::
+
+  rpmbuild <...> --with nvml
 
 The Slurm_ RPM building is going to look for and find the NVML_ files `libnvidia-ml.so` and `nvml.h` in `/usr/local/cuda`.
 
