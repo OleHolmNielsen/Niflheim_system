@@ -537,7 +537,7 @@ then a gres.conf_ file should be included.
 See also :ref:`generic-resources-(gres)-and-gpus`.
 
 Both ``AutoDetect=nvml`` and ``AutoDetect=nvidia`` detect NVIDIA GPUs when configured in gres.conf_.
-Here ``AutoDetect=nvidia`` (added in Slurm 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
+Here ``AutoDetect=nvidia`` (added in Slurm_ 24.11) doesn't require the *NVIDIA Management Library* (NVML_) library to be installed,
 but doesn't detect MIG_ or NVLink_.
 The most complete hardware detection mechanisms are configured with the AutoDetect_ option,
 for example, ``AutoDetect=nvml``.
@@ -545,8 +545,7 @@ for example, ``AutoDetect=nvml``.
 Configuring Slurm with NVML
 ................................
 
-To enable NVML_ support, it must be configured before building the Slurm_ packages,
-since development libraries and headers are required.
+To enable NVML_ support the required development libraries and headers must be installed **before** building the Slurm_ packages.
 All NVIDIA GPU nodes should have the full set of NVIDIA drivers installed which include the NVML_ libraries.
 However, the NVML_ libraries do not need to be installed on nodes that do not have GPUs,
 including for example the slurmctld_ server.
