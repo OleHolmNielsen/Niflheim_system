@@ -158,18 +158,18 @@ Select a suitable *slurm* user's **database password**.
 Now follow the accounting_ page instructions (using -p to enter the database password)::
 
   # mysql -p
-  grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'some_pass' with grant option;  ### WARNING: change the some_pass
+  grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'XXXXXXXX' with grant option;  ### WARNING: change the XXXXXXXX
   SHOW GRANTS;
   SHOW VARIABLES LIKE 'have_innodb';
   create database slurm_acct_db;
   quit;
 
-**WARNING:** Use the *slurm* database user's password **in stead of** ``some_pass``!
+**WARNING:** Use the *slurm* database user's password **in stead of** ``XXXXXXXX``!
 
 Optional: If you would like to grant read-only (SELECT) access to the database, set up a ``readonly`` user with access from ``%`` (meaning any host)::
 
   # mysql -p
-  grant select on slurm_acct_db.* TO 'readonly'@'%' identified by 'some_pass';
+  grant select on slurm_acct_db.* TO 'readonly'@'%' identified by 'XXXXXXXX';
 
 For remote hosts you of course have to open the database server's firewall on port 3306
 as described in :ref:`firewall-between-slurmctld-and-slurmdbd`.
@@ -356,7 +356,7 @@ Configure some of the slurmdbd.conf_ variables::
   DbdPort=6819    # The default value
   SlurmUser=slurm
   StorageHost=localhost
-  StoragePass=some_pass    # The above defined database password, change it for your site!
+  StoragePass=XXXXXXXX    # The above defined database password, change it for your site!
   StorageLoc=slurm_acct_db
 
 The slurmdbd_ configuration can be printed by the command::
