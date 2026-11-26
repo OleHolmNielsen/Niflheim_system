@@ -942,6 +942,14 @@ Here is a suggested procedure:
      SlurmctldHost=localhost
      AccountingStorageHost=localhost
 
+   Verify that you made the changes correctly::
+
+     $ grep Host= /etc/slurm/slurm*conf
+     /etc/slurm/slurm.conf:SlurmctldHost=localhost
+     /etc/slurm/slurm.conf:AccountingStorageHost=localhost
+     /etc/slurm/slurmdbd.conf:DbdHost=localhost
+     /etc/slurm/slurmdbd.conf:StorageHost=localhost
+
    Set up files and permissions::
 
      chown slurm: /etc/slurm/slurmdbd.conf
